@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 const render = () => {
   baseStyles();
-  ReactDOM.render(<Root store={store} />, document.getElementById('root'));
+  ReactDOM.render(<Root />, document.getElementById('root'));
 };
 
 render();
