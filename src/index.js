@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import baseStyles from 'helpers/foundation';
 import Root from 'scenes/Root';
+import baseStyles from 'styles/foundation';
 
 import registerServiceWorker from './registerServiceWorker';
 
