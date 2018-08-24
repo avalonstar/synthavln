@@ -1,8 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 
+import { foundation } from 'helpers/foundation';
 import App from 'scenes/App';
 
 const Main = () => (
@@ -12,9 +13,11 @@ const Main = () => (
 );
 
 const Root = () => (
-  <ThemeProvider theme={foundation}>
-    <Main />
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider theme={foundation}>
+      <Main />
+    </ThemeProvider>
+  </BrowserRouter>
 );
 
 export default Root;
