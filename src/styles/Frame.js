@@ -1,16 +1,25 @@
 import styled from 'styled-components';
-import { rgba } from 'polished';
+// import { rgba } from 'polished';
 
-const Frame = styled.div`
+const Base = styled.div`
   position: absolute;
   overflow: hidden;
   width: 1920px;
   height: 1080px;
 `;
 
+const Wrapper = styled(Base)``;
+
+const Border = styled(Base)`
+  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[2]},
+    inset 0 0 0 24px ${props => props.theme.colors.gray[1]};
+  z-index: 1000;
+`;
+
 const Container = styled.div``;
 
 export default {
-  Frame,
-  Container
+  Border,
+  Container,
+  Wrapper
 };

@@ -1,7 +1,11 @@
 import { injectGlobal } from 'styled-components';
-import { fontFace, normalize } from 'polished';
+import { normalize } from 'polished';
 
-export const foundation = {};
+import colors from './colors';
+
+export const foundation = {
+  colors
+};
 
 export default () => injectGlobal`
   ${normalize()}
