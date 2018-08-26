@@ -4,7 +4,10 @@ import { normalize } from 'polished';
 import colors from './colors';
 
 export const foundation = {
-  colors
+  colors,
+  fonts: {
+    montserrat: "'Montserrat', sans-serif"
+  }
 };
 
 export default () => injectGlobal`
