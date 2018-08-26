@@ -1,16 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
+import { Brand } from 'components/Branding';
+
+import styled from 'styled-components';
 import Frame from 'styles/Frame';
 
 const Layout = () => (
   <Fragment>
-    <ParallaxLayer offset={0}>
-      <div>one</div>
-    </ParallaxLayer>
-    <ParallaxLayer offset={1}>
-      <div>two</div>
-    </ParallaxLayer>
+    <StyledBrand />
+    <div>one</div>
   </Fragment>
 );
 
@@ -20,13 +19,15 @@ class Activity extends Component {
       <Fragment>
         <Frame.Border />
         <Frame.Wrapper>
-          <Parallax className="hi" ref="parallax" pages={2} scrolling={false}>
-            <Layout />
-          </Parallax>
+          <Layout />
         </Frame.Wrapper>
       </Fragment>
     );
   }
 }
+
+const StyledBrand = styled(Brand)`
+  grid-row: 1 / span 2;
+`;
 
 export default Activity;

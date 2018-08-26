@@ -8,7 +8,11 @@ const Base = styled.div`
   height: 1080px;
 `;
 
-const Wrapper = styled(Base)``;
+const Wrapper = styled(Base)`
+  display: grid;
+  grid-template-rows: repeat(26, 30px);
+  grid-gap: 12px;
+`;
 
 const Border = styled(Base)`
   box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[2]},

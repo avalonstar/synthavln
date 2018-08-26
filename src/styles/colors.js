@@ -26,5 +26,6 @@ export default {
     '#dce0e5',
     '#e8ebed',
     '#f3f5f6'
-  ]
+  ],
+  green: ['#eAf56b']
 };
