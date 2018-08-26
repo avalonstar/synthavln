@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
-import { Brand } from 'components/Branding';
+import { Hero } from 'components';
 
 import styled from 'styled-components';
 import Frame from 'styles/Frame';
 
 const Layout = () => (
   <Fragment>
-    <StyledBrand />
+    <StyledHero />
     <div>one</div>
   </Fragment>
 );
@@ -26,7 +26,7 @@ class Activity extends Component {
   }
 }
 
-const StyledBrand = styled(Brand)`
+const StyledHero = styled(Hero)`
   grid-row: 1 / span 2;
 `;
 
