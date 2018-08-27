@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { Gift } from 'react-feather';
+import { Gift, Star } from 'react-feather';
 
 import { getCheermoteURL } from './utils';
 
@@ -16,9 +16,20 @@ export const FollowEvent = props => <Wrapper>{props.event}</Wrapper>;
 
 export const HostEvent = props => <Wrapper>{props.event}</Wrapper>;
 
-export const MysteryGiftEvent = props => <Wrapper>{props.event}</Wrapper>;
+export const MysteryGiftEvent = props => (
+  <Wrapper>
+    <Actor>{props.gifter}</Actor>
+    <Gift size={18} />
+    {'\u00D7'}
+    {props.amount}
+  </Wrapper>
+);
 
-export const SubscriptionEvent = props => <Wrapper>{props.event}</Wrapper>;
+export const SubscriptionEvent = props => (
+  <Wrapper>
+    <Star size={18} />
+  </Wrapper>
+);
 
 export const SubGiftEvent = props => (
   <Wrapper>
@@ -31,7 +42,9 @@ export const RaidEvent = props => <Wrapper>{props.event}</Wrapper>;
 
 export const ResubEvent = props => (
   <Wrapper>
-    {props.months}x {props.event}
+    <Star size={18} />
+    {'\u00D7'}
+    {props.months}
   </Wrapper>
 );
 

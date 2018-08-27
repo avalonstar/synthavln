@@ -54,8 +54,6 @@ const Wrapper = styled.li`
   text-transform: uppercase;
 
   :first-child {
-    margin-right: 12px;
-
     box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};
     border-radius: 4px;
     color: ${props => props.theme.colors.white};
@@ -78,6 +76,7 @@ const Wrapper = styled.li`
   }
 
   :not(:first-child) {
+    box-shadow: inset -1px 0 0 0 ${props => props.theme.colors.gray[3]};
     color: ${props => props.theme.colors.gray[6]};
   }
 
