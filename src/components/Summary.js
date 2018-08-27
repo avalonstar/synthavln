@@ -4,14 +4,17 @@ import { Logo } from './Branding';
 import { Ticker } from './Ticker';
 
 import styled from 'styled-components';
+import { Heart } from 'react-feather';
 
 const Summary = props => (
   <Wrapper>
-    <strong>5 new</strong> crusaders!
+    <Heart size={18} />
+    {/* <strong>5 new</strong> crusaders! */}
   </Wrapper>
 );
 
 const Wrapper = styled.div`
+  display: flex;
   margin-left: 36px;
   padding: 8px 16px;
 
