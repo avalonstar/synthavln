@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Base = styled.div`
   position: absolute;
   overflow: hidden;
-  width: 1920px;
-  height: 1080px;
+  width: ${props => props.theme.frame.width};
+  height: ${props => props.theme.frame.height};
 `;
 
 const Wrapper = styled(Base)`
@@ -15,8 +15,8 @@ const Wrapper = styled(Base)`
 `;
 
 const Border = styled(Base)`
-  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[2]},
-    inset 0 0 0 24px ${props => props.theme.colors.gray[1]};
+  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[3]},
+    inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
   z-index: 1000;
 `;
 
