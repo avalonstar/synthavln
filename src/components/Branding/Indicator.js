@@ -2,11 +2,10 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const Indicator = () => <Square />;
+const Indicator = props => <Square className={props.className} />;
 
 const Square = styled.div`
   position: absolute;
-  left: 0;
   width: 24px;
   height: 28px;
   z-index: 2000;

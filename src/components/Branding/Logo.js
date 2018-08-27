@@ -1,10 +1,13 @@
 import React from 'react';
 
+import Indicator from './Indicator';
+
 import styled from 'styled-components';
 import logo from './logo.png';
 
 const Logo = props => (
   <Wrapper>
+    <StyledIndicator />
     <Avocado src={logo} />
     Avalonstar
     <Period>.</Period>
@@ -14,6 +17,8 @@ const Logo = props => (
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
+  padding-right: 36px;
 
   color: ${props => props.theme.colors.white};
   font-size: 18px;
@@ -30,6 +35,10 @@ const Avocado = styled.img`
 
 const Period = styled.span`
   color: ${props => props.theme.colors.green[0]};
+`;
+
+const StyledIndicator = styled(Indicator)`
+  left: -36px;
 `;
 
 export default Logo;
