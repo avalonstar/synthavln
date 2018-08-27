@@ -15,7 +15,7 @@ const Summary = props => (
 
 const Wrapper = styled.div`
   display: flex;
-  margin-left: 36px;
+  margin-left: 12px;
   padding: 8px 16px;
 
   box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};

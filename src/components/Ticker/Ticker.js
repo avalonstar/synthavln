@@ -26,7 +26,7 @@ const Wrapper = styled.ol`
     position: absolute;
     right: 0;
     height: 100%;
-    width: 36px;
+    width: 72px;
 
     content: '';
     background-image: linear-gradient(
