@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
   background-color: ${props => props.theme.colors.gray[2]};
   color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.montserrat};
+  font-family: ${props => props.theme.fonts.gotham};
   font-weight: 500;
 `;
 

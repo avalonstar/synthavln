@@ -17,11 +17,12 @@ import { rgba } from 'polished';
 
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
-  follow: CheerEvent({ ...data }),
+  follow: FollowEvent({ ...data }),
   host: HostEvent({ ...data }),
   mysterygift: MysteryGiftEvent({ ...data }),
   subscription: SubscriptionEvent({ ...data }),
   subgift: SubGiftEvent({ ...data }),
+  raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
   tip: TipEvent({ ...data })
 });
@@ -48,6 +49,7 @@ class Item extends Component {
 
 const Wrapper = styled.li`
   display: flex;
+  align-items: center;
   padding: 8px 10px;
 
   font-weight: 800;
@@ -59,11 +61,13 @@ const Wrapper = styled.li`
     color: ${props => props.theme.colors.white};
 
     :before {
+      position: relative;
+      top: -1px;
       content: '!HYPE';
 
       color: ${props => props.theme.colors.gray[10]};
-      font-family: ${props => props.theme.fonts.barlow};
-      font-weight: 800;
+      font-family: ${props => props.theme.fonts.din};
+      font-weight: 600;
       padding-right: 12px;
     }
 
