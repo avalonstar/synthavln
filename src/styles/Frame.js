@@ -14,16 +14,23 @@ const Wrapper = styled(Base)`
   grid-gap: 12px;
 `;
 
-const Border = styled(Base)`
-  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[3]},
-    inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
+const InnerBorder = styled(Base)`
+  box-shadow: inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
+  pointer-events: none;
+  z-index: 999;
+`;
+
+const OuterBorder = styled(Base)`
+  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[3]};
+  pointer-events: none;
   z-index: 1000;
 `;
 
 const Container = styled.div``;
 
 export default {
-  Border,
   Container,
+  InnerBorder,
+  OuterBorder,
   Wrapper
 };

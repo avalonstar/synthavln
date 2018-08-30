@@ -18,7 +18,8 @@ class Activity extends Component {
   render() {
     return (
       <Fragment>
-        <Frame.Border />
+        <Frame.OuterBorder />
+        <Frame.InnerBorder />
         <Frame.Wrapper>
           <Layout />
         </Frame.Wrapper>
