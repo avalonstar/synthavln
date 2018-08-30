@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
-import { Hero, Notifier, Queue } from 'components';
+import { Logomark, Hero, Notifier, Queue } from 'components';
 
 import styled from 'styled-components';
 import Frame from 'styles/Frame';
@@ -18,6 +18,7 @@ class Activity extends Component {
   render() {
     return (
       <Fragment>
+        <StyledLogomark />
         <Frame.OuterBorder />
         <Frame.Wrapper>
           <Layout />
@@ -27,6 +28,10 @@ class Activity extends Component {
     );
   }
 }
+
+const StyledLogomark = styled(Logomark)`
+  top: 28px;
+`;
 
 const StyledHero = styled(Hero)`
   grid-row: 1 / span 2;

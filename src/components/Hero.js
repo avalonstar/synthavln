@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Logo } from './Branding';
+import { Logotype } from './Branding';
 import { Ticker } from './Ticker';
 import Summary from './Summary';
 
@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 const Hero = props => (
   <Wrapper className={props.className}>
-    <Logo />
+    <Logotype />
     <Ticker events={events} />
     <Summary />
   </Wrapper>

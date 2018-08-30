@@ -5,9 +5,8 @@ import Indicator from './Indicator';
 import styled from 'styled-components';
 import logo from './logo.png';
 
-const Logo = props => (
+const Logotype = props => (
   <Wrapper>
-    <StyledIndicator />
     <Avocado src={logo} />
     Avalonstar
     <Period>.</Period>
@@ -27,10 +26,10 @@ const Wrapper = styled.div`
 `;
 
 const Avocado = styled.img`
+  margin-right: 8px;
   width: 28px;
   height: 28px;
-
-  margin-right: 8px;
+  visibility: hidden;
 `;
 
 const Period = styled.span`
@@ -41,4 +40,4 @@ const StyledIndicator = styled(Indicator)`
   left: -36px;
 `;
 
-export default Logo;
+export default Logotype;
