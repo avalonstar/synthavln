@@ -53,6 +53,7 @@ const StyledQueue = styled(Queue)`
 `;
 
 const StyledCamera = styled(Camera)`
+  display: none;
   grid-row: 25;
   grid-column: 2;
   justify-self: end;
