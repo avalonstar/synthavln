@@ -1,9 +1,9 @@
 import { action } from './utils';
 
-export const EVENT_NOTIFIER_ADD = 'EVENT_NOTIFIER_ADD';
-export const EVENT_NOTIFIER_DELETE = 'EVENT_NOTIFIER_DELETE';
+export const NOTIFIER_ADD = 'NOTIFIER_ADD';
+export const NOTIFIER_DELETE = 'NOTIFIER_DELETE';
 
-export const eventNotifier = {
-  add: event => action(EVENT_NOTIFIER_ADD, { event }),
-  delete: () => action(EVENT_NOTIFIER_DELETE)
+export const notifier = {
+  add: event => action(NOTIFIER_ADD, { event }),
+  delete: () => action(NOTIFIER_DELETE)
 };

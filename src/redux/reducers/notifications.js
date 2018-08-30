@@ -4,9 +4,9 @@ import * as actions from 'redux/actions/notifications';
 
 const notifications = (state = [], action) => {
   switch (action.type) {
-    case actions.EVENT_NOTIFIER_ADD:
+    case actions.NOTIFIER_ADD:
       return [...state, action.event];
-    case actions.EVENT_NOTIFIER_DELETE:
+    case actions.NOTIFIER_DELETE:
       return [...state.slice(1)];
     default:
       return state;
