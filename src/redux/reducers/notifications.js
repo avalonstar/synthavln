@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import * as actions from 'redux/actions/events';
+import * as actions from 'redux/actions/notifications';
 
 const notifications = (state = [], action) => {
   switch (action.type) {
