@@ -29,7 +29,6 @@ const Avocado = styled.img`
   margin-right: 8px;
   width: 28px;
   height: 28px;
-  visibility: hidden;
 `;
 
 const Period = styled.span`

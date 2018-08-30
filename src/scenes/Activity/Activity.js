@@ -30,6 +30,7 @@ class Activity extends Component {
 }
 
 const StyledLogomark = styled(Logomark)`
+  display: none;
   top: 28px;
 `;
 
