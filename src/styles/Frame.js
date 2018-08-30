@@ -12,12 +12,13 @@ const Wrapper = styled(Base)`
   display: grid;
   grid-template-rows: repeat(26, 30px);
   grid-gap: 12px;
+  z-index: 100;
 `;
 
 const InnerBorder = styled(Base)`
   box-shadow: inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
   pointer-events: none;
-  z-index: 999;
+  z-index: 1;
 `;
 
 const OuterBorder = styled(Base)`

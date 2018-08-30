@@ -19,10 +19,10 @@ class Activity extends Component {
     return (
       <Fragment>
         <Frame.OuterBorder />
-        <Frame.InnerBorder />
         <Frame.Wrapper>
           <Layout />
         </Frame.Wrapper>
+        <Frame.InnerBorder />
       </Fragment>
     );
   }
