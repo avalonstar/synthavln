@@ -11,6 +11,7 @@ const Base = styled.div`
 const Wrapper = styled(Base)`
   display: grid;
   grid-template-rows: repeat(26, 30px);
+  grid-template-columns: 1fr 1fr;
   grid-gap: 12px;
   z-index: 100;
 `;

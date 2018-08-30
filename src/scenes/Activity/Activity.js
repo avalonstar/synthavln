@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
-import { Logomark, Hero, Notifier, Queue } from 'components';
+import { Camera, Logomark, Hero, Notifier, Queue } from 'components';
 
 import styled from 'styled-components';
-import Frame from 'styles/Frame';
+import { Frame } from 'styles';
 
 const Layout = () => (
   <Fragment>
+    <StyledCamera />
     <StyledHero />
     <StyledNotifier />
     <StyledQueue />
@@ -35,7 +36,9 @@ const StyledLogomark = styled(Logomark)`
 `;
 
 const StyledHero = styled(Hero)`
+  grid-column: 1 / span 2;
   grid-row: 1 / span 2;
+  box-shadow: ${props => props.theme.shadows[3]};
 `;
 
 const StyledNotifier = styled(Notifier)`
@@ -44,8 +47,19 @@ const StyledNotifier = styled(Notifier)`
 `;
 
 const StyledQueue = styled(Queue)`
+  grid-column: 1 / span 2;
   grid-row: 25 / span 2;
   align-self: end;
+`;
+
+const StyledCamera = styled(Camera)`
+  grid-row: 25;
+  grid-column: 2;
+  justify-self: end;
+  align-self: end;
+  margin-right: 36px;
+  width: 422px;
+  z-index: 1000;
 `;
 
 export default Activity;
