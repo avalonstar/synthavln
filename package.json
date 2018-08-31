@@ -30,7 +30,7 @@
     "eject": "react-scripts eject"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,scss}": [
+    "src/**/*.{js,jsx}": [
       "prettier --single-quote --write",
       "stylelint",
       "git add"
