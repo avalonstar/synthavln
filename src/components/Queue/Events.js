@@ -5,7 +5,7 @@ import { Bell, Star } from 'react-feather';
 
 export const CheerEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>
       {props.amount}
       {' bits'}
@@ -15,14 +15,14 @@ export const CheerEvent = props => (
 
 export const FollowEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>{props.event}</Label>
   </Wrapper>
 );
 
 export const HostEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>{props.event}</Label>
   </Wrapper>
 );
@@ -40,14 +40,14 @@ export const MysteryGiftEvent = props => (
 
 export const SubscriptionEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>{props.event}</Label>
   </Wrapper>
 );
 
 export const SubGiftEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>
       {props.event} from {props.gifter}
     </Label>
@@ -56,14 +56,14 @@ export const SubGiftEvent = props => (
 
 export const RaidEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>{props.event}</Label>
   </Wrapper>
 );
 
 export const ResubEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>
       resub {'\u00D7'}
       {props.months}
@@ -73,7 +73,7 @@ export const ResubEvent = props => (
 
 export const TipEvent = props => (
   <Wrapper>
-    <Actor>{props.username}</Actor>
+    <Actor>{props.name}</Actor>
     <Label>
       {props.formattedAmount}
       {' tip'}
