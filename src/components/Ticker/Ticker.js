@@ -8,7 +8,7 @@ import { rgba } from 'polished';
 const Ticker = props => (
   <Wrapper>
     {props.events.map(event => (
-      <Item key={event.timestamp} data={event} />
+      <Item key={event.id} data={event} />
     ))}
   </Wrapper>
 );

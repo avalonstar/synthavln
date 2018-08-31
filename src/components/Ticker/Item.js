@@ -33,15 +33,11 @@ class Item extends Component {
   }
 
   render() {
-    const {
-      data,
-      data: { event, timestamp }
-    } = this.props;
-    const username = data.displayName || data.username;
+    const { className, data } = this.props;
     return (
-      <Wrapper className={this.props.className}>
+      <Wrapper className={className}>
         {getType(data)[data.event]}
-        <Actor>{username}</Actor>
+        <Actor>{data.name}</Actor>
       </Wrapper>
     );
   }

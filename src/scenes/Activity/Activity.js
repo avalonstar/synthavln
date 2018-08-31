@@ -25,7 +25,7 @@ const Layout = () => (
           <StyledHero>
             <Logotype />
             <Ticker events={state.data} />
-            {/* <Summary /> */}
+            <Summary />
           </StyledHero>
           <StyledNotifier
             notifications={notifications}
