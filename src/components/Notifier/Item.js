@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -31,14 +31,36 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-const Item = props => {
-  const {
-    data,
-    data: { event, timestamp }
-  } = props;
-  return <Wrapper>{getType(data)[data.event]}</Wrapper>;
-};
+class Item extends Component {
+  state = {
+    isVisible: false
+  };
 
-const Wrapper = styled.div``;
+  componentWillUnmount(nextProps) {
+    if (nextProps.event && nextProps.event !== this.props.event) {
+      this.timer = setTimeout(() => this.setState({ isVisible: true }));
+    }
+  }
+
+  handleRest = () => {
+    if (!this.state.isVisible) {
+      setTimeout(() => this.props.onComplete(), 500);
+    }
+  };
+
+  render() {
+    const { notification } = this.props;
+    return !notification ? null : (
+      <Wrapper className={this.props.className}>
+        {getType(notification)[notification.event]}
+      </Wrapper>
+    );
+  }
+}
+
+const Wrapper = styled.div`
+  z-index: 1000;
+  align-items: end;
+`;
 
 export default Item;

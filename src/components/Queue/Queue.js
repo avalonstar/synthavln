@@ -5,22 +5,18 @@ import Item from './Item';
 import styled from 'styled-components';
 import { ChevronRight } from 'react-feather';
 
-import notifierPool from 'helpers/notifications';
+import notifications from 'helpers/notifications';
 
 class Queue extends Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.notifierPool[0] !== this.props.notifierPool[0];
-  }
-
   render() {
     return (
       <Wrapper className={this.props.className}>
         <Count>
           next <ChevronRight size={14} />
-          {/* <Length>{notifierPool.length}</Length> */}
+          {/* <Length>{notifications.length}</Length> */}
         </Count>
         <Items>
-          {notifierPool.slice(1).map(event => (
+          {this.props.notifications.slice(1).map(event => (
             <Item key={event.timestamp} data={event} />
           ))}
         </Items>

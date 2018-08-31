@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { Logo } from './Branding';
-import { Ticker } from './Ticker';
-
 import styled from 'styled-components';
 import { Heart } from 'react-feather';
 

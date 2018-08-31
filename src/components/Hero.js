@@ -9,11 +9,7 @@ import events from 'helpers/events';
 import styled from 'styled-components';
 
 const Hero = props => (
-  <Wrapper className={props.className}>
-    <Logotype />
-    <Ticker events={events} />
-    <Summary />
-  </Wrapper>
+  <Wrapper className={props.className}>{props.children}</Wrapper>
 );
 
 const Wrapper = styled.div`

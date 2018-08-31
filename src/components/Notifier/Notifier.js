@@ -2,28 +2,20 @@ import React, { Component } from 'react';
 
 import Item from './Item';
 
-import styled from 'styled-components';
-
-import notifierPool from 'helpers/notifications';
-
 class Notifier extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.notifierPool[0] !== this.props.notifierPool[0];
+    return nextProps.notifications[0] !== this.props.notifications[0];
   }
 
   render() {
-    const data = notifierPool[0];
     return (
-      <Wrapper className={this.props.className}>
-        <Item key={data.timestamp} data={data} />
-      </Wrapper>
+      <Item
+        className={this.props.className}
+        notification={this.props.notifications[0]}
+        onComplete={this.props.onComplete}
+      />
     );
   }
 }
-
-const Wrapper = styled.div`
-  z-index: 1000;
-  align-items: end;
-`;
 
 export default Notifier;

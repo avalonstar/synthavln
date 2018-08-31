@@ -1,7 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
-import { Camera, Logomark, Hero, Notifier, Queue } from 'components';
+import {
+  Camera,
+  Logomark,
+  Logotype,
+  Hero,
+  Notifier,
+  Queue,
+  Summary,
+  Ticker
+} from 'components';
+import * as Providers from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
@@ -9,9 +19,22 @@ import { Frame } from 'styles';
 const Layout = () => (
   <Fragment>
     <StyledCamera />
-    <StyledHero />
-    <StyledNotifier />
-    <StyledQueue />
+    <Providers.Events>
+      {(state, notifications, onComplete) => (
+        <Fragment>
+          <StyledHero>
+            <Logotype />
+            <Ticker events={state.data} />
+            {/* <Summary /> */}
+          </StyledHero>
+          <StyledNotifier
+            notifications={notifications}
+            onComplete={onComplete}
+          />
+          <StyledQueue notifications={notifications} />
+        </Fragment>
+      )}
+    </Providers.Events>
   </Fragment>
 );
 

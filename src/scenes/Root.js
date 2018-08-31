@@ -25,6 +25,10 @@ firebase.initializeApp({
   databaseURL: REACT_APP_FIREBASE_URI
 });
 
+const firestore = firebase.firestore();
+const firestoreSettings = { timestampsInSnapshots: true };
+firestore.settings(firestoreSettings);
+
 const Main = () => (
   <Switch>
     <Route exact path="/scenes/activity" component={Activity} />
