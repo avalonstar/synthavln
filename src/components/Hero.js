@@ -1,11 +1,5 @@
 import React from 'react';
 
-import { Logotype } from './Branding';
-import { Ticker } from './Ticker';
-import Summary from './Summary';
-
-import events from 'helpers/events';
-
 import styled from 'styled-components';
 
 const Hero = props => (
