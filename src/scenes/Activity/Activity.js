@@ -11,31 +11,39 @@ import {
   Summary,
   Ticker
 } from 'components';
+import { UIContext } from 'contexts';
 import * as Providers from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
 const Layout = () => (
-  <Fragment>
-    <StyledCamera />
-    <Providers.Events>
-      {(state, notifications, onComplete) => (
-        <Fragment>
-          <StyledHero>
-            <Logotype />
-            <Ticker events={state.data} />
-            <Summary />
-          </StyledHero>
-          <StyledNotifier
-            notifications={notifications}
-            onComplete={onComplete}
-          />
-          <StyledQueue notifications={notifications} />
-        </Fragment>
-      )}
-    </Providers.Events>
-  </Fragment>
+  <UIContext.Consumer>
+    {uiState => (
+      <Fragment>
+        <StyledCamera />
+        <Providers.Events>
+          {(state, notifications, onComplete) => (
+            <Fragment>
+              <StyledHero>
+                <Logotype />
+                <Ticker
+                  whitelistedEvents={uiState.whitelistedEvents}
+                  events={state.data}
+                />
+                <Summary />
+              </StyledHero>
+              <StyledNotifier
+                notifications={notifications}
+                onComplete={onComplete}
+              />
+              <StyledQueue notifications={notifications} />
+            </Fragment>
+          )}
+        </Providers.Events>
+      </Fragment>
+    )}
+  </UIContext.Consumer>
 );
 
 class Activity extends Component {

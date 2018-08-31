@@ -5,13 +5,18 @@ import Item from './Item';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-const Ticker = props => (
-  <Wrapper>
-    {props.events.map(event => (
-      <Item key={event.id} data={event} />
-    ))}
-  </Wrapper>
-);
+const Ticker = props => {
+  const events = props.events.filter(e =>
+    props.whitelistedEvents.includes(e.event)
+  );
+  return (
+    <Wrapper>
+      {events.map(event => (
+        <Item key={event.id} data={event} />
+      ))}
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.ol`
   position: relative;

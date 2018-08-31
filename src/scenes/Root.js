@@ -8,6 +8,7 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import { ThemeProvider } from 'styled-components';
 
+import { UIProvider } from 'providers';
 import App from 'scenes/App';
 import Activity from 'scenes/Activity';
 import { foundation } from 'styles/foundation';
@@ -41,7 +42,9 @@ const Root = props => (
     <Provider store={props.store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={foundation}>
-          <Main />
+          <UIProvider>
+            <Main />
+          </UIProvider>
         </ThemeProvider>
       </ConnectedRouter>
     </Provider>

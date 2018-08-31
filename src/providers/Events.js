@@ -16,7 +16,7 @@ class EventProvider extends Component {
     this.props.firestore
       .collection('events')
       .orderBy('timestamp', 'desc')
-      .limit(10)
+      .limit(30)
       .onSnapshot(snapshot => this.setData(snapshot));
   }
 
