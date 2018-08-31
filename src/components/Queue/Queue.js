@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Item from './Item';
 
 import styled from 'styled-components';
+import { rgba } from 'polished';
 import { ChevronRight } from 'react-feather';
 
 import notifications from 'helpers/notifications';
@@ -26,6 +27,7 @@ class Queue extends Component {
 }
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   align-self: end;
   padding: 0 36px 24px;
@@ -36,6 +38,20 @@ const Wrapper = styled.div`
   font-family: ${props => props.theme.fonts.gotham};
   font-size: 14px;
   font-weight: 500;
+
+  :after {
+    position: absolute;
+    right: 36px;
+    height: 100%;
+    width: 72px;
+
+    content: '';
+    background-image: linear-gradient(
+      to right,
+      ${props => rgba(props.theme.colors.gray[2], 0)},
+      ${props => props.theme.colors.gray[2]}
+    );
+  }
 `;
 
 const Items = styled.ol`
