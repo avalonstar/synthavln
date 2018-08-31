@@ -48,12 +48,7 @@ export const ResubEvent = props => (
   </Wrapper>
 );
 
-export const TipEvent = props => (
-  <Wrapper>
-    {props.formattedAmount}
-    {' tip'}
-  </Wrapper>
-);
+export const TipEvent = props => <Wrapper>{props.formattedAmount}</Wrapper>;
 
 const Wrapper = styled.div`
   display: flex;
