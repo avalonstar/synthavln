@@ -39,9 +39,9 @@ const queueProps = {
 };
 
 const AnimatedItem = posed(Item)({
-  from: { width: 'auto', y: '100%' },
-  enter: { width: 'auto', x: '0%', y: '0%' },
-  exit: { width: 0, x: '-125%' }
+  from: { opacity: 0, width: 'auto', y: '100%' },
+  enter: { opacity: 1, width: 'auto', x: '0%', y: '0%' },
+  exit: { opacity: 0, width: 0, x: '-125%' }
 });
 
 const Wrapper = styled(posed.div(queueProps))`
