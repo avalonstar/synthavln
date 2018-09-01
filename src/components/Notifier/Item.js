@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Sound from 'react-sound';
 
 import {
   CheerEvent,
@@ -27,12 +28,21 @@ const getType = data => ({
 
 class Item extends Component {
   state = {
-    isVisible: false
+    isVisible: false,
+    playStatus: Sound.status.STOPPED
   };
 
-  componentWillUnmount(nextProps) {
-    if (nextProps.event && nextProps.event !== this.props.event) {
-      this.timer = setTimeout(() => this.setState({ isVisible: true }));
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.notification &&
+      nextProps.notification === this.props.notification
+    ) {
+      this.timer = setTimeout(() =>
+        this.setState({
+          isVisible: true,
+          playStatus: Sound.status.PLAYING
+        })
+      );
     }
   }
 
@@ -42,11 +52,28 @@ class Item extends Component {
     }
   };
 
+  handleSongFinishedPlaying = () => {
+    this.setState({
+      isVisible: false,
+      playStatus: Sound.status.STOPPED
+    });
+    clearTimeout(this.timer);
+    this.handleRest();
+  };
+
   render() {
     const { notification } = this.props;
     return !notification ? null : (
       <Wrapper className={this.props.className}>
         {getType(notification)[notification.event]}
+        <Sound
+          url={`http://synthform.s3.amazonaws.com/audio/avalonstar/${
+            notification.event
+          }.ogg`}
+          playStatus={this.state.playStatus}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+          volume={20}
+        />
       </Wrapper>
     );
   }

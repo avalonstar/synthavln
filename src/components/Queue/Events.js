@@ -83,12 +83,9 @@ export const TipEvent = props => (
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  padding: 12px 24px 0 12px;
+  align-items: baseline;
+  padding: 12px;
   white-space: nowrap;
-
-  background: ${props => props.theme.colors.gray[2]};
-  box-shadow: inset 1px 0 0 0 ${props => props.theme.colors.gray[4]};
 `;
 
 const Icon = styled.div`
