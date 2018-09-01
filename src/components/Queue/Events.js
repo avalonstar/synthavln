@@ -86,6 +86,8 @@ const Wrapper = styled.div`
   align-items: baseline;
   padding: 12px;
   white-space: nowrap;
+
+  background-color: ${props => props.theme.colors.gray[2]};
 `;
 
 const Icon = styled.div`

@@ -46,7 +46,8 @@ const AnimatedItem = posed(Item)({
 
 const Wrapper = styled(posed.div(queueProps))`
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-self: end;
   height: 40px;
   padding: 0 36px 12px;
@@ -61,6 +62,7 @@ const Wrapper = styled(posed.div(queueProps))`
 `;
 
 const Items = styled.ol`
+  grid-column: 2;
   position: relative;
   display: flex;
   overflow: hidden;
@@ -99,9 +101,11 @@ const Items = styled.ol`
 `;
 
 const Count = styled.div`
+  grid-column: 1;
   display: flex;
   align-items: center;
   padding: 12px 6px 12px 0;
+
   font-family: ${props => props.theme.fonts.din};
   font-weight: 700;
   text-transform: uppercase;
