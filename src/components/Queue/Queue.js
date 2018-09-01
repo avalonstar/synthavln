@@ -8,9 +8,16 @@ import { rgba } from 'polished';
 import { ChevronRight } from 'react-feather';
 
 class Queue extends Component {
+  state = {
+    isVisible: true
+  };
+
   render() {
     return (
-      <Wrapper className={this.props.className}>
+      <Wrapper
+        pose={this.state.isVisible ? 'open' : 'closed'}
+        className={this.props.className}
+      >
         <Count>
           next <ChevronRight size={14} />
         </Count>
@@ -26,13 +33,18 @@ class Queue extends Component {
   }
 }
 
+const queueProps = {
+  open: { y: '0%' },
+  closed: { y: '100%' }
+};
+
 const AnimatedItem = posed(Item)({
   from: { width: 'auto', y: '100%' },
   enter: { width: 'auto', x: '0%', y: '0%' },
   exit: { width: 0, x: '-125%' }
 });
 
-const Wrapper = styled.div`
+const Wrapper = styled(posed.div(queueProps))`
   position: relative;
   display: flex;
   align-self: end;
