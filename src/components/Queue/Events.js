@@ -5,11 +5,11 @@ import { Bell, Star } from 'react-feather';
 
 export const CheerEvent = props => (
   <Wrapper>
-    <Actor>{props.name}</Actor>
     <Label>
       {props.amount}
       {' bits'}
     </Label>
+    <Actor>{props.name}</Actor>
   </Wrapper>
 );
 
