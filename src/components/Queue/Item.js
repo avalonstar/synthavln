@@ -13,8 +13,6 @@ import {
   TipEvent
 } from './Events';
 
-import styled from 'styled-components';
-
 const propTypes = {
   featured: PropTypes.boolean
 };
@@ -36,9 +34,11 @@ const Item = props => {
     data,
     data: { event, timestamp }
   } = props;
-  return <Wrapper>{getType(data)[data.event]}</Wrapper>;
+  return (
+    <li ref={props.hostRef} style={props.style}>
+      {getType(data)[data.event]}
+    </li>
+  );
 };
-
-const Wrapper = styled.div``;
 
 export default Item;

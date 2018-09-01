@@ -34,6 +34,7 @@ const Layout = () => (
                 <Summary />
               </StyledHero>
               <StyledNotifier
+                whitelistedEvents={uiState.whitelistedEvents}
                 notifications={notifications}
                 onComplete={onComplete}
               />
@@ -46,20 +47,16 @@ const Layout = () => (
   </UIContext.Consumer>
 );
 
-class Activity extends Component {
-  render() {
-    return (
-      <Fragment>
-        <StyledLogomark />
-        <Frame.OuterBorder />
-        <Frame.Wrapper>
-          <Layout />
-        </Frame.Wrapper>
-        <Frame.InnerBorder />
-      </Fragment>
-    );
-  }
-}
+const Activity = props => (
+  <Fragment>
+    <StyledLogomark />
+    <Frame.OuterBorder />
+    <Frame.Wrapper>
+      <Layout />
+    </Frame.Wrapper>
+    <Frame.InnerBorder />
+  </Fragment>
+);
 
 const StyledLogomark = styled(Logomark)`
   display: none;

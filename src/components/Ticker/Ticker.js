@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
-import Item from './Item';
-
 import styled from 'styled-components';
 import { rgba } from 'polished';
+
+import Item from './Item';
 
 const Ticker = props => {
   const events = props.events.filter(e =>
@@ -23,7 +22,7 @@ const Wrapper = styled.ol`
   display: flex;
   overflow: hidden;
   margin: 0;
-  padding: 0;
+  padding: 12px 0;
 
   list-style: none;
 
