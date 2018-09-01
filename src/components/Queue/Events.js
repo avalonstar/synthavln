@@ -22,7 +22,10 @@ export const FollowEvent = props => (
 
 export const HostEvent = props => (
   <Wrapper>
-    <Label>{props.event}</Label>
+    <Label>
+      {props.type === 'auto' && 'auto'}
+      {props.event}
+    </Label>
     <Actor>{props.name}</Actor>
   </Wrapper>
 );
