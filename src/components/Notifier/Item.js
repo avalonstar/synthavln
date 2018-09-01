@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Sound from 'react-sound';
+import posed, { PoseGroup } from 'react-pose';
 
 import {
   CheerEvent,
@@ -35,7 +36,7 @@ class Item extends Component {
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.notification &&
-      nextProps.notification === this.props.notification
+      nextProps.notification !== this.props.notification
     ) {
       this.timer = setTimeout(() =>
         this.setState({
@@ -62,24 +63,35 @@ class Item extends Component {
   };
 
   render() {
-    const { notification } = this.props;
+    const { className, notification } = this.props;
+    const { isVisible, playStatus } = this.state;
     return !notification ? null : (
-      <Wrapper className={this.props.className}>
-        {getType(notification)[notification.event]}
-        <Sound
-          url={`http://synthform.s3.amazonaws.com/audio/avalonstar/${
-            notification.event
-          }.ogg`}
-          playStatus={this.state.playStatus}
-          onFinishedPlaying={this.handleSongFinishedPlaying}
-          volume={20}
-        />
-      </Wrapper>
+      <PoseGroup preEnterPose="from" singleChildOnly>
+        {isVisible && (
+          <Wrapper className={className}>
+            {getType(notification)[notification.event]}
+            <Sound
+              url={`http://synthform.s3.amazonaws.com/audio/avalonstar/${
+                notification.event
+              }.ogg`}
+              playStatus={playStatus}
+              onFinishedPlaying={this.handleSongFinishedPlaying}
+              volume={0}
+            />
+          </Wrapper>
+        )}
+      </PoseGroup>
     );
   }
 }
 
-const Wrapper = styled.div`
+const wrapperProps = {
+  from: { x: '-100%', y: '0%' },
+  enter: { x: '0%', y: '0%' },
+  exit: { x: '0%', y: '100%' }
+};
+
+const Wrapper = styled(posed.div(wrapperProps))`
   z-index: 1000;
   align-items: end;
 `;
