@@ -57,6 +57,7 @@ const Wrapper = styled.div`
 
 const Cheermote = styled.img`
   height: 18px;
+  padding-left: 4px;
 `;
 
 const Actor = styled.div`
