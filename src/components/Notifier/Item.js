@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   CheerEvent,
   FollowEvent,
-  HostEvent,
   MysteryGiftEvent,
   SubscriptionEvent,
   SubGiftEvent,
@@ -15,14 +14,9 @@ import {
 
 import styled from 'styled-components';
 
-const propTypes = {
-  featured: PropTypes.boolean
-};
-
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
   follow: FollowEvent({ ...data }),
-  host: HostEvent({ ...data }),
   mysterygift: MysteryGiftEvent({ ...data }),
   subscription: SubscriptionEvent({ ...data }),
   subgift: SubGiftEvent({ ...data }),

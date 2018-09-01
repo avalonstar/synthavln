@@ -34,6 +34,7 @@ const Layout = () => (
                 <Summary />
               </StyledHero>
               <StyledNotifier
+                whitelistedEvents={uiState.whitelistedEvents}
                 notifications={notifications}
                 onComplete={onComplete}
               />

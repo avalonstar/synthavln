@@ -62,5 +62,3 @@ const Cheermote = styled.img`
 const Actor = styled.div`
   padding-right: 4px;
 `;
-
-const Icon = styled.span``;

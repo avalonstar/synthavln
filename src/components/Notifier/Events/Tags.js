@@ -64,7 +64,7 @@ export const Tip = () => (
 );
 
 export const Tier = props => (
-  <Tag>
+  <Tag plan={props.plan}>
     <Heart size={svgSize} /> {utils.getTier(props.plan)}
   </Tag>
 );
@@ -74,7 +74,6 @@ const Tag = styled.div`
   align-items: center;
   margin-right: 12px;
 
-  /* box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[20]}; */
   color: ${props => props.theme.colors.gray[20]};
   border-radius: 2px;
   text-transform: uppercase;
