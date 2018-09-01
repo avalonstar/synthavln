@@ -9,8 +9,17 @@ import { ChevronRight } from 'react-feather';
 
 class Queue extends Component {
   state = {
-    isVisible: true
+    isVisible: false
   };
+
+  componentWillReceiveProps(nextProps) {
+    const { length } = nextProps.notifications;
+    if (length > 2) {
+      this.timer = setTimeout(() => this.setState({ isVisible: true }));
+    } else if (length < 2) {
+      this.timer = setTimeout(() => this.setState({ isVisible: false }));
+    }
+  }
 
   render() {
     return (
