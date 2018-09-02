@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { UIProvider } from 'providers';
 import App from 'scenes/App';
-import Activity from 'scenes/Activity';
+import { Activity, Camera } from 'scenes/Activity';
 import { foundation } from 'styles/foundation';
 import { history } from 'store';
 
@@ -33,6 +33,7 @@ firestore.settings(firestoreSettings);
 const Main = () => (
   <Switch>
     <Route exact path="/scenes/activity" component={Activity} />
+    <Route exact path="/scenes/activity/camera" component={Camera} />
     <Route component={App} />
   </Switch>
 );
