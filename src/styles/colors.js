@@ -27,5 +27,13 @@ export default {
     '#e8ebed',
     '#f3f5f6'
   ],
-  green: ['#eaf56b']
+  green: ['#eaf56b'],
+  bits: {
+    1: '#ccc9d0',
+    100: '#ca83fd',
+    1000: '#48d7b3',
+    5000: '#4eadfc',
+    10000: '#fd2b2c',
+    100000: '#fdca33'
+  }
 };
