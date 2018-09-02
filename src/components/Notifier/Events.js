@@ -16,8 +16,17 @@ import * as Pomps from './Events/Pomps';
 
 export const CheerEvent = props => (
   <Wrapper>
-    <Label>{props.event}</Label>
-    {props.amount}
+    <Pomp>
+      <Pomps.Resub />
+    </Pomp>
+    <Header>
+      <Actor>{props.name}</Actor>
+      {' cheered '}
+      <Modifier>{`${props.amount} bits!`}</Modifier>
+    </Header>
+    <Footer>
+      <Tags.Cheer />
+    </Footer>
   </Wrapper>
 );
 
@@ -184,8 +193,9 @@ const Actor = styled.span`
 `;
 
 const Modifier = styled.span`
-  text-transform: uppercase;
   font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
 `;
 
 const Label = styled.div`
