@@ -4,18 +4,13 @@ import { rgba } from 'polished';
 
 import Item from './Item';
 
-const Ticker = props => {
-  const events = props.events.filter(e =>
-    props.whitelistedEvents.includes(e.event)
-  );
-  return (
-    <Wrapper>
-      {events.map(event => (
-        <Item key={event.id} data={event} />
-      ))}
-    </Wrapper>
-  );
-};
+const Ticker = props => (
+  <Wrapper>
+    {props.events.map(event => (
+      <Item key={event.id} data={event} />
+    ))}
+  </Wrapper>
+);
 
 const Wrapper = styled.ol`
   position: relative;
