@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
 import {
-  Camera,
   Logomark,
   Logotype,
   Hero,
@@ -17,51 +16,67 @@ import * as Providers from 'providers';
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-const Layout = () => (
-  <UIContext.Consumer>
-    {uiState => (
+class Layout extends PureComponent {
+  componentWillReceiveProps(nextProps) {
+    const { length } = nextProps.notifications;
+    setTimeout(() => (length > 0 ? this.scroll(1) : this.scroll(0)), 250);
+  }
+
+  scroll = to => this.props.parallax.scrollTo(to);
+
+  render() {
+    return (
       <Fragment>
-        <StyledCamera />
-        <Providers.Events>
-          {(state, notifications, onComplete) => (
-            <Fragment>
-              <StyledHero>
-                <Logotype />
-                <Ticker
-                  whitelistedEvents={uiState.whitelistedEvents}
-                  events={state.data}
-                />
-                <Summary />
-              </StyledHero>
-              <StyledNotifier
-                whitelistedEvents={uiState.whitelistedEvents}
-                notifications={notifications}
-                onComplete={onComplete}
-              />
-              <StyledQueue notifications={notifications} />
-            </Fragment>
-          )}
-        </Providers.Events>
+        <TickerArea {...this.props} />
+        <NotificationsArea {...this.props} />
       </Fragment>
-    )}
-  </UIContext.Consumer>
+    );
+  }
+}
+
+const TickerArea = props => (
+  <ParallaxLayer offset={0} speed={-0.3}>
+    <Frame.Wrapper onClick={() => props.parallax.scrollTo(1)}>
+      <StyledHero>
+        <Logotype />
+        <Ticker events={props.state.data} />
+        <Summary />
+      </StyledHero>
+    </Frame.Wrapper>
+  </ParallaxLayer>
 );
 
-const Activity = props => (
-  <Fragment>
-    <StyledLogomark />
-    <Frame.OuterBorder />
-    <Frame.Wrapper>
-      <Layout />
+const NotificationsArea = props => (
+  <ParallaxLayer offset={1} speed={-0.3}>
+    <Frame.Wrapper onClick={() => props.parallax.scrollTo(0)}>
+      <StyledNotifier
+        notifications={props.notifications}
+        onComplete={props.onComplete}
+      />
+      <StyledQueue notifications={props.notifications} />
     </Frame.Wrapper>
+  </ParallaxLayer>
+);
+
+const Structure = props => (
+  <Fragment>
+    <Frame.OuterBorder />
+    <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
+      {props.children}
+    </Parallax>
     <Frame.InnerBorder />
   </Fragment>
 );
 
-const StyledLogomark = styled(Logomark)`
-  display: none;
-  top: 28px;
-`;
+const Scene = props => (
+  <Providers.Events>
+    {props => (
+      <Structure>
+        <Layout {...props} parallax={this.parallax} />
+      </Structure>
+    )}
+  </Providers.Events>
+);
 
 const StyledHero = styled(Hero)`
   grid-column: 1 / span 2;
@@ -80,15 +95,4 @@ const StyledQueue = styled(Queue)`
   align-self: end;
 `;
 
-const StyledCamera = styled(Camera)`
-  display: none;
-  grid-row: 25;
-  grid-column: 2;
-  justify-self: end;
-  align-self: end;
-  margin-right: 36px;
-  width: 422px;
-  z-index: 1000;
-`;
-
-export default Activity;
+export default Scene;
