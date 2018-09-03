@@ -16,7 +16,7 @@ class EventProvider extends Component {
     this.props.firestore
       .collection('events')
       .orderBy('timestamp', 'desc')
-      .limit(30)
+      .limit(10)
       .onSnapshot(snapshot => this.setData(snapshot));
   }
 
@@ -46,12 +46,12 @@ class EventProvider extends Component {
   };
 
   render() {
-    console.log(this.props.notifications);
-    return this.props.children(
-      this.state,
-      this.props.notifications,
-      this.onComplete
-    );
+    const props = {
+      state: this.state,
+      notifications: this.props.notifications,
+      onComplete: this.onComplete
+    };
+    return this.props.children(props);
   }
 }
 
