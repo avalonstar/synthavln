@@ -80,7 +80,7 @@ export const TipEvent = props => (
       {props.formattedAmount}
       {' tip'}
     </Label>
-    <Actor>{props.name}</Actor>
+    <Actor>{props.from}</Actor>
   </Wrapper>
 );
 
