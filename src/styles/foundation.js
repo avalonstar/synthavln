@@ -11,6 +11,7 @@ export const foundation = {
     gotham: "'Gotham SSm A', 'Gotham SSm B', sans-serif",
     montserrat: 'Montserrat, sans-serif'
   },
+  easing: 'cubic-bezier(.62, .28, .23, .99)',
   frame: {
     width: '1920px',
     height: '1080px'
