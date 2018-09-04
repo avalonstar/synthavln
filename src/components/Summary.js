@@ -1,20 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import posed from 'react-pose';
 import { easing } from 'popmotion';
 
 import styled from 'styled-components';
 import { Heart } from 'react-feather';
 
-const Summary = props => (
-  <Wrapper initialPose="exit" pose={props.isVisible ? 'enter' : 'exit'}>
+const propTypes = {
+  isVisible: PropTypes.boolean
+};
+
+const defaultProps = {
+  isVisible: false
+};
+
+const Summary = ({ isVisible }) => (
+  <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
     <Heart size={18} />
-    {/* <Stat>
+    <Stat>
       <strong>5 new</strong> crusaders!
-    </Stat> */}
+    </Stat>
   </Wrapper>
 );
 
-const animationDelay = 300;
+Summary.propTypes = propTypes;
+Summary.defaultProps = defaultProps;
 
 const summaryPoses = {
   exit: { opacity: 0, x: '200%' },
