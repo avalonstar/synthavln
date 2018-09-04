@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as utils from './utils';
+import * as utils from '../utils';
 
 import styled from 'styled-components';
 import {
@@ -74,8 +74,6 @@ const Tag = styled.div`
   align-items: center;
   margin-right: 12px;
 
-  color: ${props => props.theme.colors.gray[20]};
-  border-radius: 2px;
   text-transform: uppercase;
 
   svg {
