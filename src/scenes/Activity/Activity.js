@@ -13,13 +13,11 @@ import { Frame } from 'styles';
 
 const tickerProps = {
   state: PropTypes.shape({}).isRequired,
-  parallax: PropTypes.shape({}), // eslint-disable-line
   isVisible: PropTypes.bool.isRequired
 };
 
 const notificationProps = {
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
-  parallax: PropTypes.shape({}), // eslint-disable-line
   onComplete: PropTypes.func.isRequired
 };
 
@@ -27,9 +25,9 @@ const structureProps = {
   children: PropTypes.node.isRequired
 };
 
-const TickerArea = ({ state, parallax, isVisible }) => (
+const TickerArea = ({ state, isVisible }) => (
   <ParallaxLayer offset={0} speed={-0.3}>
-    <Frame.Wrapper onClick={() => parallax.scrollTo(1)}>
+    <Frame.Wrapper>
       <StyledHero>
         <Logotype isVisible={isVisible} />
         <Ticker events={state.data} isVisible={isVisible} />
@@ -39,9 +37,9 @@ const TickerArea = ({ state, parallax, isVisible }) => (
   </ParallaxLayer>
 );
 
-const NotificationsArea = ({ notifications, parallax, onComplete }) => (
+const NotificationsArea = ({ notifications, onComplete }) => (
   <ParallaxLayer offset={1} speed={-0.3}>
-    <Frame.Wrapper onClick={() => parallax.scrollTo(0)}>
+    <Frame.Wrapper>
       <StyledNotifier notifications={notifications} onComplete={onComplete} />
       <StyledQueue notifications={notifications} />
     </Frame.Wrapper>
