@@ -1,8 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const Indicator = props => <Square className={props.className} />;
+const propTypes = {
+  className: PropTypes.string
+};
+
+const defaultProps = {
+  className: ''
+};
+
+const Indicator = ({ className }) => <Square className={className} />;
+
+Indicator.propTypes = propTypes;
+Indicator.defaultProps = defaultProps;
 
 const Square = styled.div`
   width: 24px;
