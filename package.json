@@ -2,6 +2,7 @@
   "name": "synthavln",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://synthavln.netlify.com",
   "dependencies": {
     "firebase": "^5.4.2",
     "lodash": "^4.17.10",
