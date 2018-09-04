@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { rgba } from 'polished';
 
 const propTypes = {
   className: PropTypes.string.isRequired,
@@ -16,17 +15,17 @@ const defaultProps = {
   explicitHeight: false
 };
 
-const Chrome = props => (
-  <Wrapper className={props.className} explicitHeight={props.explicitHeight}>
+const Chrome = ({ className, title, explicitHeight, children }) => (
+  <Wrapper className={className} explicitHeight={explicitHeight}>
     <Header>
       <Buttons>
         <Circle color="#ff5f57" />
         <Circle color="#ffc130" />
         <Circle color="#02fa7b" />
       </Buttons>
-      <Title>{props.title}</Title>
+      <Title>{title}</Title>
     </Header>
-    {props.children}
+    {children}
   </Wrapper>
 );
 
@@ -41,18 +40,6 @@ const Wrapper = styled.div`
 
   box-shadow: ${props => props.theme.shadows[3]};
   border-radius: 6px;
-`;
-
-const Zone = styled.div`
-  display: block;
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-
-  background: ${props => props.theme.colors.gray[0]};
-  color: ${props => props.theme.colors.gray[0]};
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
 `;
 
 const Header = styled.div`

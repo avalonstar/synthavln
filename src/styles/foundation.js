@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-import { fontFace, normalize, rgba } from 'polished';
+import { normalize, rgba } from 'polished';
 
 import colors from './colors';
 

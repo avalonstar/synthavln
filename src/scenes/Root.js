@@ -1,6 +1,6 @@
 import firebase from '@firebase/app';
 import '@firebase/firestore';
-import { FirestoreProvider, Firestore } from 'react-firestore';
+import { FirestoreProvider } from 'react-firestore';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
@@ -40,9 +40,9 @@ const Main = () => (
   </Switch>
 );
 
-const Root = props => (
+const Root = ({ store }) => (
   <FirestoreProvider firebase={firebase}>
-    <Provider store={props.store}>
+    <Provider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={foundation}>
           <UIProvider>
