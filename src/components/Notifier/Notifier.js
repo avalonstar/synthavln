@@ -13,6 +13,7 @@ class Notifier extends Component {
         className={this.props.className}
         notification={this.props.notifications[0]}
         onComplete={this.props.onComplete}
+        soundOnly={this.props.soundOnly}
       />
     );
   }

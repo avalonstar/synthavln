@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Sound from 'react-sound';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
+
+import { getSongFile } from './utils';
 
 import {
   CheerEvent,
@@ -30,7 +31,8 @@ const getType = data => ({
 class Item extends Component {
   state = {
     isVisible: false,
-    playStatus: Sound.status.STOPPED
+    playStatus: Sound.status.STOPPED,
+    volume: 20
   };
 
   componentWillReceiveProps(nextProps) {
@@ -63,36 +65,33 @@ class Item extends Component {
   };
 
   render() {
-    const { className, notification } = this.props;
-    const { isVisible, playStatus } = this.state;
+    const { notification } = this.props;
+    const baseURL = 'http://synthform.s3.amazonaws.com/audio/avalonstar/';
     return !notification ? null : (
-      <PoseGroup preEnterPose="from" singleChildOnly>
-        {isVisible && (
-          <Wrapper className={className}>
-            {getType(notification)[notification.event]}
-            <Sound
-              url={`http://synthform.s3.amazonaws.com/audio/avalonstar/${
-                notification.event
-              }.ogg`}
-              playStatus={playStatus}
-              onFinishedPlaying={this.handleSongFinishedPlaying}
-              volume={0}
-            />
-          </Wrapper>
-        )}
-      </PoseGroup>
+      <Wrapper
+        className={this.props.className}
+        pose={this.state.isVisible ? 'show' : 'hide'}
+      >
+        {console.log(getSongFile(notification))}
+        {!this.props.soundOnly && getType(notification)[notification.event]}
+        <Sound
+          url={`${baseURL}${notification.event}.ogg`}
+          playStatus={this.state.playStatus}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+          volume={this.props.soundOnly ? this.state.volume : 0}
+        />
+      </Wrapper>
     );
   }
 }
 
 const wrapperProps = {
-  from: { x: '-100%', y: '0%' },
-  enter: { x: '0%', y: '0%' },
-  exit: { x: '0%', y: '100%' }
+  hide: { x: '-100%' },
+  show: { x: '0%', transition: { ease: 'anticipate', duration: 1000 } }
 };
 
 const Wrapper = styled(posed.div(wrapperProps))`
-  z-index: 1000;
+  z-index: 2000;
   align-items: end;
 `;
 
