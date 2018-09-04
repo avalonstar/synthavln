@@ -1,35 +1,24 @@
-import React, { Component, Fragment } from 'react';
-import { Parallax, ParallaxLayer } from 'react-spring';
+import React, { Fragment } from 'react';
 
-import {
-  Logomark,
-  Logotype,
-  Hero,
-  Notifier,
-  Queue,
-  Summary,
-  Ticker
-} from 'components';
-import { UIContext } from 'contexts';
+import { Logotype, Hero, Notifier, Queue, Summary, Ticker } from 'components';
 import * as Providers from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-const Layout = () => (
-  <Providers.Events>
-    {(state, notifications, onComplete) => (
-      <Fragment>
-        <StyledHero>
-          <Logotype />
-          <Ticker events={state.data} />
-          <Summary />
-        </StyledHero>
-        <StyledNotifier notifications={notifications} onComplete={onComplete} />
-        <StyledQueue notifications={notifications} />
-      </Fragment>
-    )}
-  </Providers.Events>
+const Layout = props => (
+  <Fragment>
+    <StyledHero>
+      <Logotype isVisible />
+      <Ticker events={props.state.data} isVisible />
+      <Summary isVisible />
+    </StyledHero>
+    <StyledNotifier
+      notifications={props.notifications}
+      onComplete={props.onComplete}
+    />
+    <StyledQueue notifications={props.notifications} />
+  </Fragment>
 );
 
 const Structure = props => (
@@ -41,15 +30,14 @@ const Structure = props => (
 );
 
 const Scene = props => (
-  <Structure>
-    <Layout />
-  </Structure>
+  <Providers.Events>
+    {props => (
+      <Structure>
+        <Layout {...props} />
+      </Structure>
+    )}
+  </Providers.Events>
 );
-
-const StyledLogomark = styled(Logomark)`
-  display: none;
-  top: 28px;
-`;
 
 const StyledHero = styled(Hero)`
   grid-column: 1 / span 2;
