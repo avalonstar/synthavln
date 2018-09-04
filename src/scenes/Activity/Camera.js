@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { Camera } from 'components';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-const Scene = props => (
+const Scene = () => (
   <Frame.Wrapper>
     <StyledCamera />
   </Frame.Wrapper>

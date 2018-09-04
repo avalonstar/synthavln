@@ -1,4 +1,8 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable react/no-this-in-sfc */
+
 import React, { Fragment, PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
 import { Logotype, Hero, Notifier, Queue, Summary, Ticker } from 'components';
@@ -7,26 +11,39 @@ import * as Providers from 'providers';
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-const TickerArea = props => (
+const tickerProps = {
+  state: PropTypes.arrayOf(PropTypes.object).isRequired,
+  parallax: PropTypes.string.isRequired,
+  isVisible: PropTypes.bool.isRequired
+};
+
+const notificationProps = {
+  notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
+  parallax: PropTypes.string.isRequired,
+  onComplete: PropTypes.func.isRequired
+};
+
+const structureProps = {
+  children: PropTypes.node.isRequired
+};
+
+const TickerArea = ({ state, parallax, isVisible }) => (
   <ParallaxLayer offset={0} speed={-0.3}>
-    <Frame.Wrapper onClick={() => props.parallax.scrollTo(1)}>
+    <Frame.Wrapper onClick={() => parallax.scrollTo(1)}>
       <StyledHero>
-        <Logotype isVisible={props.isVisible} />
-        <Ticker events={props.state.data} isVisible={props.isVisible} />
-        <Summary isVisible={props.isVisible} />
+        <Logotype isVisible={isVisible} />
+        <Ticker events={state.data} isVisible={isVisible} />
+        <Summary isVisible={isVisible} />
       </StyledHero>
     </Frame.Wrapper>
   </ParallaxLayer>
 );
 
-const NotificationsArea = props => (
+const NotificationsArea = ({ notifications, parallax, onComplete }) => (
   <ParallaxLayer offset={1} speed={-0.3}>
-    <Frame.Wrapper onClick={() => props.parallax.scrollTo(0)}>
-      <StyledNotifier
-        notifications={props.notifications}
-        onComplete={props.onComplete}
-      />
-      <StyledQueue notifications={props.notifications} />
+    <Frame.Wrapper onClick={() => parallax.scrollTo(0)}>
+      <StyledNotifier notifications={notifications} onComplete={onComplete} />
+      <StyledQueue notifications={notifications} />
     </Frame.Wrapper>
   </ParallaxLayer>
 );
@@ -42,7 +59,8 @@ class Layout extends PureComponent {
   }
 
   scroll = to => {
-    this.props.parallax.scrollTo(to);
+    const { parallax } = this.props;
+    parallax.scrollTo(to);
     this.setState({ page: to });
   };
 
@@ -57,17 +75,17 @@ class Layout extends PureComponent {
   }
 }
 
-const Structure = props => (
+const Structure = ({ children }) => (
   <Fragment>
     <Frame.OuterBorder />
     <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
-      {props.children}
+      {children}
     </Parallax>
     <Frame.InnerBorder />
   </Fragment>
 );
 
-const Scene = props => (
+const Scene = () => (
   <Providers.Events>
     {props => (
       <Structure>
@@ -76,6 +94,10 @@ const Scene = props => (
     )}
   </Providers.Events>
 );
+
+TickerArea.propTypes = tickerProps;
+NotificationsArea.propTypes = notificationProps;
+Structure.propTypes = structureProps;
 
 const StyledHero = styled(Hero)`
   grid-column: 1 / span 2;
