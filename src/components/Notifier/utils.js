@@ -20,6 +20,8 @@ export const getSongFile = props => {
       }`;
     case 'cheer':
       return `cheer-${getCheerTier(props.amount)}`;
+    case 'follow':
+      return `follow-${Math.floor(Math.random() * 3) + 1}`;
     default:
       return props.event;
   }

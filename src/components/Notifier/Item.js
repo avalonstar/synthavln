@@ -73,10 +73,9 @@ class Item extends PureComponent {
         className={this.props.className}
         pose={this.state.isVisible ? 'show' : 'hide'}
       >
-        {console.log(getSongFile(notification))}
         {!this.props.soundOnly && getType(notification)[notification.event]}
         <Sound
-          url={`${baseURL}${notification.event}.ogg`}
+          url={`${baseURL}${getSongFile(notification)}.ogg`}
           playStatus={this.state.playStatus}
           onFinishedPlaying={this.handleSongFinishedPlaying}
           volume={this.props.soundOnly ? this.state.volume : 0}
