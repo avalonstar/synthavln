@@ -267,11 +267,7 @@ const Bubble = styled.div`
   margin-left: 10px;
   padding: 18px;
 
-  background-image: linear-gradient(
-    to right,
-    ${props => props.theme.colors.gray[21]},
-    ${props => props.theme.colors.gray[23]}
-  );
+  background-image: linear-gradient(to right, #d0d6dc, #e8ebed);
   box-shadow: inset 0 2px 0 ${props => props.theme.colors.white};
   border-radius: 8px;
   border-bottom-left-radius: 0px;
@@ -284,12 +280,12 @@ const Bubble = styled.div`
   &:before {
     content: '';
     position: absolute;
-    left: -12px;
+    left: -11px;
     bottom: 0;
 
     width: 0;
     height: 0;
-    border-bottom: 12px solid ${props => props.theme.colors.gray[21]};
+    border-bottom: 12px solid #d0d6dc;
     border-left: 12px solid transparent;
   }
 `;
