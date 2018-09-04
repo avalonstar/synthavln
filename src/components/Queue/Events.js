@@ -1,88 +1,129 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { Bell, Star } from 'react-feather';
 
-export const CheerEvent = props => (
+const cheerPropTypes = {
+  amount: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+const followPropTypes = {
+  event: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+const mysteryGiftPropTypes = {
+  event: PropTypes.string.isRequired,
+  gifter: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired
+};
+
+const raidPropTypes = {
+  event: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+const resubPropTypes = {
+  name: PropTypes.string.isRequired,
+  months: PropTypes.number.isRequired
+};
+
+const subscriptionPropTypes = {
+  event: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+const subGiftPropTypes = {
+  event: PropTypes.string.isRequired,
+  gifter: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+const tipPropTypes = {
+  from: PropTypes.string.isRequired,
+  formattedAmount: PropTypes.string.isRequired
+};
+
+export const CheerEvent = ({ amount, name }) => (
   <Wrapper>
     <Label>
-      {props.amount}
+      {amount}
       {' bits'}
     </Label>
-    <Actor>{props.name}</Actor>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
-export const FollowEvent = props => (
+export const FollowEvent = ({ event, name }) => (
   <Wrapper>
-    <Label>{props.event}</Label>
-    <Actor>{props.name}</Actor>
+    <Label>{event}</Label>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
-export const HostEvent = props => (
-  <Wrapper>
-    <Label>
-      {props.type === 'auto' && 'auto'}
-      {props.event}
-    </Label>
-    <Actor>{props.name}</Actor>
-  </Wrapper>
-);
-
-export const MysteryGiftEvent = props => (
+export const MysteryGiftEvent = ({ event, amount, gifter }) => (
   <Wrapper>
     <Label>
-      {props.event}
+      {event}
       {' \u00D7'}
-      {props.amount}
+      {amount}
     </Label>
-    <Actor>{props.gifter}</Actor>
+    <Actor>{gifter}</Actor>
   </Wrapper>
 );
 
-export const SubscriptionEvent = props => (
+export const SubscriptionEvent = ({ event, name }) => (
   <Wrapper>
-    <Label>{props.event}</Label>
-    <Actor>{props.name}</Actor>
+    <Label>{event}</Label>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
-export const SubGiftEvent = props => (
+export const SubGiftEvent = ({ event, gifter, name }) => (
   <Wrapper>
     <Label>
-      {props.event} from {props.gifter}
+      {event} from {gifter}
     </Label>
-    <Actor>{props.name}</Actor>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
-export const RaidEvent = props => (
+export const RaidEvent = ({ event, name }) => (
   <Wrapper>
-    <Label>{props.event}</Label>
-    <Actor>{props.name}</Actor>
+    <Label>{event}</Label>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
-export const ResubEvent = props => (
+export const ResubEvent = ({ months, name }) => (
   <Wrapper>
     <Label>
       resub {'\u00D7'}
-      {props.months}
+      {months}
     </Label>
-    <Actor>{props.name}</Actor>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
-export const TipEvent = props => (
+export const TipEvent = ({ formattedAmount, from }) => (
   <Wrapper>
     <Label>
-      {props.formattedAmount}
+      {formattedAmount}
       {' tip'}
     </Label>
-    <Actor>{props.from}</Actor>
+    <Actor>{from}</Actor>
   </Wrapper>
 );
+
+CheerEvent.propTypes = cheerPropTypes;
+FollowEvent.propTypes = followPropTypes;
+MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
+RaidEvent.propTypes = raidPropTypes;
+ResubEvent.propTypes = resubPropTypes;
+SubscriptionEvent.propTypes = subscriptionPropTypes;
+SubGiftEvent.propTypes = subGiftPropTypes;
+TipEvent.propTypes = tipPropTypes;
 
 const Wrapper = styled.div`
   display: flex;
@@ -91,11 +132,6 @@ const Wrapper = styled.div`
   white-space: nowrap;
 
   background-color: ${props => props.theme.colors.gray[2]};
-`;
-
-const Icon = styled.div`
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
 `;
 
 const Actor = styled.div`
@@ -109,8 +145,4 @@ const Label = styled.div`
   font-family: ${props => props.theme.fonts.din};
   font-weight: 600;
   text-transform: uppercase;
-`;
-
-const Cheermote = styled.img`
-  height: 18px;
 `;

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   CheerEvent,
   FollowEvent,
-  HostEvent,
   MysteryGiftEvent,
   SubscriptionEvent,
   SubGiftEvent,
@@ -14,13 +13,17 @@ import {
 } from './Events';
 
 const propTypes = {
-  featured: PropTypes.boolean
+  hostRef: PropTypes.string.isRequired,
+  style: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    event: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired
+  }).isRequired
 };
 
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
   follow: FollowEvent({ ...data }),
-  host: HostEvent({ ...data }),
   mysterygift: MysteryGiftEvent({ ...data }),
   subscription: SubscriptionEvent({ ...data }),
   subgift: SubGiftEvent({ ...data }),
@@ -29,16 +32,12 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-const Item = props => {
-  const {
-    data,
-    data: { event, timestamp }
-  } = props;
-  return (
-    <li ref={props.hostRef} style={props.style}>
-      {getType(data)[data.event]}
-    </li>
-  );
-};
+const Item = ({ data, hostRef, style }) => (
+  <li ref={hostRef} style={style}>
+    {getType(data)[data.event]}
+  </li>
+);
+
+Item.propTypes = propTypes;
 
 export default Item;

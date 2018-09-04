@@ -1,11 +1,21 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import posed, { PoseGroup } from 'react-pose';
-
-import Item from './Item';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { ChevronRight } from 'react-feather';
+
+import Item from './Item';
+
+const propTypes = {
+  className: PropTypes.string,
+  notifications: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
+const defaultProps = {
+  className: ''
+};
 
 class Queue extends PureComponent {
   state = {
@@ -22,17 +32,16 @@ class Queue extends PureComponent {
   }
 
   render() {
+    const { className, notifications } = this.props;
+    const { isVisible } = this.state;
     return (
-      <Wrapper
-        pose={this.state.isVisible ? 'open' : 'closed'}
-        className={this.props.className}
-      >
+      <Wrapper pose={isVisible ? 'open' : 'closed'} className={className}>
         <Count>
           next <ChevronRight size={14} />
         </Count>
         <Items>
           <PoseGroup preEnterPose="from">
-            {this.props.notifications.slice(1).map((event, i) => (
+            {notifications.slice(1).map((event, i) => (
               <AnimatedItem i={i} key={event.timestamp} data={event} />
             ))}
           </PoseGroup>
@@ -41,6 +50,9 @@ class Queue extends PureComponent {
     );
   }
 }
+
+Queue.propTypes = propTypes;
+Queue.defaultProps = defaultProps;
 
 const queuePoses = {
   open: { y: '0%' },
