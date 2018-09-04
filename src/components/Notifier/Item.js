@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Sound from 'react-sound';
 import posed from 'react-pose';
 
-import { getSongFile } from './utils';
+import styled from 'styled-components';
 
 import {
   CheerEvent,
@@ -14,8 +15,21 @@ import {
   ResubEvent,
   TipEvent
 } from './Events';
+import { getSongFile } from './utils';
 
-import styled from 'styled-components';
+const propTypes = {
+  notification: PropTypes.shape({
+    event: PropTypes.string
+  }),
+  className: PropTypes.string.isRequired,
+  onComplete: PropTypes.func.isRequired,
+  soundOnly: PropTypes.boolean
+};
+
+const defaultProps = {
+  notification: {},
+  soundOnly: false
+};
 
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
@@ -36,10 +50,8 @@ class Item extends PureComponent {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.notification &&
-      nextProps.notification !== this.props.notification
-    ) {
+    const { notification } = this.props;
+    if (nextProps.notification && nextProps.notification !== notification) {
       this.timer = setTimeout(() => {
         this.setState({ isVisible: true });
         setTimeout(
@@ -51,8 +63,10 @@ class Item extends PureComponent {
   }
 
   handleRest = () => {
-    if (!this.state.isVisible) {
-      setTimeout(() => this.props.onComplete(), 500);
+    const { onComplete } = this.props;
+    const { isVisible } = this.state;
+    if (!isVisible) {
+      setTimeout(() => onComplete(), 500);
     }
   };
 
@@ -66,24 +80,25 @@ class Item extends PureComponent {
   };
 
   render() {
-    const { notification } = this.props;
+    const { className, notification, soundOnly } = this.props;
+    const { isVisible, playStatus, volume } = this.state;
     const baseURL = 'http://synthform.s3.amazonaws.com/audio/avalonstar/';
     return !notification ? null : (
-      <Wrapper
-        className={this.props.className}
-        pose={this.state.isVisible ? 'show' : 'hide'}
-      >
-        {!this.props.soundOnly && getType(notification)[notification.event]}
+      <Wrapper className={className} pose={isVisible ? 'show' : 'hide'}>
+        {!soundOnly && getType(notification)[notification.event]}
         <Sound
           url={`${baseURL}${getSongFile(notification)}.ogg`}
-          playStatus={this.state.playStatus}
+          playStatus={playStatus}
           onFinishedPlaying={this.handleSongFinishedPlaying}
-          volume={this.props.soundOnly ? this.state.volume : 0}
+          volume={soundOnly ? volume : 0}
         />
       </Wrapper>
     );
   }
 }
+
+Item.propTypes = propTypes;
+Item.defaultProps = defaultProps;
 
 const wrapperProps = {
   hide: { x: '-100%' },

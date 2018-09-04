@@ -1,4 +1,4 @@
-const subscriptions = ['subscription', 'resub'];
+/* eslint-disable consistent-return */
 
 const getCheerTier = bits => {
   if (bits < 100) return `100`;
@@ -10,7 +10,6 @@ const getCheerTier = bits => {
 };
 
 export const getSongFile = props => {
-  console.log(props);
   switch (props.event) {
     case 'resub':
     case 'subgift':
