@@ -1,46 +1,19 @@
 import React, { Fragment, PureComponent } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
-import {
-  Logomark,
-  Logotype,
-  Hero,
-  Notifier,
-  Queue,
-  Summary,
-  Ticker
-} from 'components';
-import { UIContext } from 'contexts';
+import { Logotype, Hero, Notifier, Queue, Summary, Ticker } from 'components';
 import * as Providers from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-class Layout extends PureComponent {
-  componentWillReceiveProps(nextProps) {
-    const { length } = nextProps.notifications;
-    setTimeout(() => (length > 0 ? this.scroll(1) : this.scroll(0)), 250);
-  }
-
-  scroll = to => this.props.parallax.scrollTo(to);
-
-  render() {
-    return (
-      <Fragment>
-        <TickerArea {...this.props} />
-        <NotificationsArea {...this.props} />
-      </Fragment>
-    );
-  }
-}
-
 const TickerArea = props => (
   <ParallaxLayer offset={0} speed={-0.3}>
     <Frame.Wrapper onClick={() => props.parallax.scrollTo(1)}>
       <StyledHero>
-        <Logotype />
-        <Ticker events={props.state.data} />
-        <Summary />
+        <Logotype isVisible={props.isVisible} />
+        <Ticker events={props.state.data} isVisible={props.isVisible} />
+        <Summary isVisible={props.isVisible} />
       </StyledHero>
     </Frame.Wrapper>
   </ParallaxLayer>
@@ -57,6 +30,32 @@ const NotificationsArea = props => (
     </Frame.Wrapper>
   </ParallaxLayer>
 );
+
+class Layout extends PureComponent {
+  state = {
+    page: 0
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const { length } = nextProps.notifications;
+    setTimeout(() => (length > 0 ? this.scroll(1) : this.scroll(0)), 250);
+  }
+
+  scroll = to => {
+    this.props.parallax.scrollTo(to);
+    this.setState({ page: to });
+  };
+
+  render() {
+    const { page } = this.state;
+    return (
+      <Fragment>
+        <TickerArea {...this.props} isVisible={page === 0} />
+        <NotificationsArea {...this.props} isVisible={page === 1} />
+      </Fragment>
+    );
+  }
+}
 
 const Structure = props => (
   <Fragment>
