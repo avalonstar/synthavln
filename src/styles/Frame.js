@@ -19,7 +19,7 @@ const Wrapper = styled(Base)`
 const InnerBorder = styled(Base)`
   box-shadow: inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 `;
 
 const OuterBorder = styled(Base)`
@@ -28,10 +28,7 @@ const OuterBorder = styled(Base)`
   z-index: 1000;
 `;
 
-const Container = styled.div``;
-
 export default {
-  Container,
   InnerBorder,
   OuterBorder,
   Wrapper

@@ -14,6 +14,8 @@ import {
 import * as Tags from './Events/Tags';
 import * as Pomps from './Events/Pomps';
 
+import avalonHAI from './assets/avalonHAI.png';
+
 export const CheerEvent = props => (
   <Wrapper>
     <Pomp>
@@ -30,7 +32,14 @@ export const CheerEvent = props => (
   </Wrapper>
 );
 
-export const FollowEvent = props => <Wrapper>{props.event}</Wrapper>;
+export const FollowEvent = props => (
+  <BubbleWrapper>
+    <Avatar src={avalonHAI} />
+    <Bubble>
+      Hello there <Actor>{props.name}</Actor>! Thank you and welcome!
+    </Bubble>
+  </BubbleWrapper>
+);
 
 export const MysteryGiftEvent = props => (
   <Wrapper>
@@ -205,4 +214,47 @@ const Label = styled.div`
 
 const Cheermote = styled.img`
   height: 18px;
+`;
+
+const Avatar = styled.img`
+  transform: rotate(70deg);
+`;
+
+const BubbleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: -4px;
+`;
+
+const Bubble = styled.div`
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+  padding: 18px;
+
+  background-image: linear-gradient(
+    to right,
+    ${props => props.theme.colors.gray[21]},
+    ${props => props.theme.colors.gray[23]}
+  );
+  box-shadow: inset 0 2px 0 ${props => props.theme.colors.white};
+  border-radius: 8px;
+  border-bottom-left-radius: 0px;
+  color: ${props => props.theme.colors.gray[8]};
+  font-family: ${props => props.theme.fonts.gotham};
+  font-weight: 400;
+  transform: rotate(-1deg);
+  transform-origin: bottom left;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+    border-bottom: 12px solid ${props => props.theme.colors.gray[21]};
+    border-left: 12px solid transparent;
+  }
 `;
