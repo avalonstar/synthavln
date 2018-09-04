@@ -1,54 +1,92 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { Gift, Star } from 'react-feather';
 
 import { getCheermoteURL } from './utils';
 
-export const CheerEvent = props => (
+const cheerPropTypes = {
+  amount: PropTypes.string.isRequired
+};
+
+const followPropTypes = {
+  event: PropTypes.string.isRequired
+};
+
+const mysteryGiftPropTypes = {
+  gifter: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired
+};
+
+const raidPropTypes = {
+  event: PropTypes.string.isRequired
+};
+
+const resubPropTypes = {
+  months: PropTypes.number.isRequired
+};
+
+const subGiftPropTypes = {
+  gifter: PropTypes.string.isRequired
+};
+
+const tipPropTypes = {
+  formattedAmount: PropTypes.string.isRequired
+};
+
+export const CheerEvent = ({ amount }) => (
   <Wrapper>
-    {props.amount}
-    <Cheermote alt={props.amount} src={getCheermoteURL(props.amount)} />
+    {amount}
+    <Cheermote alt={amount} src={getCheermoteURL(amount)} />
   </Wrapper>
 );
 
-export const FollowEvent = props => <Wrapper>{props.event}</Wrapper>;
+export const FollowEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
-export const HostEvent = props => <Wrapper>{props.event}</Wrapper>;
-
-export const MysteryGiftEvent = props => (
+export const MysteryGiftEvent = ({ gifter, amount }) => (
   <Wrapper>
-    <Actor>{props.gifter}</Actor>
+    <Actor>{gifter}</Actor>
     <Gift size={18} />
     {'\u00D7'}
-    {props.amount}
+    {amount}
   </Wrapper>
 );
 
-export const SubscriptionEvent = props => (
+export const SubscriptionEvent = () => (
   <Wrapper>
     <Star size={18} />
   </Wrapper>
 );
 
-export const SubGiftEvent = props => (
+export const SubGiftEvent = ({ gifter }) => (
   <Wrapper>
-    <Actor>{props.gifter}</Actor>
+    <Actor>{gifter}</Actor>
     <Gift size={18} />
   </Wrapper>
 );
 
-export const RaidEvent = props => <Wrapper>{props.event}</Wrapper>;
+export const RaidEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
-export const ResubEvent = props => (
+export const ResubEvent = ({ months }) => (
   <Wrapper>
     <Star size={18} />
     {'\u00D7'}
-    {props.months}
+    {months}
   </Wrapper>
 );
 
-export const TipEvent = props => <Wrapper>{props.formattedAmount}</Wrapper>;
+export const TipEvent = ({ formattedAmount }) => (
+  <Wrapper>{formattedAmount}</Wrapper>
+);
+
+CheerEvent.propTypes = cheerPropTypes;
+FollowEvent.propTypes = followPropTypes;
+MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
+RaidEvent.propTypes = raidPropTypes;
+ResubEvent.propTypes = resubPropTypes;
+SubGiftEvent.propTypes = subGiftPropTypes;
+TipEvent.propTypes = tipPropTypes;
 
 const Wrapper = styled.div`
   display: flex;

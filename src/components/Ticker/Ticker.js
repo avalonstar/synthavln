@@ -1,11 +1,20 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import posed, { PoseGroup } from 'react-pose';
-import { easing } from 'popmotion';
+
+import styled from 'styled-components';
+import { rgba } from 'polished';
 
 import Item from './Item';
 
-import styled from 'styled-components';
-import { rgba, animation } from 'polished';
+const propTypes = {
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isVisible: PropTypes.boolean
+};
+
+const defaultProps = {
+  isVisible: false
+};
 
 class Ticker extends PureComponent {
   state = {
@@ -13,7 +22,8 @@ class Ticker extends PureComponent {
   };
 
   componentDidMount() {
-    this.setState({ events: this.props.events });
+    const { events } = this.props;
+    this.setState({ events });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,12 +31,10 @@ class Ticker extends PureComponent {
   }
 
   render() {
+    const { isVisible } = this.props;
     const { events } = this.state;
     return (
-      <Wrapper
-        initialPose="exit"
-        pose={this.props.isVisible ? 'enter' : 'exit'}
-      >
+      <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
         <PoseGroup>
           {events.map((event, i) => (
             <AnimatedItem i={i} key={event.id} data={event} />
@@ -36,6 +44,9 @@ class Ticker extends PureComponent {
     );
   }
 }
+
+Ticker.propTypes = propTypes;
+Ticker.defaultProps = defaultProps;
 
 const animationDelay = 300;
 
