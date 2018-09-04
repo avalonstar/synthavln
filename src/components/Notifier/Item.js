@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Sound from 'react-sound';
 import posed from 'react-pose';
 
@@ -28,7 +28,7 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-class Item extends Component {
+class Item extends PureComponent {
   state = {
     isVisible: false,
     playStatus: Sound.status.STOPPED,
@@ -40,12 +40,13 @@ class Item extends Component {
       nextProps.notification &&
       nextProps.notification !== this.props.notification
     ) {
-      this.timer = setTimeout(() =>
-        this.setState({
-          isVisible: true,
-          playStatus: Sound.status.PLAYING
-        })
-      );
+      this.timer = setTimeout(() => {
+        this.setState({ isVisible: true });
+        setTimeout(
+          () => this.setState({ playStatus: Sound.status.PLAYING }),
+          600
+        );
+      });
     }
   }
 

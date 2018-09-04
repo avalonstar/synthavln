@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
   CheerEvent,
@@ -27,11 +27,7 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-class Item extends Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.data !== this.props.data;
-  }
-
+class Item extends PureComponent {
   render() {
     const { className, data, hostRef, style } = this.props;
     return (

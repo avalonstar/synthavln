@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withFirestore } from 'react-firestore';
 
 import { UIContext } from 'contexts';
@@ -15,7 +15,7 @@ const defaultEventToggles = {
   tip: true
 };
 
-class UIProvider extends Component {
+class UIProvider extends PureComponent {
   state = {
     eventToggles: defaultEventToggles,
     whitelistedEvents: []

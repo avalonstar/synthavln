@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import Item from './Item';
 
-class Notifier extends Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.notifications[0] !== this.props.notifications[0];
-  }
-
+class Notifier extends PureComponent {
   render() {
     return (
       <Item

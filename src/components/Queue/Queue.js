@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import posed, { PoseGroup } from 'react-pose';
 
 import Item from './Item';
@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { rgba } from 'polished';
 import { ChevronRight } from 'react-feather';
 
-class Queue extends Component {
+class Queue extends PureComponent {
   state = {
     isVisible: false
   };
@@ -42,7 +42,7 @@ class Queue extends Component {
   }
 }
 
-const queueProps = {
+const queuePoses = {
   open: { y: '0%' },
   closed: { y: '100%' }
 };
@@ -53,7 +53,7 @@ const AnimatedItem = posed(Item)({
   exit: { opacity: 0, width: 0, x: '-125%' }
 });
 
-const Wrapper = styled(posed.div(queueProps))`
+const Wrapper = styled(posed.div(queuePoses))`
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;

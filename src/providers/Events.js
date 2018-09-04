@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withFirestore } from 'react-firestore';
@@ -6,7 +6,7 @@ import { withFirestore } from 'react-firestore';
 import { notifier } from 'redux/actions/notifications';
 import * as selectors from './selectors';
 
-class EventProvider extends Component {
+class EventProvider extends PureComponent {
   state = {
     data: [],
     snapshot: null
