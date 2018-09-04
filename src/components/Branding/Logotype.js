@@ -10,7 +10,7 @@ import colors from 'styles/colors';
 import logo from './logo.png';
 
 const propTypes = {
-  isVisible: PropTypes.boolean
+  isVisible: PropTypes.bool
 };
 
 const defaultProps = {

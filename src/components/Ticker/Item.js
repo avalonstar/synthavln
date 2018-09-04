@@ -19,12 +19,13 @@ const propTypes = {
   data: PropTypes.shape({
     event: PropTypes.string.isRequired
   }).isRequired,
-  hostRef: PropTypes.string.isRequired,
-  style: PropTypes.string.isRequired
+  hostRef: PropTypes.func.isRequired,
+  style: PropTypes.shape({})
 };
 
 const defaultProps = {
-  className: ''
+  className: '',
+  style: {}
 };
 
 const getType = data => ({

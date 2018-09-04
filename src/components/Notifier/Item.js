@@ -23,7 +23,7 @@ const propTypes = {
   }),
   className: PropTypes.string.isRequired,
   onComplete: PropTypes.func.isRequired,
-  soundOnly: PropTypes.boolean
+  soundOnly: PropTypes.bool
 };
 
 const defaultProps = {

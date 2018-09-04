@@ -9,9 +9,9 @@ import { notifier } from 'redux/actions/notifications';
 import * as selectors from './selectors';
 
 const propTypes = {
-  firestore: PropTypes.object, // eslint-disable-line
+  firestore: PropTypes.shape({}).isRequired,
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.func.isRequired,
   addEventToNotifier: PropTypes.func.isRequired,
   deleteEventFromNotifier: PropTypes.func.isRequired
 };

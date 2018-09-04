@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { Frame } from 'styles';
 
 const layoutPropTypes = {
-  state: PropTypes.arrayOf(PropTypes.object).isRequired,
+  state: PropTypes.shape({}).isRequired,
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
   onComplete: PropTypes.func.isRequired
 };

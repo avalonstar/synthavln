@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Heart } from 'react-feather';
 
 const propTypes = {
-  isVisible: PropTypes.boolean
+  isVisible: PropTypes.bool
 };
 
 const defaultProps = {

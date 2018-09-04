@@ -13,12 +13,16 @@ import {
 } from './Events';
 
 const propTypes = {
-  hostRef: PropTypes.string.isRequired,
-  style: PropTypes.string.isRequired,
+  hostRef: PropTypes.func.isRequired,
+  style: PropTypes.shape({}),
   data: PropTypes.shape({
     event: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired
+    timestamp: PropTypes.object // eslint-disable-line
   }).isRequired
+};
+
+const defaultProps = {
+  style: {}
 };
 
 const getType = data => ({
@@ -39,5 +43,6 @@ const Item = ({ data, hostRef, style }) => (
 );
 
 Item.propTypes = propTypes;
+Item.defaultProps = defaultProps;
 
 export default Item;

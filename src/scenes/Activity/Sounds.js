@@ -5,8 +5,8 @@ import { Notifier } from 'components';
 import * as Providers from 'providers';
 
 const propTypes = {
-  notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onComplete: PropTypes.func.isRequired
+  notifications: PropTypes.arrayOf(PropTypes.object),
+  onComplete: PropTypes.func
 };
 
 const Scene = () => (

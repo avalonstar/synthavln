@@ -12,14 +12,14 @@ import styled from 'styled-components';
 import { Frame } from 'styles';
 
 const tickerProps = {
-  state: PropTypes.arrayOf(PropTypes.object).isRequired,
-  parallax: PropTypes.string.isRequired,
+  state: PropTypes.shape({}).isRequired,
+  parallax: PropTypes.shape({}), // eslint-disable-line
   isVisible: PropTypes.bool.isRequired
 };
 
 const notificationProps = {
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
-  parallax: PropTypes.string.isRequired,
+  parallax: PropTypes.shape({}), // eslint-disable-line
   onComplete: PropTypes.func.isRequired
 };
 

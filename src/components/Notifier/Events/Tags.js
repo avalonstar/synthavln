@@ -14,8 +14,12 @@ import {
 
 import * as utils from '../utils';
 
-const planProps = {
-  plan: PropTypes.string.isRequired
+const planPropTypes = {
+  plan: PropTypes.string
+};
+
+const planDefaultProps = {
+  plan: '1000'
 };
 
 const svgSize = 16;
@@ -74,8 +78,10 @@ export const Tier = ({ plan }) => (
   </Tag>
 );
 
-SPChange.propTypes = planProps;
-Tier.propTypes = planProps;
+SPChange.propTypes = planPropTypes;
+SPChange.defaultProps = planDefaultProps;
+Tier.propTypes = planPropTypes;
+Tier.defaultProps = planDefaultProps;
 
 const Tag = styled.div`
   display: inline-flex;

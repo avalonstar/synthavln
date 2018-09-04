@@ -9,7 +9,7 @@ import Item from './Item';
 
 const propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isVisible: PropTypes.boolean
+  isVisible: PropTypes.bool
 };
 
 const defaultProps = {
