@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-state */
+
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,6 +8,14 @@ import { withFirestore } from 'react-firestore';
 import { notifier } from 'redux/actions/notifications';
 import * as selectors from './selectors';
 
+const propTypes = {
+  firestore: PropTypes.shape({}).isRequired,
+  notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.func.isRequired,
+  addEventToNotifier: PropTypes.func.isRequired,
+  deleteEventFromNotifier: PropTypes.func.isRequired
+};
+
 class EventProvider extends PureComponent {
   state = {
     data: [],
@@ -13,7 +23,8 @@ class EventProvider extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.firestore
+    const { firestore } = this.props;
+    firestore
       .collection('events')
       .orderBy('timestamp', 'desc')
       .limit(10)
@@ -21,7 +32,8 @@ class EventProvider extends PureComponent {
   }
 
   onComplete = () => {
-    this.props.deleteEventFromNotifier();
+    const { deleteEventFromNotifier } = this.props;
+    deleteEventFromNotifier();
   };
 
   setData = snapshot => {
@@ -39,21 +51,25 @@ class EventProvider extends PureComponent {
     // if (this.state.snapshot && !this.state.snapshot.isEqual(snapshot)) {
     snapshot.docChanges().forEach(change => {
       if (change.type === 'added') {
-        this.props.addEventToNotifier(change.doc.data());
+        const { addEventToNotifier } = this.props;
+        addEventToNotifier(change.doc.data());
       }
     });
     // }
   };
 
   render() {
+    const { notifications, children } = this.props;
     const props = {
       state: this.state,
-      notifications: this.props.notifications,
+      notifications,
       onComplete: this.onComplete
     };
-    return this.props.children(props);
+    return children(props);
   }
 }
+
+EventProvider.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   notifications: selectors.getNotifications(state)

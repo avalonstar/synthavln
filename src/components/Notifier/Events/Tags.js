@@ -1,6 +1,5 @@
 import React from 'react';
-
-import * as utils from '../utils';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import {
@@ -12,6 +11,16 @@ import {
   Square,
   Zap
 } from 'react-feather';
+
+import * as utils from '../utils';
+
+const planPropTypes = {
+  plan: PropTypes.string
+};
+
+const planDefaultProps = {
+  plan: '1000'
+};
 
 const svgSize = 16;
 
@@ -33,9 +42,9 @@ export const Resub = () => (
   </Tag>
 );
 
-export const SPChange = props => (
+export const SPChange = ({ plan }) => (
   <Tag>
-    <PlusSquare size={svgSize} /> sp + {utils.getSubValue(props.plan)}
+    <PlusSquare size={svgSize} /> sp + {utils.getSubValue(plan)}
   </Tag>
 );
 
@@ -63,11 +72,16 @@ export const Tip = () => (
   </Tag>
 );
 
-export const Tier = props => (
-  <Tag plan={props.plan}>
-    <Heart size={svgSize} /> {utils.getTier(props.plan)}
+export const Tier = ({ plan }) => (
+  <Tag plan={plan}>
+    <Heart size={svgSize} /> {utils.getTier(plan)}
   </Tag>
 );
+
+SPChange.propTypes = planPropTypes;
+SPChange.defaultProps = planDefaultProps;
+Tier.propTypes = planPropTypes;
+Tier.defaultProps = planDefaultProps;
 
 const Tag = styled.div`
   display: inline-flex;

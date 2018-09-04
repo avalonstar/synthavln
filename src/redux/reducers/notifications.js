@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import * as actions from 'redux/actions/notifications';
 
 const notifications = (state = [], action) => {

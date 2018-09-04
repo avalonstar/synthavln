@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
+import styled from 'styled-components';
 
 import {
   CheerEvent,
   FollowEvent,
-  HostEvent,
   MysteryGiftEvent,
   SubscriptionEvent,
   SubGiftEvent,
@@ -12,13 +14,23 @@ import {
   TipEvent
 } from './Events';
 
-import styled from 'styled-components';
-import { rgba } from 'polished';
+const propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.shape({
+    event: PropTypes.string.isRequired
+  }).isRequired,
+  hostRef: PropTypes.func.isRequired,
+  style: PropTypes.shape({})
+};
+
+const defaultProps = {
+  className: '',
+  style: {}
+};
 
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
   follow: FollowEvent({ ...data }),
-  host: HostEvent({ ...data }),
   mysterygift: MysteryGiftEvent({ ...data }),
   subscription: SubscriptionEvent({ ...data }),
   subgift: SubGiftEvent({ ...data }),
@@ -38,6 +50,9 @@ class Item extends PureComponent {
     );
   }
 }
+
+Item.propTypes = propTypes;
+Item.defaultProps = defaultProps;
 
 const Wrapper = styled.li`
   display: flex;

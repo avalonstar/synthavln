@@ -1,10 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const Hero = props => (
-  <Wrapper className={props.className}>{props.children}</Wrapper>
+const propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired
+};
+
+const defaultProps = {
+  className: ''
+};
+
+const Hero = ({ className, children }) => (
+  <Wrapper className={className}>{children}</Wrapper>
 );
+
+Hero.propTypes = propTypes;
+Hero.defaultProps = defaultProps;
 
 const Wrapper = styled.div`
   display: grid;

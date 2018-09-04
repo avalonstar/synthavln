@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { withFirestore } from 'react-firestore';
 
-import { UIContext } from 'contexts';
+import UIContext from 'contexts';
 
 const defaultEventToggles = {
   cheer: true,

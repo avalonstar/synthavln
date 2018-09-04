@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import { Logotype, Hero, Notifier, Queue, Summary, Ticker } from 'components';
 import * as Providers from 'providers';
@@ -6,30 +7,37 @@ import * as Providers from 'providers';
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-const Layout = props => (
+const layoutPropTypes = {
+  state: PropTypes.shape({}).isRequired,
+  notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onComplete: PropTypes.func.isRequired
+};
+
+const structureProps = {
+  children: PropTypes.node.isRequired
+};
+
+const Layout = ({ state, notifications, onComplete }) => (
   <Fragment>
     <StyledHero>
       <Logotype isVisible />
-      <Ticker events={props.state.data} isVisible />
+      <Ticker events={state.data} isVisible />
       <Summary isVisible />
     </StyledHero>
-    <StyledNotifier
-      notifications={props.notifications}
-      onComplete={props.onComplete}
-    />
-    <StyledQueue notifications={props.notifications} />
+    <StyledNotifier notifications={notifications} onComplete={onComplete} />
+    <StyledQueue notifications={notifications} />
   </Fragment>
 );
 
-const Structure = props => (
+const Structure = ({ children }) => (
   <Fragment>
     <Frame.OuterBorder />
-    <Frame.Wrapper>{props.children}</Frame.Wrapper>
+    <Frame.Wrapper>{children}</Frame.Wrapper>
     <Frame.InnerBorder />
   </Fragment>
 );
 
-const Scene = props => (
+const Scene = () => (
   <Providers.Events>
     {props => (
       <Structure>
@@ -38,6 +46,9 @@ const Scene = props => (
     )}
   </Providers.Events>
 );
+
+Layout.propTypes = layoutPropTypes;
+Structure.propTypes = structureProps;
 
 const StyledHero = styled(Hero)`
   grid-column: 1 / span 2;

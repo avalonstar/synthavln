@@ -1,30 +1,65 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { rgba } from 'polished';
-import {
-  Gift,
-  Star,
-  Circle,
-  Heart,
-  PlusSquare,
-  TrendingUp
-} from 'react-feather';
+import { Gift } from 'react-feather';
 
 import * as Tags from './Events/Tags';
 import * as Pomps from './Events/Pomps';
 
 import avalonHAI from './assets/avalonHAI.png';
 
-export const CheerEvent = props => (
+const cheerPropTypes = {
+  amount: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+const followPropTypes = {
+  name: PropTypes.string.isRequired
+};
+
+const mysteryGiftPropTypes = {
+  event: PropTypes.string.isRequired,
+  gifter: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired
+};
+
+const raidPropTypes = {
+  name: PropTypes.string.isRequired
+};
+
+const resubPropTypes = {
+  name: PropTypes.string.isRequired,
+  months: PropTypes.number.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+const subscriptionPropTypes = {
+  name: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+const subGiftPropTypes = {
+  gifter: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+const tipPropTypes = {
+  from: PropTypes.string.isRequired,
+  formattedAmount: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired
+};
+
+export const CheerEvent = ({ name, amount }) => (
   <Wrapper>
     <Pomp>
       <Pomps.Resub />
     </Pomp>
     <Header>
-      <Actor>{props.name}</Actor>
+      <Actor>{name}</Actor>
       {' cheered '}
-      <Modifier>{`${props.amount} bits!`}</Modifier>
+      <Modifier>{`${amount} bits!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Cheer />
@@ -32,92 +67,103 @@ export const CheerEvent = props => (
   </Wrapper>
 );
 
-export const FollowEvent = props => (
+export const FollowEvent = ({ name }) => (
   <BubbleWrapper>
     <Avatar src={avalonHAI} />
     <Bubble>
-      Hello there <Actor>{props.name}</Actor>! Thank you and welcome!
+      Hello there <Actor>{name}</Actor>! Thank you and welcome!
     </Bubble>
   </BubbleWrapper>
 );
 
-export const MysteryGiftEvent = props => (
+export const MysteryGiftEvent = ({ event, gifter, amount }) => (
   <Wrapper>
-    <Label>{props.event}</Label>
-    <Actor>{props.gifter}</Actor>
+    <Label>{event}</Label>
+    <Actor>{gifter}</Actor>
     <Gift size={18} />
     {'\u00D7'}
-    {props.amount}
+    {amount}
   </Wrapper>
 );
 
-export const SubscriptionEvent = props => (
-  <Wrapper>
-    <Aside />
-    <Header>
-      <Actor>{props.name}</Actor>
-      {' has just subscribed! '}
-    </Header>
-    <Footer>
-      <Tags.Subscription />
-      <Tags.Tier plan={props.subPlan} />
-      <Tags.SPChange plan={props.subPlan} />
-    </Footer>
-  </Wrapper>
+export const RaidEvent = ({ name }) => (
+  <Wrapper>{name} thanks for the raid!</Wrapper>
 );
 
-export const SubGiftEvent = props => (
-  <Wrapper>
-    <Aside>test</Aside>
-    <Header>
-      <Actor>{props.gifter}</Actor>
-      {' gifted '}
-      <Actor>{props.username}</Actor>
-      {' a subscription!'}
-    </Header>
-    <Footer>
-      <Tags.SubGift />
-      <Tags.Tier plan={props.subPlan} />
-      <Tags.SPChange plan={props.subPlan} />
-    </Footer>
-  </Wrapper>
-);
-
-export const RaidEvent = props => <Wrapper>{props.event}</Wrapper>;
-
-export const ResubEvent = props => (
+export const ResubEvent = ({ name, months, subPlan }) => (
   <Wrapper>
     <Pomp>
       <Pomps.Resub />
     </Pomp>
     <Header>
-      <Actor>{props.name}</Actor>
+      <Actor>{name}</Actor>
       {' subscribed for '}
-      <Modifier>{`${props.months} consecutive months!`}</Modifier>
+      <Modifier>{`${months} consecutive months!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Resub />
-      <Tags.Tier plan={props.subPlan} />
+      <Tags.Tier plan={subPlan} />
       <Tags.SPRetain />
     </Footer>
   </Wrapper>
 );
 
-export const TipEvent = props => (
+export const SubscriptionEvent = ({ name, subPlan }) => (
   <Wrapper>
     <Aside />
     <Header>
-      <Actor>{props.from}</Actor>
+      <Actor>{name}</Actor>
+      {' has just subscribed! '}
+    </Header>
+    <Footer>
+      <Tags.Subscription />
+      <Tags.Tier plan={subPlan} />
+      <Tags.SPChange plan={subPlan} />
+    </Footer>
+  </Wrapper>
+);
+
+export const SubGiftEvent = ({ gifter, name, subPlan }) => (
+  <Wrapper>
+    <Aside>test</Aside>
+    <Header>
+      <Actor>{gifter}</Actor>
+      {' gifted '}
+      <Actor>{name}</Actor>
+      {' a subscription!'}
+    </Header>
+    <Footer>
+      <Tags.SubGift />
+      <Tags.Tier plan={subPlan} />
+      <Tags.SPChange plan={subPlan} />
+    </Footer>
+  </Wrapper>
+);
+
+export const TipEvent = ({ from, formattedAmount, message }) => (
+  <Wrapper>
+    <Aside />
+    <Header>
+      <Actor>{from}</Actor>
       {' just tipped '}
-      <Modifier>{props.formattedAmount}</Modifier>
+      <Modifier>{formattedAmount}</Modifier>
       {'!'}
-      <Message>{props.message}</Message>
+      <Message>{message}</Message>
     </Header>
     <Footer>
       <Tags.Tip />
     </Footer>
   </Wrapper>
 );
+
+CheerEvent.propTypes = cheerPropTypes;
+FollowEvent.propTypes = followPropTypes;
+MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
+RaidEvent.propTypes = raidPropTypes;
+ResubEvent.propTypes = resubPropTypes;
+SubscriptionEvent.propTypes = subscriptionPropTypes;
+SubGiftEvent.propTypes = subGiftPropTypes;
+TipEvent.propTypes = tipPropTypes;
 
 const Wrapper = styled.div`
   display: inline-grid;
@@ -189,13 +235,6 @@ const Footer = styled.div`
   font-weight: 700;
 `;
 
-const Type = styled.div`
-  display: inline;
-  color: ${props => props.theme.colors.white};
-  font-weight: 700;
-  text-transform: uppercase;
-`;
-
 const Actor = styled.span`
   text-transform: uppercase;
   font-weight: 800;
@@ -210,10 +249,6 @@ const Modifier = styled.span`
 const Label = styled.div`
   font-size: 14px;
   text-transform: uppercase;
-`;
-
-const Cheermote = styled.img`
-  height: 18px;
 `;
 
 const Avatar = styled.img`
@@ -232,11 +267,7 @@ const Bubble = styled.div`
   margin-left: 10px;
   padding: 18px;
 
-  background-image: linear-gradient(
-    to right,
-    ${props => props.theme.colors.gray[21]},
-    ${props => props.theme.colors.gray[23]}
-  );
+  background-image: linear-gradient(to right, #d0d6dc, #e8ebed);
   box-shadow: inset 0 2px 0 ${props => props.theme.colors.white};
   border-radius: 8px;
   border-bottom-left-radius: 0px;
@@ -249,12 +280,12 @@ const Bubble = styled.div`
   &:before {
     content: '';
     position: absolute;
-    left: -12px;
+    left: -11px;
     bottom: 0;
 
     width: 0;
     height: 0;
-    border-bottom: 12px solid ${props => props.theme.colors.gray[21]};
+    border-bottom: 12px solid #d0d6dc;
     border-left: 12px solid transparent;
   }
 `;
