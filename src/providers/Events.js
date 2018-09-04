@@ -47,15 +47,16 @@ class EventProvider extends PureComponent {
     });
   };
 
-  addEventToNotifier = snapshot => {
-    // if (this.state.snapshot && !this.state.snapshot.isEqual(snapshot)) {
-    snapshot.docChanges().forEach(change => {
-      if (change.type === 'added') {
-        const { addEventToNotifier } = this.props;
-        addEventToNotifier(change.doc.data());
-      }
-    });
-    // }
+  addEventToNotifier = firestore => {
+    const { snapshot } = this.state;
+    if (snapshot && !snapshot.isEqual(firestore)) {
+      firestore.docChanges().forEach(change => {
+        if (change.type === 'added') {
+          const { addEventToNotifier } = this.props;
+          addEventToNotifier(change.doc.data());
+        }
+      });
+    }
   };
 
   render() {
