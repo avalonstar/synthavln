@@ -24,11 +24,10 @@ class EventProvider extends PureComponent {
 
   componentDidMount() {
     const { firestore } = this.props;
-    firestore
+    const collection = firestore
       .collection('events')
-      .orderBy('timestamp', 'desc')
-      .limit(10)
-      .onSnapshot(snapshot => this.setData(snapshot));
+      .orderBy('timestamp', 'desc');
+    collection.limit(10).onSnapshot(snapshot => this.setData(snapshot));
   }
 
   onComplete = () => {
@@ -37,14 +36,13 @@ class EventProvider extends PureComponent {
   };
 
   setData = snapshot => {
+    const data = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    this.setState({ data, snapshot });
     this.addEventToNotifier(snapshot);
-    this.setState({
-      data: snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })),
-      snapshot
-    });
   };
 
   addEventToNotifier = firestore => {
