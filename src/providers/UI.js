@@ -1,7 +1,15 @@
+/* eslint-disable react/no-unused-state */
+
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { withFirestore } from 'react-firestore';
 
 import UIContext from 'contexts';
+
+const propTypes = {
+  firestore: PropTypes.shape({}).isRequired,
+  children: PropTypes.node.isRequired
+};
 
 const defaultEventToggles = {
   cheer: true,
@@ -22,25 +30,25 @@ class UIProvider extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.firestore
-      .collection('uxc')
-      .doc('avalonstar')
-      .onSnapshot(snapshot => {
-        const { eventToggles } = snapshot.data();
-        const whitelistedEvents = Object.keys(eventToggles).filter(
-          key => eventToggles[key]
-        );
-        this.setState({ eventToggles, whitelistedEvents });
-      });
+    const { firestore } = this.props;
+    const collection = firestore.collection('uxc').doc('avalonstar');
+    collection.onSnapshot(snapshot => {
+      const { eventToggles } = snapshot.data();
+      const whitelistedEvents = Object.keys(eventToggles).filter(
+        key => eventToggles[key]
+      );
+      this.setState({ eventToggles, whitelistedEvents });
+    });
   }
 
   render() {
+    const { children } = this.props;
     return (
-      <UIContext.Provider value={this.state}>
-        {this.props.children}
-      </UIContext.Provider>
+      <UIContext.Provider value={this.state}>{children}</UIContext.Provider>
     );
   }
 }
+
+UIProvider.propTypes = propTypes;
 
 export default withFirestore(UIProvider);
