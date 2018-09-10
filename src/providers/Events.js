@@ -41,14 +41,14 @@ class EventProvider extends PureComponent {
       ...doc.data()
     }));
 
-    this.setState({ data, snapshot });
     this.addEventToNotifier(snapshot);
+    this.setState({ data, snapshot });
   };
 
-  addEventToNotifier = firestore => {
+  addEventToNotifier = events => {
     const { snapshot } = this.state;
-    if (snapshot && !snapshot.isEqual(firestore)) {
-      firestore.docChanges().forEach(change => {
+    if (snapshot && !snapshot.isEqual(events)) {
+      events.docChanges().forEach(change => {
         if (change.type === 'added') {
           const { addEventToNotifier } = this.props;
           addEventToNotifier(change.doc.data());
