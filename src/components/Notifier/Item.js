@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Sound from 'react-sound';
@@ -83,8 +84,12 @@ class Item extends PureComponent {
     const { className, notification, soundOnly } = this.props;
     const { isVisible, playStatus, volume } = this.state;
     const baseURL = 'http://synthform.s3.amazonaws.com/audio/avalonstar/';
-    return !notification ? null : (
-      <Wrapper className={className} pose={isVisible ? 'show' : 'hide'}>
+    return _.isEmpty(notification) ? null : (
+      <Wrapper
+        className={className}
+        initialPose="hide"
+        pose={isVisible ? 'show' : 'hide'}
+      >
         {!soundOnly && getType(notification)[notification.event]}
         <Sound
           url={`${baseURL}${getSongFile(notification)}.ogg`}
