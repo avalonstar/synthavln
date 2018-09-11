@@ -56,6 +56,7 @@ const Wrapper = styled(posed.div(summaryPoses))`
 `;
 
 const Stat = styled.div`
+  display: none;
   margin-left: 4px;
 `;
 
