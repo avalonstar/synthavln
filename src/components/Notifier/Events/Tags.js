@@ -9,17 +9,20 @@ import {
   Heart,
   PlusSquare,
   Square,
+  Target,
   Zap
 } from 'react-feather';
 
 import * as utils from '../utils';
 
 const planPropTypes = {
-  plan: PropTypes.string
+  plan: PropTypes.string,
+  amount: PropTypes.number // eslint-disable-line
 };
 
 const planDefaultProps = {
-  plan: '1000'
+  plan: '1000',
+  amount: 1
 };
 
 const svgSize = 16;
@@ -42,9 +45,15 @@ export const Resub = () => (
   </Tag>
 );
 
-export const SPChange = ({ plan }) => (
+export const Raid = () => (
   <Tag>
-    <PlusSquare size={svgSize} /> sp + {utils.getSubValue(plan)}
+    <Target size={svgSize} /> raid
+  </Tag>
+);
+
+export const SPChange = ({ plan, amount = 1 }) => (
+  <Tag>
+    <PlusSquare size={svgSize} /> sp + {utils.getSubValue(plan) * amount}
   </Tag>
 );
 

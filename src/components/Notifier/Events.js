@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { Gift } from 'react-feather';
 
 import * as Tags from './Events/Tags';
 import * as Pomps from './Events/Pomps';
+import * as utils from './utils';
 
 import avalonHAI from './assets/avalonHAI.png';
 
@@ -19,9 +19,9 @@ const followPropTypes = {
 };
 
 const mysteryGiftPropTypes = {
-  event: PropTypes.string.isRequired,
   gifter: PropTypes.string.isRequired,
-  amount: PropTypes.string.isRequired
+  amount: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
 };
 
 const raidPropTypes = {
@@ -76,18 +76,35 @@ export const FollowEvent = ({ name }) => (
   </BubbleWrapper>
 );
 
-export const MysteryGiftEvent = ({ event, gifter, amount }) => (
+export const MysteryGiftEvent = ({ gifter, amount, subPlan }) => (
   <Wrapper>
-    <Label>{event}</Label>
-    <Actor>{gifter}</Actor>
-    <Gift size={18} />
-    {'\u00D7'}
-    {amount}
+    <Pomp />
+    <Header>
+      <Actor>{gifter}</Actor>
+      {' gifted '}
+      <Modifier>{`${amount} ${utils.getTier(
+        subPlan
+      )} subscriptions!`}</Modifier>
+    </Header>
+    <Footer>
+      <Tags.MysteryGift />
+      <Tags.Tier plan={subPlan} />
+      <Tags.SPChange plan={subPlan} amount={amount} />
+    </Footer>
   </Wrapper>
 );
 
 export const RaidEvent = ({ name }) => (
-  <Wrapper>{name} thanks for the raid!</Wrapper>
+  <Wrapper>
+    <Pomp />
+    <Header>
+      <Actor>{name}</Actor>
+      {' thanks for the raid!'}
+    </Header>
+    <Footer>
+      <Tags.Raid />
+    </Footer>
+  </Wrapper>
 );
 
 export const ResubEvent = ({ name, months, subPlan }) => (
@@ -244,11 +261,6 @@ const Modifier = styled.span`
   font-weight: 800;
   text-transform: uppercase;
   white-space: nowrap;
-`;
-
-const Label = styled.div`
-  font-size: 14px;
-  text-transform: uppercase;
 `;
 
 const Avatar = styled.img`
