@@ -26,6 +26,7 @@ class EventProvider extends PureComponent {
     const { firestore } = this.props;
     const collection = firestore
       .collection('events')
+      .where('muted', '==', false)
       .orderBy('timestamp', 'desc');
     collection.limit(10).onSnapshot(snapshot => this.setData(snapshot));
   }
