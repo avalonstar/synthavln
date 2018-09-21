@@ -15,7 +15,6 @@ const followPropTypes = {
 };
 
 const mysteryGiftPropTypes = {
-  gifter: PropTypes.string.isRequired,
   amount: PropTypes.string.isRequired
 };
 
@@ -44,9 +43,8 @@ export const CheerEvent = ({ amount }) => (
 
 export const FollowEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
-export const MysteryGiftEvent = ({ gifter, amount }) => (
+export const MysteryGiftEvent = ({ amount }) => (
   <Wrapper>
-    <Actor>{gifter}</Actor>
     <Gift size={18} />
     {'\u00D7'}
     {amount}
