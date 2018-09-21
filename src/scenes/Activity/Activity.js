@@ -84,13 +84,18 @@ const Structure = ({ children }) => (
 );
 
 const Scene = () => (
-  <Providers.Events>
-    {props => (
-      <Structure>
-        <Layout {...props} parallax={this.parallax} />
-      </Structure>
-    )}
-  </Providers.Events>
+  <Fragment>
+    <Providers.Events>
+      {props => (
+        <Structure>
+          <Layout {...props} parallax={this.parallax} />
+        </Structure>
+      )}
+    </Providers.Events>
+    <Providers.Broadcaster>
+      {({ subscriptions }) => JSON.stringify(subscriptions)}
+    </Providers.Broadcaster>
+  </Fragment>
 );
 
 TickerArea.propTypes = tickerProps;
