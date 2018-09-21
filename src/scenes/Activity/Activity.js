@@ -5,7 +5,15 @@ import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
-import { Logotype, Hero, Notifier, Queue, Summary, Ticker } from 'components';
+import {
+  Logotype,
+  Hero,
+  Notifier,
+  Progress,
+  Queue,
+  Summary,
+  Ticker
+} from 'components';
 import * as Providers from 'providers';
 
 import styled from 'styled-components';
@@ -93,7 +101,12 @@ const Scene = () => (
       )}
     </Providers.Events>
     <Providers.Broadcaster>
-      {({ subscriptions }) => JSON.stringify(subscriptions)}
+      {({ subscriptions }) => (
+        <StyledProgress
+          score={subscriptions.score}
+          goal={subscriptions.next_level}
+        />
+      )}
     </Providers.Broadcaster>
   </Fragment>
 );
@@ -117,6 +130,10 @@ const StyledQueue = styled(Queue)`
   grid-column: 1 / span 2;
   grid-row: 25 / span 2;
   align-self: end;
+`;
+
+const StyledProgress = styled(Progress)`
+  top: 1078px;
 `;
 
 export default Scene;
