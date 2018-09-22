@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Parallax, ParallaxLayer } from 'react-spring';
 
 import {
+  Ava,
   Logotype,
   Hero,
   Notifier,
@@ -83,6 +84,7 @@ class Layout extends PureComponent {
 
 const Structure = ({ children }) => (
   <Fragment>
+    <Ava />
     <Frame.OuterBorder />
     <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
       {children}

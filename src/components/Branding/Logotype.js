@@ -7,7 +7,7 @@ import { keyframes, easing } from 'popmotion';
 import styled from 'styled-components';
 import colors from 'styles/colors';
 
-import logo from './logo.png';
+import logo from './assets/logo.png';
 
 const propTypes = {
   isVisible: PropTypes.bool

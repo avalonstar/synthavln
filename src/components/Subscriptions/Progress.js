@@ -54,7 +54,7 @@ Meter.propTypes = meterPropTypes;
 const Wrapper = styled.div`
   position: relative;
   height: 2px;
-  z-index: 1000;
+  z-index: 2000;
   background: #68770b;
 `;
 

@@ -29,6 +29,7 @@ const OuterBorder = styled(Base)`
 `;
 
 export default {
+  Base,
   InnerBorder,
   OuterBorder,
   Wrapper
