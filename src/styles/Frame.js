@@ -5,7 +5,6 @@ const Base = styled.div`
   overflow: hidden;
   width: ${props => props.theme.frame.width};
   height: ${props => props.theme.frame.height};
-  pointer-events: none;
 `;
 
 const Wrapper = styled(Base)`
@@ -18,11 +17,13 @@ const Wrapper = styled(Base)`
 
 const InnerBorder = styled(Base)`
   box-shadow: inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
+  pointer-events: none;
   z-index: -1;
 `;
 
 const OuterBorder = styled(Base)`
   box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[3]};
+  pointer-events: none;
   z-index: 1000;
 `;
 
