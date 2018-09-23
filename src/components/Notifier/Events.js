@@ -7,7 +7,7 @@ import * as Tags from './Events/Tags';
 import * as Pomps from './Events/Pomps';
 import * as utils from './utils';
 
-import avalonHAI from './assets/avalonHAI.png';
+import avalonHAPPY from './assets/avalonHAPPY.png';
 
 const cheerPropTypes = {
   amount: PropTypes.string.isRequired,
@@ -69,7 +69,7 @@ export const CheerEvent = ({ name, amount }) => (
 
 export const FollowEvent = ({ name }) => (
   <BubbleWrapper>
-    <Avatar src={avalonHAI} />
+    <Avatar src={avalonHAPPY} />
     <Bubble>
       Hello there <Actor>{name}</Actor>! Thank you and welcome!
     </Bubble>
