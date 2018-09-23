@@ -9,8 +9,9 @@ import { ConnectedRouter } from 'react-router-redux';
 import { ThemeProvider } from 'styled-components';
 
 import { UIProvider } from 'providers';
-import App from 'scenes/App';
 import { Activity, Camera, Debug, Sounds } from 'scenes/Activity';
+import App from 'scenes/App';
+import { BRB } from 'scenes/Interstitials';
 import { foundation } from 'styles/foundation';
 import { history } from 'store';
 
@@ -35,6 +36,7 @@ const Main = () => (
     <Route exact path="/scenes/activity/debug" component={Debug} />
     <Route exact path="/scenes/activity/sounds" component={Sounds} />
     <Route exact path="/scenes/activity" component={Activity} />
+    <Route exact path="/scenes/brb" component={BRB} />
     <Route exact path="/scenes/camera" component={Camera} />
     <Route component={App} />
   </Switch>
