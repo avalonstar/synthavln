@@ -30,7 +30,7 @@ StarShirt.defaultProps = defaultProps;
 const StyledStarShirt = styled(StarShirt)`
   position: absolute;
   bottom: 0;
-  right: -90px;
+  right: -80px;
   z-index: 1500;
   width: 340px;
 `;
