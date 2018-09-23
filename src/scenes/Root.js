@@ -11,7 +11,7 @@ import { ThemeProvider } from 'styled-components';
 import { UIProvider } from 'providers';
 import { Activity, Camera, Debug, Sounds } from 'scenes/Activity';
 import App from 'scenes/App';
-import { BRB } from 'scenes/Interstitials';
+import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
 import { history } from 'store';
 
@@ -36,8 +36,19 @@ const Main = () => (
     <Route exact path="/scenes/activity/debug" component={Debug} />
     <Route exact path="/scenes/activity/sounds" component={Sounds} />
     <Route exact path="/scenes/activity" component={Activity} />
-    <Route exact path="/scenes/brb" component={BRB} />
     <Route exact path="/scenes/camera" component={Camera} />
+
+    <Route
+      exact
+      path="/scenes/brb"
+      render={() => <Interstitial message="Be Right Back" />}
+    />
+    <Route
+      exact
+      path="/scenes/start"
+      render={() => <Interstitial message="Please Stand By" />}
+    />
+
     <Route component={App} />
   </Switch>
 );

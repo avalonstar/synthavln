@@ -7,25 +7,24 @@ import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Frame } from 'styles';
 
+const propTypes = {
+  message: PropTypes.string
+};
+
+const defaultProps = {
+  message: ''
+};
+
 const structureProps = {
   children: PropTypes.node.isRequired
 };
 
-const Message = () => (
+const Message = ({ message }) => (
   <Wrapper>
     <Supertitle>Interstitial</Supertitle>
-    <Title>Be Right Back</Title>
+    <Title>{message}</Title>
     <Subtitle>avalonstar.tv</Subtitle>
   </Wrapper>
-);
-
-const Layout = () => (
-  <Frame.Wrapper>
-    <StyledHero>
-      <Logotype isVisible />
-    </StyledHero>
-    <Message />
-  </Frame.Wrapper>
 );
 
 const Structure = ({ children }) => (
@@ -36,12 +35,21 @@ const Structure = ({ children }) => (
   </Fragment>
 );
 
-const Scene = () => (
+const Scene = ({ message }) => (
   <Structure>
-    <Layout />
+    <Frame.Wrapper>
+      <StyledHero>
+        <Logotype isVisible />
+      </StyledHero>
+      <Message message={message} />
+    </Frame.Wrapper>
   </Structure>
 );
 
+Message.propTypes = propTypes;
+Message.defaultProps = defaultProps;
+Scene.propTypes = propTypes;
+Scene.defaultProps = defaultProps;
 Structure.propTypes = structureProps;
 
 const StyledHero = styled(Hero)`
