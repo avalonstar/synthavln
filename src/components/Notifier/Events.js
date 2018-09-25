@@ -142,7 +142,7 @@ export const SubscriptionEvent = ({ name, subPlan }) => (
 
 export const SubGiftEvent = ({ gifter, name, subPlan }) => (
   <Wrapper>
-    <Aside>test</Aside>
+    <Aside />
     <Header>
       <Actor>{gifter}</Actor>
       {' gifted '}
