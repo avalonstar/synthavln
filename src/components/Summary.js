@@ -22,7 +22,7 @@ const statisticPropTypes = {
 };
 
 const Statistic = ({ score, goal }) => {
-  const { minimum_score: next, emoticon_limit: slot } = goal;
+  const { minimum_score: next } = goal;
   return (
     <Stat>
       <Heart color="#eaf56b" size={18} />
