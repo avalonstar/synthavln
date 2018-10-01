@@ -84,7 +84,7 @@ class Layout extends PureComponent {
 
 const Structure = ({ children }) => (
   <Fragment>
-    <Ava />
+    <Ava version="destiny" />
     <Frame.OuterBorder />
     <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
       {children}
