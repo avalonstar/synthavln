@@ -17,8 +17,8 @@ const defaultProps = {
 };
 
 const statisticPropTypes = {
-  score: PropTypes.string.isRequired,
-  goal: PropTypes.string.isRequired
+  score: PropTypes.number.isRequired,
+  goal: PropTypes.shape({}).isRequired
 };
 
 const Statistic = ({ score, goal }) => {
