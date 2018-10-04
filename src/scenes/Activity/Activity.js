@@ -15,6 +15,7 @@ import {
   Summary,
   Ticker
 } from 'components';
+import UIContext from 'contexts';
 import * as Providers from 'providers';
 
 import styled from 'styled-components';
@@ -84,7 +85,9 @@ class Layout extends PureComponent {
 
 const Structure = ({ children }) => (
   <Fragment>
-    <Ava version="destiny" />
+    <UIContext.Consumer>
+      {({ game }) => <Ava version={game} />}
+    </UIContext.Consumer>
     <Frame.OuterBorder />
     <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
       {children}
