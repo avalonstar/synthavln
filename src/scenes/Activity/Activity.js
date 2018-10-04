@@ -12,7 +12,7 @@ import {
   Notifier,
   Progress,
   Queue,
-  Summary,
+  Summaries,
   Ticker
 } from 'components';
 import UIContext from 'contexts';
@@ -41,7 +41,7 @@ const TickerArea = ({ state, isVisible }) => (
       <StyledHero>
         <Logotype isVisible={isVisible} />
         <Ticker events={state.data} isVisible={isVisible} />
-        <Summary isVisible={isVisible} />
+        <Summaries isVisible={isVisible} />
       </StyledHero>
     </Frame.Wrapper>
   </ParallaxLayer>

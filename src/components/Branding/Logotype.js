@@ -17,7 +17,7 @@ const defaultProps = {
   isVisible: false
 };
 
-const animationDelay = 300;
+const animationDelay = 600;
 
 const charKeyframes = (from, to) =>
   keyframes({

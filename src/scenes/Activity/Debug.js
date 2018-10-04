@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Logotype, Hero, Notifier, Queue, Summary, Ticker } from 'components';
+import { Logotype, Hero, Notifier, Queue, Summaries, Ticker } from 'components';
 import * as Providers from 'providers';
 
 import styled from 'styled-components';
@@ -22,7 +22,7 @@ const Layout = ({ state, notifications, onComplete }) => (
     <StyledHero>
       <Logotype isVisible />
       <Ticker events={state.data} isVisible />
-      <Summary isVisible />
+      <Summaries isVisible />
     </StyledHero>
     <StyledNotifier notifications={notifications} onComplete={onComplete} />
     <StyledQueue notifications={notifications} />

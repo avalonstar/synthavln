@@ -5,4 +5,4 @@ export { Notifier } from './Notifier';
 export { Queue } from './Queue';
 export { Progress } from './Subscriptions';
 export { Ticker } from './Ticker';
-export { default as Summary } from './Summary';
+export { Summaries } from './Summary';
