@@ -138,6 +138,7 @@ const StyledQueue = styled(Queue)`
 `;
 
 const StyledProgress = styled(Progress)`
+  display: none;
   top: 1078px;
 `;
 
