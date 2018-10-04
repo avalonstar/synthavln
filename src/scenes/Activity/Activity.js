@@ -86,7 +86,7 @@ class Layout extends PureComponent {
 const Structure = ({ children }) => (
   <Fragment>
     <UIContext.Consumer>
-      {({ game }) => <Ava version={game} />}
+      {({ mode }) => <Ava version={mode} />}
     </UIContext.Consumer>
     <Frame.OuterBorder />
     <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
