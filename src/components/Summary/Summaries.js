@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import posed from 'react-pose';
+import { easing } from 'popmotion';
 
 import styled from 'styled-components';
 
@@ -15,7 +17,7 @@ const defaultProps = {
 };
 
 const Summaries = ({ isVisible }) => (
-  <Wrapper>
+  <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
     <Daily />
     <Total />
   </Wrapper>
@@ -24,7 +26,16 @@ const Summaries = ({ isVisible }) => (
 Summaries.propTypes = propTypes;
 Summaries.defaultProps = defaultProps;
 
-const Wrapper = styled.div`
+const summaryPoses = {
+  exit: { opacity: 0, x: '200%' },
+  enter: {
+    opacity: 1,
+    x: '0%',
+    transition: { easing: easing.anticipate }
+  }
+};
+
+const Wrapper = styled(posed.div(summaryPoses))`
   display: flex;
 `;
 
