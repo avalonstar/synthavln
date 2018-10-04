@@ -57,7 +57,7 @@ Item.defaultProps = defaultProps;
 const Wrapper = styled.li`
   display: flex;
   align-items: center;
-  padding: 8px 10px;
+  padding: 8px 12px;
 
   font-weight: 800;
   font-size: 14px;
