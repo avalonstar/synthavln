@@ -20,8 +20,11 @@ class Daily extends PureComponent {
     const startTime = startOfToday();
     const collection = firestore
       .collection('events')
+      .where('bucket', '==', 'subscription')
       .where('timestamp', '>=', startTime);
-    collection.onSnapshot(snapshot => this.setState({ size: snapshot.size }));
+    collection.onSnapshot(snapshot => {
+      this.setState({ size: snapshot.size });
+    });
   }
 
   render() {
