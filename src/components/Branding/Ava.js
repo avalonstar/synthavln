@@ -6,6 +6,7 @@ import { easing } from 'popmotion';
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
+import business from './assets/ava-business.png';
 import destiny from './assets/ava-destiny.png';
 import starShirt from './assets/ava-star-shirt.png';
 
@@ -25,6 +26,16 @@ const imagePropTypes = {
 const imageDefaultProps = {
   className: ''
 };
+
+const Business = ({ version, className }) => (
+  <Image
+    initialPose="exit"
+    pose={version === 'business' ? 'enter' : 'exit'}
+    className={className}
+    src={business}
+    alt="business"
+  />
+);
 
 const Destiny = ({ version, className }) => (
   <Image
@@ -48,6 +59,7 @@ const StarShirt = ({ version, className }) => (
 
 const getAva = version =>
   ({
+    business: <StyledBusiness version={version} />,
     destiny: <StyledDestiny version={version} />,
     variety: <StyledStarShirt version={version} />
   }[version]);
@@ -72,6 +84,14 @@ const Image = posed.img({
     transition: { easing: easing.anticipate }
   }
 });
+
+const StyledBusiness = styled(Business)`
+  position: absolute;
+  bottom: -190px;
+  right: -85px;
+  z-index: 1500;
+  width: 340px;
+`;
 
 const StyledDestiny = styled(Destiny)`
   position: absolute;
