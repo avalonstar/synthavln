@@ -99,6 +99,7 @@ const Wrapper = styled.li`
 
 const Actor = styled.div`
   padding-left: 4px;
+  white-space: nowrap;
 `;
 
 export default Item;
