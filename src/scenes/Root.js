@@ -54,7 +54,9 @@ const Main = () => (
   </Switch>
 );
 
-const Root = ({ store }) => (
+const Root = (
+  { store } // eslint-disable-line
+) => (
   <FirestoreProvider firebase={firebase}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
