@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-/* eslint-disable react/no-this-in-sfc */
+/* eslint-disable react/no-multi-comp */
 
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
@@ -32,7 +32,7 @@ const notificationProps = {
 };
 
 const structureProps = {
-  children: PropTypes.node.isRequired
+  render: PropTypes.func.isRequired
 };
 
 const TickerArea = ({ state, isVisible }) => (
@@ -83,26 +83,35 @@ class Layout extends PureComponent {
   }
 }
 
-const Structure = ({ children }) => (
-  <Fragment>
-    <UIContext.Consumer>
-      {({ mode }) => <Ava version={mode} />}
-    </UIContext.Consumer>
-    <Frame.OuterBorder />
-    <Parallax pages={2} scrolling={false} ref={ref => (this.parallax = ref)}>
-      {children}
-    </Parallax>
-    <Frame.InnerBorder />
-  </Fragment>
-);
+class Structure extends PureComponent {
+  render() {
+    const { render } = this.props;
+    return (
+      <Fragment>
+        <UIContext.Consumer>
+          {({ mode }) => <Ava version={mode} />}
+        </UIContext.Consumer>
+        <Frame.OuterBorder />
+        <Parallax
+          pages={2}
+          scrolling={false}
+          ref={ref => (this.parallax = ref)}
+        >
+          {render(this.parallax)}
+        </Parallax>
+        <Frame.InnerBorder />
+      </Fragment>
+    );
+  }
+}
 
 const Scene = () => (
   <Fragment>
     <Providers.Events>
       {props => (
-        <Structure>
-          <Layout {...props} parallax={this.parallax} />
-        </Structure>
+        <Structure
+          render={parallax => <Layout {...props} parallax={parallax} />}
+        />
       )}
     </Providers.Events>
     <Providers.Broadcaster>
