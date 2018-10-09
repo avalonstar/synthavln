@@ -1,10 +1,11 @@
-import firebase from '@firebase/app';
-import '@firebase/firestore';
-import { FirestoreProvider } from 'react-firestore';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
+
+import firebase from '@firebase/app';
+import '@firebase/firestore';
+import { FirestoreProvider } from 'react-firestore';
 
 import { ThemeProvider } from 'styled-components';
 
