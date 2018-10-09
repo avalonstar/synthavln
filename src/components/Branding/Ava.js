@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Frame } from 'styles';
 
 import business from './assets/ava-business.png';
+import ffxiv from './assets/ava-ffxiv.png';
 import destiny from './assets/ava-destiny.png';
 import starShirt from './assets/ava-star-shirt.png';
 
@@ -47,6 +48,16 @@ const Destiny = ({ version, className }) => (
   />
 );
 
+const Lyse = ({ version, className }) => (
+  <Image
+    initialPose="exit"
+    pose={version === 'ffxiv' ? 'enter' : 'exit'}
+    className={className}
+    src={ffxiv}
+    alt="ffxiv"
+  />
+);
+
 const StarShirt = ({ version, className }) => (
   <Image
     initialPose="exit"
@@ -61,6 +72,7 @@ const getAva = version =>
   ({
     business: <StyledBusiness version={version} />,
     destiny: <StyledDestiny version={version} />,
+    ffxiv: <StyledLyse version={version} />,
     variety: <StyledStarShirt version={version} />
   }[version]);
 
@@ -68,8 +80,12 @@ const Ava = ({ version }) => <Frame.Base>{getAva(version)}</Frame.Base>;
 
 Ava.propTypes = propTypes;
 Ava.defaultProps = defaultProps;
+Business.propTypes = imagePropTypes;
+Business.defaultProps = imageDefaultProps;
 Destiny.propTypes = imagePropTypes;
 Destiny.defaultProps = imageDefaultProps;
+Lyse.propTypes = imagePropTypes;
+Lyse.defaultProps = imageDefaultProps;
 StarShirt.propTypes = imagePropTypes;
 StarShirt.defaultProps = imageDefaultProps;
 
@@ -99,6 +115,14 @@ const StyledDestiny = styled(Destiny)`
   right: -65px;
   z-index: 1500;
   width: 340px;
+`;
+
+const StyledLyse = styled(Lyse)`
+  position: absolute;
+  bottom: 0;
+  right: -75px;
+  z-index: 1500;
+  width: 300px;
 `;
 
 const StyledStarShirt = styled(StarShirt)`
