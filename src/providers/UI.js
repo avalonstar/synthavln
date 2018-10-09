@@ -33,11 +33,8 @@ class UIProvider extends PureComponent {
     const { firestore } = this.props;
     const collection = firestore.collection('uxc').doc('avalonstar');
     collection.onSnapshot(snapshot => {
-      const { eventToggles, mode } = snapshot.data();
-      const whitelistedEvents = Object.keys(eventToggles).filter(
-        key => eventToggles[key]
-      );
-      this.setState({ eventToggles, mode, whitelistedEvents });
+      const { mode } = snapshot.data();
+      this.setState({ mode });
     });
   }
 
