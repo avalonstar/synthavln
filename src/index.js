@@ -5,7 +5,7 @@ import Root from 'scenes/Root';
 import baseStyles from 'styles/foundation';
 
 import configureStore from './store';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
 
@@ -15,4 +15,4 @@ const render = () => {
 };
 
 render();
-registerServiceWorker();
+serviceWorker.unregister();
