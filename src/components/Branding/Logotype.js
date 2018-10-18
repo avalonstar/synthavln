@@ -87,6 +87,7 @@ const Wrapper = styled.div`
   padding-right: 36px;
 
   color: ${props => props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.gotham};
   font-size: 18px;
   font-weight: 800;
   text-transform: uppercase;

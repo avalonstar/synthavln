@@ -57,10 +57,10 @@ Item.defaultProps = defaultProps;
 const Wrapper = styled.li`
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 10px 14px;
 
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 16px;
   text-transform: uppercase;
 
   img {
@@ -74,11 +74,10 @@ const Wrapper = styled.li`
 
     :before {
       position: relative;
-      top: -1px;
       content: '!HYPE';
 
       color: ${props => props.theme.colors.gray[10]};
-      font-family: ${props => props.theme.fonts.din};
+      font-family: ${props => props.theme.fonts.inter};
       font-weight: 600;
       padding-right: 12px;
     }
@@ -100,6 +99,7 @@ const Wrapper = styled.li`
 const Actor = styled.div`
   padding-left: 4px;
   white-space: nowrap;
+  font-weight: 800;
 `;
 
 export default Item;

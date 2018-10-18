@@ -9,6 +9,7 @@ export const foundation = {
     barlow: 'Barlow, sans-serif',
     din: 'urw-din, sans-serif',
     gotham: "'Gotham SSm A', 'Gotham SSm B', sans-serif",
+    inter: "'Inter UI', sans-serif",
     montserrat: 'Montserrat, sans-serif'
   },
   easing: 'cubic-bezier(.62, .28, .23, .99)',
@@ -41,5 +42,7 @@ export const foundation = {
 };
 
 export default () => injectGlobal`
+  @import url('https://rsms.me/inter/inter-ui.css');
+
   ${normalize()}
 `;

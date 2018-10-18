@@ -77,8 +77,8 @@ const Wrapper = styled(posed.div(queuePoses))`
   background-color: ${props => props.theme.colors.gray[2]};
   box-shadow: ${props => props.theme.shadows[2]};
   color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.gotham};
-  font-size: 14px;
+  font-family: ${props => props.theme.fonts.inter};
+  font-size: 16px;
   font-weight: 500;
 `;
 

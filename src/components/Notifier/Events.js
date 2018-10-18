@@ -187,13 +187,13 @@ const Wrapper = styled.div`
   grid-template-rows: auto 1fr auto;
   align-items: center;
   margin-left: 36px;
-  width: calc(${props => props.theme.frame.width} * 0.2);
+  width: calc(${props => props.theme.frame.width} * 0.25);
 
   background: ${props => props.theme.colors.white};
   border-radius: 4px;
   box-shadow: ${props => props.theme.shadows[1]};
   color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.gotham};
+  font-family: ${props => props.theme.fonts.inter};
   font-weight: 400;
 `;
 
@@ -225,7 +225,7 @@ const Header = styled.div`
   margin: 0 24px;
   padding: 24px 0;
   color: ${props => props.theme.colors.gray[10]};
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 const Message = styled.div`
@@ -248,6 +248,7 @@ const Footer = styled.div`
   align-items: center;
   box-shadow: inset 0 1px 0 ${props => props.theme.colors.gray[20]};
   color: ${props => props.theme.colors.gray[16]};
+  font-family: ${props => props.theme.fonts.gotham};
   font-size: 14px;
   font-weight: 700;
 `;
@@ -285,6 +286,7 @@ const Bubble = styled.div`
   border-bottom-left-radius: 0px;
   color: ${props => props.theme.colors.gray[8]};
   font-family: ${props => props.theme.fonts.gotham};
+  font-size: 18px;
   font-weight: 400;
   transform: rotate(-1deg);
   transform-origin: bottom left;

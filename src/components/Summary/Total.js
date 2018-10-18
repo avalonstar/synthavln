@@ -49,7 +49,7 @@ const Wrapper = styled.div`
   box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};
   border-radius: 4px;
   color: ${props => props.theme.colors.white};
-  font-size: 14px;
+  font-size: 16px;
   text-transform: uppercase;
   transition: all 250ms ${props => props.theme.easing};
   white-space: nowrap;
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 10px 14px;
 
   color: ${props => props.theme.colors.gray[18]};
   font-family: ${props => props.theme.fonts.din};
@@ -67,7 +67,7 @@ const Title = styled.div`
 
 const Stat = styled.div`
   margin-left: 0;
-  padding: 8px 12px;
+  padding: 10px 14px;
 
   box-shadow: inset 1px 0 0 0 ${props => props.theme.colors.gray[6]};
   font-weight: 800;

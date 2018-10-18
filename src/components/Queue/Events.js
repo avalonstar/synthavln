@@ -142,7 +142,7 @@ const Actor = styled.div`
 
 const Label = styled.div`
   color: ${props => props.theme.colors.gray[12]};
-  font-family: ${props => props.theme.fonts.din};
+  font-family: ${props => props.theme.fonts.inter};
   font-weight: 600;
   text-transform: uppercase;
 `;

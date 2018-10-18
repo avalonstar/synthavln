@@ -65,7 +65,7 @@ const Title = styled.div`
   padding: 8px 12px;
 
   color: ${props => props.theme.colors.gray[18]};
-  font-family: ${props => props.theme.fonts.din};
+  font-family: ${props => props.theme.fonts.inter};
   font-weight: 600;
 `;
 
