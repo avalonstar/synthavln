@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 import rootReducer from 'redux/reducers';
@@ -9,7 +8,7 @@ export const history = createHistory();
 const configureStore = () => {
   const initialState = {};
   const enhancers = [];
-  const middleware = [routerMiddleware(history)];
+  const middleware = [];
 
   if (process.env.NODE_ENV === 'development') {
     const { devToolsExtension } = window;
