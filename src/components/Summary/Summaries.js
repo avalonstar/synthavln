@@ -6,7 +6,6 @@ import { easing } from 'popmotion';
 import styled from 'styled-components';
 
 import Daily from './Daily';
-import Total from './Total';
 
 const propTypes = {
   isVisible: PropTypes.bool
@@ -19,7 +18,6 @@ const defaultProps = {
 const Summaries = ({ isVisible }) => (
   <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
     <Daily />
-    <Total />
   </Wrapper>
 );
 
