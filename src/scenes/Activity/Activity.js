@@ -3,7 +3,7 @@
 
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Parallax, ParallaxLayer } from 'react-spring';
+import { Parallax, ParallaxLayer } from 'react-spring/dist/addons';
 
 import {
   Ava,
