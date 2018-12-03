@@ -19,7 +19,6 @@ const propTypes = {
   data: PropTypes.shape({
     event: PropTypes.string.isRequired
   }).isRequired,
-  hostRef: PropTypes.func.isRequired,
   style: PropTypes.shape({})
 };
 
@@ -41,9 +40,9 @@ const getType = data => ({
 
 class Item extends PureComponent {
   render() {
-    const { className, data, hostRef, style } = this.props;
+    const { className, data, style } = this.props;
     return (
-      <Wrapper className={className} innerRef={hostRef} style={style}>
+      <Wrapper className={className} style={style}>
         {getType(data)[data.event]}
         <Actor>{data.from || data.name}</Actor>
       </Wrapper>

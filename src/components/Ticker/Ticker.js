@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
+import { Trail } from 'react-spring';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -35,11 +36,16 @@ class Ticker extends PureComponent {
     const { events } = this.state;
     return (
       <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
-        <PoseGroup>
-          {events.map((event, i) => (
-            <AnimatedItem i={i} key={event.id} data={event} />
-          ))}
-        </PoseGroup>
+        <Trail
+          items={events}
+          keys={item => item.id}
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+        >
+          {(item, i) => props => (
+            <Item style={props} i={i} key={item.id} data={item} />
+          )}
+        </Trail>
       </Wrapper>
     );
   }
@@ -58,21 +64,12 @@ const tickerPoses = {
   }
 };
 
-const AnimatedItem = posed(Item)({
-  enter: {
-    opacity: 1,
-    delay: ({ i }) => animationDelay + i * 20,
-    transition: { type: 'spring', damping: 12 }
-  },
-  exit: { opacity: 0 }
-});
-
 const Wrapper = styled(posed.ol(tickerPoses))`
   position: relative;
   display: flex;
   overflow: hidden;
   margin: 0;
-  padding: 12px 0;
+  padding: 10px 0;
 
   list-style: none;
 

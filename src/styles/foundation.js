@@ -1,4 +1,4 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { normalize, rgba } from 'polished';
 
 import colors from './colors';
@@ -41,8 +41,8 @@ export const foundation = {
   ]
 };
 
-export default () => injectGlobal`
-  @import url('https://rsms.me/inter/inter-ui.css');
-
+const BaseStyles = createGlobalStyle`
   ${normalize()}
 `;
+
+export default BaseStyles;
