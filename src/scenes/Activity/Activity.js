@@ -51,7 +51,7 @@ const NotificationsArea = ({ notifications, onComplete }) => (
   <ParallaxLayer offset={1} speed={-0.3}>
     <Frame.Wrapper>
       <StyledNotifier notifications={notifications} onComplete={onComplete} />
-      <StyledQueue notifications={notifications} />
+      {/* <StyledQueue notifications={notifications} /> */}
     </Frame.Wrapper>
   </ParallaxLayer>
 );
