@@ -11,9 +11,9 @@ const configureStore = () => {
   const middleware = [];
 
   if (process.env.NODE_ENV === 'development') {
-    const { devToolsExtension } = window;
-    if (typeof devToolsExtension === 'function') {
-      enhancers.push(devToolsExtension());
+    const { __REDUX_DEVTOOLS_EXTENSION__ } = window;
+    if (typeof __REDUX_DEVTOOLS_EXTENSION__ === 'function') {
+      enhancers.push(__REDUX_DEVTOOLS_EXTENSION__());
     }
 
     const { logger } = require(`redux-logger`); // eslint-disable-line
