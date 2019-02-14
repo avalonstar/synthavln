@@ -36,17 +36,14 @@ function Item({ className, notification, soundOnly, onComplete }) {
 
   useEffect(() => {
     if (!soundOnly) {
-      setVolume(0);
+      setVolume(1);
     }
   }, []);
 
-  useEffect(
-    () => {
-      setIsVisible(true);
-      setTimeout(() => setPlayStatus('PLAYING'), 600);
-    },
-    [notification]
-  );
+  useEffect(() => {
+    setIsVisible(true);
+    setTimeout(() => setPlayStatus('PLAYING'), 600);
+  }, [notification]);
 
   function handleFinishedPlaying() {
     setPlayStatus('STOPPED');
