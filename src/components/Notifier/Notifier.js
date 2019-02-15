@@ -3,33 +3,27 @@ import PropTypes from 'prop-types';
 
 import Item from './Item';
 
-const propTypes = {
+function Notifier({ className, notifications, onComplete, soundOnly }) {
+  return (
+    <Item
+      className={className}
+      notification={notifications[0]}
+      onComplete={onComplete}
+      soundOnly={soundOnly}
+    />
+  );
+}
+
+Notifier.propTypes = {
   className: PropTypes.string,
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
   onComplete: PropTypes.func.isRequired,
-  soundOnly: PropTypes.bool
+  soundOnly: PropTypes.bool,
 };
 
-const defaultProps = {
+Notifier.defaultProps = {
   className: '',
-  soundOnly: false
+  soundOnly: false,
 };
-
-class Notifier extends PureComponent {
-  render() {
-    const { className, notifications, onComplete, soundOnly } = this.props;
-    return (
-      <Item
-        className={className}
-        notification={notifications[0]}
-        onComplete={onComplete}
-        soundOnly={soundOnly}
-      />
-    );
-  }
-}
-
-Notifier.propTypes = propTypes;
-Notifier.defaultProps = defaultProps;
 
 export default Notifier;

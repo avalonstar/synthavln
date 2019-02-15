@@ -18,18 +18,14 @@ import { history } from 'store';
 const {
   REACT_APP_FIREBASE_API_KEY,
   REACT_APP_FIREBASE_PROJECT_ID,
-  REACT_APP_FIREBASE_URI
+  REACT_APP_FIREBASE_URI,
 } = process.env;
 
 firebase.initializeApp({
   apiKey: REACT_APP_FIREBASE_API_KEY,
   projectId: REACT_APP_FIREBASE_PROJECT_ID,
-  databaseURL: REACT_APP_FIREBASE_URI
+  databaseURL: REACT_APP_FIREBASE_URI,
 });
-
-const firestore = firebase.firestore();
-const firestoreSettings = { timestampsInSnapshots: true };
-firestore.settings(firestoreSettings);
 
 const Main = () => (
   <Switch>

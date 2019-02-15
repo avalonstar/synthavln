@@ -36,7 +36,7 @@ function Item({ className, notification, soundOnly, onComplete }) {
 
   useEffect(() => {
     if (!soundOnly) {
-      setVolume(1);
+      setVolume(0);
     }
   }, []);
 

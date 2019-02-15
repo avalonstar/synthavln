@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -11,21 +11,8 @@ import {
   SubGiftEvent,
   RaidEvent,
   ResubEvent,
-  TipEvent
+  TipEvent,
 } from './Events';
-
-const propTypes = {
-  className: PropTypes.string,
-  data: PropTypes.shape({
-    event: PropTypes.string.isRequired
-  }).isRequired,
-  style: PropTypes.shape({})
-};
-
-const defaultProps = {
-  className: '',
-  style: {}
-};
 
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
@@ -35,23 +22,30 @@ const getType = data => ({
   subgift: SubGiftEvent({ ...data }),
   raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data })
+  tip: TipEvent({ ...data }),
 });
 
-class Item extends PureComponent {
-  render() {
-    const { className, data, style } = this.props;
-    return (
-      <Wrapper className={className} style={style}>
-        {getType(data)[data.event]}
-        <Actor>{data.from || data.name}</Actor>
-      </Wrapper>
-    );
-  }
+function Item({ className, data, style }) {
+  return (
+    <Wrapper className={className} style={style}>
+      {getType(data)[data.event]}
+      <Actor>{data.from || data.name}</Actor>
+    </Wrapper>
+  );
 }
 
-Item.propTypes = propTypes;
-Item.defaultProps = defaultProps;
+Item.propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.shape({
+    event: PropTypes.string.isRequired,
+  }).isRequired,
+  style: PropTypes.shape({}),
+};
+
+Item.defaultProps = {
+  className: '',
+  style: {},
+};
 
 const Wrapper = styled.li`
   display: flex;
