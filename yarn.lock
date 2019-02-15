@@ -9565,6 +9565,11 @@ react-feather@^1.1.6:
   resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.1.6.tgz#2a547e3d5cd5e383d3da0128d593cbdb3c1b32f7"
   integrity sha512-iCofWhTjX+vQwvDmg7o6vg0XrUg1c41yBDZG+l83nz1FiCsleJoUgd3O+kHpOeWMXuPrRIFfCixvcqyOLGOgIg==
 
+react-firebase-hooks@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-1.1.0.tgz#8e1853155669026b171e9b6d9fc16898cfa9b8bd"
+  integrity sha512-ZdY6vAmv9mwldW9mul8T3lbv45p5qgLhtfADZgD8L58MN6/FfTsLCAPOrYMD7MpRTRdeiMX4ioZ9xQd1BfOWCQ==
+
 react-firestore@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/react-firestore/-/react-firestore-0.10.3.tgz#85da2b8429fe1eac1d235a898f3f52383a17ea1c"
