@@ -5361,7 +5361,7 @@ hoek@4.x.x:
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
   integrity sha512-QLg82fGkfnJ/4iy1xZ81/9SIJiq1NGFUMGs6ParyjBZr6jW2Ufj/snDqTHixNlHdPNwN2RLVD0Pi3igeK9+JfA==
 
-hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
@@ -9567,13 +9567,6 @@ react-firebase-hooks@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-1.1.0.tgz#8e1853155669026b171e9b6d9fc16898cfa9b8bd"
   integrity sha512-ZdY6vAmv9mwldW9mul8T3lbv45p5qgLhtfADZgD8L58MN6/FfTsLCAPOrYMD7MpRTRdeiMX4ioZ9xQd1BfOWCQ==
-
-react-firestore@^0.10.3:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/react-firestore/-/react-firestore-0.10.3.tgz#85da2b8429fe1eac1d235a898f3f52383a17ea1c"
-  integrity sha512-e3Hud61fqAWcPYPIvfBLnnaGImk9ZvOhrCp4zpc2cAXV5Fuia3Mi+TDZ+fkdvGVtDZO73MYjCVK64raiXgu8Dw==
-  dependencies:
-    hoist-non-react-statics "^2.3.1"
 
 react-is@^16.6.0:
   version "16.6.3"
