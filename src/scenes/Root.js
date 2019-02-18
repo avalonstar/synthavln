@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -8,7 +9,8 @@ import { Activity, Camera, Sounds } from 'scenes/Activity';
 import App from 'scenes/App';
 import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
-import { history } from 'store';
+
+const history = createHistory();
 
 const Main = () => (
   <Switch>
