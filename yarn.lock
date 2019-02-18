@@ -829,17 +829,10 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@7.3.1", "@babel/runtime@^7.2.0":
+"@babel/runtime@7.3.1", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
   integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
-"@babel/runtime@^7.0.0":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.1.2.tgz#81c89935f4647706fc54541145e6b4ecfef4b8e3"
-  integrity sha512-Y3SCjmhSupzFB6wcv1KmmFucH6gDVnI30WjOcicV10ju0cZjak3Jcs67YLIXBrmZYw1xCrVeJPbycFwrqNyxpg==
   dependencies:
     regenerator-runtime "^0.12.0"
 
@@ -973,13 +966,6 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@emotion/is-prop-valid@^0.6.5":
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.6.8.tgz#68ad02831da41213a2089d2cab4e8ac8b30cbd85"
-  integrity sha512-IMSL7ekYhmFlILXcouA6ket3vV7u9BqStlXzbKOF9HBtpUPMMlHU+bBxrLOa2NvleVwNIxeq/zL8LafLbeUXcA==
-  dependencies:
-    "@emotion/memoize" "^0.6.6"
-
 "@emotion/is-prop-valid@^0.7.3":
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.7.3.tgz#a6bf4fa5387cbba59d44e698a4680f481a8da6cc"
@@ -991,11 +977,6 @@
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.1.tgz#e93c13942592cf5ef01aa8297444dc192beee52f"
   integrity sha512-Qv4LTqO11jepd5Qmlp3M1YEjBumoTHcHFdgPTQ+sFlIL5myi/7xu/POwP7IRu6odBdmLXdtIs1D6TuW6kbwbbg==
-
-"@emotion/memoize@^0.6.6":
-  version "0.6.6"
-  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.6.6.tgz#004b98298d04c7ca3b4f50ca2035d4f60d2eed1b"
-  integrity sha512-h4t4jFjtm1YV7UirAFuSuFGyLa+NNxjdkq6DpFLANNQY5rHueFZHVY+8Cu1HYVP6DrheB0kv4m5xPjo7eKT7yQ==
 
 "@emotion/unitless@^0.7.0":
   version "0.7.3"
@@ -3536,11 +3517,6 @@ dedent@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=
-
-deep-diff@^0.3.5:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
-  integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
 
 deep-equal@^1.0.1:
   version "1.0.1"
@@ -7156,7 +7132,7 @@ longest-streak@^2.0.1:
   resolved "https://registry.yarnpkg.com/longest-streak/-/longest-streak-2.0.2.tgz#2421b6ba939a443bb9ffebf596585a50b4c38e2e"
   integrity sha512-TmYTeEYxiAmSVdpbnQDXGtvYOIRsCMg89CVZzwzc2o7GFL1CjoiRPjH5ec0NFAVlAx3fVof9dX/t6KKRAo2OWA==
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -9580,12 +9556,12 @@ react-pose-text@^3.1.0:
   dependencies:
     hey-listen "^1.0.5"
 
-react-pose@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.2.tgz#0b4ad5e5d58534e426f7287c27916d7114c2ab7c"
-  integrity sha512-FhPHbVIhXHSXtxIiA7dZo8doHoukFIgkdDy9QTh9gU5sqXaA4vG9SyZjHIZ5N6szIjujN9nhhkQhPty/a0PJDA==
+react-pose@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.7.tgz#8573b7d1bc3d03d0b758e5fa07d841484ad8d25d"
+  integrity sha512-cv6/dMhMYSblyrV181I9Tf050kK5B/x0269PN041Thzut95JIluxLJRoAlwWJT2J0jBjG6ZfpXdqRxAqoEbvTQ==
   dependencies:
-    "@emotion/is-prop-valid" "^0.6.5"
+    "@emotion/is-prop-valid" "^0.7.3"
     hey-listen "^1.0.5"
     popmotion-pose "^3.4.0"
     tslib "^1.9.1"
@@ -9678,12 +9654,12 @@ react-sound@^1.2.0:
     prop-types "^15.5.7"
     soundmanager2 "^2.97.20170602"
 
-react-spring@^6.1.10:
-  version "6.1.10"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-6.1.10.tgz#ae28796dccfb32baa02d34fb94289c2088f63a1b"
-  integrity sha512-msMoHyXHzb3KdHNY6Yo6wm1t+1GKjy6k2kqaYT3bG6nM//HOL5798OD6Qg719SEDskRDh2vXxIyJ5KEoAUbecA==
+react-spring@^8.0.7:
+  version "8.0.7"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-8.0.7.tgz#55b1d298be16b308388cb865ee707a1194112fe0"
+  integrity sha512-QHEjWLvEuRCGFRlR29o03CMc+uN1QMPt8Gxxp37szpnkJUq+HDIWNXNCacQ+kJxqzcu65JoeWV6D5q3/y5VK6Q==
   dependencies:
-    "@babel/runtime" "^7.0.0"
+    "@babel/runtime" "^7.3.1"
 
 react@^16.8.2:
   version "16.8.2"
@@ -9825,21 +9801,6 @@ reduce-css-calc@^2.0.0:
   dependencies:
     css-unit-converter "^1.1.1"
     postcss-value-parser "^3.3.0"
-
-redux-logger@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
-  integrity sha1-91VZZvMJjzyIYExEnPC69XeCdL8=
-  dependencies:
-    deep-diff "^0.3.5"
-
-redux@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
-  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
-  dependencies:
-    loose-envify "^1.4.0"
-    symbol-observable "^1.2.0"
 
 regenerate-unicode-properties@^7.0.0:
   version "7.0.0"
@@ -11140,7 +11101,7 @@ svgo@^1.0.0, svgo@^1.1.1:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-symbol-observable@^1.1.0, symbol-observable@^1.2.0:
+symbol-observable@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
