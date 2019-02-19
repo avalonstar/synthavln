@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { animated } from 'react-spring';
 
 import styled from 'styled-components';
 
@@ -11,7 +12,7 @@ import {
   SubGiftEvent,
   RaidEvent,
   ResubEvent,
-  TipEvent,
+  TipEvent
 } from './Events';
 
 const getType = data => ({
@@ -22,7 +23,7 @@ const getType = data => ({
   subgift: SubGiftEvent({ ...data }),
   raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data }),
+  tip: TipEvent({ ...data })
 });
 
 function Item({ className, data, style }) {
@@ -37,17 +38,17 @@ function Item({ className, data, style }) {
 Item.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
-    event: PropTypes.string.isRequired,
+    event: PropTypes.string.isRequired
   }).isRequired,
-  style: PropTypes.shape({}),
+  style: PropTypes.shape({})
 };
 
 Item.defaultProps = {
   className: '',
-  style: {},
+  style: {}
 };
 
-const Wrapper = styled.li`
+const Wrapper = styled(animated.li)`
   display: flex;
   align-items: center;
   padding: 10px 14px;
@@ -55,13 +56,14 @@ const Wrapper = styled.li`
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
+  will-change: width, transform, opacity;
 
   img {
     filter: grayscale(90%);
   }
 
   :first-child {
-    box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};
+    background: ${props => props.theme.colors.gray[0]};
     border-radius: 4px;
     color: ${props => props.theme.colors.white};
 

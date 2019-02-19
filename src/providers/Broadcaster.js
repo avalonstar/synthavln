@@ -1,23 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { FirestoreDocument } from 'react-firestore';
+import createContainer from 'constate';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
-const propTypes = {
-  children: PropTypes.func.isRequired
-};
+import firestore from 'firestore';
 
-class BroadcasterProvider extends PureComponent {
-  render() {
-    const { children } = this.props;
-    return (
-      <FirestoreDocument
-        path="broadcasters/avalonstar"
-        render={({ isLoading, data }) => (isLoading ? null : children(data))}
-      />
-    );
-  }
+function useBroadcaster() {
+  const { loading, value } = useDocument(
+    firestore.firestore().doc('broadcasters/avalonstar')
+  );
+
+  return { value: loading ? null : value };
 }
 
-BroadcasterProvider.propTypes = propTypes;
+const BroadcasterContainer = createContainer(useBroadcaster);
 
-export default BroadcasterProvider;
+export default BroadcasterContainer;

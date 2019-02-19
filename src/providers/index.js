@@ -1,3 +1,4 @@
 export { default as Broadcaster } from './Broadcaster';
 export { default as Events } from './Events';
-export { default as UIProvider } from './UI';
+export { default as Notifications } from './Notifications';
+export { default as UI } from './UI';

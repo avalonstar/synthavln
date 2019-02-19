@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { animated } from 'react-spring';
 
 import {
   CheerEvent,
@@ -37,9 +38,9 @@ const getType = data => ({
 });
 
 const Item = ({ data, hostRef, style }) => (
-  <li ref={hostRef} style={style}>
+  <animated.li ref={hostRef} style={style}>
     {getType(data)[data.event]}
-  </li>
+  </animated.li>
 );
 
 Item.propTypes = propTypes;

@@ -1,49 +1,41 @@
 import { startOfToday } from 'date-fns';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { withFirestore } from 'react-firestore';
+import React, { useEffect, useState } from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 import styled from 'styled-components';
 import { ChevronRight } from 'react-feather';
 
-const propTypes = {
-  firestore: PropTypes.shape({}).isRequired
-};
+import firestore from 'firestore';
 
-class Daily extends PureComponent {
-  state = {
-    size: 0
-  };
+function Daily() {
+  const [size, set] = useState(0);
 
-  componentDidMount() {
-    const { firestore } = this.props;
-    const startTime = startOfToday();
-    const collection = firestore
+  const startTime = startOfToday();
+  const { loading, value } = useCollection(
+    firestore
+      .firestore()
       .collection('events')
       .where('bucket', '==', 'subscription')
-      .where('timestamp', '>=', startTime);
-    collection.onSnapshot(snapshot => {
-      this.setState({ size: snapshot.size });
-    });
-  }
+      .where('timestamp', '>=', startTime)
+  );
+  useEffect(() => {
+    if (!loading && value) {
+      set(value.size);
+    }
+  }, []);
 
-  render() {
-    const { size } = this.state;
-    return (
-      <Wrapper>
-        <Title>
-          <ChevronRight color="#eaf56b" size={18} />
-          {'Buttons Pressed'}
-        </Title>
-        <Stat>{size}</Stat>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper>
+      <Title>
+        <ChevronRight color="#eaf56b" size={18} />
+        {'Buttons Pressed'}
+      </Title>
+      <Stat>{size}</Stat>
+    </Wrapper>
+  );
 }
 
-export default withFirestore(Daily);
-
-Daily.propTypes = propTypes;
+export default Daily;
 
 const Wrapper = styled.div`
   display: flex;

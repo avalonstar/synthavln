@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import posed, { PoseGroup } from 'react-pose';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -8,64 +7,55 @@ import { ChevronRight } from 'react-feather';
 
 import Item from './Item';
 
-const propTypes = {
+function Queue({ className, notifications }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const { length } = notifications;
+    if (length > 2) {
+      timer = setTimeout(() => setIsVisible(true));
+    } else if (length < 2) {
+      timer = setTimeout(() => setIsVisible(false));
+    }
+    return () => clearTimeout(timer);
+  }, [notifications]);
+
+  return (
+    <Wrapper className={className} isVisible={isVisible}>
+      <Count>
+        next <ChevronRight size={14} />
+      </Count>
+      <Items>
+        {notifications.slice(1).map((event, i) => (
+          <Item i={i} key={event.timestamp} data={event} />
+        ))}
+      </Items>
+    </Wrapper>
+  );
+}
+
+Queue.propTypes = {
   className: PropTypes.string,
   notifications: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-const defaultProps = {
+Queue.defaultProps = {
   className: ''
 };
 
-class Queue extends PureComponent {
-  state = {
-    isVisible: false
-  };
+// const queuePoses = {
+//   open: { y: '0%' },
+//   closed: { y: '100%' }
+// };
 
-  componentWillReceiveProps(nextProps) {
-    const { length } = nextProps.notifications;
-    if (length > 2) {
-      this.timer = setTimeout(() => this.setState({ isVisible: true }));
-    } else if (length < 2) {
-      this.timer = setTimeout(() => this.setState({ isVisible: false }));
-    }
-  }
+// const AnimatedItem = posed(Item)({
+//   from: { opacity: 0, width: 'auto', y: '100%' },
+//   enter: { opacity: 1, width: 'auto', x: '0%', y: '0%' },
+//   exit: { opacity: 0, width: 0, x: '-125%' }
+// });
 
-  render() {
-    const { className, notifications } = this.props;
-    const { isVisible } = this.state;
-    return (
-      <Wrapper pose={isVisible ? 'open' : 'closed'} className={className}>
-        <Count>
-          next <ChevronRight size={14} />
-        </Count>
-        <Items>
-          <PoseGroup preEnterPose="from">
-            {notifications.slice(1).map((event, i) => (
-              <AnimatedItem i={i} key={event.timestamp} data={event} />
-            ))}
-          </PoseGroup>
-        </Items>
-      </Wrapper>
-    );
-  }
-}
-
-Queue.propTypes = propTypes;
-Queue.defaultProps = defaultProps;
-
-const queuePoses = {
-  open: { y: '0%' },
-  closed: { y: '100%' }
-};
-
-const AnimatedItem = posed(Item)({
-  from: { opacity: 0, width: 'auto', y: '100%' },
-  enter: { opacity: 1, width: 'auto', x: '0%', y: '0%' },
-  exit: { opacity: 0, width: 0, x: '-125%' }
-});
-
-const Wrapper = styled(posed.div(queuePoses))`
+const Wrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
