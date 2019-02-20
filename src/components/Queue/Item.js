@@ -14,7 +14,6 @@ import {
 } from './Events';
 
 const propTypes = {
-  hostRef: PropTypes.func.isRequired,
   style: PropTypes.shape({}),
   data: PropTypes.shape({
     event: PropTypes.string.isRequired,
@@ -37,10 +36,8 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-const Item = ({ data, hostRef, style }) => (
-  <animated.li ref={hostRef} style={style}>
-    {getType(data)[data.event]}
-  </animated.li>
+const Item = ({ data, style }) => (
+  <animated.li style={style}>{getType(data)[data.event]}</animated.li>
 );
 
 Item.propTypes = propTypes;
