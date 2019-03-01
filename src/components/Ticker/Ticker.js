@@ -10,10 +10,10 @@ import Item from './Item';
 function Ticker({ events, isVisible }) {
   const transitions = useTransition(events, event => event.id, {
     config: config.stiff,
-    trail: 400 / events.length,
-    from: { opacity: 0, transform: 'translate3d(0, -100%, 0)' },
+    trail: 1000 / events.length,
+    from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
     enter: [{ opacity: 1, transform: 'translate3d(0, 0, 0)' }],
-    leave: [{ opacity: 0, transform: 'translate3d(0, -100%, 0)' }]
+    leave: [{ opacity: 0, transform: 'translate3d(0, 100%, 0)' }]
   });
 
   return (

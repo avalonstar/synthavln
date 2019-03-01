@@ -1,39 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import posed from 'react-pose';
-import { easing } from 'popmotion';
+import { config, useSpring, animated } from 'react-spring';
 
 import styled from 'styled-components';
 
 import Daily from './Daily';
 
-const propTypes = {
+function Summaries({ isVisible }) {
+  const props = useSpring({
+    config: config.stiff,
+    from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
+    to: [
+      {
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? 'translate3d(0, 0, 0)'
+          : 'translate3d(0, 100%, 0)'
+      }
+    ]
+  });
+  return (
+    <Wrapper style={props}>
+      <Daily />
+    </Wrapper>
+  );
+}
+
+Summaries.propTypes = {
   isVisible: PropTypes.bool
 };
 
-const defaultProps = {
+Summaries.defaultProps = {
   isVisible: false
 };
 
-const Summaries = ({ isVisible }) => (
-  <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
-    <Daily />
-  </Wrapper>
-);
-
-Summaries.propTypes = propTypes;
-Summaries.defaultProps = defaultProps;
-
-const summaryPoses = {
-  exit: { opacity: 0, x: '200%' },
-  enter: {
-    opacity: 1,
-    x: '0%',
-    transition: { easing: easing.anticipate }
-  }
-};
-
-const Wrapper = styled(posed.div(summaryPoses))`
+const Wrapper = styled(animated.div)`
   display: flex;
 `;
 

@@ -67,16 +67,6 @@ const Wrapper = styled(animated.li)`
     border-radius: 4px;
     color: ${props => props.theme.colors.white};
 
-    :before {
-      position: relative;
-      content: '!HYPE';
-
-      color: ${props => props.theme.colors.gray[10]};
-      font-family: ${props => props.theme.fonts.inter};
-      font-weight: 600;
-      padding-right: 12px;
-    }
-
     img {
       filter: grayscale(0%);
     }

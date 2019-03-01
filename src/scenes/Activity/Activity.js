@@ -25,14 +25,14 @@ function NotificationsArea() {
   );
 }
 
-function TickerArea() {
+function TickerArea({ isVisible }) {
   const { events } = useContext(Events.Context);
   return (
     <Frame.Wrapper>
-      <StyledHero>
-        <Logotype isVisible />
-        <Ticker events={events} isVisible />
-        <Summaries isVisible />
+      <StyledHero isVisible={isVisible}>
+        <Logotype isVisible={isVisible} />
+        <Summaries isVisible={isVisible} />
+        <Ticker events={events} isVisible={isVisible} />
       </StyledHero>
     </Frame.Wrapper>
   );
@@ -41,7 +41,7 @@ function TickerArea() {
 function Layout() {
   return (
     <Fragment>
-      <TickerArea />
+      <TickerArea isVisible />
       <NotificationsArea />
     </Fragment>
   );
@@ -75,10 +75,13 @@ Structure.propTypes = {
   children: PropTypes.node.isRequired
 };
 
+TickerArea.propTypes = {
+  isVisible: PropTypes.bool.isRequired
+};
+
 const StyledHero = styled(Hero)`
   grid-column: 1 / span 2;
-  grid-row: 1 / span 2;
-  box-shadow: ${props => props.theme.shadows[3]};
+  grid-row: 25 / span 2;
 `;
 
 const StyledNotifier = styled(Notifier)`
@@ -88,8 +91,7 @@ const StyledNotifier = styled(Notifier)`
 
 const StyledQueue = styled(Queue)`
   grid-column: 1 / span 2;
-  grid-row: 25 / span 2;
-  align-self: end;
+  grid-row: 1 / span 2;
 `;
 
 export default Scene;
