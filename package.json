@@ -6,7 +6,7 @@
   "dependencies": {
     "constate": "^1.1.1",
     "date-fns": "^1.30.1",
-    "firebase": "^5.10.0",
+    "firebase": "^5.10.1",
     "lodash": "^4.17.10",
     "polished": "^3.2.0",
     "react": "^16.8.6",
@@ -38,12 +38,12 @@
   "devDependencies": {
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "husky": "^1.3.1",
+    "husky": "^2.1.0",
     "lint-staged": "^8.1.5",
     "prettier": "^1.17.0",
     "stylelint": "^10.0.1",
