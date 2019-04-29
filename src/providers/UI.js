@@ -15,7 +15,7 @@ function useUI() {
     if (!loading && value) {
       setMode(value.data().mode);
     }
-  }, [value]);
+  }, [loading, value]);
 
   return { mode };
 }

@@ -41,7 +41,7 @@ function Item({ className, notification, soundOnly }) {
     if (!soundOnly) {
       setVolume(0);
     }
-  }, []);
+  }, [soundOnly]);
 
   useEffect(() => {
     setIsVisible(true);

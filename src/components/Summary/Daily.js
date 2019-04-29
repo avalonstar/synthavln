@@ -22,7 +22,7 @@ function Daily() {
     if (!loading && value) {
       set(value.size);
     }
-  }, []);
+  }, [loading, value]);
 
   return (
     <Wrapper>

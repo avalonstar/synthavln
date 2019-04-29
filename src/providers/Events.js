@@ -23,7 +23,7 @@ function useEvents() {
       setSnapshot(value);
       setEvents(value.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     }
-  }, [value]);
+  }, [loading, value]);
 
   useEffect(() => {
     if (snapshot && !snapshot.isEqual(value)) {
