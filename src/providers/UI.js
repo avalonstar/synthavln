@@ -1,51 +1,25 @@
-/* eslint-disable react/no-unused-state */
+import { useEffect, useState } from 'react';
+import createContainer from 'constate';
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { withFirestore } from 'react-firestore';
+import firestore from 'firestore';
 
-import UIContext from 'contexts';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
-const propTypes = {
-  firestore: PropTypes.shape({}).isRequired,
-  children: PropTypes.node.isRequired
-};
+function useUI() {
+  const [mode, setMode] = useState('variety');
+  const { loading, value } = useDocument(
+    firestore.firestore().doc('uxc/avalonstar')
+  );
 
-const defaultEventToggles = {
-  cheer: true,
-  follow: true,
-  host: false,
-  mysterygift: true,
-  raid: true,
-  resub: true,
-  subgift: true,
-  subscription: true,
-  tip: true
-};
+  useEffect(() => {
+    if (!loading && value) {
+      setMode(value.data().mode);
+    }
+  }, [loading, value]);
 
-class UIProvider extends PureComponent {
-  state = {
-    eventToggles: defaultEventToggles,
-    whitelistedEvents: []
-  };
-
-  componentDidMount() {
-    const { firestore } = this.props;
-    const collection = firestore.collection('uxc').doc('avalonstar');
-    collection.onSnapshot(snapshot => {
-      const { mode } = snapshot.data();
-      this.setState({ mode });
-    });
-  }
-
-  render() {
-    const { children } = this.props;
-    return (
-      <UIContext.Provider value={this.state}>{children}</UIContext.Provider>
-    );
-  }
+  return { mode };
 }
 
-UIProvider.propTypes = propTypes;
+const UIContainer = createContainer(useUI);
 
-export default withFirestore(UIProvider);
+export default UIContainer;

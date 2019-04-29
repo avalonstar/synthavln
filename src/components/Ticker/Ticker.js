@@ -1,70 +1,43 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import posed from 'react-pose';
-import { Trail } from 'react-spring';
+import { config, useTransition } from 'react-spring';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
 import Item from './Item';
 
-const propTypes = {
-  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+function Ticker({ events, isVisible }) {
+  const transitions = useTransition(events, event => event.id, {
+    config: config.stiff,
+    trail: 1000 / events.length,
+    from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
+    enter: [{ opacity: 1, transform: 'translate3d(0, 0, 0)' }],
+    leave: [{ opacity: 0, transform: 'translate3d(0, 100%, 0)' }]
+  });
+
+  return (
+    events && (
+      <Wrapper>
+        {transitions.map(({ item, props: { ...rest }, key }) => (
+          <Item style={rest} key={key} data={item} />
+        ))}
+      </Wrapper>
+    )
+  );
+}
+
+Ticker.propTypes = {
+  events: PropTypes.arrayOf(PropTypes.object),
   isVisible: PropTypes.bool
 };
 
-const defaultProps = {
+Ticker.defaultProps = {
+  events: [],
   isVisible: false
 };
 
-class Ticker extends PureComponent {
-  state = {
-    events: []
-  };
-
-  componentDidMount() {
-    const { events } = this.props;
-    this.setState({ events });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    setTimeout(() => this.setState({ events: nextProps.events }), 1000);
-  }
-
-  render() {
-    const { isVisible } = this.props;
-    const { events } = this.state;
-    return (
-      <Wrapper initialPose="exit" pose={isVisible ? 'enter' : 'exit'}>
-        <Trail
-          items={events}
-          keys={item => item.id}
-          from={{ opacity: 0 }}
-          to={{ opacity: 1 }}
-        >
-          {(item, i) => props => (
-            <Item style={props} i={i} key={item.id} data={item} />
-          )}
-        </Trail>
-      </Wrapper>
-    );
-  }
-}
-
-Ticker.propTypes = propTypes;
-Ticker.defaultProps = defaultProps;
-
-const animationDelay = 300;
-
-const tickerPoses = {
-  exit: { y: '-100%' },
-  enter: {
-    y: '0',
-    transition: { delay: animationDelay, type: 'spring', damping: 12 }
-  }
-};
-
-const Wrapper = styled(posed.ol(tickerPoses))`
+const Wrapper = styled.ol`
   position: relative;
   display: flex;
   overflow: hidden;

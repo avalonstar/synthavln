@@ -1,5 +1,6 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { animated } from 'react-spring';
 
 import styled from 'styled-components';
 
@@ -14,19 +15,6 @@ import {
   TipEvent
 } from './Events';
 
-const propTypes = {
-  className: PropTypes.string,
-  data: PropTypes.shape({
-    event: PropTypes.string.isRequired
-  }).isRequired,
-  style: PropTypes.shape({})
-};
-
-const defaultProps = {
-  className: '',
-  style: {}
-};
-
 const getType = data => ({
   cheer: CheerEvent({ ...data }),
   follow: FollowEvent({ ...data }),
@@ -38,22 +26,29 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-class Item extends PureComponent {
-  render() {
-    const { className, data, style } = this.props;
-    return (
-      <Wrapper className={className} style={style}>
-        {getType(data)[data.event]}
-        <Actor>{data.from || data.name}</Actor>
-      </Wrapper>
-    );
-  }
+function Item({ className, data, style }) {
+  return (
+    <Wrapper className={className} style={style}>
+      {getType(data)[data.event]}
+      <Actor>{data.from || data.name}</Actor>
+    </Wrapper>
+  );
 }
 
-Item.propTypes = propTypes;
-Item.defaultProps = defaultProps;
+Item.propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.shape({
+    event: PropTypes.string.isRequired
+  }).isRequired,
+  style: PropTypes.shape({})
+};
 
-const Wrapper = styled.li`
+Item.defaultProps = {
+  className: '',
+  style: {}
+};
+
+const Wrapper = styled(animated.li)`
   display: flex;
   align-items: center;
   padding: 10px 14px;
@@ -61,25 +56,16 @@ const Wrapper = styled.li`
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
+  will-change: width, transform, opacity;
 
   img {
     filter: grayscale(90%);
   }
 
   :first-child {
-    box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};
+    background: ${props => props.theme.colors.gray[0]};
     border-radius: 4px;
     color: ${props => props.theme.colors.white};
-
-    :before {
-      position: relative;
-      content: '!HYPE';
-
-      color: ${props => props.theme.colors.gray[10]};
-      font-family: ${props => props.theme.fonts.inter};
-      font-weight: 600;
-      padding-right: 12px;
-    }
 
     img {
       filter: grayscale(0%);

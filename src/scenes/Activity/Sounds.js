@@ -1,26 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
 import { Notifier } from 'components';
-import * as Providers from 'providers';
+import { Events, Notifications } from 'providers';
 
-const propTypes = {
-  notifications: PropTypes.arrayOf(PropTypes.object),
-  onComplete: PropTypes.func
-};
+function NotificationsArea() {
+  const [notifications] = useContext(Notifications.Context);
+  return <Notifier notifications={notifications} soundOnly />;
+}
 
-const Scene = () => (
-  <Providers.Events>
-    {({ notifications, onComplete }) => (
-      <Notifier
-        notifications={notifications}
-        onComplete={onComplete}
-        soundOnly
-      />
-    )}
-  </Providers.Events>
-);
-
-Providers.Events.propTypes = propTypes;
+function Scene() {
+  return (
+    <Notifications.Provider>
+      <Events.Provider>
+        <NotificationsArea />
+      </Events.Provider>
+    </Notifications.Provider>
+  );
+}
 
 export default Scene;

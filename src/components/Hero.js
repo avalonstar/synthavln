@@ -1,31 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSpring, animated } from 'react-spring';
 
 import styled from 'styled-components';
 
-const propTypes = {
+function Hero({ className, isVisible, children }) {
+  const { y } = useSpring({
+    config: { mass: 5, tension: 500, friction: 60 },
+    y: isVisible ? 0 : 100
+  });
+  return (
+    <Wrapper
+      className={className}
+      style={{ transform: y.interpolate(y => `translate3d(0, ${y}%, 0)`) }}
+    >
+      {children}
+    </Wrapper>
+  );
+}
+
+Hero.propTypes = {
   className: PropTypes.string,
+  isVisible: PropTypes.bool,
   children: PropTypes.node.isRequired
 };
 
-const defaultProps = {
-  className: ''
+Hero.defaultProps = {
+  className: '',
+  isVisible: false
 };
 
-const Hero = ({ className, children }) => (
-  <Wrapper className={className}>{children}</Wrapper>
-);
-
-Hero.propTypes = propTypes;
-Hero.defaultProps = defaultProps;
-
-const Wrapper = styled.div`
+const Wrapper = styled(animated.div)`
   display: grid;
   width: calc(${props => props.theme.frame.width} - 36px * 2);
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto auto 1fr;
 
   align-items: center;
-  padding: 12px 36px 0;
+  padding: 0 36px 12px;
 
   background-color: ${props => props.theme.colors.gray[2]};
   color: ${props => props.theme.colors.gray[20]};
