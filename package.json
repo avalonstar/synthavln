@@ -6,7 +6,7 @@
   "dependencies": {
     "constate": "^1.1.1",
     "date-fns": "^1.30.1",
-    "firebase": "^5.10.1",
+    "firebase": "^5.11.1",
     "lodash": "^4.17.10",
     "polished": "^3.2.0",
     "react": "^16.8.6",
@@ -19,7 +19,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "react-sound": "^1.2.0",
-    "react-spring": "^8.0.19",
+    "react-spring": "^8.0.20",
     "styled-components": "^4.2.0"
   },
   "scripts": {
@@ -42,9 +42,9 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "husky": "^2.1.0",
-    "lint-staged": "^8.1.5",
+    "eslint-plugin-react": "^7.13.0",
+    "husky": "^2.2.0",
+    "lint-staged": "^8.1.6",
     "prettier": "^1.17.0",
     "stylelint": "^10.0.1",
     "stylelint-config-recommended": "^2.2.0",
