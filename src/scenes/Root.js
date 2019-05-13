@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -10,7 +10,7 @@ import App from 'scenes/App';
 import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 const Main = () => (
   <Switch>
