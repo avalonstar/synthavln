@@ -42,8 +42,7 @@ const Wrapper = styled.ol`
   display: flex;
   overflow: hidden;
   margin: 0;
-  padding: 10px 0;
-
+  padding: 0;
   list-style: none;
 
   :after {

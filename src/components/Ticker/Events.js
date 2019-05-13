@@ -68,9 +68,8 @@ export const RaidEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
 export const ResubEvent = ({ months }) => (
   <Wrapper>
-    <Star size={18} />
-    {'\u00D7'}
-    {months}
+    <Number>{months}</Number>
+    {' months'}
   </Wrapper>
 );
 
@@ -86,10 +85,7 @@ ResubEvent.propTypes = resubPropTypes;
 SubGiftEvent.propTypes = subGiftPropTypes;
 TipEvent.propTypes = tipPropTypes;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
+const Wrapper = styled.div``;
 
 const Cheermote = styled.img`
   height: 18px;
@@ -97,5 +93,9 @@ const Cheermote = styled.img`
 `;
 
 const Actor = styled.div`
-  padding-right: 4px;
+  color: ${props => props.theme.colors.muted.yellow};
+`;
+
+const Number = styled.span`
+  color: ${props => props.theme.colors.muted.yellow};
 `;

@@ -38,9 +38,9 @@ const Wrapper = styled(animated.div)`
   align-items: center;
   padding: 0 36px 12px;
 
-  background-color: ${props => props.theme.colors.gray[2]};
+  background-color: ${props => props.theme.colors.main.dark};
   color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.inter};
+  font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 `;
 

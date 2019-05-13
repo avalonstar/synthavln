@@ -16,13 +16,13 @@ const Wrapper = styled(Base)`
 `;
 
 const InnerBorder = styled(Base)`
-  box-shadow: inset 0 0 0 24px ${props => props.theme.colors.gray[2]};
+  box-shadow: inset 0 0 0 24px ${props => props.theme.colors.main.dark};
   pointer-events: none;
   z-index: -1;
 `;
 
 const OuterBorder = styled(Base)`
-  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.gray[3]};
+  box-shadow: inset 0 0 0 12px ${props => props.theme.colors.muted.dark};
   pointer-events: none;
   z-index: 1000;
 `;
