@@ -85,7 +85,9 @@ ResubEvent.propTypes = resubPropTypes;
 SubGiftEvent.propTypes = subGiftPropTypes;
 TipEvent.propTypes = tipPropTypes;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  white-space: nowrap;
+`;
 
 const Cheermote = styled.img`
   height: 18px;

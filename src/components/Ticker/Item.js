@@ -5,6 +5,8 @@ import { animated } from 'react-spring';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
+import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Ticker';
+
 import {
   CheerEvent,
   FollowEvent,
@@ -27,9 +29,21 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
+const getIcon = () => ({
+  cheer: <Bits />,
+  follow: <Follow />,
+  mysterygift: <Gift />,
+  subscription: <Sub />,
+  subgift: <Gift />,
+  raid: <Raid />,
+  resub: <Sub />,
+  tip: <Tip />
+});
+
 function Item({ className, data, style }) {
   return (
     <Wrapper className={className} style={style}>
+      <Icon>{getIcon()[data.event]}</Icon>
       <Actor>{data.from || data.name}</Actor>
       <Type>{getType(data)[data.event]}</Type>
     </Wrapper>
@@ -50,7 +64,7 @@ Item.defaultProps = {
 };
 
 const Wrapper = styled(animated.li)`
-  padding: 5px 24px 8px;
+  padding: 5px 24px 8px 62px;
 
   box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.12)};
   color: ${props => props.theme.colors.muted.lightbluegrey};
@@ -74,6 +88,12 @@ const Type = styled.div`
   font-size: 12px;
   font-weight: 500;
   text-transform: capitalize;
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  left: 24px;
+  top: calc(50% - 12px);
 `;
 
 export default Item;

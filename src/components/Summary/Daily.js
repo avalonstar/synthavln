@@ -4,6 +4,8 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 
 import styled from 'styled-components';
 
+import { ButtonsPressed } from 'components/Icons/Ticker';
+
 import firestore from 'firestore';
 
 function Daily() {
@@ -25,6 +27,9 @@ function Daily() {
 
   return (
     <Wrapper>
+      <Icon>
+        <ButtonsPressed />
+      </Icon>
       <Title>Total</Title>
       <Stat>
         <Number>{size}</Number>
@@ -37,13 +42,20 @@ function Daily() {
 export default Daily;
 
 const Wrapper = styled.div`
-  padding: 14px 24px 16px;
+  position: relative;
+  padding: 14px 24px 16px 62px;
 
   background: ${props => props.theme.colors.muted.dark};
   color: ${props => props.theme.colors.white};
   font-size: 16px;
   transition: all 250ms ${props => props.theme.easing};
   white-space: nowrap;
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  left: 24px;
+  top: calc(50% - 12px);
 `;
 
 const Title = styled.div`
