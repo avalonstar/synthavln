@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Logotype, Hero } from 'components';
+import { Logo } from 'components';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -38,9 +38,7 @@ const Structure = ({ children }) => (
 const Scene = ({ message }) => (
   <Structure>
     <Frame.Wrapper>
-      <StyledHero>
-        <Logotype isVisible />
-      </StyledHero>
+      <Logo isVisible />
       <Message message={message} />
     </Frame.Wrapper>
   </Structure>
@@ -51,12 +49,6 @@ Message.defaultProps = defaultProps;
 Scene.propTypes = propTypes;
 Scene.defaultProps = defaultProps;
 Structure.propTypes = structureProps;
-
-const StyledHero = styled(Hero)`
-  grid-column: 1 / span 2;
-  grid-row: 1 / span 2;
-  box-shadow: ${props => props.theme.shadows[3]};
-`;
 
 const Wrapper = styled.div`
   grid-column: 1 / span 2;

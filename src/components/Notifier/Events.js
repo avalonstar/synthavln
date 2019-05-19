@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as Tags from './Events/Tags';
-import * as Pomps from './Events/Pomps';
 import * as utils from './utils';
 
 import avalonHAPPY from './assets/avalonHAPPY.png';
@@ -53,9 +52,6 @@ const tipPropTypes = {
 
 export const CheerEvent = ({ name, amount }) => (
   <Wrapper>
-    <Pomp>
-      <Pomps.Resub />
-    </Pomp>
     <Header>
       <Actor>{name}</Actor>
       {' cheered '}
@@ -78,7 +74,6 @@ export const FollowEvent = ({ name }) => (
 
 export const MysteryGiftEvent = ({ gifter, amount, subPlan }) => (
   <Wrapper>
-    <Pomp />
     <Header>
       <Actor>{gifter}</Actor>
       {' gifted '}
@@ -96,10 +91,9 @@ export const MysteryGiftEvent = ({ gifter, amount, subPlan }) => (
 
 export const RaidEvent = ({ name }) => (
   <Wrapper>
-    <Pomp />
     <Header>
       <Actor>{name}</Actor>
-      {' thanks for the raid!'}
+      {'Thanks for the raid!'}
     </Header>
     <Footer>
       <Tags.Raid />
@@ -109,12 +103,8 @@ export const RaidEvent = ({ name }) => (
 
 export const ResubEvent = ({ name, months, subPlan }) => (
   <Wrapper>
-    <Pomp>
-      <Pomps.Resub />
-    </Pomp>
     <Header>
       <Actor>{name}</Actor>
-      {' subscribed for '}
       <Modifier>{`${months} consecutive months!`}</Modifier>
     </Header>
     <Footer>
@@ -127,7 +117,6 @@ export const ResubEvent = ({ name, months, subPlan }) => (
 
 export const SubscriptionEvent = ({ name, subPlan }) => (
   <Wrapper>
-    <Aside />
     <Header>
       <Actor>{name}</Actor>
       {' has just subscribed! '}
@@ -142,7 +131,6 @@ export const SubscriptionEvent = ({ name, subPlan }) => (
 
 export const SubGiftEvent = ({ gifter, name, subPlan }) => (
   <Wrapper>
-    <Aside />
     <Header>
       <Actor>{gifter}</Actor>
       {' gifted '}
@@ -159,7 +147,6 @@ export const SubGiftEvent = ({ gifter, name, subPlan }) => (
 
 export const TipEvent = ({ from, formattedAmount, message }) => (
   <Wrapper>
-    <Aside />
     <Header>
       <Actor>{from}</Actor>
       {' just tipped '}
@@ -184,48 +171,26 @@ TipEvent.propTypes = tipPropTypes;
 
 const Wrapper = styled.div`
   display: inline-grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   align-items: center;
   margin-left: 36px;
-  width: calc(${props => props.theme.frame.width} * 0.25);
+  width: calc(${props => props.theme.frame.width} * 0.15);
 
   background: ${props => props.theme.colors.white};
   border-radius: 4px;
   box-shadow: ${props => props.theme.shadows[1]};
-  color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.inter};
+  font-family: ${props => props.theme.fonts.freight};
   font-weight: 400;
 `;
 
-const Aside = styled.div`
-  grid-row: 1;
-  align-self: stretch;
-  padding: 12px 24px;
-
-  background: ${props => props.theme.colors.gray[5]};
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  box-shadow: inset 0 2px 0 2px ${props => props.theme.colors.gray[6]};
-`;
-
-const Pomp = styled.div`
-  position: relative;
-  grid-row: 1;
-  align-self: stretch;
-  padding: 12px 0;
-
-  background: ${props => props.theme.colors.gray[5]};
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  box-shadow: inset 0 2px 0 2px ${props => props.theme.colors.gray[6]};
-`;
-
 const Header = styled.div`
-  grid-row: 2;
+  grid-row: 1;
   margin: 0 24px;
   padding: 24px 0;
-  color: ${props => props.theme.colors.gray[10]};
-  font-size: 20px;
+
+  color: ${props => props.theme.muted.midgrey};
+  font-weight: 500;
+  text-transform: uppercase;
 `;
 
 const Message = styled.div`
@@ -233,32 +198,36 @@ const Message = styled.div`
   padding: 12px;
 
   border-radius: 4px;
-  box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[22]};
-  color: ${props => props.theme.colors.gray[14]};
+  box-shadow: inset 0 0 0 1px ${props => props.theme.colors.muted.midgrey};
+  color: ${props => props.theme.muted.midgrey};
   font-size: 14px;
   font-style: italic;
 `;
 
 const Footer = styled.div`
-  grid-row: 3;
-  margin: 0 24px;
-  padding: 18px 0 24px;
-
+  grid-row: 2;
   display: flex;
   align-items: center;
-  box-shadow: inset 0 1px 0 ${props => props.theme.colors.gray[20]};
-  color: ${props => props.theme.colors.gray[16]};
-  font-family: ${props => props.theme.fonts.gotham};
-  font-size: 14px;
-  font-weight: 700;
+  padding: 12px 24px;
+
+  background-color: ${props => props.theme.colors.main.dark};
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: ${props => props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.adelle};
+  font-size: 12px;
 `;
 
-const Actor = styled.span`
-  text-transform: uppercase;
+const Actor = styled.div`
+  color: ${props => props.theme.colors.main.dark};
+  font-size: 20px;
   font-weight: 800;
 `;
 
-const Modifier = styled.span`
+const Modifier = styled.div`
+  color: ${props => props.theme.colors.muted.midgrey};
+  font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   white-space: nowrap;

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { config, useTransition } from 'react-spring';
+import { useTransition } from 'react-spring';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
 import Item from './Item';
 
-function Ticker({ events, isVisible }) {
+function Ticker({ events, className }) {
   const transitions = useTransition(events, event => event.id, {
     trail: 1000 / events.length,
     from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
@@ -17,7 +17,7 @@ function Ticker({ events, isVisible }) {
 
   return (
     events && (
-      <Wrapper>
+      <Wrapper className={className}>
         {transitions.map(({ item, props: { ...rest }, key }) => (
           <Item style={rest} key={key} data={item} />
         ))}
@@ -39,6 +39,7 @@ Ticker.defaultProps = {
 const Wrapper = styled.ol`
   position: relative;
   display: flex;
+  align-items: center;
   overflow: hidden;
   margin: 0;
   padding: 0;

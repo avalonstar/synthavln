@@ -43,7 +43,7 @@ export default Daily;
 
 const Wrapper = styled.div`
   position: relative;
-  padding: 14px 24px 16px 62px;
+  padding: 15px 24px 16px 62px;
 
   background: ${props => props.theme.colors.muted.dark};
   color: ${props => props.theme.colors.white};

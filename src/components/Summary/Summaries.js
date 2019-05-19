@@ -1,32 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { config, useSpring, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 import styled from 'styled-components';
 
 import Daily from './Daily';
 
-function Summaries({ isVisible }) {
+function Summaries({ className, isVisible }) {
   const props = useSpring({
-    config: config.stiff,
+    delay: 400,
     from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
-    to: [
-      {
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible
-          ? 'translate3d(0, 0, 0)'
-          : 'translate3d(0, 100%, 0)'
-      }
-    ]
+    to: {
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(0, 100%, 0)'
+    }
   });
   return (
-    <Wrapper style={props}>
+    <Wrapper className={className} style={props}>
       <Daily />
     </Wrapper>
   );
 }
 
 Summaries.propTypes = {
+  className: PropTypes.string.isRequired,
   isVisible: PropTypes.bool
 };
 
