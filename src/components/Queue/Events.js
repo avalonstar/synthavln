@@ -136,7 +136,6 @@ const Wrapper = styled.div`
 
 const Actor = styled.div`
   font-weight: 800;
-  text-transform: uppercase;
   padding-left: 8px;
 `;
 
@@ -144,5 +143,4 @@ const Label = styled.div`
   color: ${props => props.theme.colors.gray[12]};
   font-family: ${props => props.theme.fonts.inter};
   font-weight: 600;
-  text-transform: uppercase;
 `;

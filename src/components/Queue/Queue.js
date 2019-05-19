@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
-import { ChevronRight } from 'react-feather';
+import { ChevronDown } from 'react-feather';
 
 import Item from './Item';
 
@@ -24,7 +24,8 @@ function Queue({ className, notifications }) {
   return (
     <Wrapper className={className} isVisible={isVisible}>
       <Count>
-        next <ChevronRight size={14} />
+        <ChevronDown color="#b4cbd6" size={24} />
+        next:
       </Count>
       <Items>
         {notifications.slice(1).map((event, i) => (
@@ -57,19 +58,12 @@ Queue.defaultProps = {
 
 const Wrapper = styled.div`
   position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-self: end;
-  height: 40px;
-  padding: 0 36px 12px;
-  width: calc(${props => props.theme.frame.width} - 36px * 2);
+  display: inline-grid;
+  grid-template-columns: auto auto;
 
-  background-color: ${props => props.theme.colors.gray[2]};
-  box-shadow: ${props => props.theme.shadows[2]};
-  color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.inter};
-  font-size: 16px;
-  font-weight: 500;
+  background-color: ${props => props.theme.colors.muted.dark};
+  border-radius: 3px;
+  font-size: 14px;
 `;
 
 const Items = styled.ol`
@@ -78,48 +72,27 @@ const Items = styled.ol`
   display: flex;
   overflow: hidden;
   margin: 0;
-  padding: 0;
+  padding: 0 24px;
 
   list-style: none;
-
-  :before {
-    position: absolute;
-    left: 0;
-    height: 100%;
-    width: 12px;
-    z-index: 1;
-
-    content: '';
-    background-image: linear-gradient(
-      to left,
-      ${props => rgba(props.theme.colors.gray[2], 0)},
-      ${props => props.theme.colors.gray[2]}
-    );
-  }
-  :after {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 72px;
-
-    content: '';
-    background-image: linear-gradient(
-      to right,
-      ${props => rgba(props.theme.colors.gray[2], 0)},
-      ${props => props.theme.colors.gray[2]}
-    );
-  }
 `;
 
 const Count = styled.div`
   grid-column: 1;
   display: flex;
   align-items: center;
-  padding: 12px 6px 12px 0;
+  padding: 5px 0 7px 24px;
 
-  font-family: ${props => props.theme.fonts.din};
+  color: ${props => props.theme.colors.muted.lightbluegrey};
+  font-family: ${props => props.theme.fonts.freight};
   font-weight: 700;
   text-transform: uppercase;
+
+  svg {
+    position: relative;
+    top: 1px;
+    padding-right: 14px;
+  }
 `;
 
 export default Queue;

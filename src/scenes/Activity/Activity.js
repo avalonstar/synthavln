@@ -105,6 +105,7 @@ const StyledQueue = styled(Queue)`
   grid-column: 3;
   grid-row: 23 / span 2;
   align-self: end;
+  justify-self: start;
 `;
 
 export default Scene;
