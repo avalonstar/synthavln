@@ -21,12 +21,22 @@ const Main = () => (
     <Route
       exact
       path="/scenes/brb"
-      render={() => <Interstitial message="Be Right Back" />}
+      render={() => (
+        <Interstitial
+          title="Be right back"
+          subtitle="Enjoy the intermission."
+        />
+      )}
     />
     <Route
       exact
       path="/scenes/start"
-      render={() => <Interstitial message="Please Stand By" />}
+      render={() => (
+        <Interstitial
+          title="Please stand by"
+          subtitle="We'll get back to it soon enough!"
+        />
+      )}
     />
 
     <Route component={App} />
