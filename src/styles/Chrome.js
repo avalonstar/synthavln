@@ -20,8 +20,8 @@ const Chrome = ({ className, title, explicitHeight, children }) => (
     <Header>
       <Buttons>
         <Circle color="#ff5f57" />
-        <Circle color="#ffc130" />
-        <Circle color="#02fa7b" />
+        <Circle color="#ffdd33" />
+        <Circle color="#5be058" />
       </Buttons>
       <Title>{title}</Title>
     </Header>
@@ -47,7 +47,7 @@ const Header = styled.div`
   align-items: center;
   padding: 12px;
 
-  background: ${props => props.theme.colors.gray[2]};
+  background: ${props => props.theme.colors.main.dark};
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 `;
