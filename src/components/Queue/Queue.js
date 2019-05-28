@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { animated, config, useSpring, useTransition } from 'react-spring';
 
 import styled from 'styled-components';
 import { ChevronDown } from 'react-feather';
@@ -8,6 +9,21 @@ import Item from './Item';
 
 function Queue({ className, notifications }) {
   const [isVisible, setIsVisible] = useState(false);
+  const visibility = useSpring({
+    config: config.stiff,
+    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-500%, 0, 0)'
+  });
+
+  const transitions = useTransition(
+    notifications.slice(1),
+    notification => notification.id,
+    {
+      trail: 1000 / notifications.length,
+      from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
+      enter: [{ opacity: 1, transform: 'translate3d(0, 0, 0)' }],
+      leave: [{ opacity: 0, transform: 'translate3d(0, 100%, 0)' }]
+    }
+  );
 
   useEffect(() => {
     let timer;
@@ -21,14 +37,14 @@ function Queue({ className, notifications }) {
   }, [notifications]);
 
   return (
-    <Wrapper className={className} isVisible={isVisible}>
+    <Wrapper className={className} isVisible={isVisible} style={visibility}>
       <Count>
         <ChevronDown color="#b4cbd6" size={24} />
         next:
       </Count>
       <Items>
-        {notifications.slice(1).map((event, i) => (
-          <Item i={i} key={event.timestamp} data={event} />
+        {transitions.map(({ item, props: { ...rest }, key }) => (
+          <Item style={rest} key={key} data={item} />
         ))}
       </Items>
     </Wrapper>
@@ -44,34 +60,26 @@ Queue.defaultProps = {
   className: ''
 };
 
-// const queuePoses = {
-//   open: { y: '0%' },
-//   closed: { y: '100%' }
-// };
-
-// const AnimatedItem = posed(Item)({
-//   from: { opacity: 0, width: 'auto', y: '100%' },
-//   enter: { opacity: 1, width: 'auto', x: '0%', y: '0%' },
-//   exit: { opacity: 0, width: 0, x: '-125%' }
-// });
-
-const Wrapper = styled.div`
+const Wrapper = styled(animated.div)`
   position: relative;
   display: inline-grid;
   grid-template-columns: auto auto;
+  height: 42px;
 
   background-color: ${props => props.theme.colors.muted.dark};
   border-radius: 3px;
+  box-shadow: ${props => props.theme.shadows[2]};
   font-size: 14px;
 `;
 
 const Items = styled.ol`
   grid-column: 2;
   position: relative;
+  align-items: center;
   display: flex;
   overflow: hidden;
   margin: 0;
-  padding: 0 24px;
+  padding: 0 12px;
 
   list-style: none;
 `;

@@ -93,7 +93,9 @@ Tier.propTypes = planPropTypes;
 Tier.defaultProps = planDefaultProps;
 
 const Tag = styled.div`
+  flex-grow: 1;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   margin-right: 12px;
 

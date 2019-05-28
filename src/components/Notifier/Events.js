@@ -173,14 +173,15 @@ const Wrapper = styled.div`
   display: inline-grid;
   grid-template-rows: 1fr auto;
   align-items: center;
-  margin-left: 36px;
+  margin-left: 48px;
   width: calc(${props => props.theme.frame.width} * 0.15);
 
   background: ${props => props.theme.colors.white};
   border-radius: 4px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   box-shadow: ${props => props.theme.shadows[1]};
   font-family: ${props => props.theme.fonts.freight};
-  font-weight: 400;
 `;
 
 const Header = styled.div`
@@ -188,8 +189,8 @@ const Header = styled.div`
   margin: 0 24px;
   padding: 24px 0;
 
-  color: ${props => props.theme.muted.midgrey};
-  font-weight: 500;
+  color: ${props => props.theme.colors.muted.midgrey};
+  font-weight: 600;
   text-transform: uppercase;
 `;
 
@@ -199,7 +200,7 @@ const Message = styled.div`
 
   border-radius: 4px;
   box-shadow: inset 0 0 0 1px ${props => props.theme.colors.muted.midgrey};
-  color: ${props => props.theme.muted.midgrey};
+  color: ${props => props.theme.colors.muted.midgrey};
   font-size: 14px;
   font-style: italic;
 `;
@@ -240,7 +241,7 @@ const Avatar = styled.img`
 const BubbleWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: -4px;
+  z-index: 10000;
 `;
 
 const Bubble = styled.div`
@@ -249,16 +250,26 @@ const Bubble = styled.div`
   margin-left: 10px;
   padding: 18px;
 
-  background-image: linear-gradient(to right, #d0d6dc, #e8ebed);
-  box-shadow: inset 0 2px 0 ${props => props.theme.colors.white};
+  background-image: linear-gradient(
+    to right,
+    ${props => props.theme.colors.main.dark},
+    ${props => props.theme.colors.muted.dark}
+  );
+  box-shadow: inset 0 2px 0 ${props => props.theme.colors.main.dark};
   border-radius: 8px;
   border-bottom-left-radius: 0px;
-  color: ${props => props.theme.colors.gray[8]};
+  color: ${props => props.theme.colors.muted.lightbluegrey};
   font-family: ${props => props.theme.fonts.adelle};
   font-size: 18px;
   font-weight: 400;
   transform: rotate(-1deg);
   transform-origin: bottom left;
+  white-space: nowrap;
+
+  ${Actor} {
+    display: inline;
+    color: ${props => props.theme.colors.main.avapurple};
+  }
 
   &:before {
     content: '';
@@ -268,7 +279,7 @@ const Bubble = styled.div`
 
     width: 0;
     height: 0;
-    border-bottom: 12px solid #d0d6dc;
+    border-bottom: 12px solid ${props => props.theme.colors.main.dark};
     border-left: 12px solid transparent;
   }
 `;
