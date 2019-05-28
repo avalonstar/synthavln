@@ -8,3 +8,4 @@ export { default as SubPointTotal } from './sub-point-total';
 export { default as Sub } from './sub';
 export { default as Tier } from './tier';
 export { default as Tip } from './tip';
+export { default as Train } from './train';
