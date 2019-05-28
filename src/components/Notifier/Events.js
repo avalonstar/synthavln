@@ -254,7 +254,7 @@ const Bubble = styled.div`
   border-radius: 8px;
   border-bottom-left-radius: 0px;
   color: ${props => props.theme.colors.gray[8]};
-  font-family: ${props => props.theme.fonts.gotham};
+  font-family: ${props => props.theme.fonts.adelle};
   font-size: 18px;
   font-weight: 400;
   transform: rotate(-1deg);
