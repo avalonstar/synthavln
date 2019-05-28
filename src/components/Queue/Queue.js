@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { rgba } from 'polished';
 import { ChevronDown } from 'react-feather';
 
 import Item from './Item';

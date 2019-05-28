@@ -64,7 +64,7 @@ Item.defaultProps = {
 };
 
 const Wrapper = styled(animated.li)`
-  padding: 5px 24px 8px 62px;
+  padding: 6px 24px 8px 62px;
 
   box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.12)};
   color: ${props => props.theme.colors.muted.lightbluegrey};
@@ -93,7 +93,7 @@ const Type = styled.div`
 const Icon = styled.div`
   position: absolute;
   left: 24px;
-  top: calc(50% - 12px);
+  top: calc(50% - 11px);
 `;
 
 export default Item;
