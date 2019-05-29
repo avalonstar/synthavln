@@ -10,7 +10,7 @@ function Train({ className, notifications }) {
   const lastSeenNotification = useRef();
   const [isVisible, setIsVisible] = useState(false);
   const visibility = useSpring({
-    config: config.stiff,
+    config,
     transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-200%, 0, 0)'
   });
   const [count, setCount] = useState(0);
