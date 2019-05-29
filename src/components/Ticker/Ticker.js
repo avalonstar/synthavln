@@ -54,8 +54,8 @@ const Wrapper = styled.ol`
     content: '';
     background-image: linear-gradient(
       to right,
-      ${props => rgba(props.theme.colors.gray[2], 0)},
-      ${props => props.theme.colors.gray[2]}
+      ${props => rgba(props.theme.colors.main.dark, 0)},
+      ${props => props.theme.colors.main.dark}
     );
   }
 `;
