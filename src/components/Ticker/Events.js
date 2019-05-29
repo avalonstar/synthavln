@@ -61,7 +61,8 @@ export const SubscriptionEvent = ({ subPlan }) => (
 
 export const SubGiftEvent = ({ gifter, subPlan }) => (
   <Wrapper>
-    <Actor>{gifter}</Actor> {getTier(subPlan)} {'gifts'}
+    {getTier(subPlan)} {'gift from '}
+    <Actor>{gifter}</Actor>
   </Wrapper>
 );
 
@@ -93,6 +94,7 @@ const Wrapper = styled.div`
 
 const Actor = styled.div`
   color: ${props => props.theme.colors.muted.yellow};
+  display: inline;
 `;
 
 const Number = styled.span`
