@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { Ava, Logo, Notifier, Queue, Summaries, Ticker } from 'components';
-import { Events, Notifications, UI } from 'providers';
+import { Logo, Notifier, Queue, Summaries, Ticker } from 'components';
+import { Events, Notifications } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
@@ -38,10 +38,8 @@ function Layout() {
 }
 
 function Structure({ children }) {
-  const { mode } = useContext(UI.Context);
   return (
     <Fragment>
-      <Ava version={mode} />
       <Frame.OuterBorder />
       {children}
       <Frame.InnerBorder />
