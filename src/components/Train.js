@@ -1,26 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { animated, config, useSpring, useTransition } from 'react-spring';
+import { animated, config, useSpring } from 'react-spring';
 
 import styled from 'styled-components';
 
 import { Train as TrainIcon } from 'components/Icons/Queue';
 
 function Train({ className, notifications }) {
+  const lastSeenNotification = useRef();
   const [isVisible, setIsVisible] = useState(false);
+  const visibility = useSpring({
+    config: config.stiff,
+    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-200%, 0, 0)'
+  });
   const [count, setCount] = useState(0);
-  const [timer, setTimer] = useState();
+  const [timeleft, setTimeleft] = useState();
 
-  useEffect(() => {}, [notifications]);
+  useEffect(() => {
+    const last = notifications[notifications.length - 1];
+    if (
+      last &&
+      last.bucket === 'subscription' &&
+      (!lastSeenNotification.current ||
+        last.id !== lastSeenNotification.current)
+    ) {
+      lastSeenNotification.current = last.id;
+      setTimeleft(300);
+      setCount(c => c + 1);
+    }
+  }, [notifications]);
 
-  useEffect(() => {}, [notifications]);
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (timeleft > 0) {
+        setTimeleft(t => t - 1);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [timeleft]);
+
+  useEffect(() => {
+    if (timeleft <= 0) {
+      setIsVisible(false);
+    } else if (timeleft >= 0 && !isVisible) {
+      setIsVisible(true);
+    }
+  }, [timeleft, isVisible]);
 
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} style={visibility}>
       <Widget>
         <TrainIcon />
         <Count>{count}</Count>
-        <Timer>0:00</Timer>
+        <Timer>{timeleft}</Timer>
       </Widget>
     </Wrapper>
   );

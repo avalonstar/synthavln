@@ -37,7 +37,7 @@ function Queue({ className, notifications }) {
   }, [notifications]);
 
   return (
-    <Wrapper className={className} isVisible={isVisible} style={visibility}>
+    <Wrapper className={className} style={visibility}>
       <Count>
         <ChevronDown color="#b4cbd6" size={24} />
         next:
