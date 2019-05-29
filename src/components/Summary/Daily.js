@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 import styled from 'styled-components';
-import { ChevronRight } from 'react-feather';
+
+import { ButtonsPressed } from 'components/Icons/Ticker';
 
 import firestore from 'firestore';
 
@@ -26,11 +27,14 @@ function Daily() {
 
   return (
     <Wrapper>
-      <Title>
-        <ChevronRight color="#eaf56b" size={18} />
-        {'Buttons Pressed'}
-      </Title>
-      <Stat>{size}</Stat>
+      <Icon>
+        <ButtonsPressed />
+      </Icon>
+      <Title>Total</Title>
+      <Stat>
+        <Number>{size}</Number>
+        {' Buttons Pressed'}
+      </Stat>
     </Wrapper>
   );
 }
@@ -38,33 +42,36 @@ function Daily() {
 export default Daily;
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 12px;
+  position: relative;
+  padding: 15px 24px 16px 62px;
 
-  box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};
-  border-radius: 4px;
+  background: ${props => props.theme.colors.muted.dark};
   color: ${props => props.theme.colors.white};
   font-size: 16px;
-  text-transform: uppercase;
   transition: all 250ms ${props => props.theme.easing};
   white-space: nowrap;
 `;
 
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
+const Icon = styled.div`
+  position: absolute;
+  left: 24px;
+  top: calc(50% - 12px);
+`;
 
-  color: ${props => props.theme.colors.gray[18]};
-  font-family: ${props => props.theme.fonts.inter};
-  font-weight: 600;
+const Title = styled.div`
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
 `;
 
 const Stat = styled.div`
-  margin-left: 0;
-  padding: 10px 14px;
+  font-family: ${props => props.theme.fonts.adelle};
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+`;
 
-  box-shadow: inset 1px 0 0 0 ${props => props.theme.colors.gray[6]};
-  font-weight: 800;
+const Number = styled.span`
+  color: ${props => props.theme.colors.muted.yellow};
 `;

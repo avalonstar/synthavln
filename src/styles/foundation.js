@@ -6,6 +6,8 @@ import colors from './colors';
 export const foundation = {
   colors,
   fonts: {
+    adelle: 'adelle-sans, sans-serif',
+    freight: 'freight-sans-pro, sans-serif',
     barlow: 'Barlow, sans-serif',
     din: 'urw-din, sans-serif',
     gotham: "'Gotham SSm A', 'Gotham SSm B', sans-serif",

@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { animated, config, useSpring, useTransition } from 'react-spring';
 
 import styled from 'styled-components';
-import { rgba } from 'polished';
-import { ChevronRight } from 'react-feather';
+import { ChevronDown } from 'react-feather';
 
 import Item from './Item';
 
 function Queue({ className, notifications }) {
   const [isVisible, setIsVisible] = useState(false);
+  const visibility = useSpring({
+    config: config.stiff,
+    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-500%, 0, 0)'
+  });
+
+  const transitions = useTransition(
+    notifications.slice(1),
+    notification => notification.id,
+    {
+      trail: 1000 / notifications.length,
+      from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
+      enter: [{ opacity: 1, transform: 'translate3d(0, 0, 0)' }],
+      leave: [{ opacity: 0, transform: 'translate3d(0, 100%, 0)' }]
+    }
+  );
 
   useEffect(() => {
     let timer;
@@ -22,13 +37,14 @@ function Queue({ className, notifications }) {
   }, [notifications]);
 
   return (
-    <Wrapper className={className} isVisible={isVisible}>
+    <Wrapper className={className} isVisible={isVisible} style={visibility}>
       <Count>
-        next <ChevronRight size={14} />
+        <ChevronDown color="#b4cbd6" size={24} />
+        next:
       </Count>
       <Items>
-        {notifications.slice(1).map((event, i) => (
-          <Item i={i} key={event.timestamp} data={event} />
+        {transitions.map(({ item, props: { ...rest }, key }) => (
+          <Item style={rest} key={key} data={item} />
         ))}
       </Items>
     </Wrapper>
@@ -44,82 +60,46 @@ Queue.defaultProps = {
   className: ''
 };
 
-// const queuePoses = {
-//   open: { y: '0%' },
-//   closed: { y: '100%' }
-// };
-
-// const AnimatedItem = posed(Item)({
-//   from: { opacity: 0, width: 'auto', y: '100%' },
-//   enter: { opacity: 1, width: 'auto', x: '0%', y: '0%' },
-//   exit: { opacity: 0, width: 0, x: '-125%' }
-// });
-
-const Wrapper = styled.div`
+const Wrapper = styled(animated.div)`
   position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-self: end;
-  height: 40px;
-  padding: 0 36px 12px;
-  width: calc(${props => props.theme.frame.width} - 36px * 2);
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  height: 42px;
 
-  background-color: ${props => props.theme.colors.gray[2]};
+  background-color: ${props => props.theme.colors.muted.dark};
+  border-radius: 3px;
   box-shadow: ${props => props.theme.shadows[2]};
-  color: ${props => props.theme.colors.gray[20]};
-  font-family: ${props => props.theme.fonts.inter};
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
 `;
 
 const Items = styled.ol`
   grid-column: 2;
   position: relative;
+  align-items: center;
   display: flex;
   overflow: hidden;
   margin: 0;
-  padding: 0;
+  padding: 0 12px;
 
   list-style: none;
-
-  :before {
-    position: absolute;
-    left: 0;
-    height: 100%;
-    width: 12px;
-    z-index: 1;
-
-    content: '';
-    background-image: linear-gradient(
-      to left,
-      ${props => rgba(props.theme.colors.gray[2], 0)},
-      ${props => props.theme.colors.gray[2]}
-    );
-  }
-  :after {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 72px;
-
-    content: '';
-    background-image: linear-gradient(
-      to right,
-      ${props => rgba(props.theme.colors.gray[2], 0)},
-      ${props => props.theme.colors.gray[2]}
-    );
-  }
 `;
 
 const Count = styled.div`
   grid-column: 1;
   display: flex;
   align-items: center;
-  padding: 12px 6px 12px 0;
+  padding: 5px 0 7px 24px;
 
-  font-family: ${props => props.theme.fonts.din};
+  color: ${props => props.theme.colors.muted.lightbluegrey};
+  font-family: ${props => props.theme.fonts.freight};
   font-weight: 700;
   text-transform: uppercase;
+
+  svg {
+    position: relative;
+    top: 1px;
+    padding-right: 14px;
+  }
 `;
 
 export default Queue;

@@ -1,99 +1,146 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { Logotype, Hero } from 'components';
+import { Logo, Summaries, Ticker } from 'components';
+import { Events, Notifications } from 'providers';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Frame } from 'styles';
 
-const propTypes = {
-  message: PropTypes.string
-};
+function TickerArea({ isVisible }) {
+  const { events } = useContext(Events.Context);
+  return (
+    <Fragment>
+      <StyledLogo isVisible={isVisible} />
+      <StyledSummaries isVisible={isVisible} />
+      <StyledTicker events={events} isVisible={isVisible} />
+    </Fragment>
+  );
+}
 
-const defaultProps = {
-  message: ''
-};
-
-const structureProps = {
-  children: PropTypes.node.isRequired
-};
-
-const Message = ({ message }) => (
+const Message = ({ title, subtitle }) => (
   <Wrapper>
-    <Supertitle>Interstitial</Supertitle>
-    <Title>{message}</Title>
-    <Subtitle>avalonstar.tv</Subtitle>
+    <Title>
+      {title}
+      <Dot>.</Dot>
+    </Title>
+    <Subtitle>{subtitle}</Subtitle>
   </Wrapper>
 );
 
-const Structure = ({ children }) => (
-  <Fragment>
-    <Frame.OuterBorder />
-    {children}
-    <Frame.InnerBorder />
-  </Fragment>
-);
+function Layout(props) {
+  return (
+    <StyledWrapper>
+      <TickerArea isVisible />
+      <Message {...props} />
+    </StyledWrapper>
+  );
+}
 
-const Scene = ({ message }) => (
-  <Structure>
-    <Frame.Wrapper>
-      <StyledHero>
-        <Logotype isVisible />
-      </StyledHero>
-      <Message message={message} />
-    </Frame.Wrapper>
-  </Structure>
-);
+function Structure({ children }) {
+  return (
+    <Fragment>
+      <Frame.OuterBorder />
+      {children}
+      <Frame.InnerBorder />
+    </Fragment>
+  );
+}
 
-Message.propTypes = propTypes;
-Message.defaultProps = defaultProps;
-Scene.propTypes = propTypes;
-Scene.defaultProps = defaultProps;
-Structure.propTypes = structureProps;
+function Scene(props) {
+  return (
+    <Notifications.Provider>
+      <Events.Provider>
+        <Structure>
+          <Layout {...props} />
+        </Structure>
+      </Events.Provider>
+    </Notifications.Provider>
+  );
+}
 
-const StyledHero = styled(Hero)`
-  grid-column: 1 / span 2;
-  grid-row: 1 / span 2;
-  box-shadow: ${props => props.theme.shadows[3]};
+Message.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string
+};
+
+Message.defaultProps = {
+  title: '',
+  subtitle: ''
+};
+
+Structure.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+TickerArea.propTypes = {
+  isVisible: PropTypes.bool.isRequired
+};
+
+const StyledWrapper = styled(Frame.Wrapper)`
+  grid-template-columns: auto auto auto;
+
+  box-shadow: inset 0 -72px 0 ${props => props.theme.colors.main.dark};
+  font-family: ${props => props.theme.fonts.freight};
+  font-weight: 500;
+
+  &:after {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: calc(${props => props.theme.frame.width} - 48px);
+    height: calc(${props => props.theme.frame.height} - 96px);
+
+    background-color: ${props => rgba(props.theme.colors.muted.dark, 0.85)};
+    content: '';
+    z-index: -1;
+  }
+`;
+
+const StyledLogo = styled(Logo)`
+  grid-column: 1;
+  grid-row: 25 / span 2;
+  padding-bottom: 12px;
+  padding-left: 36px;
+`;
+
+const StyledSummaries = styled(Summaries)`
+  grid-column: 2;
+  grid-row: 25 / span 2;
+  padding-bottom: 12px;
+`;
+
+const StyledTicker = styled(Ticker)`
+  grid-column: 3;
+  grid-row: 25 / span 2;
+  padding-bottom: 12px;
 `;
 
 const Wrapper = styled.div`
-  grid-column: 1 / span 2;
-  grid-row: 19 / span 8;
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 8;
   margin: 24px;
-  padding: 36px;
-`;
-
-const Supertitle = styled.div`
-  margin-left: 4px;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-
-  box-shadow: 0 1px 0 ${props => rgba(props.theme.colors.white, 0.5)};
-  color: ${props => rgba(props.theme.colors.white, 0.5)};
-  font-family: ${props => props.theme.fonts.gotham};
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  padding: 64px 72px;
 `;
 
 const Title = styled.div`
   color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.gotham};
+  font-family: ${props => props.theme.fonts.freight};
   font-size: 96px;
-  font-weight: 800;
-  letter-spacing: -2px;
-  text-transform: uppercase;
+  font-weight: 700;
+`;
+
+const Dot = styled.span`
+  color: ${props => props.theme.colors.main.avagreen};
 `;
 
 const Subtitle = styled.div`
-  margin-top: 8px;
+  margin-top: 12px;
   margin-left: 4px;
 
-  color: ${props => rgba(props.theme.colors.white, 0.5)};
-  font-family: ${props => props.theme.fonts.gotham};
+  color: ${props => props.theme.colors.muted.lightbluegrey};
+  font-family: ${props => props.theme.fonts.adelle};
   font-size: 24px;
   font-weight: 200;
 `;

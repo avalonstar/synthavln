@@ -50,7 +50,6 @@ const Wrapper = styled.div`
   border-radius: 4px;
   color: ${props => props.theme.colors.white};
   font-size: 16px;
-  text-transform: uppercase;
   transition: all 250ms ${props => props.theme.easing};
   white-space: nowrap;
 `;

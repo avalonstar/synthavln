@@ -2,18 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 
-import {
-  CheerEvent,
-  FollowEvent,
-  MysteryGiftEvent,
-  SubscriptionEvent,
-  SubGiftEvent,
-  RaidEvent,
-  ResubEvent,
-  TipEvent
-} from './Events';
+import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Queue';
 
-const propTypes = {
+import styled from 'styled-components';
+
+const getType = () => ({
+  cheer: <Bits />,
+  follow: <Follow />,
+  mysterygift: <Gift />,
+  subscription: <Sub />,
+  subgift: <Gift />,
+  raid: <Raid />,
+  resub: <Sub />,
+  tip: <Tip />
+});
+
+const Item = ({ data, style }) => (
+  <animated.li style={style}>
+    <Wrapper>{getType()[data.event]}</Wrapper>
+  </animated.li>
+);
+
+Item.propTypes = {
   style: PropTypes.shape({}),
   data: PropTypes.shape({
     event: PropTypes.string.isRequired,
@@ -21,26 +31,12 @@ const propTypes = {
   }).isRequired
 };
 
-const defaultProps = {
+Item.defaultProps = {
   style: {}
 };
 
-const getType = data => ({
-  cheer: CheerEvent({ ...data }),
-  follow: FollowEvent({ ...data }),
-  mysterygift: MysteryGiftEvent({ ...data }),
-  subscription: SubscriptionEvent({ ...data }),
-  subgift: SubGiftEvent({ ...data }),
-  raid: RaidEvent({ ...data }),
-  resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data })
-});
-
-const Item = ({ data, style }) => (
-  <animated.li style={style}>{getType(data)[data.event]}</animated.li>
-);
-
-Item.propTypes = propTypes;
-Item.defaultProps = defaultProps;
+const Wrapper = styled.div`
+  padding: 0px 6px;
+`;
 
 export default Item;

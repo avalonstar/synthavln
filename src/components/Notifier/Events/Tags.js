@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+
 import {
+  Bits,
   Gift,
-  CreditCard,
-  Star,
-  Heart,
-  PlusSquare,
-  Square,
-  Target,
-  Zap
-} from 'react-feather';
+  Raid as RaidIcon,
+  SPBadge,
+  Sub,
+  Tier as TierIcon,
+  Tip as TipIcon
+} from 'components/Icons/Notifier';
 
 import * as utils from '../utils';
 
@@ -29,7 +29,7 @@ const svgSize = 16;
 
 export const Cheer = () => (
   <Tag>
-    <Zap size={svgSize} /> cheer
+    <Bits size={svgSize} /> cheer
   </Tag>
 );
 
@@ -41,25 +41,25 @@ export const MysteryGift = () => (
 
 export const Resub = () => (
   <Tag>
-    <Star size={svgSize} /> resub
+    <Sub size={svgSize} /> resub
   </Tag>
 );
 
 export const Raid = () => (
   <Tag>
-    <Target size={svgSize} /> raid
+    <RaidIcon size={svgSize} /> raid
   </Tag>
 );
 
 export const SPChange = ({ plan, amount = 1 }) => (
   <Tag>
-    <PlusSquare size={svgSize} /> sp + {utils.getSubValue(plan) * amount}
+    <SPBadge size={svgSize} /> sp + {utils.getSubValue(plan) * amount}
   </Tag>
 );
 
 export const SPRetain = () => (
   <Tag>
-    <Square size={svgSize} /> sp retain
+    <SPBadge size={svgSize} /> sp retain
   </Tag>
 );
 
@@ -71,19 +71,19 @@ export const SubGift = () => (
 
 export const Subscription = () => (
   <Tag>
-    <Star size={svgSize} /> sub
+    <Sub size={svgSize} /> sub
   </Tag>
 );
 
 export const Tip = () => (
   <Tag>
-    <CreditCard size={svgSize} /> tip
+    <TipIcon size={svgSize} /> tip
   </Tag>
 );
 
 export const Tier = ({ plan }) => (
   <Tag plan={plan}>
-    <Heart size={svgSize} /> {utils.getTier(plan)}
+    <TierIcon size={svgSize} /> {utils.getTier(plan)}
   </Tag>
 );
 
@@ -93,7 +93,9 @@ Tier.propTypes = planPropTypes;
 Tier.defaultProps = planDefaultProps;
 
 const Tag = styled.div`
+  flex-grow: 1;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   margin-right: 12px;
 

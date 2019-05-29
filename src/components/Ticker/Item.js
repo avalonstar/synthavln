@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 
 import styled from 'styled-components';
+import { rgba } from 'polished';
+
+import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Ticker';
 
 import {
   CheerEvent,
@@ -26,11 +29,23 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
+const getIcon = () => ({
+  cheer: <Bits />,
+  follow: <Follow />,
+  mysterygift: <Gift />,
+  subscription: <Sub />,
+  subgift: <Gift />,
+  raid: <Raid />,
+  resub: <Sub />,
+  tip: <Tip />
+});
+
 function Item({ className, data, style }) {
   return (
     <Wrapper className={className} style={style}>
-      {getType(data)[data.event]}
+      <Icon>{getIcon()[data.event]}</Icon>
       <Actor>{data.from || data.name}</Actor>
+      <Type>{getType(data)[data.event]}</Type>
     </Wrapper>
   );
 }
@@ -49,42 +64,36 @@ Item.defaultProps = {
 };
 
 const Wrapper = styled(animated.li)`
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
+  padding: 6px 24px 8px 62px;
 
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
+  box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.12)};
+  color: ${props => props.theme.colors.muted.lightbluegrey};
   will-change: width, transform, opacity;
 
-  img {
-    filter: grayscale(90%);
-  }
-
-  :first-child {
-    background: ${props => props.theme.colors.gray[0]};
-    border-radius: 4px;
-    color: ${props => props.theme.colors.white};
-
-    img {
-      filter: grayscale(0%);
-    }
-    svg {
-      color: ${props => props.theme.colors.green[0]};
-    }
-  }
-
-  :not(:first-child) {
-    box-shadow: inset -1px 0 0 0 ${props => props.theme.colors.gray[3]};
-    color: ${props => props.theme.colors.gray[6]};
+  svg {
+    position: relative;
+    top: -1px;
   }
 `;
 
 const Actor = styled.div`
-  padding-left: 4px;
-  white-space: nowrap;
+  font-size: 14px;
   font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+`;
+
+const Type = styled.div`
+  font-family: ${props => props.theme.fonts.adelle};
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  left: 24px;
+  top: calc(50% - 11px);
 `;
 
 export default Item;

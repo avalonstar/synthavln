@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -10,7 +10,7 @@ import App from 'scenes/App';
 import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 const Main = () => (
   <Switch>
@@ -21,12 +21,22 @@ const Main = () => (
     <Route
       exact
       path="/scenes/brb"
-      render={() => <Interstitial message="Be Right Back" />}
+      render={() => (
+        <Interstitial
+          title="Be right back"
+          subtitle="Enjoy the intermission."
+        />
+      )}
     />
     <Route
       exact
       path="/scenes/start"
-      render={() => <Interstitial message="Please Stand By" />}
+      render={() => (
+        <Interstitial
+          title="Please stand by"
+          subtitle="We'll get back to it soon enough!"
+        />
+      )}
     />
 
     <Route component={App} />
