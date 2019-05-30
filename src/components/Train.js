@@ -20,11 +20,11 @@ function Train({ className, notifications }) {
     const last = notifications[notifications.length - 1];
     if (
       last &&
-      last.bucket === 'subscription' &&
+      (last.bucket === 'subscription' || last.event === 'mysterygift') &&
       (!lastSeenNotification.current ||
         last.id !== lastSeenNotification.current)
     ) {
-      const amount = last.amount || 1;
+      const amount = parseInt(last.amount, 10) || 1;
       lastSeenNotification.current = last.id;
       setTimeleft(300);
       setCount(c => c + amount);
