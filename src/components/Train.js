@@ -24,9 +24,10 @@ function Train({ className, notifications }) {
       (!lastSeenNotification.current ||
         last.id !== lastSeenNotification.current)
     ) {
+      const amount = last.amount || 1;
       lastSeenNotification.current = last.id;
       setTimeleft(300);
-      setCount(c => c + 1);
+      setCount(c => c + amount);
     }
   }, [notifications]);
 
