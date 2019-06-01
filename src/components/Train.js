@@ -42,6 +42,7 @@ function Train({ className, notifications }) {
 
   useEffect(() => {
     if (timeleft <= 0) {
+      setCount(0);
       setIsVisible(false);
     } else if (timeleft >= 0 && !isVisible) {
       setIsVisible(true);
