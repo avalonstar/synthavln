@@ -1,3 +1,4 @@
+import { addSeconds, format } from 'date-fns';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { animated, config, useSpring } from 'react-spring';
@@ -15,6 +16,7 @@ function Train({ className, notifications }) {
   });
   const [count, setCount] = useState(0);
   const [timeleft, setTimeleft] = useState();
+  const [timer, setTimer] = useState();
 
   useEffect(() => {
     const last = notifications[notifications.length - 1];
@@ -49,12 +51,17 @@ function Train({ className, notifications }) {
     }
   }, [timeleft, isVisible]);
 
+  useEffect(() => {
+    const helper = addSeconds(new Date(0), timeleft);
+    setTimer(format(helper, 'mm:ss'));
+  }, [timeleft]);
+
   return (
     <Wrapper className={className} style={visibility}>
       <Widget>
         <TrainIcon />
         <Count>{count}</Count>
-        <Timer>{timeleft}</Timer>
+        <Timer>{timer}</Timer>
       </Widget>
     </Wrapper>
   );
