@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  version: 'variety'
+  version: 'destiny'
 };
 
 const imagePropTypes = {
