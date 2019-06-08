@@ -5,7 +5,7 @@ import { UI } from 'providers';
 
 function Scene() {
   const { mode } = useContext(UI.Context);
-  return <Ava mode={mode} />;
+  return <Ava version={mode} />;
 }
 
 export default Scene;
