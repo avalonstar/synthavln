@@ -1,3 +1,4 @@
+import numeral from 'numeral';
 import React, { useEffect, useState } from 'react';
 import { useDocument } from 'react-firebase-hooks/firestore';
 
@@ -28,7 +29,8 @@ function Total() {
       </Icon>
       <Title>SubPoints</Title>
       <Stat>
-        <Number>{score}</Number>/{goal}
+        <Number>{numeral(score).format('0,0')}</Number>/
+        {numeral(goal).format('0,0')}
       </Stat>
     </Wrapper>
   );

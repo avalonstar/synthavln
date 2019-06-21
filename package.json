@@ -9,6 +9,7 @@
     "firebase": "^5.11.1",
     "lodash": "^4.17.10",
     "lottie-web": "^5.5.2",
+    "numeral": "^2.0.6",
     "polished": "^3.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
