@@ -5,6 +5,7 @@ import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 
 import Daily from './Daily';
+import Total from './Total';
 
 function Summaries({ className, isVisible }) {
   const props = useSpring({
@@ -17,6 +18,7 @@ function Summaries({ className, isVisible }) {
   });
   return (
     <Wrapper className={className} style={props}>
+      <Total />
       <Daily />
     </Wrapper>
   );

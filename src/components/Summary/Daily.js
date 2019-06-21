@@ -10,14 +10,12 @@ import firestore from 'firestore';
 
 function Daily() {
   const [size, set] = useState(0);
-
-  const startTime = startOfToday();
   const { loading, value } = useCollection(
     firestore
       .firestore()
       .collection('events')
       .where('bucket', '==', 'subscription')
-      .where('timestamp', '>=', startTime)
+      .where('timestamp', '>=', startOfToday())
   );
   useEffect(() => {
     if (!loading && value) {

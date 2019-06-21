@@ -1,73 +1,72 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import * as Providers from 'providers';
+import React, { useEffect, useState } from 'react';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
 import styled from 'styled-components';
-import { ChevronRight } from 'react-feather';
 
-const statisticPropTypes = {
-  score: PropTypes.number.isRequired,
-  goal: PropTypes.shape({}).isRequired
-};
+import { SubPointTotal } from 'components/Icons/Ticker';
 
-const Statistic = ({ score, goal }) => {
-  const { minimum_score: next } = goal;
-  return (
-    <Stat>
-      {score}/{next}
-    </Stat>
+import firestore from 'firestore';
+
+function Total() {
+  const [score, setScore] = useState(0);
+  const [goal, setGoal] = useState(0);
+  const { loading, value } = useDocument(
+    firestore.firestore().doc('broadcasters/avalonstar')
   );
-};
+  useEffect(() => {
+    if (!loading && value) {
+      const { subscriptions } = value.data();
+      setScore(subscriptions.score);
+      setGoal(subscriptions.next_level.minimum_score);
+    }
+  }, [loading, value]);
 
-const Total = () => (
-  <Wrapper>
-    <Title>
-      <ChevronRight color="#eaf56b" size={18} />
-      {'Next Emote'}
-    </Title>
-    <Providers.Broadcaster>
-      {({ subscriptions }) => (
-        <Statistic
-          score={subscriptions.score}
-          goal={subscriptions.next_level}
-        />
-      )}
-    </Providers.Broadcaster>
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <Icon>
+        <SubPointTotal />
+      </Icon>
+      <Title>SubPoints</Title>
+      <Stat>
+        <Number>{score}</Number>/{goal}
+      </Stat>
+    </Wrapper>
+  );
+}
 
 export default Total;
 
-Statistic.propTypes = statisticPropTypes;
-
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 12px;
+  position: relative;
+  padding: 15px 12px 16px 62px;
 
-  box-shadow: inset 0 0 0 1px ${props => props.theme.colors.gray[6]};
-  border-radius: 4px;
+  background: ${props => props.theme.colors.muted.dark};
   color: ${props => props.theme.colors.white};
   font-size: 16px;
   transition: all 250ms ${props => props.theme.easing};
   white-space: nowrap;
 `;
 
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
+const Icon = styled.div`
+  position: absolute;
+  left: 24px;
+  top: calc(50% - 12px);
+`;
 
-  color: ${props => props.theme.colors.gray[18]};
-  font-family: ${props => props.theme.fonts.din};
-  font-weight: 600;
+const Title = styled.div`
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
 `;
 
 const Stat = styled.div`
-  margin-left: 0;
-  padding: 10px 14px;
+  font-family: ${props => props.theme.fonts.adelle};
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+`;
 
-  box-shadow: inset 1px 0 0 0 ${props => props.theme.colors.gray[6]};
-  font-weight: 800;
+const Number = styled.span`
+  color: ${props => props.theme.colors.muted.yellow};
 `;

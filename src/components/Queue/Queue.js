@@ -11,7 +11,7 @@ function Queue({ className, notifications }) {
   const [isVisible, setIsVisible] = useState(false);
   const visibility = useSpring({
     config: config.stiff,
-    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-500%, 0, 0)'
+    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-600%, 0, 0)'
   });
 
   const transitions = useTransition(
