@@ -9,7 +9,7 @@ function useEvents() {
   const [notifications, dispatch] = useContext(Notifications.Context);
   const [events, setEvents] = useState([]);
   const [snapshot, setSnapshot] = useState(null);
-  const { loading, value } = useCollection(
+  const [value, loading] = useCollection(
     firestore
       .firestore()
       .collection('events')

@@ -7,7 +7,7 @@ import { useDocument } from 'react-firebase-hooks/firestore';
 
 function useUI() {
   const [mode, setMode] = useState('variety');
-  const { loading, value } = useDocument(
+  const [value, loading] = useDocument(
     firestore.firestore().doc('uxc/avalonstar')
   );
 

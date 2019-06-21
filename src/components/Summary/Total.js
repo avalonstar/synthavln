@@ -11,7 +11,7 @@ import firestore from 'firestore';
 function Total() {
   const [score, setScore] = useState(0);
   const [goal, setGoal] = useState(0);
-  const { loading, value } = useDocument(
+  const [value, loading] = useDocument(
     firestore.firestore().doc('broadcasters/avalonstar')
   );
   useEffect(() => {

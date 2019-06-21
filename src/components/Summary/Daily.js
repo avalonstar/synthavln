@@ -10,7 +10,7 @@ import firestore from 'firestore';
 
 function Daily() {
   const [size, set] = useState(0);
-  const { loading, value } = useCollection(
+  const [value, loading] = useCollection(
     firestore
       .firestore()
       .collection('events')
