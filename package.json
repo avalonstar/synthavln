@@ -6,7 +6,7 @@
   "dependencies": {
     "constate": "^1.1.1",
     "date-fns": "^1.30.1",
-    "firebase": "^6.2.1",
+    "firebase": "^6.2.2",
     "lodash": "^4.17.10",
     "lottie-web": "^5.5.2",
     "numeral": "^2.0.6",
@@ -44,7 +44,7 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react": "^7.14.0",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
