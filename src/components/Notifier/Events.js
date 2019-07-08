@@ -226,7 +226,7 @@ const Actor = styled.div`
   font-weight: 800;
 `;
 
-const Modifier = styled.div`
+const Modifier = styled.span`
   color: ${props => props.theme.colors.muted.midgrey};
   font-size: 14px;
   font-weight: 800;
