@@ -92,8 +92,9 @@ const StyledTicker = styled(Ticker)`
 
 const StyledNotifier = styled(Notifier)`
   grid-column: 1 / span 3;
-  grid-row: 2 / span 2;
-  align-self: start;
+  grid-row: 25 / span 2;
+  align-self: end;
+  justify-self: center;
 `;
 
 const StyledQueue = styled(Queue)`

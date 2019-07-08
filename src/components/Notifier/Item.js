@@ -87,8 +87,8 @@ Item.defaultProps = {
 };
 
 const wrapperProps = {
-  hide: { x: '-100%' },
-  show: { x: '0%', transition: { ease: 'anticipate', duration: 1000 } }
+  hide: { y: '200%' },
+  show: { y: '0%', transition: { ease: 'anticipate', duration: 1000 } }
 };
 
 const Wrapper = styled(posed.div(wrapperProps))`

@@ -212,7 +212,7 @@ const Footer = styled.div`
   padding: 12px 24px;
 
   background-color: ${props => props.theme.colors.main.dark};
-  border-radius: 4px;
+  /* border-radius: 4px; */
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   color: ${props => props.theme.colors.white};
@@ -235,7 +235,7 @@ const Modifier = styled.div`
 `;
 
 const Avatar = styled.img`
-  transform: rotate(70deg);
+  /* transform: rotate(70deg); */
 `;
 
 const BubbleWrapper = styled.div`
