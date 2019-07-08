@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 
 import { UI } from 'providers';
-import { Activity, Ava, Camera, Sounds } from 'scenes/Activity';
+import { Activity, Ava, Camera, Sounds, Splitscreen } from 'scenes/Activity';
 import App from 'scenes/App';
 import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
@@ -18,6 +18,7 @@ const Main = () => (
     <Route exact path="/scenes/activity/sounds" component={Sounds} />
     <Route exact path="/scenes/activity" component={Activity} />
     <Route exact path="/scenes/camera" component={Camera} />
+    <Route exact path="/scenes/splitscreen" component={Splitscreen} />
 
     <Route
       exact

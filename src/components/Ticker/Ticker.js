@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useTransition } from 'react-spring';
 
 import styled from 'styled-components';
-import { rgba } from 'polished';
 
 import Item from './Item';
 
@@ -44,20 +43,6 @@ const Wrapper = styled.ol`
   margin: 0;
   padding: 0;
   list-style: none;
-
-  :after {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 72px;
-
-    content: '';
-    background-image: linear-gradient(
-      to right,
-      ${props => rgba(props.theme.colors.main.dark, 0)},
-      ${props => props.theme.colors.main.dark}
-    );
-  }
 `;
 
 export default Ticker;
