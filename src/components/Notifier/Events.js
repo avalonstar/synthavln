@@ -54,8 +54,7 @@ export const CheerEvent = ({ name, amount }) => (
   <Wrapper>
     <Header>
       <Actor>{name}</Actor>
-      {' cheered '}
-      <Modifier>{`${amount} bits!`}</Modifier>
+      <Modifier>{`cheered ${amount} bits!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Cheer />
@@ -76,8 +75,7 @@ export const MysteryGiftEvent = ({ gifter, amount, subPlan }) => (
   <Wrapper>
     <Header>
       <Actor>{gifter}</Actor>
-      {' gifted '}
-      <Modifier>{`${amount} ${utils.getTier(
+      <Modifier>{`gifted ${amount} ${utils.getTier(
         subPlan
       )} subscriptions!`}</Modifier>
     </Header>
@@ -93,7 +91,7 @@ export const RaidEvent = ({ name }) => (
   <Wrapper>
     <Header>
       <Actor>{name}</Actor>
-      {'Thanks for the raid!'}
+      <Modifier>Thanks for the raid!</Modifier>
     </Header>
     <Footer>
       <Tags.Raid />
@@ -119,7 +117,7 @@ export const SubscriptionEvent = ({ name, subPlan }) => (
   <Wrapper>
     <Header>
       <Actor>{name}</Actor>
-      {' has just subscribed! '}
+      <Modifier>has just subscribed!</Modifier>
     </Header>
     <Footer>
       <Tags.Subscription />
@@ -133,9 +131,7 @@ export const SubGiftEvent = ({ gifter, name, subPlan }) => (
   <Wrapper>
     <Header>
       <Actor>{gifter}</Actor>
-      {' gifted '}
-      <Actor>{name}</Actor>
-      {' a subscription!'}
+      <Modifier>{`gifted ${name} a subscription!`}</Modifier>
     </Header>
     <Footer>
       <Tags.SubGift />
@@ -149,9 +145,7 @@ export const TipEvent = ({ from, formattedAmount, message }) => (
   <Wrapper>
     <Header>
       <Actor>{from}</Actor>
-      {' just tipped '}
-      <Modifier>{formattedAmount}</Modifier>
-      {'!'}
+      <Modifier>{`just tipped ${formattedAmount}!`}</Modifier>
       <Message>{message}</Message>
     </Header>
     <Footer>
@@ -226,7 +220,7 @@ const Actor = styled.div`
   font-weight: 800;
 `;
 
-const Modifier = styled.span`
+const Modifier = styled.div`
   color: ${props => props.theme.colors.muted.midgrey};
   font-size: 14px;
   font-weight: 800;
