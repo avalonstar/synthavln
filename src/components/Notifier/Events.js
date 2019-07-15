@@ -167,11 +167,11 @@ const Wrapper = styled.div`
   display: inline-grid;
   grid-template-rows: 1fr auto;
   align-items: center;
-  margin-left: 48px;
-  width: calc(${props => props.theme.frame.width} * 0.15);
+  min-width: calc(${props => props.theme.frame.width} * 0.15);
 
   background: ${props => props.theme.colors.white};
-  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   box-shadow: ${props => props.theme.shadows[1]};
@@ -206,7 +206,7 @@ const Footer = styled.div`
   padding: 12px 24px;
 
   background-color: ${props => props.theme.colors.main.dark};
-  /* border-radius: 4px; */
+  border-radius: 4px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   color: ${props => props.theme.colors.white};
@@ -229,7 +229,7 @@ const Modifier = styled.div`
 `;
 
 const Avatar = styled.img`
-  /* transform: rotate(70deg); */
+  transform: rotate(180deg);
 `;
 
 const BubbleWrapper = styled.div`

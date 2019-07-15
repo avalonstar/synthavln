@@ -87,7 +87,7 @@ Item.defaultProps = {
 };
 
 const wrapperProps = {
-  hide: { y: '200%' },
+  hide: { y: '-150%' },
   show: { y: '0%', transition: { ease: 'anticipate', duration: 1000 } }
 };
 
