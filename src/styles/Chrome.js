@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   height: ${props => (props.explicitHeight ? '100%' : 'auto')};
   overflow: hidden;
 
-  box-shadow: ${props => props.theme.shadows[4]};
+  box-shadow: ${props => props.theme.shadows[2]};
   border-radius: 6px;
 `;
 

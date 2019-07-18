@@ -9,7 +9,6 @@ const Scene = () => <StyledCamera />;
 const StyledCamera = styled(Camera)`
   margin: 36px;
   width: 480px;
-  /* width: 422px; */
   z-index: 1000;
 `;
 
