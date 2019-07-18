@@ -65,7 +65,10 @@ TickerArea.propTypes = {
 const StyledWrapper = styled(Frame.Wrapper)`
   grid-template-columns: auto auto auto;
 
-  box-shadow: inset 0 60px 0 ${props => props.theme.colors.main.dark};
+  box-shadow: ${props =>
+    `inset 0 60px 0 ${props.theme.colors.main.dark}, ${
+      props.theme.shadows[2]
+    }`};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 `;
