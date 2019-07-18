@@ -36,7 +36,7 @@ const Main = () => (
       render={() => (
         <Interstitial
           title="Please stand by"
-          subtitle="We'll get back to it soon enough!"
+          subtitle="Technical difficulties? No, not here. Never!"
         />
       )}
     />

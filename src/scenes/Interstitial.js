@@ -39,13 +39,7 @@ function Layout(props) {
 }
 
 function Structure({ children }) {
-  return (
-    <Fragment>
-      <Frame.OuterBorder />
-      {children}
-      <Frame.InnerBorder />
-    </Fragment>
-  );
+  return <Fragment>{children}</Fragment>;
 }
 
 function Scene(props) {
@@ -81,16 +75,18 @@ TickerArea.propTypes = {
 const StyledWrapper = styled(Frame.Wrapper)`
   grid-template-columns: auto auto auto;
 
-  box-shadow: inset 0 -72px 0 ${props => props.theme.colors.main.dark};
+  box-shadow: ${props =>
+    `inset 0 60px 0 ${props.theme.colors.main.dark}, ${
+      props.theme.shadows[2]
+    }`};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 
   &:after {
     position: absolute;
-    top: 24px;
-    left: 24px;
-    width: calc(${props => props.theme.frame.width} - 48px);
-    height: calc(${props => props.theme.frame.height} - 96px);
+    top: 60px;
+    width: calc(${props => props.theme.frame.width});
+    height: calc(${props => props.theme.frame.height});
 
     background-color: ${props => rgba(props.theme.colors.muted.dark, 0.85)};
     content: '';
@@ -100,20 +96,20 @@ const StyledWrapper = styled(Frame.Wrapper)`
 
 const StyledLogo = styled(Logo)`
   grid-column: 1;
-  grid-row: 25 / span 2;
+  grid-row: 1 / span 2;
   padding-bottom: 12px;
-  padding-left: 36px;
+  padding-left: 24px;
 `;
 
 const StyledSummaries = styled(Summaries)`
   grid-column: 2;
-  grid-row: 25 / span 2;
+  grid-row: 1 / span 2;
   padding-bottom: 12px;
 `;
 
 const StyledTicker = styled(Ticker)`
   grid-column: 3;
-  grid-row: 25 / span 2;
+  grid-row: 1 / span 2;
   padding-bottom: 12px;
 `;
 
@@ -121,7 +117,7 @@ const Wrapper = styled.div`
   grid-column: 1 / span 3;
   grid-row: 2 / span 8;
   margin: 24px;
-  padding: 64px 72px;
+  padding: 112px 72px;
 `;
 
 const Title = styled.div`
