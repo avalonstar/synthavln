@@ -48,6 +48,10 @@ function Item({ className, notification, soundOnly }) {
     setTimeout(() => setPlayStatus('PLAYING'), 600);
   }, [notification]);
 
+  function handleError(errorCode, description) {
+    console.log(errorCode, description);
+  }
+
   function handleFinishedPlaying() {
     setPlayStatus('STOPPED');
     setIsVisible(false);
@@ -66,6 +70,7 @@ function Item({ className, notification, soundOnly }) {
       <Sound
         url={`${baseURL}${getSongFile(notification)}.ogg`}
         playStatus={playStatus}
+        onError={handleError}
         onFinishedPlaying={handleFinishedPlaying}
         volume={volume}
       />
