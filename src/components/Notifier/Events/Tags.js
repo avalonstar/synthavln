@@ -15,16 +15,6 @@ import {
 
 import * as utils from '../utils';
 
-const planPropTypes = {
-  plan: PropTypes.string,
-  amount: PropTypes.number // eslint-disable-line
-};
-
-const planDefaultProps = {
-  plan: '1000',
-  amount: 1
-};
-
 const svgSize = 16;
 
 export const Cheer = () => (
@@ -51,7 +41,7 @@ export const Raid = () => (
   </Tag>
 );
 
-export const SPChange = ({ plan, amount = 1 }) => (
+export const SPChange = ({ plan, amount = '1' }) => (
   <Tag>
     <SPBadge size={svgSize} /> sp + {utils.getSubValue(plan) * amount}
   </Tag>
@@ -87,10 +77,23 @@ export const Tier = ({ plan }) => (
   </Tag>
 );
 
-SPChange.propTypes = planPropTypes;
-SPChange.defaultProps = planDefaultProps;
-Tier.propTypes = planPropTypes;
-Tier.defaultProps = planDefaultProps;
+SPChange.propTypes = {
+  plan: PropTypes.string,
+  amount: PropTypes.string
+};
+
+SPChange.defaultProps = {
+  plan: '1000',
+  amount: '1'
+};
+
+Tier.propTypes = {
+  plan: PropTypes.string
+};
+
+Tier.defaultProps = {
+  plan: '1000'
+};
 
 const Tag = styled.div`
   flex-grow: 1;

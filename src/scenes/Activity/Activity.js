@@ -39,13 +39,7 @@ function Layout() {
 }
 
 function Structure({ children }) {
-  return (
-    <Fragment>
-      <Frame.OuterBorder />
-      {children}
-      <Frame.InnerBorder />
-    </Fragment>
-  );
+  return <Fragment>{children}</Fragment>;
 }
 
 function Scene() {
@@ -71,34 +65,35 @@ TickerArea.propTypes = {
 const StyledWrapper = styled(Frame.Wrapper)`
   grid-template-columns: auto auto auto;
 
-  box-shadow: inset 0 -72px 0 ${props => props.theme.colors.main.dark};
+  box-shadow: inset 0 60px 0 ${props => props.theme.colors.main.dark};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 `;
 
 const StyledLogo = styled(Logo)`
   grid-column: 1;
-  grid-row: 25 / span 2;
+  grid-row: 1 / span 2;
   padding-bottom: 12px;
-  padding-left: 36px;
+  padding-left: 24px;
 `;
 
 const StyledSummaries = styled(Summaries)`
   grid-column: 2;
-  grid-row: 25 / span 2;
+  grid-row: 1 / span 2;
   padding-bottom: 12px;
 `;
 
 const StyledTicker = styled(Ticker)`
   grid-column: 3;
-  grid-row: 25 / span 2;
+  grid-row: 1 / span 2;
   padding-bottom: 12px;
 `;
 
 const StyledNotifier = styled(Notifier)`
   grid-column: 1 / span 3;
-  grid-row: 2 / span 2;
+  grid-row: 1 / span 2;
   align-self: start;
+  justify-self: center;
 `;
 
 const StyledQueue = styled(Queue)`
@@ -110,8 +105,8 @@ const StyledQueue = styled(Queue)`
 
 const StyledTrain = styled(Train)`
   grid-column: 1 / span 3;
-  grid-row: 23 / span 2;
-  align-self: end;
+  grid-row: 3 / span 2;
+  align-self: start;
 `;
 
 export default Scene;
