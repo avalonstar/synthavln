@@ -47,7 +47,7 @@ const Header = styled.div`
   align-items: center;
   padding: 12px;
 
-  background: ${props => props.theme.colors.main.dark};
+  background: ${props => props.theme.colors.muted.dark};
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 `;
