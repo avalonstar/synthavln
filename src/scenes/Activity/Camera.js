@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const Scene = () => <StyledCamera />;
 
 const StyledCamera = styled(Camera)`
-  margin: 36px;
+  margin: 24px;
   width: 480px;
   z-index: 1000;
 `;
