@@ -23,7 +23,7 @@ const raidPropTypes = {
 };
 
 const resubPropTypes = {
-  months: PropTypes.number.isRequired,
+  cumulativeMonths: PropTypes.number.isRequired,
   subPlan: PropTypes.string.isRequired
 };
 
@@ -32,7 +32,7 @@ const subscriptionPropTypes = {
 };
 
 const subGiftPropTypes = {
-  gifter: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
   subPlan: PropTypes.string.isRequired
 };
 
@@ -59,18 +59,18 @@ export const SubscriptionEvent = ({ subPlan }) => (
   <Wrapper>{getTier(subPlan)}</Wrapper>
 );
 
-export const SubGiftEvent = ({ gifter, subPlan }) => (
+export const SubGiftEvent = ({ displayName, subPlan }) => (
   <Wrapper>
     {getTier(subPlan)} {'gift from '}
-    <Actor>{gifter}</Actor>
+    <Actor>{displayName}</Actor>
   </Wrapper>
 );
 
 export const RaidEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
-export const ResubEvent = ({ months, subPlan }) => (
+export const ResubEvent = ({ cumulativeMonths, subPlan }) => (
   <Wrapper>
-    <Number>{months}</Number>
+    <Number>{cumulativeMonths}</Number>
     {' months'} {getTier(subPlan)}
   </Wrapper>
 );

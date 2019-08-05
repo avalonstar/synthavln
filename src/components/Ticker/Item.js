@@ -44,7 +44,7 @@ function Item({ className, data, style }) {
   return (
     <Wrapper className={className} style={style}>
       <Icon>{getIcon()[data.event]}</Icon>
-      <Actor>{data.from || data.name}</Actor>
+      <Actor>{data.recipientDisplayName || data.displayName}</Actor>
       <Type>{getType(data)[data.event]}</Type>
     </Wrapper>
   );
@@ -53,7 +53,9 @@ function Item({ className, data, style }) {
 Item.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
-    event: PropTypes.string.isRequired
+    event: PropTypes.string.isRequired,
+    recipientDisplayName: PropTypes.string,
+    displayName: PropTypes.string
   }).isRequired,
   style: PropTypes.shape({})
 };

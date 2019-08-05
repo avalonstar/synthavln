@@ -10,7 +10,7 @@ import avalonHAPPY from './assets/avalonHAPPY.png';
 
 const cheerPropTypes = {
   amount: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  displayName: PropTypes.string.isRequired
 };
 
 const followPropTypes = {
@@ -18,18 +18,18 @@ const followPropTypes = {
 };
 
 const mysteryGiftPropTypes = {
-  gifter: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
   amount: PropTypes.string.isRequired,
   subPlan: PropTypes.string.isRequired
 };
 
 const raidPropTypes = {
-  name: PropTypes.string.isRequired
+  displayName: PropTypes.string.isRequired
 };
 
 const resubPropTypes = {
-  name: PropTypes.string.isRequired,
-  months: PropTypes.number.isRequired,
+  displayName: PropTypes.string.isRequired,
+  cumulativeMonths: PropTypes.number.isRequired,
   subPlan: PropTypes.string.isRequired
 };
 
@@ -39,8 +39,8 @@ const subscriptionPropTypes = {
 };
 
 const subGiftPropTypes = {
-  gifter: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
+  recipientDisplayName: PropTypes.string.isRequired,
   subPlan: PropTypes.string.isRequired
 };
 
@@ -50,10 +50,10 @@ const tipPropTypes = {
   message: PropTypes.string.isRequired
 };
 
-export const CheerEvent = ({ name, amount }) => (
+export const CheerEvent = ({ displayName, amount }) => (
   <Wrapper>
     <Header>
-      <Actor>{name}</Actor>
+      <Actor>{displayName}</Actor>
       <Modifier>{`cheered ${amount} bits!`}</Modifier>
     </Header>
     <Footer>
@@ -71,10 +71,10 @@ export const FollowEvent = ({ name }) => (
   </BubbleWrapper>
 );
 
-export const MysteryGiftEvent = ({ gifter, amount, subPlan }) => (
+export const MysteryGiftEvent = ({ displayName, amount, subPlan }) => (
   <Wrapper>
     <Header>
-      <Actor>{gifter}</Actor>
+      <Actor>{displayName}</Actor>
       <Modifier>{`gifted ${amount} ${utils.getTier(
         subPlan
       )} subscriptions!`}</Modifier>
@@ -87,10 +87,10 @@ export const MysteryGiftEvent = ({ gifter, amount, subPlan }) => (
   </Wrapper>
 );
 
-export const RaidEvent = ({ name }) => (
+export const RaidEvent = ({ displayName }) => (
   <Wrapper>
     <Header>
-      <Actor>{name}</Actor>
+      <Actor>{displayName}</Actor>
       <Modifier>Thanks for the raid!</Modifier>
     </Header>
     <Footer>
@@ -99,11 +99,11 @@ export const RaidEvent = ({ name }) => (
   </Wrapper>
 );
 
-export const ResubEvent = ({ name, months, subPlan }) => (
+export const ResubEvent = ({ displayName, cumulativeMonths, subPlan }) => (
   <Wrapper>
     <Header>
-      <Actor>{name}</Actor>
-      <Modifier>{`${months} consecutive months!`}</Modifier>
+      <Actor>{displayName}</Actor>
+      <Modifier>{`${cumulativeMonths} consecutive months!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Resub />
@@ -127,11 +127,15 @@ export const SubscriptionEvent = ({ name, subPlan }) => (
   </Wrapper>
 );
 
-export const SubGiftEvent = ({ gifter, name, subPlan }) => (
+export const SubGiftEvent = ({
+  displayName,
+  recipientDisplayName,
+  subPlan
+}) => (
   <Wrapper>
     <Header>
-      <Actor>{gifter}</Actor>
-      <Modifier>{`gifted ${name} a subscription!`}</Modifier>
+      <Actor>{displayName}</Actor>
+      <Modifier>{`gifted ${recipientDisplayName} a subscription!`}</Modifier>
     </Header>
     <Footer>
       <Tags.SubGift />

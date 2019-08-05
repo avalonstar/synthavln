@@ -13,6 +13,8 @@ function Daily() {
   const [value, loading] = useCollection(
     firestore
       .firestore()
+      .collection('broadcasters')
+      .doc('avalonstar')
       .collection('events')
       .where('bucket', '==', 'subscription')
       .where('timestamp', '>=', startOfToday())

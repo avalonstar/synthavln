@@ -12,6 +12,8 @@ function useEvents() {
   const [value, loading] = useCollection(
     firestore
       .firestore()
+      .collection('broadcasters')
+      .doc('avalonstar')
       .collection('events')
       .where('muted', '==', false)
       .orderBy('timestamp', 'desc')
