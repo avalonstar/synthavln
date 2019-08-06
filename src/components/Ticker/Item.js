@@ -15,7 +15,8 @@ import {
   SubGiftEvent,
   RaidEvent,
   ResubEvent,
-  TipEvent
+  TipEvent,
+  UpgradeEvent
 } from './Events';
 
 const getType = data => ({
@@ -26,7 +27,8 @@ const getType = data => ({
   subgift: SubGiftEvent({ ...data }),
   raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data })
+  tip: TipEvent({ ...data }),
+  upgrade: UpgradeEvent({ ...data })
 });
 
 const getIcon = () => ({
@@ -37,7 +39,8 @@ const getIcon = () => ({
   subgift: <Gift />,
   raid: <Raid />,
   resub: <Sub />,
-  tip: <Tip />
+  tip: <Tip />,
+  upgrade: <Sub />
 });
 
 function Item({ className, data, style }) {

@@ -50,6 +50,10 @@ const tipPropTypes = {
   message: PropTypes.string.isRequired
 };
 
+const upgradePropTypes = {
+  displayName: PropTypes.string.isRequired
+};
+
 export const CheerEvent = ({ displayName, amount }) => (
   <Wrapper>
     <Header>
@@ -158,6 +162,18 @@ export const TipEvent = ({ from, formattedAmount, message }) => (
   </Wrapper>
 );
 
+export const UpgradeEvent = ({ displayName }) => (
+  <Wrapper>
+    <Header>
+      <Actor>{displayName}</Actor>
+      <Modifier>just upgraded their gift sub!</Modifier>
+    </Header>
+    <Footer>
+      <Tags.Upgrade />
+    </Footer>
+  </Wrapper>
+);
+
 CheerEvent.propTypes = cheerPropTypes;
 FollowEvent.propTypes = followPropTypes;
 MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
@@ -166,6 +182,7 @@ ResubEvent.propTypes = resubPropTypes;
 SubscriptionEvent.propTypes = subscriptionPropTypes;
 SubGiftEvent.propTypes = subGiftPropTypes;
 TipEvent.propTypes = tipPropTypes;
+UpgradeEvent.propTypes = upgradePropTypes;
 
 const Wrapper = styled.div`
   display: inline-grid;

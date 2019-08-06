@@ -16,7 +16,8 @@ import {
   SubGiftEvent,
   RaidEvent,
   ResubEvent,
-  TipEvent
+  TipEvent,
+  UpgradeEvent
 } from './Events';
 import { getSongFile } from './utils';
 
@@ -28,7 +29,8 @@ const getType = data => ({
   subgift: SubGiftEvent({ ...data }),
   raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data })
+  tip: TipEvent({ ...data }),
+  upgrade: UpgradeEvent({ ...data })
 });
 
 function Item({ className, notification, soundOnly }) {

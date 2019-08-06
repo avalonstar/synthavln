@@ -77,6 +77,12 @@ export const Tier = ({ plan }) => (
   </Tag>
 );
 
+export const Upgrade = () => (
+  <Tag>
+    <Sub size={svgSize} /> upgrade
+  </Tag>
+);
+
 SPChange.propTypes = {
   plan: PropTypes.string,
   amount: PropTypes.string

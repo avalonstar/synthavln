@@ -79,6 +79,8 @@ export const TipEvent = ({ formattedAmount }) => (
   <Wrapper>{formattedAmount}</Wrapper>
 );
 
+export const UpgradeEvent = () => <Wrapper>Gift Converted</Wrapper>;
+
 CheerEvent.propTypes = cheerPropTypes;
 FollowEvent.propTypes = followPropTypes;
 MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
