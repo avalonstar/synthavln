@@ -47,7 +47,9 @@ function Item({ className, data, style }) {
   return (
     <Wrapper className={className} style={style}>
       <Icon>{getIcon()[data.event]}</Icon>
-      <Actor>{data.recipientDisplayName || data.displayName}</Actor>
+      <Actor>
+        {data.recipientDisplayName || data.displayName || data.name}
+      </Actor>
       <Type>{getType(data)[data.event]}</Type>
     </Wrapper>
   );
