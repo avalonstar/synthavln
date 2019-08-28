@@ -102,7 +102,7 @@ const StyledNotifier = styled(Notifier)`
 const StyledQueue = styled(Queue)`
   grid-column: 3;
   grid-row: 3 / span 2;
-  align-self: end;
+  align-self: start;
   justify-self: start;
 `;
 
