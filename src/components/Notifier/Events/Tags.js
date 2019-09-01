@@ -85,7 +85,7 @@ export const Upgrade = () => (
 
 SPChange.propTypes = {
   plan: PropTypes.string,
-  amount: PropTypes.string
+  amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 SPChange.defaultProps = {
