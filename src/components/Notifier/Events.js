@@ -34,7 +34,7 @@ const resubPropTypes = {
 };
 
 const subscriptionPropTypes = {
-  name: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
   subPlan: PropTypes.string.isRequired
 };
 
@@ -117,10 +117,10 @@ export const ResubEvent = ({ displayName, cumulativeMonths, subPlan }) => (
   </Wrapper>
 );
 
-export const SubscriptionEvent = ({ name, subPlan }) => (
+export const SubscriptionEvent = ({ displayName, subPlan }) => (
   <Wrapper>
     <Header>
-      <Actor>{name}</Actor>
+      <Actor>{displayName}</Actor>
       <Modifier>has just subscribed!</Modifier>
     </Header>
     <Footer>

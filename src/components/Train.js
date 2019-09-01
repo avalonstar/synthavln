@@ -15,7 +15,7 @@ function Train({ className, notifications }) {
     transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-200%, 0, 0)'
   });
   const [count, setCount] = useState(0);
-  const [timeleft, setTimeleft] = useState();
+  const [timeleft, setTimeleft] = useState(0);
   const [timer, setTimer] = useState();
 
   useEffect(() => {
