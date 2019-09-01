@@ -39,6 +39,7 @@ function Total() {
 export default Total;
 
 const Wrapper = styled.div`
+  display: none;
   position: relative;
   padding: 15px 12px 16px 62px;
 

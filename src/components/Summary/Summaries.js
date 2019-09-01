@@ -18,7 +18,7 @@ function Summaries({ className, isVisible }) {
   });
   return (
     <Wrapper className={className} style={props}>
-      {/* <Total /> */}
+      <Total />
       <Daily />
     </Wrapper>
   );
