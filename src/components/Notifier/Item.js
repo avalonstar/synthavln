@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Sound from 'react-sound';
+import ReactPlayer from 'react-player';
 import posed from 'react-pose';
 import isEmpty from 'lodash/isEmpty';
 
@@ -36,8 +36,8 @@ const getType = data => ({
 function Item({ className, notification, soundOnly }) {
   const [notifications, dispatch] = useContext(Notifications.Context); // eslint-disable-line
   const [isVisible, setIsVisible] = useState(false);
-  const [playStatus, setPlayStatus] = useState('STOPPED');
-  const [volume, setVolume] = useState(20);
+  const [playStatus, setPlayStatus] = useState(false);
+  const [volume, setVolume] = useState(0.2);
 
   useEffect(() => {
     if (!soundOnly) {
@@ -47,7 +47,7 @@ function Item({ className, notification, soundOnly }) {
 
   useEffect(() => {
     setIsVisible(true);
-    setTimeout(() => setPlayStatus('PLAYING'), 600);
+    setTimeout(() => setPlayStatus(true), 600);
   }, [notification]);
 
   function handleError(errorCode, description) {
@@ -55,7 +55,7 @@ function Item({ className, notification, soundOnly }) {
   }
 
   function handleFinishedPlaying() {
-    setPlayStatus('STOPPED');
+    setPlayStatus(false);
     setIsVisible(false);
     return setTimeout(() => dispatch({ type: 'delete' }), 500);
   }
@@ -69,12 +69,13 @@ function Item({ className, notification, soundOnly }) {
       pose={isVisible ? 'show' : 'hide'}
     >
       {!soundOnly && getType(notification)[notification.event]}
-      <Sound
+      <ReactPlayer
         url={`${baseURL}${getSongFile(notification)}.ogg`}
-        playStatus={playStatus}
+        playing={playStatus}
+        onEnded={handleFinishedPlaying}
         onError={handleError}
-        onFinishedPlaying={handleFinishedPlaying}
         volume={volume}
+        config={{ file: { forceAudio: true } }}
       />
     </Wrapper>
   );
