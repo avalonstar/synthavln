@@ -88,6 +88,7 @@ const Wrapper = styled.div`
 const Actor = styled.div`
   color: ${props => props.theme.colors.muted.yellow};
   display: inline;
+  text-transform: initial;
 `;
 
 const Number = styled.span`
