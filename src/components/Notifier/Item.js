@@ -1,3 +1,5 @@
+import { captureException } from '@sentry/browser';
+
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
@@ -50,8 +52,8 @@ function Item({ className, notification, soundOnly }) {
     setTimeout(() => setPlayStatus(true), 600);
   }, [notification]);
 
-  function handleError(errorCode, description) {
-    console.log(errorCode, description);
+  function handleError(error) {
+    captureException(error);
   }
 
   function handleFinishedPlaying() {
