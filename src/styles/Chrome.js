@@ -3,18 +3,6 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const propTypes = {
-  className: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  explicitHeight: PropTypes.bool,
-  children: PropTypes.node.isRequired
-};
-
-const defaultProps = {
-  title: '',
-  explicitHeight: false
-};
-
 const Chrome = ({ className, title, explicitHeight, children }) => (
   <Wrapper className={className} explicitHeight={explicitHeight}>
     <Header>
@@ -29,8 +17,17 @@ const Chrome = ({ className, title, explicitHeight, children }) => (
   </Wrapper>
 );
 
-Chrome.propTypes = propTypes;
-Chrome.defaultProps = defaultProps;
+Chrome.propTypes = {
+  className: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  explicitHeight: PropTypes.bool,
+  children: PropTypes.node.isRequired
+};
+
+Chrome.defaultProps = {
+  title: '',
+  explicitHeight: false
+};
 
 const Wrapper = styled.div`
   display: flex;

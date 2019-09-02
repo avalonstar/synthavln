@@ -8,52 +8,6 @@ import * as utils from './utils';
 
 import avalonHAPPY from './assets/avalonHAPPY.png';
 
-const cheerPropTypes = {
-  amount: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired
-};
-
-const followPropTypes = {
-  name: PropTypes.string.isRequired
-};
-
-const mysteryGiftPropTypes = {
-  displayName: PropTypes.string.isRequired,
-  amount: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const raidPropTypes = {
-  displayName: PropTypes.string.isRequired
-};
-
-const resubPropTypes = {
-  displayName: PropTypes.string.isRequired,
-  cumulativeMonths: PropTypes.number.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const subscriptionPropTypes = {
-  displayName: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const subGiftPropTypes = {
-  displayName: PropTypes.string.isRequired,
-  recipientDisplayName: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const tipPropTypes = {
-  from: PropTypes.string.isRequired,
-  formattedAmount: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired
-};
-
-const upgradePropTypes = {
-  displayName: PropTypes.string.isRequired
-};
-
 export const CheerEvent = ({ displayName, amount }) => (
   <Wrapper>
     <Header>
@@ -174,15 +128,51 @@ export const UpgradeEvent = ({ displayName }) => (
   </Wrapper>
 );
 
-CheerEvent.propTypes = cheerPropTypes;
-FollowEvent.propTypes = followPropTypes;
-MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
-RaidEvent.propTypes = raidPropTypes;
-ResubEvent.propTypes = resubPropTypes;
-SubscriptionEvent.propTypes = subscriptionPropTypes;
-SubGiftEvent.propTypes = subGiftPropTypes;
-TipEvent.propTypes = tipPropTypes;
-UpgradeEvent.propTypes = upgradePropTypes;
+CheerEvent.propTypes = {
+  amount: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired
+};
+
+FollowEvent.propTypes = {
+  name: PropTypes.string.isRequired
+};
+
+MysteryGiftEvent.propTypes = {
+  displayName: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+RaidEvent.propTypes = {
+  displayName: PropTypes.string.isRequired
+};
+
+ResubEvent.propTypes = {
+  displayName: PropTypes.string.isRequired,
+  cumulativeMonths: PropTypes.number.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+SubscriptionEvent.propTypes = {
+  displayName: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+SubGiftEvent.propTypes = {
+  displayName: PropTypes.string.isRequired,
+  recipientDisplayName: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+TipEvent.propTypes = {
+  from: PropTypes.string.isRequired,
+  formattedAmount: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired
+};
+
+UpgradeEvent.propTypes = {
+  displayName: PropTypes.string.isRequired
+};
 
 const Wrapper = styled.div`
   display: inline-grid;

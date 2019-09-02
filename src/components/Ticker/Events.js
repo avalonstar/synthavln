@@ -5,41 +5,6 @@ import styled from 'styled-components';
 
 import { getTier } from './utils';
 
-const cheerPropTypes = {
-  amount: PropTypes.string.isRequired
-};
-
-const followPropTypes = {
-  event: PropTypes.string.isRequired
-};
-
-const mysteryGiftPropTypes = {
-  amount: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const raidPropTypes = {
-  event: PropTypes.string.isRequired
-};
-
-const resubPropTypes = {
-  cumulativeMonths: PropTypes.number.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const subscriptionPropTypes = {
-  subPlan: PropTypes.string.isRequired
-};
-
-const subGiftPropTypes = {
-  displayName: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
-};
-
-const tipPropTypes = {
-  formattedAmount: PropTypes.string.isRequired
-};
-
 export const CheerEvent = ({ amount }) => (
   <Wrapper>
     <Number>{amount}</Number>
@@ -81,14 +46,40 @@ export const TipEvent = ({ formattedAmount }) => (
 
 export const UpgradeEvent = () => <Wrapper>Gift Converted</Wrapper>;
 
-CheerEvent.propTypes = cheerPropTypes;
-FollowEvent.propTypes = followPropTypes;
-MysteryGiftEvent.propTypes = mysteryGiftPropTypes;
-RaidEvent.propTypes = raidPropTypes;
-ResubEvent.propTypes = resubPropTypes;
-SubscriptionEvent.propTypes = subscriptionPropTypes;
-SubGiftEvent.propTypes = subGiftPropTypes;
-TipEvent.propTypes = tipPropTypes;
+CheerEvent.propTypes = {
+  amount: PropTypes.string.isRequired
+};
+
+FollowEvent.propTypes = {
+  event: PropTypes.string.isRequired
+};
+
+MysteryGiftEvent.propTypes = {
+  amount: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+RaidEvent.propTypes = {
+  event: PropTypes.string.isRequired
+};
+
+ResubEvent.propTypes = {
+  cumulativeMonths: PropTypes.number.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+SubscriptionEvent.propTypes = {
+  subPlan: PropTypes.string.isRequired
+};
+
+SubGiftEvent.propTypes = {
+  displayName: PropTypes.string.isRequired,
+  subPlan: PropTypes.string.isRequired
+};
+
+TipEvent.propTypes = {
+  formattedAmount: PropTypes.string.isRequired
+};
 
 const Wrapper = styled.div`
   white-space: nowrap;

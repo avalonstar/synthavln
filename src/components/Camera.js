@@ -5,24 +5,21 @@ import styled from 'styled-components';
 
 import { Chrome } from 'styles';
 
-const propTypes = {
-  className: PropTypes.string,
-  title: PropTypes.string
-};
-
-const defaultProps = {
-  className: '',
-  title: ''
-};
-
 const Camera = ({ className, title }) => (
   <Chrome className={className} title={title}>
     <Zone />
   </Chrome>
 );
 
-Camera.propTypes = propTypes;
-Camera.defaultProps = defaultProps;
+Camera.propTypes = {
+  className: PropTypes.string,
+  title: PropTypes.string
+};
+
+Camera.defaultProps = {
+  className: '',
+  title: ''
+};
 
 const Zone = styled.div`
   padding-top: ${(9 / 16) * 100}%;

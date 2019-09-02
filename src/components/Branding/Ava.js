@@ -11,23 +11,6 @@ import ffxiv from './assets/ava-ffxiv.png';
 import destiny from './assets/ava-destiny.png';
 import starShirt from './assets/ava-star-shirt.png';
 
-const propTypes = {
-  version: PropTypes.string
-};
-
-const defaultProps = {
-  version: 'variety'
-};
-
-const imagePropTypes = {
-  className: PropTypes.string,
-  version: PropTypes.string.isRequired // eslint-disable-line
-};
-
-const imageDefaultProps = {
-  className: ''
-};
-
 const Business = ({ version, className }) => (
   <Image
     initialPose="exit"
@@ -78,16 +61,49 @@ const getAva = version =>
 
 const Ava = ({ version }) => <Frame.Base>{getAva(version)}</Frame.Base>;
 
-Ava.propTypes = propTypes;
-Ava.defaultProps = defaultProps;
-Business.propTypes = imagePropTypes;
-Business.defaultProps = imageDefaultProps;
-Destiny.propTypes = imagePropTypes;
-Destiny.defaultProps = imageDefaultProps;
-Lyse.propTypes = imagePropTypes;
-Lyse.defaultProps = imageDefaultProps;
-StarShirt.propTypes = imagePropTypes;
-StarShirt.defaultProps = imageDefaultProps;
+Ava.propTypes = {
+  version: PropTypes.string
+};
+
+Ava.defaultProps = {
+  version: 'variety'
+};
+
+Business.propTypes = {
+  className: PropTypes.string,
+  version: PropTypes.string.isRequired // eslint-disable-line
+};
+
+Business.defaultProps = {
+  className: ''
+};
+
+Destiny.propTypes = {
+  className: PropTypes.string,
+  version: PropTypes.string.isRequired // eslint-disable-line
+};
+
+Destiny.defaultProps = {
+  className: ''
+};
+
+Lyse.propTypes = {
+  className: PropTypes.string,
+  version: PropTypes.string.isRequired // eslint-disable-line
+};
+
+Lyse.defaultProps = {
+  className: ''
+};
+
+StarShirt.propTypes = {
+  className: PropTypes.string,
+  version: PropTypes.string.isRequired // eslint-disable-line
+};
+
+StarShirt.defaultProps = {
+  className: ''
+};
 
 const Image = posed.img({
   exit: {

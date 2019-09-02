@@ -3,18 +3,15 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const propTypes = {
+const Indicator = ({ className }) => <Square className={className} />;
+
+Indicator.propTypes = {
   className: PropTypes.string
 };
 
-const defaultProps = {
+Indicator.defaultProps = {
   className: ''
 };
-
-const Indicator = ({ className }) => <Square className={className} />;
-
-Indicator.propTypes = propTypes;
-Indicator.defaultProps = defaultProps;
 
 const Square = styled.div`
   width: 24px;
