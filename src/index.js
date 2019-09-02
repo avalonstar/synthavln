@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser';
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Root from 'scenes/Root';
@@ -14,10 +14,10 @@ Sentry.init({
 
 const render = () => {
   ReactDOM.render(
-    <Fragment>
+    <>
       <BaseStyles />
       <Root />
-    </Fragment>,
+    </>,
     document.getElementById('root')
   );
 };

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { Logo, Notifier, Queue, Summaries, Ticker, Train } from 'components';
@@ -10,22 +10,22 @@ import { Frame } from 'styles';
 function TickerArea({ isVisible }) {
   const { events } = useContext(Events.Context);
   return (
-    <Fragment>
+    <>
       <StyledLogo isVisible={isVisible} />
       <StyledSummaries isVisible={isVisible} />
       <StyledTicker events={events} isVisible={isVisible} />
-    </Fragment>
+    </>
   );
 }
 
 function NotificationsArea() {
   const [notifications] = useContext(Notifications.Context);
   return (
-    <Fragment>
+    <>
       <StyledNotifier notifications={notifications} />
       <StyledQueue notifications={notifications} />
       <StyledTrain notifications={notifications} />
-    </Fragment>
+    </>
   );
 }
 
@@ -39,7 +39,7 @@ function Layout() {
 }
 
 function Structure({ children }) {
-  return <Fragment>{children}</Fragment>;
+  return <>{children}</>;
 }
 
 function Scene() {

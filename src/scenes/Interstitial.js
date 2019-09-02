@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { Logo, Summaries, Ticker } from 'components';
@@ -11,11 +11,11 @@ import { Frame } from 'styles';
 function TickerArea({ isVisible }) {
   const { events } = useContext(Events.Context);
   return (
-    <Fragment>
+    <>
       <StyledLogo isVisible={isVisible} />
       <StyledSummaries isVisible={isVisible} />
       <StyledTicker events={events} isVisible={isVisible} />
-    </Fragment>
+    </>
   );
 }
 
@@ -39,7 +39,7 @@ function Layout(props) {
 }
 
 function Structure({ children }) {
-  return <Fragment>{children}</Fragment>;
+  return <>{children}</>;
 }
 
 function Scene(props) {
