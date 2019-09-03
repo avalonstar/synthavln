@@ -8,6 +8,7 @@
     "constate": "^1.2.0",
     "date-fns": "2.0.1",
     "firebase": "^6.5.0",
+    "framer-motion": "^1.6.7",
     "lodash": "^4.17.15",
     "lottie-web": "^5.5.7",
     "numeral": "^2.0.6",
