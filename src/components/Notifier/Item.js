@@ -1,5 +1,3 @@
-import { captureException } from '@sentry/browser';
-
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
@@ -53,7 +51,7 @@ function Item({ className, notification, soundOnly }) {
   }, [notification]);
 
   function handleError(error) {
-    captureException(error);
+    console.error('onError', error); // eslint-disable-line
   }
 
   function handleFinishedPlaying() {

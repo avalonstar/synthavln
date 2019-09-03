@@ -9,7 +9,17 @@ import BaseStyles from 'styles/foundation';
 import * as serviceWorker from './serviceWorker';
 
 Sentry.init({
-  dsn: 'https://9cd75d9eb6cb4698aa5cdc62e90bcba2@sentry.io/1509428'
+  dsn: 'https://9cd75d9eb6cb4698aa5cdc62e90bcba2@sentry.io/1509428',
+  beforeSend(event, hint) {
+    const processedEvent = { ...event };
+    const { message } = hint.originalException;
+
+    if (message) {
+      processedEvent.message = message.message;
+    }
+
+    return processedEvent;
+  }
 });
 
 const render = () => {
