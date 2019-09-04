@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import posed from 'react-pose';
-import { easing } from 'popmotion';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
@@ -112,8 +111,7 @@ const Image = posed.img({
   },
   enter: {
     x: 0,
-    opacity: 1,
-    transition: { easing: easing.anticipate }
+    opacity: 1
   }
 });
 
