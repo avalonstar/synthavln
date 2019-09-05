@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { animated } from 'react-spring';
+import { motion } from 'framer-motion';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -60,7 +60,8 @@ Item.propTypes = {
   data: PropTypes.shape({
     event: PropTypes.string.isRequired,
     recipientDisplayName: PropTypes.string,
-    displayName: PropTypes.string
+    displayName: PropTypes.string,
+    name: PropTypes.string
   }).isRequired,
   style: PropTypes.shape({})
 };
@@ -70,7 +71,7 @@ Item.defaultProps = {
   style: {}
 };
 
-const Wrapper = styled(animated.li)`
+const Wrapper = styled(motion.li)`
   padding: 6px 24px 8px 62px;
 
   box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.12)};

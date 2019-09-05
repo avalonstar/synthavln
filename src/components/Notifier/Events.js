@@ -181,10 +181,7 @@ const Wrapper = styled.div`
   min-width: calc(${props => props.theme.frame.width} * 0.15);
 
   background: ${props => props.theme.colors.white};
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-radius: 6px;
   box-shadow: ${props => props.theme.shadows[1]};
   font-family: ${props => props.theme.fonts.freight};
 `;
