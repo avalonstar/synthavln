@@ -62,6 +62,7 @@ function Train({ className, notifications }) {
       className={className}
       animate={isVisible ? 'show' : 'hide'}
       variants={variants}
+      transition={{ duration: 1, ease: [0.23, 1, 0.32, 1], type: 'tween' }}
     >
       <Widget>
         <TrainIcon />
