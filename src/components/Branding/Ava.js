@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import posed from 'react-pose';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
@@ -104,16 +103,7 @@ StarShirt.defaultProps = {
   className: ''
 };
 
-const Image = posed.img({
-  exit: {
-    x: 20,
-    opacity: 0
-  },
-  enter: {
-    x: 0,
-    opacity: 1
-  }
-});
+const Image = styled.img``;
 
 const StyledBusiness = styled(Business)`
   position: absolute;
