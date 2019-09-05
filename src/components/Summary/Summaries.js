@@ -1,26 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSpring, animated } from 'react-spring';
 
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import Daily from './Daily';
 import Total from './Total';
 
 function Summaries({ className, isVisible }) {
-  const props = useSpring({
-    delay: 400,
-    from: { opacity: 0, transform: 'translate3d(0, -100%, 0)' },
-    to: {
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(0, -100%, 0)'
-    }
-  });
   return (
-    <Wrapper className={className} style={props}>
-      <Total />
-      <Daily />
-    </Wrapper>
+    isVisible && (
+      <Wrapper
+        className={className}
+        initial={{ opacity: 0, y: '-100%' }}
+        animate={{ opacity: 1, y: '0%' }}
+      >
+        <Total />
+        <Daily />
+      </Wrapper>
+    )
   );
 }
 
@@ -33,7 +31,7 @@ Summaries.defaultProps = {
   isVisible: false
 };
 
-const Wrapper = styled(animated.div)`
+const Wrapper = styled(motion.div)`
   display: flex;
 `;
 

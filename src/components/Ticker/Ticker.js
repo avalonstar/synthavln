@@ -1,24 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTransition } from 'react-spring';
+import { motion } from 'framer-motion';
 
 import styled from 'styled-components';
 
 import Item from './Item';
 
 function Ticker({ events, className }) {
-  const transitions = useTransition(events, event => event.id, {
-    trail: 1000 / events.length,
-    from: { opacity: 0, transform: 'translate3d(0, -100%, 0)' },
-    enter: [{ opacity: 1, transform: 'translate3d(0, 0, 0)' }],
-    leave: [{ opacity: 0, transform: 'translate3d(0, -100%, 0)' }]
-  });
-
   return (
     events && (
       <Wrapper className={className}>
-        {transitions.map(({ item, props: { ...rest }, key }) => (
-          <Item style={rest} key={key} data={item} />
+        {events.map(event => (
+          <Item key={event.timestamp} data={event} />
         ))}
       </Wrapper>
     )
@@ -35,7 +28,7 @@ Ticker.defaultProps = {
   isVisible: false
 };
 
-const Wrapper = styled.ol`
+const Wrapper = styled(motion.ol)`
   position: relative;
   display: flex;
   align-items: center;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { config, useSpring, animated } from 'react-spring';
 
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import Logotype from './Logotype';
@@ -9,17 +9,9 @@ import Logotype from './Logotype';
 import logo from './assets/logo.png';
 
 function Logo({ className, isVisible }) {
-  const props = useSpring({
-    config: config.stiff,
-    delay: 600,
-    from: { transform: 'translate3d(-200%, 0, 0)' },
-    to: {
-      transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-200%, 0, 0)'
-    }
-  });
   return (
     <Wrapper className={className}>
-      <Avocado src={logo} style={props} />
+      <Avocado src={logo} />
       <Logotype />
     </Wrapper>
   );
@@ -44,7 +36,7 @@ const Wrapper = styled.div`
   font-family: ${props => props.theme.fonts.gotham};
 `;
 
-const Avocado = styled(animated.img)`
+const Avocado = styled(motion.img)`
   margin-right: 6px;
   width: 28px;
   height: 28px;

@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { animated, config, useSpring, useTransition } from 'react-spring';
 
+import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Queue';
+
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-import { ChevronDown } from 'react-feather';
-
-import Item from './Item';
+import { ChevronsUp } from 'react-feather';
 
 function Queue({ className, notifications }) {
   const [isVisible, setIsVisible] = useState(false);
-  const visibility = useSpring({
-    config: config.stiff,
-    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-600%, 0, 0)'
-  });
 
-  const transitions = useTransition(
-    notifications.slice(1),
-    notification => notification.id,
-    {
-      trail: 1000 / notifications.length,
-      from: { opacity: 0, transform: 'translate3d(0, 100%, 0)' },
-      enter: [{ opacity: 1, transform: 'translate3d(0, 0, 0)' }],
-      leave: [{ opacity: 0, transform: 'translate3d(0, 100%, 0)' }]
-    }
-  );
+  const getType = () => ({
+    cheer: <Bits />,
+    follow: <Follow />,
+    mysterygift: <Gift />,
+    subscription: <Sub />,
+    subgift: <Gift />,
+    raid: <Raid />,
+    resub: <Sub />,
+    tip: <Tip />
+  });
 
   useEffect(() => {
     let timer;
@@ -37,17 +33,34 @@ function Queue({ className, notifications }) {
   }, [notifications]);
 
   return (
-    <Wrapper className={className} style={visibility}>
-      <Count>
-        <ChevronDown color="#b4cbd6" size={24} />
-        next:
-      </Count>
-      <Items>
-        {transitions.map(({ item, props: { ...rest }, key }) => (
-          <Item style={rest} key={key} data={item} />
-        ))}
-      </Items>
-    </Wrapper>
+    <AnimatePresence>
+      {isVisible && (
+        <Wrapper
+          className={className}
+          initial={{ opacity: 0, scale: 1.1, x: '15%' }}
+          animate={{ opacity: 1, scale: 1.0, x: '0%' }}
+          exit={{ opacity: 0, x: '-15%' }}
+        >
+          <Count>
+            <ChevronsUp color="#b4cbd6" size={24} />
+            next:
+          </Count>
+          <Items>
+            {notifications.slice(1).map(({ timestamp, event }) => (
+              <motion.li
+                positionTransition
+                key={timestamp}
+                initial={{ opacity: 0, scale: 1.1, x: '15%' }}
+                animate={{ opacity: 1, scale: 1.0, x: '0%' }}
+                exit={{ opacity: 0, x: '-15%' }}
+              >
+                <Icon>{getType()[event]}</Icon>
+              </motion.li>
+            ))}
+          </Items>
+        </Wrapper>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -60,7 +73,7 @@ Queue.defaultProps = {
   className: ''
 };
 
-const Wrapper = styled(animated.div)`
+const Wrapper = styled(motion.div)`
   position: relative;
   display: inline-grid;
   grid-template-columns: auto auto;
@@ -100,6 +113,10 @@ const Count = styled.div`
     top: 1px;
     padding-right: 14px;
   }
+`;
+
+const Icon = styled.div`
+  padding: 0px 6px;
 `;
 
 export default Queue;

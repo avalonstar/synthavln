@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-import posed from 'react-pose';
 import isEmpty from 'lodash/isEmpty';
 
 import { Notifications } from 'providers';
 
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
 import {
@@ -35,7 +35,6 @@ const getType = data => ({
 
 function Item({ className, notification, soundOnly }) {
   const [notifications, dispatch] = useContext(Notifications.Context); // eslint-disable-line
-  const [isVisible, setIsVisible] = useState(false);
   const [playStatus, setPlayStatus] = useState(false);
   const [volume, setVolume] = useState(0.2);
 
@@ -46,7 +45,6 @@ function Item({ className, notification, soundOnly }) {
   }, [soundOnly]);
 
   useEffect(() => {
-    setIsVisible(true);
     setTimeout(() => setPlayStatus(true), 600);
   }, [notification]);
 
@@ -56,28 +54,36 @@ function Item({ className, notification, soundOnly }) {
 
   function handleFinishedPlaying() {
     setPlayStatus(false);
-    setIsVisible(false);
     return setTimeout(() => dispatch({ type: 'delete' }), 500);
   }
 
   const baseURL = 'http://synthform.s3.amazonaws.com/audio/avalonstar/';
 
-  return isEmpty(notification) ? null : (
-    <Wrapper
-      className={className}
-      initialPose="hide"
-      pose={isVisible ? 'show' : 'hide'}
-    >
-      {!soundOnly && getType(notification)[notification.event]}
-      <ReactPlayer
-        url={`${baseURL}${getSongFile(notification)}.ogg`}
-        playing={playStatus}
-        onEnded={handleFinishedPlaying}
-        onError={handleError}
-        volume={volume}
-        config={{ file: { forceAudio: true } }}
-      />
-    </Wrapper>
+  return (
+    <AnimatePresence>
+      {!isEmpty(notification) && (
+        <Wrapper
+          className={className}
+          initial={{ y: '-105%' }}
+          animate={{ y: '0' }}
+          exit={{ opacity: 0, scale: 1.1 }}
+          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1], type: 'tween' }}
+        >
+          {!soundOnly && getType(notification)[notification.event]}
+          <ReactPlayer
+            url={`${baseURL}${getSongFile(notification)}.ogg`}
+            playing={playStatus}
+            onEnded={handleFinishedPlaying}
+            onError={handleError}
+            volume={volume}
+            config={{ file: { forceAudio: true } }}
+            width="0%"
+            height="0%"
+          />
+        </Wrapper>
+      )}
+      ;
+    </AnimatePresence>
   );
 }
 
@@ -94,12 +100,7 @@ Item.defaultProps = {
   soundOnly: false
 };
 
-const wrapperProps = {
-  hide: { y: '-150%' },
-  show: { y: '0%', transition: { ease: 'anticipate', duration: 1000 } }
-};
-
-const Wrapper = styled(posed.div(wrapperProps))`
+const Wrapper = styled(motion.div)`
   z-index: 2000;
   align-items: end;
 `;

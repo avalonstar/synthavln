@@ -1,19 +1,20 @@
 import { addSeconds, format } from 'date-fns';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { animated, config, useSpring } from 'react-spring';
 
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import { Train as TrainIcon } from 'components/Icons/Queue';
 
+const variants = {
+  show: { x: 0 },
+  hide: { x: '-100%' }
+};
+
 function Train({ className, notifications }) {
   const lastSeenNotification = useRef();
   const [isVisible, setIsVisible] = useState(false);
-  const visibility = useSpring({
-    config,
-    transform: isVisible ? 'translate3d(0, 0, 0)' : 'translate3d(-200%, 0, 0)'
-  });
   const [count, setCount] = useState(0);
   const [timeleft, setTimeleft] = useState(0);
   const [timer, setTimer] = useState();
@@ -57,7 +58,12 @@ function Train({ className, notifications }) {
   }, [timeleft]);
 
   return (
-    <Wrapper className={className} style={visibility}>
+    <Wrapper
+      className={className}
+      animate={isVisible ? 'show' : 'hide'}
+      variants={variants}
+      transition={{ duration: 1, ease: [0.23, 1, 0.32, 1], type: 'tween' }}
+    >
       <Widget>
         <TrainIcon />
         <Count>{count}</Count>
@@ -76,7 +82,7 @@ Train.defaultProps = {
   className: ''
 };
 
-const Wrapper = styled(animated.div)`
+const Wrapper = styled(motion.div)`
   position: relative;
   display: inline-flex;
   height: 42px;
@@ -86,7 +92,7 @@ const Widget = styled.div`
   display: inline-grid;
   grid-template-columns: auto auto auto;
   align-items: center;
-  margin-left: 36px;
+  margin-left: 24px;
   padding: 0 12px;
 
   background-color: ${props => props.theme.colors.muted.dark};

@@ -19,7 +19,7 @@ function Debug({ className }) {
     event: 'resub',
     displayName: 'Avalonstar',
     subPlan: '1000',
-    cumulativeMonths: '54',
+    cumulativeMonths: Math.floor(Math.random() * Math.floor(54)),
     timestamp: Date.now()
   };
 
