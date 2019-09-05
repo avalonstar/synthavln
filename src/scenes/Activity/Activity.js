@@ -1,7 +1,15 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { Logo, Notifier, Queue, Summaries, Ticker, Train } from 'components';
+import {
+  Debug,
+  Logo,
+  Notifier,
+  Queue,
+  Summaries,
+  Ticker,
+  Train
+} from 'components';
 import { Events, Notifications } from 'providers';
 
 import styled from 'styled-components';
@@ -34,6 +42,7 @@ function Layout() {
     <StyledWrapper>
       <TickerArea isVisible />
       <NotificationsArea />
+      <Debug />
     </StyledWrapper>
   );
 }
