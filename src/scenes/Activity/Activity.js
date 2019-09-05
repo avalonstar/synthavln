@@ -42,7 +42,7 @@ function Layout() {
     <StyledWrapper>
       <TickerArea isVisible />
       <NotificationsArea />
-      <Debug />
+      <StyledDebug />
     </StyledWrapper>
   );
 }
@@ -106,6 +106,7 @@ const StyledNotifier = styled(Notifier)`
   grid-row: 1 / span 2;
   align-self: start;
   justify-self: center;
+  margin-top: 32px;
 `;
 
 const StyledQueue = styled(Queue)`
@@ -119,6 +120,11 @@ const StyledTrain = styled(Train)`
   grid-column: 1 / span 3;
   grid-row: 3 / span 2;
   align-self: start;
+`;
+
+const StyledDebug = styled(Debug)`
+  position: fixed;
+  bottom: 0;
 `;
 
 export default Scene;
