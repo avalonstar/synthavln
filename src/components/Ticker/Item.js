@@ -72,15 +72,17 @@ Item.defaultProps = {
 };
 
 const Wrapper = styled(motion.li)`
-  padding: 6px 24px 8px 62px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px 12px 24px;
 
-  box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.12)};
+  box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.15)};
   color: ${props => props.theme.colors.muted.lightbluegrey};
   will-change: width, transform, opacity;
 
   svg {
-    position: relative;
-    top: -1px;
+    transform: rotate(-30deg) scale(2);
+    opacity: 0.2;
   }
 `;
 
@@ -96,6 +98,7 @@ const Type = styled.div`
   font-size: 12px;
   font-weight: 500;
   text-transform: capitalize;
+  padding-left: 12px;
 `;
 
 const Icon = styled.div`

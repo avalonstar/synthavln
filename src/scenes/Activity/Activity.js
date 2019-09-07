@@ -75,9 +75,7 @@ const StyledWrapper = styled(Frame.Wrapper)`
   grid-template-columns: auto auto 1fr;
 
   box-shadow: ${props =>
-    `inset 0 60px 0 ${props.theme.colors.main.dark}, ${
-      props.theme.shadows[2]
-    }`};
+    `inset 0 160px 100px -100px ${props.theme.colors.muted.dark}`};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 `;
@@ -85,20 +83,18 @@ const StyledWrapper = styled(Frame.Wrapper)`
 const StyledLogo = styled(Logo)`
   grid-column: 1;
   grid-row: 1 / span 2;
-  padding-bottom: 12px;
   padding-left: 24px;
 `;
 
 const StyledSummaries = styled(Summaries)`
   grid-column: 2;
   grid-row: 1 / span 2;
-  padding-bottom: 12px;
 `;
 
 const StyledTicker = styled(Ticker)`
   grid-column: 3;
   grid-row: 1 / span 2;
-  padding-bottom: 12px;
+  align-self: center;
 `;
 
 const StyledNotifier = styled(Notifier)`

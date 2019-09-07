@@ -30,7 +30,6 @@ function Daily() {
       <Icon>
         <ButtonsPressed />
       </Icon>
-      <Title>Total</Title>
       <Stat>
         <Number>{size}</Number>
         {' Buttons Pressed'}
@@ -44,8 +43,9 @@ export default Daily;
 const Wrapper = styled.div`
   position: relative;
   padding: 15px 24px 16px 62px;
+  align-self: center;
 
-  background: ${props => props.theme.colors.muted.dark};
+  /* background: ${props => props.theme.colors.muted.dark}; */
   color: ${props => props.theme.colors.white};
   font-size: 16px;
   transition: all 250ms ${props => props.theme.easing};
@@ -67,11 +67,12 @@ const Title = styled.div`
 
 const Stat = styled.div`
   font-family: ${props => props.theme.fonts.adelle};
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
 `;
 
 const Number = styled.span`
   color: ${props => props.theme.colors.muted.yellow};
+  font-weight: 800;
 `;
