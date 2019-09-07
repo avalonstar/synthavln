@@ -58,12 +58,11 @@ function Train({ className, notifications }) {
   }, [timeleft]);
 
   return (
-    <Wrapper
-      className={className}
-      animate={isVisible ? 'show' : 'hide'}
-      variants={variants}
-      transition={{ duration: 1, ease: [0.23, 1, 0.32, 1], type: 'tween' }}
-    >
+    <Wrapper className={className}>
+      <Bar>
+        <Indicator style={{ width: `${(timeleft / 300) * 100}%` }} />
+        <Well />
+      </Bar>
       <Widget>
         <TrainIcon />
         <Count>{count}</Count>
@@ -84,8 +83,26 @@ Train.defaultProps = {
 
 const Wrapper = styled(motion.div)`
   position: relative;
-  display: inline-flex;
-  height: 42px;
+`;
+
+const Bar = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const Well = styled.div`
+  height: 6px;
+  background-color: ${props => props.theme.colors.main.dark};
+`;
+
+const Indicator = styled.div`
+  position: absolute;
+  top: 0;
+  height: 1px;
+  will-change: width;
+
+  background-color: ${props => props.theme.colors.main.avapurple};
+  transition: all 250ms ${props => props.theme.easing};
 `;
 
 const Widget = styled.div`

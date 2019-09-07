@@ -114,7 +114,7 @@ const StyledQueue = styled(Queue)`
 
 const StyledTrain = styled(Train)`
   grid-column: 1 / span 3;
-  grid-row: 3 / span 2;
+  grid-row: 1 / span 2;
   align-self: start;
 `;
 
