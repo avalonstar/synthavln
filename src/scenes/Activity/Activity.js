@@ -87,11 +87,13 @@ const StyledLogo = styled(Logo)`
 `;
 
 const StyledSummaries = styled(Summaries)`
+  display: none;
   grid-column: 2;
   grid-row: 1 / span 2;
 `;
 
 const StyledTicker = styled(Ticker)`
+  display: none;
   grid-column: 3;
   grid-row: 1 / span 2;
   align-self: center;

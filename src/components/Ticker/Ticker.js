@@ -38,9 +38,7 @@ const Wrapper = styled(motion.ol)`
 
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
-  background: ${props => props.theme.colors.muted.dark};
   list-style: none;
-  box-shadow: ${props => props.theme.shadows[2]};
 `;
 
 export default Ticker;
