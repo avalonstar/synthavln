@@ -1,38 +1,22 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Debug,
-  Logo,
-  Notifier,
-  Queue,
-  Summaries,
-  Ticker,
-  Train
-} from 'components';
+import { Debug, Hero, Notifier, Queue, Summaries, Ticker } from 'components';
 import { Events, Notifications } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-function TickerArea({ isVisible }) {
+function NotificationsArea({ isVisible }) {
   const { events } = useContext(Events.Context);
-  return (
-    <>
-      <StyledLogo isVisible={isVisible} />
-      <StyledSummaries isVisible={isVisible} />
-      <StyledTicker events={events} isVisible={isVisible} />
-    </>
-  );
-}
-
-function NotificationsArea() {
   const [notifications] = useContext(Notifications.Context);
   return (
     <>
+      <StyledHero notifications={notifications} />
+      <StyledSummaries isVisible={isVisible} />
+      <StyledTicker events={events} isVisible={isVisible} />
       <StyledNotifier notifications={notifications} />
       <StyledQueue notifications={notifications} />
-      <StyledTrain notifications={notifications} />
     </>
   );
 }
@@ -40,8 +24,7 @@ function NotificationsArea() {
 function Layout() {
   return (
     <StyledWrapper>
-      <TickerArea isVisible />
-      <NotificationsArea />
+      <NotificationsArea isVisible />
       <StyledDebug />
     </StyledWrapper>
   );
@@ -67,7 +50,7 @@ Structure.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-TickerArea.propTypes = {
+NotificationsArea.propTypes = {
   isVisible: PropTypes.bool.isRequired
 };
 
@@ -78,12 +61,6 @@ const StyledWrapper = styled(Frame.Wrapper)`
     `inset 0 160px 100px -100px ${props.theme.colors.muted.dark}`};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
-`;
-
-const StyledLogo = styled(Logo)`
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  padding-left: 24px;
 `;
 
 const StyledSummaries = styled(Summaries)`
@@ -114,7 +91,7 @@ const StyledQueue = styled(Queue)`
   justify-self: start;
 `;
 
-const StyledTrain = styled(Train)`
+const StyledHero = styled(Hero)`
   grid-column: 1 / span 3;
   grid-row: 1 / span 2;
   align-self: start;

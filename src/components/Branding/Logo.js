@@ -1,45 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
-import Logotype from './Logotype';
+const baseUrl =
+  'https://synthform.s3.us-east-1.amazonaws.com/images/avalonstar/';
 
-import logo from './assets/logo.png';
+const images = {
+  idle: 'avalonSTAR',
+  train: 'avalonFIESTA',
+  carousel: [
+    'avalonBLANK',
+    'avalonBLESS',
+    'avalonBLUSH',
+    'avalonCOZY',
+    'avalonHAPPY'
+  ]
+};
 
-function Logo({ className, isVisible }) {
+function Logo({ className, state }) {
+  const [image, setImage] = useState('avalonSTAR');
+
+  useEffect(() => {
+    if (state === 'train') {
+      setImage(images.train);
+    } else if (state === 'idle') {
+      setImage(images.idle);
+    }
+  }, [state]);
+
   return (
-    <Wrapper className={className}>
-      <Avocado src={logo} />
-      <Logotype />
-    </Wrapper>
+    <AnimatePresence exitBeforeEnter>
+      <Wrapper className={className}>
+        <Image
+          key={image}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -10 }}
+          src={`${baseUrl}${image}.png`}
+        />
+      </Wrapper>
+    </AnimatePresence>
   );
 }
 
 Logo.propTypes = {
   className: PropTypes.string.isRequired,
-  isVisible: PropTypes.bool
+  state: PropTypes.string
 };
 
 Logo.defaultProps = {
-  isVisible: false
+  state: 'idle'
 };
 
-const Wrapper = styled.div`
-  display: flex;
+const Wrapper = styled(motion.div)`
   align-items: center;
   position: relative;
-  padding-right: 24px;
-
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.gotham};
 `;
 
-const Avocado = styled(motion.img)`
+const Image = styled(motion.img)`
   margin-right: 6px;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   will-change: transform;
 `;
 

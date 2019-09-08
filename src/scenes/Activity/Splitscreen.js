@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { Logo, Notifier, Queue, Summaries, Ticker, Train } from 'components';
+import { Logo, Notifier, Queue, Summaries, Ticker } from 'components';
 import { Events, Notifications } from 'providers';
 
 import styled from 'styled-components';
@@ -24,7 +24,6 @@ function NotificationsArea() {
     <>
       <StyledNotifier notifications={notifications} />
       <StyledQueue notifications={notifications} />
-      <StyledTrain notifications={notifications} />
     </>
   );
 }
@@ -102,12 +101,6 @@ const StyledQueue = styled(Queue)`
   grid-row: 23 / span 2;
   align-self: end;
   justify-self: start;
-`;
-
-const StyledTrain = styled(Train)`
-  grid-column: 1 / span 3;
-  grid-row: 23 / span 2;
-  align-self: end;
 `;
 
 export default Scene;
