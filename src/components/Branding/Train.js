@@ -66,9 +66,12 @@ const Widget = styled.div`
 `;
 
 const Count = styled.div`
-  padding-left: 12px;
-  padding-right: 6px;
-  color: ${props => props.theme.colors.main.avayellow};
+  padding: 4px 10px;
+  margin: 0 10px 0 6px;
+
+  background-color: ${props => props.theme.colors.main.avayellow};
+  border-radius: 4px;
+  color: ${props => props.theme.colors.black};
   font-weight: 800;
 `;
 
