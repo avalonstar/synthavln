@@ -2,29 +2,23 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { Debug, Hero, Notifier, Queue, Summaries, Ticker } from 'components';
-import { Events, Notifications } from 'providers';
+import { Events, useNotificationContext, useTrainContext } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
-function NotificationsArea({ isVisible }) {
-  const { events } = useContext(Events.Context);
-  const [notifications] = useContext(Notifications.Context);
-  return (
-    <>
-      <StyledHero notifications={notifications} />
-      <StyledSummaries isVisible={isVisible} />
-      <StyledTicker events={events} isVisible={isVisible} />
-      <StyledNotifier notifications={notifications} />
-      <StyledQueue notifications={notifications} />
-    </>
-  );
-}
-
 function Layout() {
+  const [notifications] = useNotificationContext();
+  const { events } = useContext(Events.Context);
+  const { count, timer } = useTrainContext();
+
   return (
     <StyledWrapper>
-      <NotificationsArea isVisible />
+      <StyledHero notifications={notifications} count={count} timer={timer} />
+      <StyledSummaries isVisible />
+      <StyledTicker events={events} isVisible />
+      <StyledNotifier notifications={notifications} />
+      <StyledQueue notifications={notifications} />
       <StyledDebug />
     </StyledWrapper>
   );
@@ -36,22 +30,20 @@ function Structure({ children }) {
 
 function Scene() {
   return (
-    <Notifications.Provider>
+    <useNotificationContext.Provider>
       <Events.Provider>
-        <Structure>
-          <Layout />
-        </Structure>
+        <useTrainContext.Provider>
+          <Structure>
+            <Layout />
+          </Structure>
+        </useTrainContext.Provider>
       </Events.Provider>
-    </Notifications.Provider>
+    </useNotificationContext.Provider>
   );
 }
 
 Structure.propTypes = {
   children: PropTypes.node.isRequired
-};
-
-NotificationsArea.propTypes = {
-  isVisible: PropTypes.bool.isRequired
 };
 
 const StyledWrapper = styled(Frame.Wrapper)`

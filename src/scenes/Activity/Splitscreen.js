@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { Logo, Notifier, Queue, Summaries, Ticker } from 'components';
-import { Events, Notifications } from 'providers';
+import { Events, useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
@@ -19,7 +19,7 @@ function TickerArea({ isVisible }) {
 }
 
 function NotificationsArea() {
-  const [notifications] = useContext(Notifications.Context);
+  const [notifications] = useNotificationContext();
   return (
     <>
       <StyledNotifier notifications={notifications} />
@@ -43,13 +43,13 @@ function Structure({ children }) {
 
 function Scene() {
   return (
-    <Notifications.Provider>
+    <useNotificationContext.Provider>
       <Events.Provider>
         <Structure>
           <Layout />
         </Structure>
       </Events.Provider>
-    </Notifications.Provider>
+    </useNotificationContext.Provider>
   );
 }
 

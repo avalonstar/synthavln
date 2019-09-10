@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Notifications } from 'providers';
+import { useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
 
 function Debug({ className }) {
-  const [notifications, dispatch] = useContext(Notifications.Context); // eslint-disable-line
+  const [, dispatch] = useNotificationContext();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

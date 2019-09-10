@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { Logo, Summaries, Ticker } from 'components';
-import { Events, Notifications } from 'providers';
+import { Events, useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -44,13 +44,13 @@ function Structure({ children }) {
 
 function Scene(props) {
   return (
-    <Notifications.Provider>
+    <useNotificationContext.Provider>
       <Events.Provider>
         <Structure>
           <Layout {...props} />
         </Structure>
       </Events.Provider>
-    </Notifications.Provider>
+    </useNotificationContext.Provider>
   );
 }
 

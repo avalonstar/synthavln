@@ -1,3 +1,4 @@
 export { default as Events } from './Events';
-export { default as Notifications } from './Notifications';
+export { default as useNotificationContext } from './Notifications';
+export { default as useTrainContext } from './Train';
 export { default as UI } from './UI';

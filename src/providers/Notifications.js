@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import createContainer from 'constate';
+import createUseContext from 'constate';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +12,6 @@ const reducer = (state, action) => {
   }
 };
 
-const NotificationContainer = createContainer(() => useReducer(reducer, []));
+const useNotificationContext = createUseContext(() => useReducer(reducer, []));
 
-export default NotificationContainer;
+export default useNotificationContext;

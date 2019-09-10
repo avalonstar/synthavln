@@ -1,12 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import createContainer from 'constate';
+import createUseContext from 'constate';
 
 import firestore from 'firestore';
-import { Notifications } from 'providers';
+
+import useNotificationContext from './Notifications';
 
 function useEvents() {
-  const [notifications, dispatch] = useContext(Notifications.Context);
+  const [, dispatch] = useNotificationContext();
   const [events, setEvents] = useState([]);
   const [snapshot, setSnapshot] = useState(null);
   const [value, loading] = useCollection(
@@ -37,13 +38,9 @@ function useEvents() {
     }
   });
 
-  useEffect(() => {
-    console.log('notifications', notifications);
-  }, [notifications]);
-
   return { events };
 }
 
-const EventsContainer = createContainer(useEvents);
+const useEventContext = createUseContext(useEvents);
 
-export default EventsContainer;
+export default useEventContext;

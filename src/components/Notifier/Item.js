@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import isEmpty from 'lodash/isEmpty';
 
-import { Notifications } from 'providers';
+import { useNotificationContext } from 'providers';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
@@ -34,7 +34,7 @@ const getType = data => ({
 });
 
 function Item({ className, notification, soundOnly }) {
-  const [notifications, dispatch] = useContext(Notifications.Context); // eslint-disable-line
+  const [, dispatch] = useNotificationContext();
   const [playStatus, setPlayStatus] = useState(false);
   const [volume, setVolume] = useState(0.2);
 
