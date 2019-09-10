@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Debug, Hero, Notifier, Queue, Summaries, Ticker } from 'components';
+import { Debug, Header, Notifier, Queue, Summaries, Ticker } from 'components';
 import { useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ function Layout() {
 
   return (
     <StyledWrapper>
-      <StyledHero notifications={notifications} />
+      <StyledHeader notifications={notifications} />
       <StyledSummaries isVisible />
       <StyledTicker isVisible />
       <StyledNotifier notifications={notifications} />
@@ -75,7 +75,7 @@ const StyledQueue = styled(Queue)`
   justify-self: start;
 `;
 
-const StyledHero = styled(Hero)`
+const StyledHeader = styled(Header)`
   grid-column: 1 / span 3;
   grid-row: 1 / span 2;
   align-self: start;
