@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useTrainContext } from 'providers';
+
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-function Timer({ className, timeLeft }) {
+function Timer({ className }) {
+  const { timer } = useTrainContext();
   return (
     <Wrapper className={className}>
       <Bar>
-        <Indicator style={{ width: `${(timeLeft / 300) * 100}%` }} />
+        <Indicator style={{ width: `${(timer / 300) * 100}%` }} />
         <Well />
       </Bar>
     </Wrapper>
