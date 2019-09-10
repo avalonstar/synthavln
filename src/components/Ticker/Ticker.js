@@ -1,12 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+
+import { useEventContext } from 'providers';
 
 import styled from 'styled-components';
 
 import Item from './Item';
 
-function Ticker({ events, className }) {
+function Ticker({ className }) {
+  const { events } = useEventContext();
+
   return (
     events && (
       <Wrapper className={className}>
@@ -17,16 +20,6 @@ function Ticker({ events, className }) {
     )
   );
 }
-
-Ticker.propTypes = {
-  events: PropTypes.arrayOf(PropTypes.object),
-  isVisible: PropTypes.bool
-};
-
-Ticker.defaultProps = {
-  events: [],
-  isVisible: false
-};
 
 const Wrapper = styled(motion.ol)`
   position: relative;

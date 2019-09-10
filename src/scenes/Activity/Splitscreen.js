@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Logo, Notifier, Queue, Summaries, Ticker } from 'components';
-import { Events, useNotificationContext } from 'providers';
+import { useEventContext, useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
 function TickerArea({ isVisible }) {
-  const { events } = useContext(Events.Context);
+  const { events } = useEventContext();
   return (
     <>
       <StyledLogo isVisible={isVisible} />
@@ -44,11 +44,11 @@ function Structure({ children }) {
 function Scene() {
   return (
     <useNotificationContext.Provider>
-      <Events.Provider>
+      <useEventContext.Provider>
         <Structure>
           <Layout />
         </Structure>
-      </Events.Provider>
+      </useEventContext.Provider>
     </useNotificationContext.Provider>
   );
 }

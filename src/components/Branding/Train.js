@@ -2,25 +2,24 @@ import { addSeconds, format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useTrainContext } from 'providers';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
-function Train({ className, count, timeLeft, state }) {
+function Train({ className }) {
+  const { isTrainActive, count, timer } = useTrainContext();
   const [isVisible, setIsVisible] = useState(false);
-  const [timer, setTimer] = useState();
+  const [clock, setClock] = useState();
 
   useEffect(() => {
-    if (state === 'train') {
-      setIsVisible(true);
-    } else if (state === 'idle') {
-      setIsVisible(false);
-    }
-  }, [state]);
+    setIsVisible(isTrainActive);
+  }, [isTrainActive]);
 
   useEffect(() => {
-    const helper = addSeconds(new Date(0), timeLeft);
-    setTimer(format(helper, 'mm:ss'));
-  }, [timeLeft]);
+    const helper = addSeconds(new Date(0), timer);
+    setClock(format(helper, 'mm:ss'));
+  }, [timer]);
 
   return (
     <AnimatePresence>
@@ -33,7 +32,7 @@ function Train({ className, count, timeLeft, state }) {
         >
           <Widget>
             <Count>{count}</Count>
-            <Timer>{timer}</Timer>
+            <Timer>{clock}</Timer>
           </Widget>
         </Wrapper>
       )}{' '}
@@ -42,15 +41,11 @@ function Train({ className, count, timeLeft, state }) {
 }
 
 Train.propTypes = {
-  className: PropTypes.string,
-  count: PropTypes.number.isRequired,
-  timeLeft: PropTypes.number.isRequired,
-  state: PropTypes.string
+  className: PropTypes.string
 };
 
 Train.defaultProps = {
-  className: '',
-  state: 'idle'
+  className: ''
 };
 
 const Wrapper = styled(motion.div)`
@@ -62,7 +57,10 @@ const Widget = styled.div`
   grid-template-columns: auto auto auto;
   align-items: center;
 
-  font-family: ${props => props.theme.fonts.adelle};
+  font-family: ${props => props.theme.fonts.freight};
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum';
 `;
 
 const Count = styled.div`
@@ -72,7 +70,6 @@ const Count = styled.div`
   background-color: ${props => props.theme.colors.main.avayellow};
   border-radius: 4px;
   color: ${props => props.theme.colors.black};
-  font-weight: 800;
 `;
 
 const Timer = styled.div`

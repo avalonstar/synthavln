@@ -16,8 +16,7 @@ function Timer({ className, timeLeft }) {
 }
 
 Timer.propTypes = {
-  className: PropTypes.string,
-  timeLeft: PropTypes.number.isRequired
+  className: PropTypes.string
 };
 
 Timer.defaultProps = {

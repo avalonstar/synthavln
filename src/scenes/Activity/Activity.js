@@ -1,22 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Debug, Hero, Notifier, Queue, Summaries, Ticker } from 'components';
-import { Events, useNotificationContext, useTrainContext } from 'providers';
+import { useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
 function Layout() {
   const [notifications] = useNotificationContext();
-  const { events } = useContext(Events.Context);
-  const { count, timer } = useTrainContext();
 
   return (
     <StyledWrapper>
-      <StyledHero notifications={notifications} count={count} timer={timer} />
+      <StyledHero notifications={notifications} />
       <StyledSummaries isVisible />
-      <StyledTicker events={events} isVisible />
+      <StyledTicker isVisible />
       <StyledNotifier notifications={notifications} />
       <StyledQueue notifications={notifications} />
       <StyledDebug />
@@ -30,15 +28,9 @@ function Structure({ children }) {
 
 function Scene() {
   return (
-    <useNotificationContext.Provider>
-      <Events.Provider>
-        <useTrainContext.Provider>
-          <Structure>
-            <Layout />
-          </Structure>
-        </useTrainContext.Provider>
-      </Events.Provider>
-    </useNotificationContext.Provider>
+    <Structure>
+      <Layout />
+    </Structure>
   );
 }
 

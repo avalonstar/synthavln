@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -8,62 +8,19 @@ import Logotype from './Logotype';
 import Timer from './Timer';
 import Train from './Train';
 
-function Hero({ className, notifications }) {
-  const lastSeenNotification = useRef();
-  const [state, setState] = useState('idle');
-  const [count, setCount] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const [timer, setTimer] = useState();
-
-  useEffect(() => {
-    const last = notifications[notifications.length - 1];
-    if (
-      last &&
-      (last.bucket === 'subscription' || last.event === 'mysterygift') &&
-      (!lastSeenNotification.current ||
-        last.id !== lastSeenNotification.current)
-    ) {
-      const amount = parseInt(last.amount, 10) || 1;
-      lastSeenNotification.current = last.id;
-      setTimeLeft(300);
-      setCount(c => c + amount);
-    }
-  }, [notifications]);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (timeLeft > 0) {
-        setTimeLeft(t => t - 1);
-      }
-    }, 1000);
-    return () => clearInterval(id);
-  }, [timeLeft]);
-
-  useEffect(() => {
-    if (timeLeft <= 0) {
-      setCount(0);
-      setState('idle');
-      setIsVisible(false);
-    } else if (timeLeft >= 0 && !isVisible) {
-      setIsVisible(true);
-      setState('train');
-    }
-  }, [timeLeft, isVisible]);
-
+function Hero({ className }) {
   return (
     <Wrapper className={className}>
-      <StyledTimer timeLeft={timeLeft} />
-      <StyledLogo state={state} />
-      <StyledTrain count={count} timeLeft={timeLeft} state={state} />
-      <StyledLogotype state={state} />
+      <StyledTimer />
+      <StyledLogo />
+      <StyledTrain />
+      <StyledLogotype />
     </Wrapper>
   );
 }
 
 Hero.propTypes = {
-  className: PropTypes.string,
-  notifications: PropTypes.arrayOf(PropTypes.object).isRequired
+  className: PropTypes.string
 };
 
 Hero.defaultProps = {

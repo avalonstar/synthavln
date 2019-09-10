@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useTrainContext } from 'providers';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
-function Logotype({ className, state }) {
+function Logotype({ className }) {
+  const { isTrainActive } = useTrainContext();
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (state === 'train') {
-      setIsVisible(false);
-    } else if (state === 'idle') {
-      setIsVisible(true);
-    }
-  }, [state]);
+    setIsVisible(!isTrainActive);
+  }, [isTrainActive]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -39,13 +38,11 @@ function Logotype({ className, state }) {
 }
 
 Logotype.propTypes = {
-  className: PropTypes.string,
-  state: PropTypes.string
+  className: PropTypes.string
 };
 
 Logotype.defaultProps = {
-  className: '',
-  state: 'idle'
+  className: ''
 };
 
 const SVG = styled.svg`

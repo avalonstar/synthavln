@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useTrainContext } from 'providers';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -19,16 +21,17 @@ const images = {
   ]
 };
 
-function Logo({ className, state }) {
+function Logo({ className }) {
+  const { isTrainActive } = useTrainContext();
   const [image, setImage] = useState('avalonSTAR');
 
   useEffect(() => {
-    if (state === 'train') {
+    if (isTrainActive) {
       setImage(images.train);
-    } else if (state === 'idle') {
+    } else {
       setImage(images.idle);
     }
-  }, [state]);
+  }, [isTrainActive]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -46,12 +49,7 @@ function Logo({ className, state }) {
 }
 
 Logo.propTypes = {
-  className: PropTypes.string.isRequired,
-  state: PropTypes.string
-};
-
-Logo.defaultProps = {
-  state: 'idle'
+  className: PropTypes.string.isRequired
 };
 
 const Wrapper = styled(motion.div)`
