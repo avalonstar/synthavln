@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 import { useEventContext } from 'providers';
 
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import Item from './Item';

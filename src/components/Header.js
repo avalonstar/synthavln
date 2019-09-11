@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { Logo, Logotype } from './Branding';
 import { Timer, Train } from './Train';
-import { Pool } from './Pool';
+import Pool from './Pool';
 
 function Hero({ className }) {
   return (

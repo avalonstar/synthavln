@@ -31,8 +31,8 @@ function Train({ className }) {
           exit={{ opacity: 0 }}
         >
           <Widget>
-            <Count>{count}</Count>
             <Timer>{clock}</Timer>
+            <Count>{count}</Count>
           </Widget>
         </Wrapper>
       )}{' '}
@@ -65,7 +65,6 @@ const Widget = styled.div`
 
 const Count = styled.div`
   padding: 4px 10px;
-  margin: 0 10px 0 6px;
 
   background-color: ${props => props.theme.colors.main.avayellow};
   border-radius: 4px;
@@ -73,6 +72,7 @@ const Count = styled.div`
 `;
 
 const Timer = styled.div`
+  margin: 0 10px 0 6px;
   color: ${props => props.theme.colors.white};
 `;
 
