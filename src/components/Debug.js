@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { useNotificationContext } from 'providers';
+import { useNotificationContext, usePoolContext } from 'providers';
 
 import styled from 'styled-components';
 
 function Debug({ className }) {
-  const [, dispatch] = useNotificationContext();
+  const [, dispatchToNotifications] = useNotificationContext();
+  const [, dispatchToPool] = usePoolContext();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -28,7 +29,10 @@ function Debug({ className }) {
       <Wrapper className={className}>
         <Button
           type="button"
-          onClick={() => dispatch({ type: 'add', event: testEvent })}
+          onClick={() => {
+            dispatchToNotifications({ type: 'add', event: testEvent });
+            dispatchToPool({ type: 'add', event: testEvent });
+          }}
         >
           Test Notification
         </Button>
