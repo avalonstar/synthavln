@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import createUseContext from 'constate';
 
 import useNotificationContext from './Notifications';
+import usePoolContext from './Pool';
 
 function useTrain() {
   const [notifications] = useNotificationContext();
+  const [, dispatchToPool] = usePoolContext();
   const lastSeenNotification = useRef();
   const [isActive, setIsActive] = useState(false);
   const [count, setCount] = useState(0);
@@ -42,10 +44,11 @@ function useTrain() {
     if (timer <= 0) {
       setCount(0);
       setIsActive(false);
+      dispatchToPool({ type: 'empty' });
     } else if (timer > 0) {
       setIsActive(true);
     }
-  }, [timer]);
+  }, [dispatchToPool, timer]);
 
   return { isTrainActive: isActive, count, timer };
 }

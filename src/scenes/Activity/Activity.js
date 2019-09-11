@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Debug, Header, Notifier, Queue, Summaries, Ticker } from 'components';
+import {
+  Debug,
+  Header,
+  Notifier,
+  Pool,
+  Queue,
+  Summaries,
+  Ticker
+} from 'components';
 import { useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
@@ -12,6 +20,7 @@ function Layout() {
 
   return (
     <StyledWrapper>
+      <Pool />
       <StyledHeader notifications={notifications} />
       <StyledSummaries isVisible />
       <StyledTicker isVisible />

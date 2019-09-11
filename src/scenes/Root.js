@@ -8,6 +8,7 @@ import {
   UI,
   useEventContext,
   useNotificationContext,
+  usePoolContext,
   useTrainContext
 } from 'providers';
 import { Activity, Ava, Camera, Sounds, Splitscreen } from 'scenes/Activity';
@@ -20,9 +21,11 @@ const history = createBrowserHistory();
 const Contexts = () => (
   <useNotificationContext.Provider>
     <useEventContext.Provider>
-      <useTrainContext.Provider>
-        <Main />
-      </useTrainContext.Provider>
+      <usePoolContext.Provider>
+        <useTrainContext.Provider>
+          <Main />
+        </useTrainContext.Provider>
+      </usePoolContext.Provider>
     </useEventContext.Provider>
   </useNotificationContext.Provider>
 );

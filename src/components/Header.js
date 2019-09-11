@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-import Logo from './Logo';
-import Logotype from './Logotype';
-import Timer from './Timer';
-import Train from './Train';
+import Logo from './Branding/Logo';
+import Logotype from './Branding/Logotype';
+import Timer from './Branding/Timer';
+import Train from './Branding/Train';
 
 function Hero({ className }) {
   return (
