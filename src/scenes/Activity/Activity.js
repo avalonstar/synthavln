@@ -1,22 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Debug, Header, Notifier, Queue, Summaries, Ticker } from 'components';
-import { useNotificationContext } from 'providers';
+import { Debug, Header, Notifier, Summaries, Ticker } from 'components';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
 function Layout() {
-  const [notifications] = useNotificationContext();
-
   return (
     <StyledWrapper>
-      <StyledHeader notifications={notifications} />
-      <StyledSummaries isVisible />
-      <StyledTicker isVisible />
-      <StyledNotifier notifications={notifications} />
-      <StyledQueue notifications={notifications} />
+      <StyledHeader />
+      <StyledNotifier />
       <StyledDebug />
     </StyledWrapper>
   );
@@ -47,32 +41,12 @@ const StyledWrapper = styled(Frame.Wrapper)`
   font-weight: 500;
 `;
 
-const StyledSummaries = styled(Summaries)`
-  display: none;
-  grid-column: 2;
-  grid-row: 1 / span 2;
-`;
-
-const StyledTicker = styled(Ticker)`
-  display: none;
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  align-self: center;
-`;
-
 const StyledNotifier = styled(Notifier)`
   grid-column: 1 / span 3;
   grid-row: 1 / span 2;
   align-self: start;
   justify-self: center;
   margin-top: 32px;
-`;
-
-const StyledQueue = styled(Queue)`
-  grid-column: 3;
-  grid-row: 3 / span 2;
-  align-self: start;
-  justify-self: start;
 `;
 
 const StyledHeader = styled(Header)`
