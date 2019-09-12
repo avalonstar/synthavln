@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { rgba } from 'polished';
 
 import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Notifier';
 
@@ -50,7 +51,12 @@ const spring = {
 
 function Item({ className, data }) {
   return (
-    <Wrapper className={className} layoutTransition={spring}>
+    <Wrapper
+      className={className}
+      initial={{ x: -10, opacity: 0 }}
+      animate={{ x: 0, opacity: 0.75 }}
+      layoutTransition={spring}
+    >
       <Icon>{getIcon()[data.event]}</Icon>
       <Actor>
         {data.recipientDisplayName || data.displayName || data.name}
@@ -82,13 +88,16 @@ const Wrapper = styled(motion.li)`
   padding: 0 10px;
   height: 26px;
 
-  background: ${props => props.theme.colors.gradient.darker};
+  box-shadow: inset 0 0 0 1px ${props => rgba(props.theme.colors.white, 0.5)};
+  background: ${props => rgba(props.theme.colors.muted.dark, 0.15)};
   border-radius: 4px;
   color: ${props => props.theme.colors.white};
 `;
 
 const Actor = styled.div`
   padding: 0 10px 0 4px;
+  box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.white, 0.25)};
+  margin-right: 10px;
 
   font-size: 14px;
   font-weight: 800;
