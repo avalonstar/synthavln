@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import React, { useEffect, useState } from 'react';
 
 import { useNotificationContext, usePoolContext } from 'providers';
@@ -16,6 +17,13 @@ function Debug({ className }) {
   }, []);
 
   const testEvent = {
+    id:
+      Math.random()
+        .toString(36)
+        .substring(2, 15) +
+      Math.random()
+        .toString(36)
+        .substring(2, 15),
     bucket: 'subscription',
     event: 'resub',
     displayName: 'Avalonstar',
