@@ -1,5 +1,6 @@
 export { default as useChatContext } from './Chat';
 export { default as useEventContext } from './Events';
+export { default as useImageryContext } from './Imagery';
 export { default as useMessageContext } from './Messages';
 export { default as useNotificationContext } from './Notifications';
 export { default as usePoolContext } from './Pool';
