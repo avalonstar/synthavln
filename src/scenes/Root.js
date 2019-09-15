@@ -8,6 +8,7 @@ import {
   UI,
   useChatContext,
   useEventContext,
+  useImageryContext,
   useMessageContext,
   useNotificationContext,
   usePoolContext,
@@ -27,7 +28,9 @@ const Contexts = () => (
         <useTrainContext.Provider>
           <useMessageContext.Provider>
             <useChatContext.Provider>
-              <Main />
+              <useImageryContext.Provider>
+                <Main />
+              </useImageryContext.Provider>
             </useChatContext.Provider>
           </useMessageContext.Provider>
         </useTrainContext.Provider>
