@@ -12,6 +12,7 @@ const { REACT_APP_TWITCH_API_CLIENT_ID } = process.env;
 
 function useChat() {
   const [messages, dispatch] = useMessageContext();
+  const [client, setClient] = useState();
   const [connected, setConnected] = useState(false);
   const [snapshot, loading] = useDocumentOnce(
     firestore
@@ -53,11 +54,11 @@ function useChat() {
         return chat;
       };
 
-      initializeClients();
+      setClient(initializeClients());
     }
   }, [loading, snapshot, dispatch]);
 
-  return { loading, connected, messages, chat };
+  return { client, loading, connected, messages };
 }
 
 const useChatContext = createUseContext(useChat);
