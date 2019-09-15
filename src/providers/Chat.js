@@ -1,8 +1,8 @@
-import TwitchClient from 'twitch';
-import ChatClient from 'twitch-chat-client';
 import { useEffect, useState } from 'react';
 import { useDocumentOnce } from 'react-firebase-hooks/firestore';
 import createUseContext from 'constate';
+import TwitchClient from 'twitch';
+import ChatClient from 'twitch-chat-client';
 
 import firestore from 'firestore';
 
@@ -51,14 +51,15 @@ function useChat() {
           dispatch({ type: 'add', event });
         });
 
+        setClient(chat);
         return chat;
       };
 
-      setClient(initializeClients());
+      initializeClients();
     }
   }, [loading, snapshot, dispatch]);
 
-  return { client, loading, connected, messages };
+  return { client, connected, messages };
 }
 
 const useChatContext = createUseContext(useChat);
