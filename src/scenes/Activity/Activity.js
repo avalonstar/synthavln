@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Debug, Header, Notifier, Summaries, Ticker } from 'components';
+import { Debug, Header, Notifier } from 'components';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
