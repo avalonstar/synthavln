@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { Notifier } from 'components';
-import { Events, Notifications } from 'providers';
+import { useEventContext, useNotificationContext } from 'providers';
 
 function NotificationsArea() {
-  const [notifications] = useContext(Notifications.Context);
+  const [notifications] = useNotificationContext();
   return <Notifier notifications={notifications} soundOnly />;
 }
 
 function Scene() {
   return (
-    <Notifications.Provider>
-      <Events.Provider>
+    <useNotificationContext.Provider>
+      <useEventContext.Provider>
         <NotificationsArea />
-      </Events.Provider>
-    </Notifications.Provider>
+      </useEventContext.Provider>
+    </useNotificationContext.Provider>
   );
 }
 

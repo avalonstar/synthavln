@@ -4,14 +4,16 @@ import createUseContext from 'constate';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'add':
-      return [...state, action.event];
+      return [action.event, ...state];
     case 'delete':
       return [...state.slice(1)];
+    case 'empty':
+      return [];
     default:
       throw new Error('Unexpected action.');
   }
 };
 
-const useNotificationContext = createUseContext(() => useReducer(reducer, []));
+const usePoolContext = createUseContext(() => useReducer(reducer, []));
 
-export default useNotificationContext;
+export default usePoolContext;

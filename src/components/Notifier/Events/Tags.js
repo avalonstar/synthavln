@@ -41,9 +41,9 @@ export const Raid = () => (
   </Tag>
 );
 
-export const SPChange = ({ plan, amount = '1' }) => (
+export const SPChange = ({ plan, count = '1' }) => (
   <Tag>
-    <SPBadge size={svgSize} /> sp + {utils.getSubValue(plan) * amount}
+    <SPBadge size={svgSize} /> sp + {utils.getSubValue(plan) * count}
   </Tag>
 );
 
@@ -85,12 +85,12 @@ export const Upgrade = () => (
 
 SPChange.propTypes = {
   plan: PropTypes.string,
-  amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 SPChange.defaultProps = {
   plan: '1000',
-  amount: '1'
+  count: '1'
 };
 
 Tier.propTypes = {

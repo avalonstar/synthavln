@@ -4,13 +4,31 @@ import { createBrowserHistory } from 'history';
 
 import { ThemeProvider } from 'styled-components';
 
-import { UI } from 'providers';
+import {
+  UI,
+  useEventContext,
+  useNotificationContext,
+  usePoolContext,
+  useTrainContext
+} from 'providers';
 import { Activity, Ava, Camera, Sounds, Splitscreen } from 'scenes/Activity';
 import App from 'scenes/App';
 import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
 
 const history = createBrowserHistory();
+
+const Contexts = () => (
+  <useNotificationContext.Provider>
+    <useEventContext.Provider>
+      <usePoolContext.Provider>
+        <useTrainContext.Provider>
+          <Main />
+        </useTrainContext.Provider>
+      </usePoolContext.Provider>
+    </useEventContext.Provider>
+  </useNotificationContext.Provider>
+);
 
 const Main = () => (
   <Switch>
@@ -50,7 +68,7 @@ function Root() {
     <Router history={history}>
       <ThemeProvider theme={foundation}>
         <UI.Provider>
-          <Main />
+          <Contexts />
         </UI.Provider>
       </ThemeProvider>
     </Router>

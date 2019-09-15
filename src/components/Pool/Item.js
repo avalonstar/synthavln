@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Ticker';
+import { Bits, Follow, Gift, Raid, Sub, Tip } from 'components/Icons/Notifier';
 
 import {
   CheerEvent,
@@ -41,9 +41,20 @@ const getIcon = () => ({
   upgrade: <Sub />
 });
 
-function Item({ className, data, style }) {
+const spring = {
+  type: 'spring',
+  damping: 30,
+  stiffness: 300
+};
+
+function Item({ className, data }) {
   return (
-    <Wrapper className={className} style={style}>
+    <Wrapper
+      className={className}
+      initial={{ x: -10, opacity: 0 }}
+      animate={{ x: 0, opacity: 0.75 }}
+      layoutTransition={spring}
+    >
       <Icon>{getIcon()[data.event]}</Icon>
       <Actor>{data.name}</Actor>
       <Type>{getType(data)[data.event]}</Type>
@@ -56,31 +67,32 @@ Item.propTypes = {
   data: PropTypes.shape({
     event: PropTypes.string.isRequired,
     name: PropTypes.string
-  }).isRequired,
-  style: PropTypes.shape({})
+  }).isRequired
 };
 
 Item.defaultProps = {
-  className: '',
-  style: {}
+  className: ''
 };
 
 const Wrapper = styled(motion.li)`
   display: inline-flex;
+  position: relative;
   align-items: center;
-  padding: 10px 24px 12px 24px;
+  margin-left: 12px;
+  padding: 0 10px;
+  height: 26px;
 
-  box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.muted.purple, 0.15)};
-  color: ${props => props.theme.colors.muted.lightbluegrey};
-  will-change: width, transform, opacity;
-
-  svg {
-    transform: rotate(-30deg) scale(2);
-    opacity: 0.2;
-  }
+  box-shadow: inset 0 0 0 1px ${props => rgba(props.theme.colors.white, 0.5)};
+  background: ${props => rgba(props.theme.colors.muted.dark, 0.15)};
+  border-radius: 4px;
+  color: ${props => props.theme.colors.white};
 `;
 
 const Actor = styled.div`
+  padding: 0 10px 0 4px;
+  box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.white, 0.25)};
+  margin-right: 10px;
+
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
@@ -92,13 +104,11 @@ const Type = styled.div`
   font-size: 12px;
   font-weight: 500;
   text-transform: capitalize;
-  padding-left: 12px;
 `;
 
 const Icon = styled.div`
-  position: absolute;
-  left: 24px;
-  top: calc(50% - 11px);
+  position: relative;
+  top: 1px;
 `;
 
 export default Item;

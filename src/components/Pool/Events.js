@@ -24,10 +24,10 @@ export const SubscriptionEvent = ({ plan }) => (
   <Wrapper>{getTier(plan)}</Wrapper>
 );
 
-export const SubGiftEvent = ({ gifter, plan }) => (
+export const SubGiftEvent = ({ name, plan }) => (
   <Wrapper>
     {getTier(plan)} {'gift from '}
-    <Actor>{gifter}</Actor>
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
@@ -71,7 +71,7 @@ SubscriptionEvent.propTypes = {
 };
 
 SubGiftEvent.propTypes = {
-  gifter: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   plan: PropTypes.string.isRequired
 };
 
@@ -84,11 +84,11 @@ const Wrapper = styled.div`
 `;
 
 const Actor = styled.div`
-  color: ${props => props.theme.colors.muted.yellow};
+  color: ${props => props.theme.colors.main.avagreen};
   display: inline;
   text-transform: initial;
 `;
 
 const Number = styled.span`
-  color: ${props => props.theme.colors.muted.yellow};
+  color: ${props => props.theme.colors.main.avagreen};
 `;

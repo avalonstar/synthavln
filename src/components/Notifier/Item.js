@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import isEmpty from 'lodash/isEmpty';
 
-import { Notifications } from 'providers';
+import { useNotificationContext } from 'providers';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
@@ -16,8 +16,7 @@ import {
   SubGiftEvent,
   RaidEvent,
   ResubEvent,
-  TipEvent,
-  UpgradeEvent
+  TipEvent
 } from './Events';
 import { getSongFile } from './utils';
 
@@ -29,12 +28,11 @@ const getType = data => ({
   subgift: SubGiftEvent({ ...data }),
   raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data }),
-  upgrade: UpgradeEvent({ ...data })
+  tip: TipEvent({ ...data })
 });
 
 function Item({ className, notification, soundOnly }) {
-  const [notifications, dispatch] = useContext(Notifications.Context); // eslint-disable-line
+  const [, dispatch] = useNotificationContext();
   const [playStatus, setPlayStatus] = useState(false);
   const [volume, setVolume] = useState(0.2);
 
@@ -60,16 +58,26 @@ function Item({ className, notification, soundOnly }) {
   const baseURL = 'http://synthform.s3.amazonaws.com/audio/avalonstar/';
 
   return (
-    <AnimatePresence>
+    <AnimatePresence exitBeforeEnter>
       {!isEmpty(notification) && (
-        <Wrapper
-          className={className}
-          initial={{ y: '-105%' }}
-          animate={{ y: '0' }}
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1], type: 'tween' }}
-        >
-          {!soundOnly && getType(notification)[notification.event]}
+        <>
+          <Content
+            className={className}
+            initial={{ y: -105, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{
+              duration: 1,
+              ease: [0.23, 1, 0.32, 1],
+              type: 'tween',
+              staggerChildren: 1,
+              delayChildren: 1
+            }}
+          >
+            <motion.div key={notification.id}>
+              {!soundOnly && getType(notification)[notification.event]}
+            </motion.div>
+          </Content>
           <ReactPlayer
             url={`${baseURL}${getSongFile(notification)}.ogg`}
             playing={playStatus}
@@ -80,7 +88,7 @@ function Item({ className, notification, soundOnly }) {
             width="0%"
             height="0%"
           />
-        </Wrapper>
+        </>
       )}
       ;
     </AnimatePresence>
@@ -89,6 +97,7 @@ function Item({ className, notification, soundOnly }) {
 
 Item.propTypes = {
   notification: PropTypes.shape({
+    id: PropTypes.string,
     event: PropTypes.string
   }),
   className: PropTypes.string.isRequired,
@@ -103,6 +112,19 @@ Item.defaultProps = {
 const Wrapper = styled(motion.div)`
   z-index: 2000;
   align-items: end;
+`;
+
+const Content = styled(motion.div)`
+  display: inline-grid;
+  grid-template-rows: 1fr auto;
+  min-width: calc(${props => props.theme.frame.width} * 0.15);
+  z-index: 2000;
+  align-items: end;
+
+  background: ${props => props.theme.colors.white};
+  border-radius: 6px;
+  box-shadow: ${props => props.theme.shadows[1]};
+  font-family: ${props => props.theme.fonts.freight};
 `;
 
 export default Item;

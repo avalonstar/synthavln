@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Logo, Notifier, Queue, Summaries, Ticker, Train } from 'components';
-import { Events, Notifications } from 'providers';
+import { Logo, Notifier, Queue, Summaries, Ticker } from 'components';
+import { useEventContext, useNotificationContext } from 'providers';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
 
 function TickerArea({ isVisible }) {
-  const { events } = useContext(Events.Context);
+  const { events } = useEventContext();
   return (
     <>
       <StyledLogo isVisible={isVisible} />
@@ -19,12 +19,11 @@ function TickerArea({ isVisible }) {
 }
 
 function NotificationsArea() {
-  const [notifications] = useContext(Notifications.Context);
+  const [notifications] = useNotificationContext();
   return (
     <>
       <StyledNotifier notifications={notifications} />
       <StyledQueue notifications={notifications} />
-      <StyledTrain notifications={notifications} />
     </>
   );
 }
@@ -44,13 +43,13 @@ function Structure({ children }) {
 
 function Scene() {
   return (
-    <Notifications.Provider>
-      <Events.Provider>
+    <useNotificationContext.Provider>
+      <useEventContext.Provider>
         <Structure>
           <Layout />
         </Structure>
-      </Events.Provider>
-    </Notifications.Provider>
+      </useEventContext.Provider>
+    </useNotificationContext.Provider>
   );
 }
 
@@ -102,12 +101,6 @@ const StyledQueue = styled(Queue)`
   grid-row: 23 / span 2;
   align-self: end;
   justify-self: start;
-`;
-
-const StyledTrain = styled(Train)`
-  grid-column: 1 / span 3;
-  grid-row: 23 / span 2;
-  align-self: end;
 `;
 
 export default Scene;

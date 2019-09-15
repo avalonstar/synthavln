@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Notifications } from 'providers';
+import { useNotificationContext, usePoolContext } from 'providers';
 
 import styled from 'styled-components';
 
 function Debug({ className }) {
-  const [notifications, dispatch] = useContext(Notifications.Context); // eslint-disable-line
+  const [, dispatchToNotifications] = useNotificationContext();
+  const [, dispatchToPool] = usePoolContext();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -15,11 +16,18 @@ function Debug({ className }) {
   }, []);
 
   const testEvent = {
+    id:
+      Math.random()
+        .toString(36)
+        .substring(2, 15) +
+      Math.random()
+        .toString(36)
+        .substring(2, 15),
     bucket: 'subscription',
     event: 'resub',
-    displayName: 'Avalonstar',
-    subPlan: '1000',
-    cumulativeMonths: Math.floor(Math.random() * Math.floor(54)),
+    name: 'Avalonstar',
+    plan: '1000',
+    months: Math.floor(Math.random() * Math.floor(54)),
     timestamp: Date.now()
   };
 
@@ -28,7 +36,10 @@ function Debug({ className }) {
       <Wrapper className={className}>
         <Button
           type="button"
-          onClick={() => dispatch({ type: 'add', event: testEvent })}
+          onClick={() => {
+            dispatchToNotifications({ type: 'add', event: testEvent });
+            dispatchToPool({ type: 'add', event: testEvent });
+          }}
         >
           Test Notification
         </Button>
