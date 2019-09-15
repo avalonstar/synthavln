@@ -39,7 +39,7 @@ function Animated() {
       client.onAction((channel, user, message) => processEmotes(message));
       client.onPrivmsg((channel, user, message) => processEmotes(message));
     }
-  }, [connected, client]);
+  }, [connected, client, processEmotes]);
 
   return <div className="App" />;
 }
