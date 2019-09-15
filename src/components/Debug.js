@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 import React, { useEffect, useState } from 'react';
 
 import { useNotificationContext, usePoolContext } from 'providers';
@@ -26,9 +25,9 @@ function Debug({ className }) {
         .substring(2, 15),
     bucket: 'subscription',
     event: 'resub',
-    displayName: 'Avalonstar',
-    subPlan: '1000',
-    cumulativeMonths: Math.floor(Math.random() * Math.floor(54)),
+    name: 'Avalonstar',
+    plan: '1000',
+    months: Math.floor(Math.random() * Math.floor(54)),
     timestamp: Date.now()
   };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import * as Tags from './Events/Tags';
@@ -8,16 +9,37 @@ import * as utils from './utils';
 
 import avalonHAPPY from './assets/avalonHAPPY.png';
 
-export const CheerEvent = ({ displayName, amount }) => (
-  <Wrapper>
+const headerVariants = {
+  initial: {
+    opacity: 0,
+    x: 10,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 1,
+      delayChildren: 1
+    }
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      when: 'afterChildren',
+      staggerChildren: 1,
+      delayChildren: 1
+    }
+  }
+};
+
+export const CheerEvent = ({ name, count }) => (
+  <>
     <Header>
-      <Actor>{displayName}</Actor>
-      <Modifier>{`cheered ${amount} bits!`}</Modifier>
+      <Actor>{name}</Actor>
+      <Modifier>{`cheered ${count} bits!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Cheer />
     </Footer>
-  </Wrapper>
+  </>
 );
 
 export const FollowEvent = ({ name }) => (
@@ -29,108 +51,92 @@ export const FollowEvent = ({ name }) => (
   </BubbleWrapper>
 );
 
-export const MysteryGiftEvent = ({ displayName, amount, subPlan }) => (
-  <Wrapper>
+export const MysteryGiftEvent = ({ name, count, plan }) => (
+  <>
     <Header>
-      <Actor>{displayName}</Actor>
-      <Modifier>{`gifted ${amount} ${utils.getTier(
-        subPlan
+      <Actor>{name}</Actor>
+      <Modifier>{`gifted ${count} ${utils.getTier(
+        plan
       )} subscriptions!`}</Modifier>
     </Header>
     <Footer>
       <Tags.MysteryGift />
-      <Tags.Tier plan={subPlan} />
-      <Tags.SPChange plan={subPlan} amount={amount} />
+      <Tags.Tier plan={plan} />
+      <Tags.SPChange plan={plan} count={count} />
     </Footer>
-  </Wrapper>
+  </>
 );
 
-export const RaidEvent = ({ displayName }) => (
-  <Wrapper>
+export const RaidEvent = ({ name }) => (
+  <>
     <Header>
-      <Actor>{displayName}</Actor>
+      <Actor>{name}</Actor>
       <Modifier>Thanks for the raid!</Modifier>
     </Header>
     <Footer>
       <Tags.Raid />
     </Footer>
-  </Wrapper>
+  </>
 );
 
-export const ResubEvent = ({ displayName, cumulativeMonths, subPlan }) => (
-  <Wrapper>
-    <Header>
-      <Actor>{displayName}</Actor>
-      <Modifier>{`${cumulativeMonths} consecutive months!`}</Modifier>
+export const ResubEvent = ({ name, months, plan }) => (
+  <>
+    <Header variants={headerVariants} initial="initial" animate="animate">
+      <Actor>{name}</Actor>
+      <Modifier>{`${months} cumulative months!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Resub />
-      <Tags.Tier plan={subPlan} />
+      <Tags.Tier plan={plan} />
       <Tags.SPRetain />
     </Footer>
-  </Wrapper>
+  </>
 );
 
-export const SubscriptionEvent = ({ displayName, subPlan }) => (
-  <Wrapper>
+export const SubscriptionEvent = ({ name, plan }) => (
+  <>
     <Header>
-      <Actor>{displayName}</Actor>
+      <Actor>{name}</Actor>
       <Modifier>has just subscribed!</Modifier>
     </Header>
     <Footer>
       <Tags.Subscription />
-      <Tags.Tier plan={subPlan} />
-      <Tags.SPChange plan={subPlan} />
+      <Tags.Tier plan={plan} />
+      <Tags.SPChange plan={plan} />
     </Footer>
-  </Wrapper>
+  </>
 );
 
-export const SubGiftEvent = ({
-  displayName,
-  recipientDisplayName,
-  subPlan
-}) => (
-  <Wrapper>
+export const SubGiftEvent = ({ name, gifter, plan }) => (
+  <>
     <Header>
-      <Actor>{displayName}</Actor>
-      <Modifier>{`gifted ${recipientDisplayName} a subscription!`}</Modifier>
+      <Actor>{name}</Actor>
+      <Modifier>{`was gifted a subscription by ${gifter}!`}</Modifier>
     </Header>
     <Footer>
       <Tags.SubGift />
-      <Tags.Tier plan={subPlan} />
-      <Tags.SPChange plan={subPlan} />
+      <Tags.Tier plan={plan} />
+      <Tags.SPChange plan={plan} />
     </Footer>
-  </Wrapper>
+  </>
 );
 
-export const TipEvent = ({ from, formattedAmount, message }) => (
-  <Wrapper>
+export const TipEvent = ({ from, formattedcount, message }) => (
+  <>
     <Header>
       <Actor>{from}</Actor>
-      <Modifier>{`just tipped ${formattedAmount}!`}</Modifier>
+      <Modifier>{`just tipped ${formattedcount}!`}</Modifier>
       <Message>{message}</Message>
     </Header>
     <Footer>
       <Tags.Tip />
     </Footer>
-  </Wrapper>
-);
-
-export const UpgradeEvent = ({ displayName }) => (
-  <Wrapper>
-    <Header>
-      <Actor>{displayName}</Actor>
-      <Modifier>just upgraded their gift sub!</Modifier>
-    </Header>
-    <Footer>
-      <Tags.Upgrade />
-    </Footer>
-  </Wrapper>
+  </>
 );
 
 CheerEvent.propTypes = {
-  amount: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired
+  count: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 FollowEvent.propTypes = {
@@ -138,55 +144,39 @@ FollowEvent.propTypes = {
 };
 
 MysteryGiftEvent.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  amount: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  count: PropTypes.string.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 RaidEvent.propTypes = {
-  displayName: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired
 };
 
 ResubEvent.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  cumulativeMonths: PropTypes.number.isRequired,
-  subPlan: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  months: PropTypes.number.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 SubscriptionEvent.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 SubGiftEvent.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  recipientDisplayName: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  gifter: PropTypes.string.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 TipEvent.propTypes = {
   from: PropTypes.string.isRequired,
-  formattedAmount: PropTypes.string.isRequired,
+  formattedcount: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired
 };
 
-UpgradeEvent.propTypes = {
-  displayName: PropTypes.string.isRequired
-};
-
-const Wrapper = styled.div`
-  display: inline-grid;
-  grid-template-rows: 1fr auto;
-  align-items: center;
-  min-width: calc(${props => props.theme.frame.width} * 0.15);
-
-  background: ${props => props.theme.colors.white};
-  border-radius: 6px;
-  box-shadow: ${props => props.theme.shadows[1]};
-  font-family: ${props => props.theme.fonts.freight};
-`;
-
-const Header = styled.div`
+const Header = styled(motion.div)`
   grid-row: 1;
   margin: 0 24px;
   padding: 24px 0;
@@ -203,6 +193,7 @@ const Message = styled.div`
   border-radius: 4px;
   box-shadow: inset 0 0 0 1px ${props => props.theme.colors.muted.midgrey};
   color: ${props => props.theme.colors.muted.midgrey};
+  font-family: ${props => props.theme.fonts.adelle};
   font-size: 14px;
   font-style: italic;
 `;
@@ -222,13 +213,13 @@ const Footer = styled.div`
   font-size: 12px;
 `;
 
-const Actor = styled.div`
+const Actor = styled(motion.div)`
   color: ${props => props.theme.colors.main.dark};
   font-size: 20px;
   font-weight: 800;
 `;
 
-const Modifier = styled.div`
+const Modifier = styled(motion.div)`
   color: ${props => props.theme.colors.muted.midgrey};
   font-size: 14px;
   font-weight: 800;

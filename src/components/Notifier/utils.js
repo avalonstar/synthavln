@@ -15,10 +15,10 @@ export const getSongFile = props => {
     case 'subgift':
     case 'subscription':
       return `${props.event}-${
-        { Prime: 1000, 1000: 1000, 2000: 2000, 3000: 3000 }[props.subPlan]
+        { Prime: 1000, 1000: 1000, 2000: 2000, 3000: 3000 }[props.plan]
       }`;
     case 'cheer':
-      return `cheer-${getCheerTier(props.amount)}`;
+      return `cheer-${getCheerTier(props.count)}`;
     case 'follow':
       return `follow-${Math.floor(Math.random() * 3) + 1}`;
     default:

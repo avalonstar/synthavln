@@ -15,8 +15,7 @@ import {
   SubGiftEvent,
   RaidEvent,
   ResubEvent,
-  TipEvent,
-  UpgradeEvent
+  TipEvent
 } from './Events';
 
 const getType = data => ({
@@ -27,8 +26,7 @@ const getType = data => ({
   subgift: SubGiftEvent({ ...data }),
   raid: RaidEvent({ ...data }),
   resub: ResubEvent({ ...data }),
-  tip: TipEvent({ ...data }),
-  upgrade: UpgradeEvent({ ...data })
+  tip: TipEvent({ ...data })
 });
 
 const getIcon = () => ({
@@ -47,9 +45,7 @@ function Item({ className, data, style }) {
   return (
     <Wrapper className={className} style={style}>
       <Icon>{getIcon()[data.event]}</Icon>
-      <Actor>
-        {data.recipientDisplayName || data.displayName || data.name}
-      </Actor>
+      <Actor>{data.name}</Actor>
       <Type>{getType(data)[data.event]}</Type>
     </Wrapper>
   );
@@ -59,8 +55,6 @@ Item.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
     event: PropTypes.string.isRequired,
-    recipientDisplayName: PropTypes.string,
-    displayName: PropTypes.string,
     name: PropTypes.string
   }).isRequired,
   style: PropTypes.shape({})

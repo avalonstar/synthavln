@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useNotificationContext } from 'providers';
+
 import Item from './Item';
 
-function Notifier({ className, notifications, soundOnly }) {
+function Notifier({ className, soundOnly }) {
+  const [notifications] = useNotificationContext();
   return (
     <Item
       className={className}
@@ -15,7 +18,6 @@ function Notifier({ className, notifications, soundOnly }) {
 
 Notifier.propTypes = {
   className: PropTypes.string,
-  notifications: PropTypes.arrayOf(PropTypes.object).isRequired,
   soundOnly: PropTypes.bool
 };
 

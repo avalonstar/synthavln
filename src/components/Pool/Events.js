@@ -5,49 +5,47 @@ import styled from 'styled-components';
 
 import { getTier } from './utils';
 
-export const CheerEvent = ({ amount }) => (
+export const CheerEvent = ({ count }) => (
   <Wrapper>
-    <Number>{amount}</Number>
+    <Number>{count}</Number>
     {' bits'}
   </Wrapper>
 );
 
 export const FollowEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
-export const MysteryGiftEvent = ({ amount, subPlan }) => (
+export const MysteryGiftEvent = ({ count, plan }) => (
   <Wrapper>
-    <Number>{amount}</Number> {getTier(subPlan)} {'gifts'}
+    <Number>{count}</Number> {getTier(plan)} {'gifts'}
   </Wrapper>
 );
 
-export const SubscriptionEvent = ({ subPlan }) => (
-  <Wrapper>{getTier(subPlan)}</Wrapper>
+export const SubscriptionEvent = ({ plan }) => (
+  <Wrapper>{getTier(plan)}</Wrapper>
 );
 
-export const SubGiftEvent = ({ displayName, subPlan }) => (
+export const SubGiftEvent = ({ name, plan }) => (
   <Wrapper>
-    {getTier(subPlan)} {'gift from '}
-    <Actor>{displayName}</Actor>
+    {getTier(plan)} {'gift from '}
+    <Actor>{name}</Actor>
   </Wrapper>
 );
 
 export const RaidEvent = ({ event }) => <Wrapper>{event}</Wrapper>;
 
-export const ResubEvent = ({ cumulativeMonths, subPlan }) => (
+export const ResubEvent = ({ months, plan }) => (
   <Wrapper>
-    <Number>{cumulativeMonths}</Number>
-    {' months'} {getTier(subPlan)}
+    <Number>{months}</Number>
+    {' months'} {getTier(plan)}
   </Wrapper>
 );
 
-export const TipEvent = ({ formattedAmount }) => (
-  <Wrapper>{formattedAmount}</Wrapper>
+export const TipEvent = ({ formattedcount }) => (
+  <Wrapper>{formattedcount}</Wrapper>
 );
 
-export const UpgradeEvent = () => <Wrapper>Gift Converted</Wrapper>;
-
 CheerEvent.propTypes = {
-  amount: PropTypes.string.isRequired
+  count: PropTypes.string.isRequired
 };
 
 FollowEvent.propTypes = {
@@ -55,8 +53,8 @@ FollowEvent.propTypes = {
 };
 
 MysteryGiftEvent.propTypes = {
-  amount: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
+  count: PropTypes.string.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 RaidEvent.propTypes = {
@@ -64,21 +62,21 @@ RaidEvent.propTypes = {
 };
 
 ResubEvent.propTypes = {
-  cumulativeMonths: PropTypes.number.isRequired,
-  subPlan: PropTypes.string.isRequired
+  months: PropTypes.number.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 SubscriptionEvent.propTypes = {
-  subPlan: PropTypes.string.isRequired
+  plan: PropTypes.string.isRequired
 };
 
 SubGiftEvent.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  subPlan: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  plan: PropTypes.string.isRequired
 };
 
 TipEvent.propTypes = {
-  formattedAmount: PropTypes.string.isRequired
+  formattedcount: PropTypes.string.isRequired
 };
 
 const Wrapper = styled.div`
