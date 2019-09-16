@@ -12,6 +12,8 @@ import { useChatContext } from 'providers';
 import idMap from './assets/idMap.json';
 import sprites from './hype.json';
 
+PIXI.utils.skipHello();
+
 const AUTO_SPAWN_FOR_TEST = false;
 const { PUBLIC_URL } = process.env;
 
@@ -352,7 +354,7 @@ function Toy() {
     return () => {
       clearTimeout(hypeTimer.current);
     };
-  }, [animate, buildPhysics, buildStage, loader]);
+  }, []); // eslint-disable-line
 
   return <Wrapper ref={stageRef} />;
 }
