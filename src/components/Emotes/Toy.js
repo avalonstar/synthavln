@@ -33,7 +33,7 @@ const HEIGHT = 1080;
 function Toy() {
   const { connected, client } = useChatContext();
   const [hypeActive, setHypeActive] = useState(false);
-  const [spamActive] = useState(true);
+  const [spamActive, setSpamActive] = useState(true);
 
   // Instance Variables.
   const hypeTimer = useRef(null);
@@ -119,7 +119,6 @@ function Toy() {
       objectList.current.push(object);
 
       if (auto && AUTO_SPAWN_FOR_TEST) {
-        setTimeout(() => createObject(), (Math.random() * 4 + 1) * 1000);
         setTimeout(() => createObject(true, false), Math.random() * 2 * 1000);
       }
     },
@@ -150,14 +149,14 @@ function Toy() {
     emotes => {
       if (spamActive || hypeActive) {
         const acceptedEmotes = [];
-        emotes.keys().forEach(emote => {
+        Array.from(emotes.keys()).forEach(emote => {
           if (idMap[emote]) {
-            for (let i = 0; i < emotes[emote].length; i += 1) {
+            for (let i = 0; i < emotes.get(emote).length; i += 1) {
               acceptedEmotes.push(idMap[emote]);
             }
           }
         });
-        shuffleArray(acceptedEmotes, 12).forEach((emote, id) => {
+        shuffleArray(acceptedEmotes, 15).forEach((emote, id) => {
           setTimeout(() => createObject(false, false, emote), (id + 1) * 350);
         });
       }
@@ -329,8 +328,9 @@ function Toy() {
       });
 
       client.onPrivmsg((_channel, _user, _message, msg) => {
-        if (msg.emoteOffsets) {
-          handleEmotes(msg.emoteOffsets);
+        const { emoteOffsets } = msg;
+        if (emoteOffsets) {
+          handleEmotes(emoteOffsets);
         }
       });
     }
