@@ -12,7 +12,7 @@ import { useChatContext } from 'providers';
 import idMap from './assets/idMap.json';
 import sprites from './hype.json';
 
-const AUTO_SPAWN_FOR_TEST = true;
+const AUTO_SPAWN_FOR_TEST = false;
 const { PUBLIC_URL } = process.env;
 
 const SCALE = 0.5;
@@ -31,6 +31,7 @@ const HEIGHT = 1080;
 function Toy() {
   const { connected, client } = useChatContext();
   const [hypeActive, setHypeActive] = useState(false);
+  const [spamActive, setSpamActive] = useState(false);
 
   // Instance Variables.
   const hypeTimer = useRef(null);
@@ -138,20 +139,40 @@ function Toy() {
   };
 
   const handleEmotes = emotes => {
-    if (hypeActive) {
+    if (spamActive || hypeActive) {
       const acceptedEmotes = [];
-      Object.keys(emotes).forEach(emote => {
+      emotes.keys().forEach(emote => {
         if (idMap[emote]) {
           for (let i = 0; i < emotes[emote].length; i += 1) {
             acceptedEmotes.push(idMap[emote]);
           }
         }
       });
-      // this.shuffleArray(acceptedEmotes, 6).forEach((emote, id) => {
-      shuffleArray(acceptedEmotes, 15).forEach((emote, id) => {
+      shuffleArray(acceptedEmotes, 12).forEach((emote, id) => {
         setTimeout(() => createObject(false, false, emote), (id + 1) * 350);
       });
     }
+  };
+
+  const calculateSubValue = plan => {
+    let value = 100;
+    switch (plan) {
+      case 'Prime':
+      case '1000':
+        value *= 5;
+        break;
+      case '2000':
+        value *= 10;
+        break;
+      case '3000':
+        value *= 25;
+        break;
+      default:
+        value = 0;
+        break;
+    }
+
+    return value;
   };
 
   const draw = () => {
@@ -277,7 +298,27 @@ function Toy() {
 
   useEffect(() => {
     if (connected && client) {
-      client.onPrivmsg((_channel, _user, _message, msg) => {});
+      client.onCommunitySub((_channel, _user, subInfo) => {
+        handleSupport(calculateSubValue(subInfo.plan));
+      });
+
+      client.onResub((_channel, _user, subInfo) => {
+        handleSupport(calculateSubValue(subInfo.plan));
+      });
+
+      client.onSubGift((_channel, _user, subInfo) => {
+        handleSupport(calculateSubValue(subInfo.plan));
+      });
+
+      client.onSub((_channel, _user, subInfo) => {
+        handleSupport(calculateSubValue(subInfo.plan));
+      });
+
+      client.onPrivmsg((_channel, _user, _message, msg) => {
+        if (msg.emoteOffsets) {
+          handleEmotes(msg.emoteOffsets);
+        }
+      });
     }
   }, [connected, client]);
 
