@@ -1,7 +1,7 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable no-param-reassign */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import p2 from 'p2';
 import * as PIXI from 'pixi.js';
 import moment from 'moment';
@@ -31,7 +31,7 @@ const HEIGHT = 1080;
 function Toy() {
   const { connected, client } = useChatContext();
   const [hypeActive, setHypeActive] = useState(false);
-  const [spamActive, setSpamActive] = useState(false);
+  const [spamActive] = useState(true);
 
   // Instance Variables.
   const hypeTimer = useRef(null);
@@ -63,96 +63,105 @@ function Toy() {
     return random;
   };
 
-  const createObject = (auto, cheer, emote) => {
-    const object = {
-      alive: true,
-      created: moment(),
-      render: null,
-      physics: null
-    };
+  const createObject = useCallback(
+    (auto, cheer, emote) => {
+      const object = {
+        alive: true,
+        created: moment(),
+        render: null,
+        physics: null
+      };
 
-    const x = Math.random() * WIDTH;
-    const y = -1 * (IMG_WIDTH / 2 + 10);
+      const x = Math.random() * WIDTH;
+      const y = -1 * (IMG_WIDTH / 2 + 10);
 
-    const angle = Math.random() * 360 * (Math.PI / 180);
-    const angularVelocity = Math.random() * 5;
+      const angle = Math.random() * 360 * (Math.PI / 180);
+      const angularVelocity = Math.random() * 5;
 
-    const circleBody = new p2.Body({
-      mass: Math.random() * 95 + 5,
-      position: [x, y],
-      angle,
-      angularVelocity
-    });
-    const circleShape = new p2.Circle({ radius: IMG_WIDTH / 2 });
-    circleBody.addShape(circleShape);
-    circleShape.collisionGroup = OBJECT;
-    circleShape.collisionMask = OBJECT | WALL | GROUND;
+      const circleBody = new p2.Body({
+        mass: Math.random() * 95 + 5,
+        position: [x, y],
+        angle,
+        angularVelocity
+      });
+      const circleShape = new p2.Circle({ radius: IMG_WIDTH / 2 });
+      circleBody.addShape(circleShape);
+      circleShape.collisionGroup = OBJECT;
+      circleShape.collisionMask = OBJECT | WALL | GROUND;
 
-    object.physics = circleBody;
-    world.addBody(circleBody);
+      object.physics = circleBody;
+      world.addBody(circleBody);
 
-    let spriteImg;
+      let spriteImg;
 
-    if (emote) {
-      spriteImg = textures.current[`${emote}.png`];
-    } else {
-      const emoteName =
-        sprites[Math.floor(Math.random() * (sprites.length - 1))];
-      spriteImg = textures.current[`${emoteName}.png`];
-    }
+      if (emote) {
+        spriteImg = textures.current[`${emote}.png`];
+      } else {
+        const emoteName =
+          sprites[Math.floor(Math.random() * (sprites.length - 1))];
+        spriteImg = textures.current[`${emoteName}.png`];
+      }
 
-    const blankObj = new PIXI.Sprite(spriteImg);
-    blankObj.anchor.set(0.5);
-    blankObj.scale.x = SCALE;
-    blankObj.scale.y = SCALE;
-    blankObj.x = x;
-    blankObj.y = y;
-    blankObj.rotation = angle;
+      const blankObj = new PIXI.Sprite(spriteImg);
+      blankObj.anchor.set(0.5);
+      blankObj.scale.x = SCALE;
+      blankObj.scale.y = SCALE;
+      blankObj.x = x;
+      blankObj.y = y;
+      blankObj.rotation = angle;
 
-    object.render = blankObj;
+      object.render = blankObj;
 
-    pixiContainer.addChild(blankObj);
+      pixiContainer.addChild(blankObj);
 
-    objectList.current.push(object);
+      objectList.current.push(object);
 
-    if (auto && AUTO_SPAWN_FOR_TEST) {
-      setTimeout(() => createObject(), (Math.random() * 4 + 1) * 1000);
-      setTimeout(() => createObject(true, false), Math.random() * 2 * 1000);
-    }
-  };
+      if (auto && AUTO_SPAWN_FOR_TEST) {
+        setTimeout(() => createObject(), (Math.random() * 4 + 1) * 1000);
+        setTimeout(() => createObject(true, false), Math.random() * 2 * 1000);
+      }
+    },
+    [pixiContainer, world]
+  );
 
-  const handleSupport = inputValue => {
-    const value = parseInt(inputValue, 10);
-    if (value >= 500) {
-      setHypeActive(true);
-      clearTimeout(hypeTimer.current);
-      hypeTimer.current = setTimeout(
-        setHypeActive(false),
-        HYPE_DURATION * 1000
-      );
-    }
-    const timesIntermediary = Math.round(Math.max(1, value / 100));
-    const times = timesIntermediary;
-    for (let i = 0; i < times; i += 1) {
-      setTimeout(() => createObject(false), (i + 1) * 250);
-    }
-  };
+  const handleSupport = useCallback(
+    inputValue => {
+      const value = parseInt(inputValue, 10);
+      if (value >= 500) {
+        setHypeActive(true);
+        clearTimeout(hypeTimer.current);
+        hypeTimer.current = setTimeout(
+          setHypeActive(false),
+          HYPE_DURATION * 1000
+        );
+      }
+      const timesIntermediary = Math.round(Math.max(1, value / 100));
+      const times = timesIntermediary;
+      for (let i = 0; i < times; i += 1) {
+        setTimeout(() => createObject(false), (i + 1) * 250);
+      }
+    },
+    [createObject]
+  );
 
-  const handleEmotes = emotes => {
-    if (spamActive || hypeActive) {
-      const acceptedEmotes = [];
-      emotes.keys().forEach(emote => {
-        if (idMap[emote]) {
-          for (let i = 0; i < emotes[emote].length; i += 1) {
-            acceptedEmotes.push(idMap[emote]);
+  const handleEmotes = useCallback(
+    emotes => {
+      if (spamActive || hypeActive) {
+        const acceptedEmotes = [];
+        emotes.keys().forEach(emote => {
+          if (idMap[emote]) {
+            for (let i = 0; i < emotes[emote].length; i += 1) {
+              acceptedEmotes.push(idMap[emote]);
+            }
           }
-        }
-      });
-      shuffleArray(acceptedEmotes, 12).forEach((emote, id) => {
-        setTimeout(() => createObject(false, false, emote), (id + 1) * 350);
-      });
-    }
-  };
+        });
+        shuffleArray(acceptedEmotes, 12).forEach((emote, id) => {
+          setTimeout(() => createObject(false, false, emote), (id + 1) * 350);
+        });
+      }
+    },
+    [spamActive, hypeActive, createObject]
+  );
 
   const calculateSubValue = plan => {
     let value = 100;
@@ -183,17 +192,20 @@ function Toy() {
     });
   };
 
-  const animate = time => {
-    const { current } = lastTime;
+  const animate = useCallback(
+    time => {
+      const { current } = lastTime;
 
-    requestAnimationFrame(animate);
-    const deltaTime = current ? (time - current) / 1000 : 0;
-    world.step(1 / 60, deltaTime, 10);
-    draw();
-    lastTime.current = time;
-  };
+      requestAnimationFrame(animate);
+      const deltaTime = current ? (time - current) / 1000 : 0;
+      world.step(1 / 60, deltaTime, 10);
+      draw();
+      lastTime.current = time;
+    },
+    [world]
+  );
 
-  const cleanup = () => {
+  const cleanup = useCallback(() => {
     const { current } = objectList;
     const outOfBounds = -1 * (HEIGHT + IMG_WIDTH / 2 + 10);
 
@@ -228,9 +240,9 @@ function Toy() {
         }
       });
     }
-  };
+  }, [pixiApp, world]);
 
-  const buildPhysics = () => {
+  const buildPhysics = useCallback(() => {
     world.setGlobalStiffness(1e4);
     world.setGlobalRelaxation(2);
 
@@ -287,14 +299,14 @@ function Toy() {
     topShape.collisionGroup = WALL;
 
     world.on('postStep', () => cleanup());
-  };
+  }, [cleanup, world]);
 
-  const buildStage = () => {
+  const buildStage = useCallback(() => {
     stageRef.current.appendChild(pixiApp.view);
     pixiContainer.width = WIDTH;
     pixiContainer.height = HEIGHT;
     pixiApp.stage.addChild(pixiContainer);
-  };
+  }, [stageRef, pixiApp, pixiContainer]);
 
   useEffect(() => {
     if (connected && client) {
@@ -320,25 +332,27 @@ function Toy() {
         }
       });
     }
-  }, [connected, client]);
+  }, [connected, client, handleEmotes, handleSupport]);
+
+  useEffect(() => {
+    if (AUTO_SPAWN_FOR_TEST) {
+      setTimeout(() => createObject(true, false), 3 * 1000);
+    }
+  }, [createObject]);
 
   useEffect(() => {
     const emoteTexture = `${PUBLIC_URL}/sprites/emoteTexture.json`;
-    loader.add(emoteTexture).load((loader, resources) => {
+    loader.add(emoteTexture).load((_loader, resources) => {
       textures.current = resources[emoteTexture].textures;
       buildPhysics();
       buildStage();
       requestAnimationFrame(animate);
-
-      if (AUTO_SPAWN_FOR_TEST) {
-        setTimeout(() => createObject(true, false), 3 * 1000);
-      }
     });
 
     return () => {
       clearTimeout(hypeTimer.current);
     };
-  }, []);
+  }, [animate, buildPhysics, buildStage, loader]);
 
   return <Wrapper ref={stageRef} />;
 }
