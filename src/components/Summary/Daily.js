@@ -58,13 +58,6 @@ const Icon = styled.div`
   top: calc(50% - 12px);
 `;
 
-const Title = styled.div`
-  font-size: 14px;
-  font-weight: 800;
-  text-transform: uppercase;
-  white-space: nowrap;
-`;
-
 const Stat = styled.div`
   font-family: ${props => props.theme.fonts.adelle};
   font-size: 14px;

@@ -6,7 +6,10 @@ import { ThemeProvider } from 'styled-components';
 
 import {
   UI,
+  useChatContext,
   useEventContext,
+  useImageryContext,
+  useMessageContext,
   useNotificationContext,
   usePoolContext,
   useTrainContext
@@ -23,7 +26,13 @@ const Contexts = () => (
     <useEventContext.Provider>
       <usePoolContext.Provider>
         <useTrainContext.Provider>
-          <Main />
+          <useMessageContext.Provider>
+            <useChatContext.Provider>
+              <useImageryContext.Provider>
+                <Main />
+              </useImageryContext.Provider>
+            </useChatContext.Provider>
+          </useMessageContext.Provider>
         </useTrainContext.Provider>
       </usePoolContext.Provider>
     </useEventContext.Provider>

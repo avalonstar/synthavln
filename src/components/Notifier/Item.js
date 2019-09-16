@@ -109,11 +109,6 @@ Item.defaultProps = {
   soundOnly: false
 };
 
-const Wrapper = styled(motion.div)`
-  z-index: 2000;
-  align-items: end;
-`;
-
 const Content = styled(motion.div)`
   display: inline-grid;
   grid-template-rows: 1fr auto;
