@@ -5,9 +5,11 @@ import createUseContext from 'constate';
 import firestore from 'firestore';
 
 import useNotificationContext from './Notifications';
+import usePoolContext from './Pool';
 
 function useEvents() {
-  const [, dispatch] = useNotificationContext();
+  const [, dispatchToNotifictions] = useNotificationContext();
+  const [, dispatchToPool] = usePoolContext();
   const [events, setEvents] = useState([]);
   const [snapshot, setSnapshot] = useState(null);
   const [value, loading] = useCollection(
@@ -32,7 +34,8 @@ function useEvents() {
     if (snapshot && !snapshot.isEqual(value)) {
       value.docChanges().forEach(change => {
         if (change.type === 'added') {
-          dispatch({ type: 'add', event: change.doc.data() });
+          dispatchToNotifictions({ type: 'add', event: change.doc.data() });
+          dispatchToPool({ type: 'add', event: change.doc.data() });
         }
       });
     }

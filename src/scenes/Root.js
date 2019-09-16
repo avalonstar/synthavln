@@ -23,8 +23,8 @@ const history = createBrowserHistory();
 
 const Contexts = () => (
   <useNotificationContext.Provider>
-    <useEventContext.Provider>
-      <usePoolContext.Provider>
+    <usePoolContext.Provider>
+      <useEventContext.Provider>
         <useTrainContext.Provider>
           <useMessageContext.Provider>
             <useChatContext.Provider>
@@ -34,8 +34,8 @@ const Contexts = () => (
             </useChatContext.Provider>
           </useMessageContext.Provider>
         </useTrainContext.Provider>
-      </usePoolContext.Provider>
-    </useEventContext.Provider>
+      </useEventContext.Provider>
+    </usePoolContext.Provider>
   </useNotificationContext.Provider>
 );
 
