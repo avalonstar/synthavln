@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { countBy } from 'lodash';
 
 import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
@@ -17,17 +17,22 @@ function Animated() {
   const { emotes } = useImageryContext();
   const [emoteCodes, setEmoteCodes] = useState();
 
-  const processEmotes = message => {
-    const occurances = countBy(message.split(' '), token => token);
-    const filtered = Object.keys(occurances)
-      .filter(key => emoteCodes.includes(key))
-      .reduce((obj, key) => {
-        // eslint-disable-next-line no-param-reassign
-        obj[key] = occurances[key];
-        return obj;
-      }, {});
-    return Object.keys(filtered).forEach(key => ebs.processIncomgingEmote(key));
-  };
+  const processEmotes = useCallback(
+    message => {
+      const occurances = countBy(message.split(' '), token => token);
+      const filtered = Object.keys(occurances)
+        .filter(key => emoteCodes.includes(key))
+        .reduce((obj, key) => {
+          // eslint-disable-next-line no-param-reassign
+          obj[key] = occurances[key];
+          return obj;
+        }, {});
+      return Object.keys(filtered).forEach(key =>
+        ebs.processIncomgingEmote(key)
+      );
+    },
+    [emoteCodes]
+  );
 
   useEffect(() => {
     const codes = emotes.map(emote => emote.code);
@@ -36,8 +41,8 @@ function Animated() {
 
   useEffect(() => {
     if (connected && client) {
-      client.onAction((channel, user, message) => processEmotes(message));
-      client.onPrivmsg((channel, user, message) => processEmotes(message));
+      client.onAction((_channel, _user, message) => processEmotes(message));
+      client.onPrivmsg((_channel, _user, message) => processEmotes(message));
     }
   }, [connected, client, processEmotes]);
 
