@@ -1,23 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Logo, Summaries, Ticker } from 'components';
-import { useEventContext, useNotificationContext } from 'providers';
+import { Header, Notifier, Logo, Summaries, Ticker } from 'components';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
 import { Frame } from 'styles';
-
-function TickerArea({ isVisible }) {
-  const { events } = useEventContext();
-  return (
-    <>
-      <StyledLogo isVisible={isVisible} />
-      <StyledSummaries isVisible={isVisible} />
-      <StyledTicker events={events} isVisible={isVisible} />
-    </>
-  );
-}
 
 const Message = ({ title, subtitle }) => (
   <Wrapper>
@@ -29,11 +17,12 @@ const Message = ({ title, subtitle }) => (
   </Wrapper>
 );
 
-function Layout(props) {
+function Layout({ title, subtitle }) {
   return (
     <StyledWrapper>
-      <TickerArea isVisible />
-      <Message {...props} />
+      <StyledHeader />
+      <StyledNotifier />
+      <Message title={title} subtitle={subtitle} />
     </StyledWrapper>
   );
 }
@@ -42,49 +31,48 @@ function Structure({ children }) {
   return <>{children}</>;
 }
 
-function Scene(props) {
+function Scene({ title, subtitle }) {
   return (
-    <useNotificationContext.Provider>
-      <useEventContext.Provider>
-        <Structure>
-          <Layout {...props} />
-        </Structure>
-      </useEventContext.Provider>
-    </useNotificationContext.Provider>
+    <Structure>
+      <Layout title={title} subtitle={subtitle} />
+    </Structure>
   );
 }
 
 Message.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired
 };
 
-Message.defaultProps = {
-  title: '',
-  subtitle: ''
+Layout.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired
 };
 
 Structure.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-TickerArea.propTypes = {
-  isVisible: PropTypes.bool.isRequired
+Scene.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string
+};
+
+Scene.defaultProps = {
+  title: '',
+  subtitle: ''
 };
 
 const StyledWrapper = styled(Frame.Wrapper)`
   grid-template-columns: auto auto 1fr;
 
   box-shadow: ${props =>
-    `inset 0 60px 0 ${props.theme.colors.main.dark}, ${
-      props.theme.shadows[2]
-    }`};
+    `inset 0 160px 100px -100px ${props.theme.colors.muted.dark}`};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 
   &:after {
     position: absolute;
-    top: 60px;
     width: calc(${props => props.theme.frame.width});
     height: calc(${props => props.theme.frame.height});
 
@@ -111,6 +99,20 @@ const StyledTicker = styled(Ticker)`
   grid-column: 3;
   grid-row: 1 / span 2;
   padding-bottom: 12px;
+`;
+
+const StyledNotifier = styled(Notifier)`
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 2;
+  align-self: start;
+  justify-self: center;
+  margin-top: 32px;
+`;
+
+const StyledHeader = styled(Header)`
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 2;
+  align-self: start;
 `;
 
 const Wrapper = styled.div`
