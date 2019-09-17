@@ -9,7 +9,7 @@ import { Frame } from 'styles';
 function Layout() {
   return (
     <StyledWrapper>
-      <Toy />
+      {/* <Toy /> */}
       <Animated />
       <StyledHeader />
       <StyledNotifier />
