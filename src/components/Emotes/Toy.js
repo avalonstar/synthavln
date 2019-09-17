@@ -7,7 +7,7 @@ import * as PIXI from 'pixi.js';
 import moment from 'moment';
 import styled from 'styled-components';
 
-import { useChatContext } from 'providers';
+import { useMessageContext, useNotificationContext } from 'providers';
 
 import idMap from './assets/idMap.json';
 import sprites from './hype.json';
@@ -31,7 +31,8 @@ const WIDTH = 1920;
 const HEIGHT = 1080;
 
 function Toy() {
-  const { connected, client } = useChatContext();
+  const [notifications] = useNotificationContext();
+  const [messages] = useMessageContext();
   const [hypeActive, setHypeActive] = useState(false);
   const [spamActive, setSpamActive] = useState(true);
 
@@ -310,39 +311,6 @@ function Toy() {
   }, [stageRef, pixiApp, pixiContainer]);
 
   useEffect(() => {
-    if (connected && client) {
-      client.onCommunitySub((_channel, _user, subInfo) => {
-        handleSupport(calculateSubValue(subInfo.plan));
-      });
-
-      client.onResub((_channel, _user, subInfo) => {
-        handleSupport(calculateSubValue(subInfo.plan));
-      });
-
-      client.onSubGift((_channel, _user, subInfo) => {
-        handleSupport(calculateSubValue(subInfo.plan));
-      });
-
-      client.onSub((_channel, _user, subInfo) => {
-        handleSupport(calculateSubValue(subInfo.plan));
-      });
-
-      client.onPrivmsg((_channel, _user, _message, msg) => {
-        const { emoteOffsets } = msg;
-        if (emoteOffsets) {
-          handleEmotes(emoteOffsets);
-        }
-      });
-    }
-  }, [connected, client, handleEmotes, handleSupport]);
-
-  useEffect(() => {
-    if (AUTO_SPAWN_FOR_TEST) {
-      setTimeout(() => createObject(true, false), 3 * 1000);
-    }
-  }, [createObject]);
-
-  useEffect(() => {
     const emoteTexture = `${PUBLIC_URL}/sprites/emoteTexture.json`;
     loader.add(emoteTexture).load((_loader, resources) => {
       textures.current = resources[emoteTexture].textures;
@@ -354,7 +322,34 @@ function Toy() {
     return () => {
       clearTimeout(hypeTimer.current);
     };
-  }, []); // eslint-disable-line
+  }, []);
+
+  useEffect(() => {
+    if (AUTO_SPAWN_FOR_TEST) {
+      setTimeout(() => createObject(true, false), 3 * 1000);
+    }
+  }, [createObject]);
+
+  useEffect(() => {
+    const [message] = messages.slice(-1);
+    if (message) {
+      const { emoteOffsets } = message.tags;
+      if (emoteOffsets) handleEmotes(emoteOffsets);
+    }
+  }, [messages, handleEmotes]);
+
+  useEffect(() => {
+    const [notification] = notifications;
+    if (notification && notification.bucket === 'subscription') {
+      handleSupport(calculateSubValue(notification.plan));
+    }
+  }, [notifications, handleSupport]);
+
+  useEffect(() => {
+    if (AUTO_SPAWN_FOR_TEST) {
+      setTimeout(() => createObject(true, false), 3 * 1000);
+    }
+  }, [createObject]);
 
   return <Wrapper ref={stageRef} />;
 }

@@ -41,12 +41,12 @@ function useChat() {
           setConnected(true);
         }
 
-        chat.onPrivmsg((channel, user, message, msg) => {
+        chat.onPrivmsg((_channel, user, message, msg) => {
           const event = { user, message, tags: msg, isAction: false };
           dispatch({ type: 'add', event });
         });
 
-        chat.onAction((channel, user, message, msg) => {
+        chat.onAction((_channel, user, message, msg) => {
           const event = { user, message, tags: msg, isAction: true };
           dispatch({ type: 'add', event });
         });
