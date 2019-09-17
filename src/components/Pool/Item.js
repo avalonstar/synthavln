@@ -79,7 +79,7 @@ const Wrapper = styled(motion.li)`
   position: relative;
   align-items: center;
   margin-left: 12px;
-  padding: 0 10px;
+  padding: 1px 10px;
   height: 26px;
 
   box-shadow: inset 0 0 0 1px ${props => rgba(props.theme.colors.white, 0.5)};
@@ -93,7 +93,9 @@ const Actor = styled.div`
   box-shadow: 1px 0 0 ${props => rgba(props.theme.colors.white, 0.25)};
   margin-right: 10px;
 
-  font-size: 14px;
+  font-feature-settings: 'lnum';
+  font-size: 18px;
+  font-variant-numeric: lining-nums;
   font-weight: 800;
   text-transform: uppercase;
   white-space: nowrap;
@@ -101,7 +103,7 @@ const Actor = styled.div`
 
 const Type = styled.div`
   font-family: ${props => props.theme.fonts.adelle};
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
 `;

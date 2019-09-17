@@ -58,9 +58,10 @@ const Widget = styled.div`
   align-items: center;
 
   font-family: ${props => props.theme.fonts.freight};
-  font-weight: 600;
-  font-variant-numeric: lining-nums;
   font-feature-settings: 'lnum';
+  font-size: 18px;
+  font-variant-numeric: lining-nums;
+  font-weight: 600;
 `;
 
 const Count = styled.div`
