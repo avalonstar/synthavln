@@ -24,10 +24,10 @@ export const SubscriptionEvent = ({ plan }) => (
   <Wrapper>{getTier(plan)}</Wrapper>
 );
 
-export const SubGiftEvent = ({ name, plan }) => (
+export const SubGiftEvent = ({ plan, gifterName }) => (
   <Wrapper>
     {getTier(plan)} {'gift from '}
-    <Actor>{name}</Actor>
+    <Actor>{gifterName}</Actor>
   </Wrapper>
 );
 
@@ -71,8 +71,8 @@ SubscriptionEvent.propTypes = {
 };
 
 SubGiftEvent.propTypes = {
-  name: PropTypes.string.isRequired,
-  plan: PropTypes.string.isRequired
+  plan: PropTypes.string.isRequired,
+  gifterName: PropTypes.string.isRequired
 };
 
 TipEvent.propTypes = {
