@@ -8,14 +8,13 @@ import styled from 'styled-components';
 import Scene from './Scene';
 
 PIXI.utils.skipHello();
-const WIDTH = 1920;
 const HEIGHT = 1080;
 
-function Toy({ auto, spam }) {
+function Toy({ auto, spam, width }) {
   return (
     <Wrapper>
-      <Stage width={WIDTH} height={HEIGHT} options={{ transparent: true }}>
-        <Scene width={WIDTH} height={HEIGHT} auto={auto} spam={spam} />
+      <Stage width={width} height={HEIGHT} options={{ transparent: true }}>
+        <Scene width={width} height={HEIGHT} auto={auto} spam={spam} />
       </Stage>
     </Wrapper>
   );
@@ -23,16 +22,20 @@ function Toy({ auto, spam }) {
 
 Toy.propTypes = {
   auto: PropTypes.bool,
-  spam: PropTypes.bool
+  spam: PropTypes.bool,
+  width: PropTypes.number
 };
 
 Toy.defaultProps = {
   auto: false,
-  spam: false
+  spam: false,
+  width: 1920
 };
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 1920px;
   height: 1080px;
 `;

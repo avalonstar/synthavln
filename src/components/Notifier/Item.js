@@ -55,7 +55,7 @@ function Item({ className, notification, soundOnly }) {
     return setTimeout(() => dispatch({ type: 'delete' }), 500);
   }
 
-  const baseURL = 'http://synthform.s3.amazonaws.com/audio/avalonstar/';
+  const baseURL = 'https://synthform.s3.amazonaws.com/audio/avalonstar/';
 
   return (
     <AnimatePresence exitBeforeEnter>
