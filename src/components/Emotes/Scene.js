@@ -1,5 +1,6 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable no-param-reassign */
+/* eslint-disable no-unused-vars */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
