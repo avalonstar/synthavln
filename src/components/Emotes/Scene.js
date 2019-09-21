@@ -119,7 +119,7 @@ function Scene({ width, height }) {
         setTimeout(() => createObject(true, false), Math.random() * 2 * 1000);
       }
     },
-    [world]
+    [pixiApp, world, width]
   );
 
   const handleSupport = useCallback(
@@ -217,7 +217,7 @@ function Scene({ width, height }) {
         }
       });
     }
-  }, [pixiApp, world]);
+  }, [pixiApp, world, height]);
 
   const buildPhysics = useCallback(() => {
     world.setGlobalStiffness(1e4);
@@ -261,9 +261,9 @@ function Scene({ width, height }) {
     topShape.collisionGroup = WALL;
 
     world.on('postStep', () => cleanup());
-  }, [cleanup, world]);
+  }, [cleanup, world, height, width]);
 
-  const setupTMI = () => {
+  const setupTMI = useCallback(() => {
     client.on('subgift', (channel, username, recepient, method, userstate) => {
       handleSupport(calculateSubValue(method));
     });
@@ -309,7 +309,7 @@ function Scene({ width, height }) {
     });
 
     client.connect();
-  };
+  }, [client, handleEmotes, handleSupport]);
 
   useTick(delta => {
     world.step(1 / 60, delta, 10);
@@ -328,28 +328,13 @@ function Scene({ width, height }) {
       buildPhysics();
       setupTMI();
     });
-  }, []);
+  }, [loader, buildPhysics, setupTMI]);
 
   useEffect(() => {
     if (AUTO_SPAWN_FOR_TEST) {
       setTimeout(() => createObject(true, false), 3 * 1000);
     }
   }, [createObject]);
-
-  // useEffect(() => {
-  //   const [message] = messages.slice(-1);
-  //   if (message) {
-  //     const { emoteOffsets } = message.tags;
-  //     if (emoteOffsets) handleEmotes(emoteOffsets);
-  //   }
-  // }, [messages, handleEmotes]);
-
-  // useEffect(() => {
-  //   const [notification] = notifications;
-  //   if (notification && notification.bucket === 'subscription') {
-  //     handleSupport(calculateSubValue(notification.plan));
-  //   }
-  // }, [notifications, handleSupport]);
 
   useEffect(() => {
     if (AUTO_SPAWN_FOR_TEST) {
