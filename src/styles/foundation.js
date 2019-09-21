@@ -7,12 +7,7 @@ export const foundation = {
   colors,
   fonts: {
     adelle: 'adelle-sans, sans-serif',
-    freight: 'freight-sans-pro, sans-serif',
-    barlow: 'Barlow, sans-serif',
-    din: 'urw-din, sans-serif',
-    gotham: "'Gotham SSm A', 'Gotham SSm B', sans-serif",
-    inter: "'Inter UI', sans-serif",
-    montserrat: 'Montserrat, sans-serif'
+    freight: 'freight-sans-pro, sans-serif'
   },
   easing: 'cubic-bezier(.62, .28, .23, .99)',
   frame: {
