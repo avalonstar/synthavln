@@ -286,9 +286,24 @@ function Scene({ width, height }) {
         }
       }
     );
-    client.on('message', (channel, user) => {
+    client.on('message', (channel, user, message) => {
       if (user.emotes) {
         handleEmotes(user.emotes);
+      } else if (
+        message.indexOf('!') === 0 &&
+        user.username === channel.replace('#', '')
+      ) {
+        const command = message
+          .toLowerCase()
+          .replace('!', '')
+          .split(' ')
+          .slice(0, 2)
+          .join(' ');
+        if (command === 'spam on') {
+          setSpamActive(true);
+        } else if (command === 'spam off') {
+          setSpamActive(false);
+        }
       }
     });
 
