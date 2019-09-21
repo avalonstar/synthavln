@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Header, Notifier } from 'components';
+import { Header, Notifier, Toy } from 'components';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -20,6 +20,7 @@ const Message = ({ title, subtitle }) => (
 function Layout({ title, subtitle }) {
   return (
     <StyledWrapper>
+      <Toy spam />
       <StyledHeader />
       <StyledNotifier />
       <Message title={title} subtitle={subtitle} />

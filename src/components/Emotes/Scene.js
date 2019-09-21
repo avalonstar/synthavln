@@ -12,7 +12,6 @@ import moment from 'moment';
 import idMap from './assets/idMap.json';
 import sprites from './hype.json';
 
-const AUTO_SPAWN_FOR_TEST = false;
 const { tmi } = window;
 const { NODE_ENV, PUBLIC_URL } = process.env;
 
@@ -28,10 +27,10 @@ const OBJECT = 2 ** 0;
 const WALL = 2 ** 1;
 const GROUND = 2 ** 2;
 
-function Scene({ width, height }) {
+function Scene({ width, height, auto, spam }) {
   const pixiApp = useApp();
   const [hypeActive, setHypeActive] = useState(false);
-  const [spamActive, setSpamActive] = useState(true);
+  const [spamActive, setSpamActive] = useState(spam);
 
   // Instance Variables.
   const hypeTimer = useRef(null);
@@ -63,7 +62,7 @@ function Scene({ width, height }) {
   };
 
   const createObject = useCallback(
-    (auto, cheer, emote) => {
+    (autoCreate, cheer, emote) => {
       const object = {
         alive: true,
         created: moment(),
@@ -115,11 +114,11 @@ function Scene({ width, height }) {
 
       objectList.current.push(object);
 
-      if (auto && AUTO_SPAWN_FOR_TEST) {
+      if (auto && autoCreate) {
         setTimeout(() => createObject(true, false), Math.random() * 2 * 1000);
       }
     },
-    [pixiApp, world, width]
+    [pixiApp, world, width, auto]
   );
 
   const handleSupport = useCallback(
@@ -331,16 +330,10 @@ function Scene({ width, height }) {
   }, [loader, buildPhysics, setupTMI]);
 
   useEffect(() => {
-    if (AUTO_SPAWN_FOR_TEST) {
+    if (auto) {
       setTimeout(() => createObject(true, false), 3 * 1000);
     }
-  }, [createObject]);
-
-  useEffect(() => {
-    if (AUTO_SPAWN_FOR_TEST) {
-      setTimeout(() => createObject(true, false), 3 * 1000);
-    }
-  }, [createObject]);
+  }, [auto, createObject]);
 
   return (
     <ParticleContainer
@@ -352,7 +345,9 @@ function Scene({ width, height }) {
 
 Scene.propTypes = {
   width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired
+  height: PropTypes.number.isRequired,
+  auto: PropTypes.bool.isRequired,
+  spam: PropTypes.bool.isRequired
 };
 
 export default Scene;
