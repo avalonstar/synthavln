@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Header, Notifier, Logo, Summaries, Ticker } from 'components';
+import { Header, Notifier } from 'components';
 
 import styled from 'styled-components';
 import { rgba } from 'polished';
@@ -80,25 +80,6 @@ const StyledWrapper = styled(Frame.Wrapper)`
     content: '';
     z-index: -1;
   }
-`;
-
-const StyledLogo = styled(Logo)`
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  padding-bottom: 12px;
-  padding-left: 24px;
-`;
-
-const StyledSummaries = styled(Summaries)`
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  padding-bottom: 12px;
-`;
-
-const StyledTicker = styled(Ticker)`
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  padding-bottom: 12px;
 `;
 
 const StyledNotifier = styled(Notifier)`
