@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Animated, Debug, Header, Notifier, Toy } from 'components';
+import { Debug, Header, Notifier, Toy } from 'components';
 
 import styled from 'styled-components';
 import { Frame } from 'styles';
@@ -10,7 +10,6 @@ function Layout() {
   return (
     <StyledWrapper>
       <Toy />
-      <Animated />
       <StyledHeader />
       <StyledNotifier />
       <StyledDebug />
