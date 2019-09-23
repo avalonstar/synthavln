@@ -1,21 +1,28 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { countBy } from 'lodash';
+
+import { motion } from 'framer-motion';
 
 import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
 import { useChatContext, useImageryContext } from 'providers';
 
-const ebs = new EmoteBucketSystem({
-  emoteThreshold: 2,
-  trackedEmotes: ['avalonPOG', 'avalonFEELS'],
-  onThresholdReached: emote => {
-    console.log('onThresholdReached', emote);
-  }
-});
+import * as Poses from './Poses';
 
-function Animated() {
+function Animated({ className }) {
   const { connected, client } = useChatContext();
   const { emotes } = useImageryContext();
   const [emoteCodes, setEmoteCodes] = useState();
+  const [currentPose, setCurrentPose] = useState('avalonBASE');
+
+  const ebs = new EmoteBucketSystem({
+    emoteThreshold: 100,
+    trackedEmotes: ['avalonHEHE'],
+    onThresholdReached: emote => {
+      console.log('onThresholdReached', emote);
+      setCurrentPose(emote);
+    }
+  });
 
   const processEmotes = useCallback(
     message => {
@@ -31,8 +38,21 @@ function Animated() {
         ebs.processIncomgingEmote(key)
       );
     },
-    [emoteCodes]
+    [emoteCodes, ebs]
   );
+
+  const resetPose = () => {
+    setCurrentPose('avalonBASE');
+  };
+
+  const availablePoses = () => ({
+    avalonBASE: <Poses.avalonBASE />,
+    avalonHEHE: <Poses.avalonHEHE callback={resetPose} />
+  });
+
+  useEffect(() => {
+    console.log('currentPose', currentPose);
+  }, [currentPose]);
 
   useEffect(() => {
     const codes = emotes.map(emote => emote.code);
@@ -46,7 +66,23 @@ function Animated() {
     }
   }, [connected, client, processEmotes]);
 
-  return <div className="App" />;
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      {availablePoses()[currentPose]}
+    </motion.div>
+  );
 }
+
+Animated.propTypes = {
+  className: PropTypes.string
+};
+
+Animated.defaultProps = {
+  className: ''
+};
 
 export default Animated;
