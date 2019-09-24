@@ -80,6 +80,8 @@ Animated.defaultProps = {
 };
 
 const Wrapper = styled(motion.div)`
+  margin-right: -60px;
+
   img {
     display: block;
   }
