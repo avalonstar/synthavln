@@ -57,10 +57,10 @@ export default class EmoteBucketSystem {
     if (this.leakingTimer) clearInterval(this.leakingTimer);
   }
 
-  processIncomgingEmote(emote) {
+  processIncomgingEmote(emote, occurances = 1) {
     if (!this.blocked) {
       if (this.buckets[emote] !== null && this.buckets[emote] !== undefined) {
-        this.buckets[emote] += 1;
+        this.buckets[emote] += occurances;
         if (this.buckets[emote] >= this.emoteThreshold) {
           this.fireThresholdEvent(emote);
         }
