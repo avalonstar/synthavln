@@ -44,6 +44,15 @@ function Animated({ className }) {
     setCurrentPose('avalonBASE');
   };
 
+  const availablePoses = () => ({
+    avalonBASE: <Poses.avalonBASE />,
+    avalonHEHE: <Poses.avalonHEHE callback={resetPose} />
+  });
+
+  useEffect(() => {
+    console.log('currentPose', currentPose);
+  }, [currentPose]);
+
   useEffect(() => {
     const codes = emotes.map(emote => emote.code);
     setEmoteCodes(codes);

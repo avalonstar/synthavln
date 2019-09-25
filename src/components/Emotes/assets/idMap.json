@@ -21,7 +21,6 @@
   "1426733": "avalonSMOL",
   "1481552": "avalonSIP",
   "1481558": "avalonBLUSH",
-  "1503980": "avalonCOZY",
   "1504000": "avalonGIB",
   "300347574": "avalonOWO",
   "300392080": "avalonOHWOAH",
@@ -42,5 +41,10 @@
   "300643041": "avalonBLEH",
   "300646404": "avalonLURK",
   "300685088": "avalonRIP",
-  "300685091": "avalonSHY"
+  "300685091": "avalonSHY",
+  "300859011": "avalonFINE",
+  "300859014": "avalonKANPAI",
+  "300859015": "avalonLEAP",
+  "300859017": "avalonSQUISH",
+  "300859100": "avalonCOZY"
 }
