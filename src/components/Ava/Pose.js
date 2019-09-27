@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Spritesheet from 'react-responsive-spritesheet';
 
 import { url, path } from './constants';
 import poses from './poses';
 
-function Pose({ name, callback }) {
-  const [spritesheet, setSpritesheet] = useState(null);
-
-  useEffect(() => {
-    if (spritesheet) {
-      spritesheet.play();
-    }
-  }, [spritesheet]);
-
+function Pose({ name, onPlay, onComplete }) {
   return (
     <Spritesheet
       image={`${url}${path}/${name}.png`}
@@ -23,22 +15,17 @@ function Pose({ name, callback }) {
       fps={30}
       autoplay={false}
       isResponsive={false}
-      getInstance={spritesheet => {
-        setSpritesheet(spritesheet);
-      }}
-      onPlay={() => {
-        console.log('onPlay');
-      }}
-      onPause={() => {
-        callback();
-      }}
+      onInit={spritesheet => spritesheet.play()}
+      onPlay={() => onPlay(name)}
+      onPause={() => onComplete(name)}
     />
   );
 }
 
 Pose.propTypes = {
   name: PropTypes.string.isRequired,
-  callback: PropTypes.func.isRequired
+  onPlay: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired
 };
 
 export default Pose;

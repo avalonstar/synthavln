@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
 import { countBy } from 'lodash';
 
@@ -6,23 +6,50 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
-import { useChatContext, useImageryContext } from 'providers';
+import { useImageryContext } from 'providers';
 
 import Pose from './Pose';
 import { url, path } from './constants';
 
+const { tmi } = window;
+const { NODE_ENV } = process.env;
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'add':
+      return [...state, action.pose];
+    case 'delete':
+      return [...state.slice(1)];
+    default:
+      throw new Error('Unexpected action.');
+  }
+};
+
 function Animated({ className }) {
-  const { connected, client } = useChatContext();
   const { emotes } = useImageryContext();
   const [emoteCodes, setEmoteCodes] = useState([]);
-  const [currentPose, setCurrentPose] = useState('avalonBASE');
+  const [isAnimating, setAnimating] = useState(false);
+  const [poseQueue, dispatchToQueue] = useReducer(reducer, []);
+
+  // eslint-disable-next-line new-cap
+  const client = new tmi.client({
+    options: {
+      debug: NODE_ENV !== 'production'
+    },
+    connection: {
+      reconnect: true,
+      secure: true
+    },
+    channels: ['#avalonstar']
+  });
 
   const ebs = new EmoteBucketSystem({
-    emoteThreshold: 100,
+    emoteThreshold: 5,
+    systemCooldown: 1000,
     trackedEmotes: ['avalonHEHE'],
     onThresholdReached: emote => {
       console.log('onThresholdReached', emote);
-      setCurrentPose(emote);
+      if (!isAnimating) dispatchToQueue({ type: 'add', pose: emote });
     }
   });
 
@@ -40,25 +67,47 @@ function Animated({ className }) {
     });
   };
 
-  const resetPose = () => {
-    setCurrentPose('avalonBASE');
+  const setupTMI = () => {
+    client.on('message', (channel, user, message) => processEmotes(message));
+    client.connect();
+  };
+
+  const blink = () => {
+    const [min, max] = [3, 9];
+    const rand = Math.floor(Math.random() * (max - min + 1) + min);
+    setTimeout(
+      () => dispatchToQueue({ type: 'add', pose: 'avalonBLINK0' }),
+      rand * 1000
+    );
+  };
+
+  const onPosePlay = () => {
+    setAnimating(true);
+  };
+
+  const onPoseComplete = () => {
+    setAnimating(false);
+    dispatchToQueue({ type: 'delete' });
   };
 
   useEffect(() => {
-    console.log('currentPose', currentPose);
-  }, [currentPose]);
+    if (emoteCodes.length > 0) setupTMI();
+  }, [emoteCodes]);
+
+  useEffect(() => {
+    console.log('Pose Queue:', poseQueue);
+  }, [poseQueue]);
+
+  useEffect(() => {
+    if (poseQueue.length === 0) {
+      blink();
+    }
+  }, [poseQueue]);
 
   useEffect(() => {
     const codes = emotes.map(emote => emote.code);
     setEmoteCodes(codes);
   }, [emotes]);
-
-  useEffect(() => {
-    if (connected && client) {
-      client.onAction((_channel, _user, message) => processEmotes(message));
-      client.onPrivmsg((_channel, _user, message) => processEmotes(message));
-    }
-  }, [connected, client, processEmotes]);
 
   return (
     <Wrapper
@@ -66,10 +115,14 @@ function Animated({ className }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      {currentPose === 'avalonBASE' ? (
+      {poseQueue.length === 0 ? (
         <img src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
       ) : (
-        <Pose name={currentPose} callback={resetPose} />
+        <Pose
+          name={poseQueue[0]}
+          onPlay={onPosePlay}
+          onComplete={onPoseComplete}
+        />
       )}
     </Wrapper>
   );
