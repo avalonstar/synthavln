@@ -1,4 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState
+} from 'react';
 import PropTypes from 'prop-types';
 import { countBy } from 'lodash';
 
@@ -25,11 +31,38 @@ const reducer = (state, action) => {
   }
 };
 
+const animationReducer = (state, action) => {
+  switch (action.type) {
+    case 'start':
+      return { ...state, isAnimating: true, isCooldown: false };
+    case 'stop':
+      return { ...state, isAnimating: false, inCooldown: true };
+    case 'block':
+      return { ...state, blinkBlocked: true };
+    case 'unblock':
+      return { ...state, blinkBlocked: false };
+    case 'reset':
+      return { ...state, isAnimating: false, inCooldown: false };
+    default:
+      return state;
+  }
+};
+
 function Animated({ className }) {
   const { emotes } = useImageryContext();
+  const cooldownTimer = useRef(null);
+  const blinkBlockTimer = useRef(null);
+  const blinkChecker = useRef(null);
   const [emoteCodes, setEmoteCodes] = useState([]);
-  const [isAnimating, setAnimating] = useState(false);
   const [poseQueue, dispatchToQueue] = useReducer(reducer, []);
+  const [
+    { isAnimating, inCooldown, blinkBlocked },
+    dispatchToAnimState
+  ] = useReducer(animationReducer, {
+    isAnimating: false,
+    isCooldown: false,
+    blinkBlocked: false
+  });
 
   // eslint-disable-next-line new-cap
   const client = new tmi.client({
@@ -72,22 +105,44 @@ function Animated({ className }) {
     client.connect();
   };
 
-  const blink = () => {
-    const [min, max] = [3, 9];
-    const rand = Math.floor(Math.random() * (max - min + 1) + min);
-    setTimeout(
-      () => dispatchToQueue({ type: 'add', pose: 'avalonBLINK0' }),
-      rand * 1000
-    );
-  };
+  const shouldBlink = useCallback(() => {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    if (
+      !isAnimating &&
+      !inCooldown &&
+      !blinkBlocked &&
+      poseQueue.length === 0
+    ) {
+      if (roll % 2 !== 0) {
+        dispatchToQueue({ type: 'add', pose: 'avalonBLINK0' });
+        dispatchToAnimState({ type: 'block' });
+        const [min, max] = [3, 9];
+        const rand = Math.floor(Math.random() * (max - min + 1) + min);
+        blinkBlockTimer.current = setTimeout(() => {
+          dispatchToAnimState({ type: 'unblock' });
+        }, rand * 1000);
+      }
+    }
+  }, [isAnimating, inCooldown, blinkBlocked]);
+
+  useEffect(() => {
+    blinkChecker.current = shouldBlink;
+  }, [shouldBlink]);
+
+  const resetAnim = useCallback(() => {
+    dispatchToAnimState({ type: 'reset' });
+  }, []);
 
   const onPosePlay = () => {
-    setAnimating(true);
+    dispatchToAnimState({ type: 'start' });
   };
 
   const onPoseComplete = () => {
-    setAnimating(false);
+    dispatchToAnimState({ type: 'stop' });
     dispatchToQueue({ type: 'delete' });
+    cooldownTimer.current = setTimeout(() => {
+      resetAnim();
+    }, 0.4 * 1000); // .4 second animation blocker
   };
 
   useEffect(() => {
@@ -99,15 +154,20 @@ function Animated({ className }) {
   }, [poseQueue]);
 
   useEffect(() => {
-    if (poseQueue.length === 0) {
-      blink();
-    }
-  }, [poseQueue]);
-
-  useEffect(() => {
     const codes = emotes.map(emote => emote.code);
     setEmoteCodes(codes);
   }, [emotes]);
+
+  useEffect(() => {
+    const tick = () => {
+      if (blinkChecker.current) blinkChecker.current();
+    };
+
+    const id = setInterval(tick, 0.6 * 1000); // run interval every .6 seconds
+    return () => {
+      clearInterval(id);
+    };
+  }, []);
 
   return (
     <Wrapper
@@ -115,7 +175,7 @@ function Animated({ className }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      {poseQueue.length === 0 ? (
+      {poseQueue.length === 0 || inCooldown ? (
         <img src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
       ) : (
         <Pose
