@@ -123,7 +123,7 @@ function Animated({ className }) {
         }, rand * 1000);
       }
     }
-  }, [isAnimating, inCooldown, blinkBlocked]);
+  }, [isAnimating, inCooldown, blinkBlocked, poseQueue]);
 
   useEffect(() => {
     blinkChecker.current = shouldBlink;
