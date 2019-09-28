@@ -12,13 +12,19 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
+import { useLoaderSystem } from 'helpers/LoaderSystem';
 import { useImageryContext } from 'providers';
 
 import Pose from './Pose';
 import { url, path } from './constants';
+import poses from './poses';
 
 const { tmi } = window;
 const { NODE_ENV } = process.env;
+
+const baseUrl =
+  'https://synthform.s3.us-east-1.amazonaws.com/images/avalonstar/poses/';
+const concurency = 10;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,7 +54,7 @@ const animationReducer = (state, action) => {
   }
 };
 
-function Animated({ className }) {
+function Avatar() {
   const { emotes } = useImageryContext();
   const cooldownTimer = useRef(null);
   const blinkBlockTimer = useRef(null);
@@ -79,10 +85,10 @@ function Animated({ className }) {
   const ebs = new EmoteBucketSystem({
     emoteThreshold: 5,
     systemCooldown: 1000,
-    trackedEmotes: ['avalonHEHE'],
+    trackedEmotes: ['avalonFEELS', 'avalonHEHE'],
     onThresholdReached: emote => {
       console.log('onThresholdReached', emote);
-      if (!isAnimating) dispatchToQueue({ type: 'add', pose: emote });
+      dispatchToQueue({ type: 'add', pose: emote });
     }
   });
 
@@ -114,7 +120,7 @@ function Animated({ className }) {
       poseQueue.length === 0
     ) {
       if (roll % 2 !== 0) {
-        dispatchToQueue({ type: 'add', pose: 'avalonBLINK0' });
+        dispatchToQueue({ type: 'add', pose: 'avalonBLINK' });
         dispatchToAnimState({ type: 'block' });
         const [min, max] = [3, 9];
         const rand = Math.floor(Math.random() * (max - min + 1) + min);
@@ -170,11 +176,7 @@ function Animated({ className }) {
   }, []);
 
   return (
-    <Wrapper
-      className={className}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
+    <Wrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       {poseQueue.length === 0 || inCooldown ? (
         <img src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
       ) : (
@@ -188,11 +190,44 @@ function Animated({ className }) {
   );
 }
 
-Animated.propTypes = {
+function Container({ className }) {
+  const {
+    initialized,
+    loaded,
+    error,
+    resources,
+    resetSystem
+  } = useLoaderSystem({
+    baseUrl,
+    concurency,
+    resourceCollection: poses,
+    resourceExt: 'png',
+    debug: true
+  });
+
+  useEffect(() => {
+    if (error) {
+      // error handling should go here, then reset the system (probably needs some sort of a limiter/backoff system)
+      resetSystem();
+    }
+  }, [error, resetSystem]);
+
+  return initialized ? (
+    loaded ? (
+      <div className={className}>
+        <Avatar />
+      </div>
+    ) : (
+      <div>Loading...</div>
+    )
+  ) : null;
+}
+
+Container.propTypes = {
   className: PropTypes.string
 };
 
-Animated.defaultProps = {
+Container.defaultProps = {
   className: ''
 };
 
@@ -204,4 +239,4 @@ const Wrapper = styled(motion.div)`
   }
 `;
 
-export default Animated;
+export default Container;

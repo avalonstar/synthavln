@@ -8,9 +8,10 @@ import poses from './poses';
 function Pose({ name, onPlay, onComplete }) {
   return (
     <Spritesheet
+      style={poses[name].style || {}}
       image={`${url}${path}/${name}.png`}
-      widthFrame={321}
-      heightFrame={439}
+      widthFrame={poses[name].width}
+      heightFrame={poses[name].height}
       steps={poses[name].steps}
       fps={30}
       autoplay={false}
