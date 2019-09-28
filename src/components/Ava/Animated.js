@@ -119,7 +119,7 @@ function Avatar() {
       if (roll % 2 !== 0) {
         dispatchToQueue({ type: 'add', pose: 'avalonBLINK' });
         dispatchToAnimState({ type: 'block' });
-        const [min, max] = [3, 6];
+        const [min, max] = [1, 6];
         const rand = Math.floor(Math.random() * (max - min + 1) + min);
         blinkBlockTimer.current = setTimeout(() => {
           dispatchToAnimState({ type: 'unblock' });
