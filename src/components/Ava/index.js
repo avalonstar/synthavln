@@ -1,1 +1,1 @@
-export { default } from './Animated';
+export { default } from './Avatar';

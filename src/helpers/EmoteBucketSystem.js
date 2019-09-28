@@ -76,6 +76,7 @@ export default class EmoteBucketSystem {
   }
 
   initiateCooldown() {
+    console.log('system is in cooldown for:', this.systemCooldown);
     this.blocked = true;
     this.initializeBuckets();
     this.cooldownTimer = setTimeout(() => {
