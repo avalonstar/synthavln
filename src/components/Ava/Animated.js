@@ -16,14 +16,12 @@ import { useLoaderSystem } from 'helpers/LoaderSystem';
 import { useImageryContext } from 'providers';
 
 import Pose from './Pose';
-import { url, path } from './constants';
+import { baseUrl, url, path } from './constants';
 import poses from './poses';
 
 const { tmi } = window;
 const { NODE_ENV } = process.env;
 
-const baseUrl =
-  'https://synthform.s3.us-east-1.amazonaws.com/images/avalonstar/poses/';
 const concurency = 10;
 
 const reducer = (state, action) => {
@@ -59,6 +57,7 @@ function Avatar() {
   const cooldownTimer = useRef(null);
   const blinkBlockTimer = useRef(null);
   const blinkChecker = useRef(null);
+  const [connected, setConnected] = useState(false);
   const [emoteCodes, setEmoteCodes] = useState([]);
   const [poseQueue, dispatchToQueue] = useReducer(reducer, []);
   const [
@@ -92,24 +91,22 @@ function Avatar() {
     }
   });
 
-  const processEmotes = message => {
-    const occurances = countBy(message.split(' '), token => token);
-    const filtered = Object.keys(occurances)
-      .filter(key => emoteCodes.includes(key))
-      .reduce((obj, key) => {
-        // eslint-disable-next-line no-param-reassign
-        obj[key] = occurances[key];
-        return obj;
-      }, {});
-    return Object.keys(filtered).forEach(key => {
-      ebs.processIncomgingEmote(key, occurances[key]);
-    });
-  };
-
-  const setupTMI = () => {
-    client.on('message', (channel, user, message) => processEmotes(message));
-    client.connect();
-  };
+  const processEmotes = useCallback(
+    message => {
+      const occurances = countBy(message.split(' '), token => token);
+      const filtered = Object.keys(occurances)
+        .filter(key => emoteCodes.includes(key))
+        .reduce((obj, key) => {
+          // eslint-disable-next-line no-param-reassign
+          obj[key] = occurances[key];
+          return obj;
+        }, {});
+      return Object.keys(filtered).forEach(key => {
+        ebs.processIncomgingEmote(key, occurances[key]);
+      });
+    },
+    [emoteCodes, ebs]
+  );
 
   const shouldBlink = useCallback(() => {
     const roll = Math.floor(Math.random() * 6) + 1;
@@ -122,7 +119,7 @@ function Avatar() {
       if (roll % 2 !== 0) {
         dispatchToQueue({ type: 'add', pose: 'avalonBLINK' });
         dispatchToAnimState({ type: 'block' });
-        const [min, max] = [3, 9];
+        const [min, max] = [3, 6];
         const rand = Math.floor(Math.random() * (max - min + 1) + min);
         blinkBlockTimer.current = setTimeout(() => {
           dispatchToAnimState({ type: 'unblock' });
@@ -152,12 +149,12 @@ function Avatar() {
   };
 
   useEffect(() => {
-    if (emoteCodes.length > 0) setupTMI();
-  }, [emoteCodes]);
-
-  useEffect(() => {
-    console.log('Pose Queue:', poseQueue);
-  }, [poseQueue]);
+    if (emoteCodes.length > 0 && !connected) {
+      client.on('message', (channel, user, message) => processEmotes(message));
+      client.connect();
+      setConnected(true);
+    }
+  }, [emoteCodes, connected, client, processEmotes]);
 
   useEffect(() => {
     const codes = emotes.map(emote => emote.code);
@@ -176,7 +173,7 @@ function Avatar() {
   }, []);
 
   return (
-    <Wrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <Wrapper>
       {poseQueue.length === 0 || inCooldown ? (
         <img src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
       ) : (
@@ -191,13 +188,7 @@ function Avatar() {
 }
 
 function Container({ className }) {
-  const {
-    initialized,
-    loaded,
-    error,
-    resources,
-    resetSystem
-  } = useLoaderSystem({
+  const { initialized, loaded, error, resetSystem } = useLoaderSystem({
     baseUrl,
     concurency,
     resourceCollection: poses,
@@ -207,20 +198,25 @@ function Container({ className }) {
 
   useEffect(() => {
     if (error) {
-      // error handling should go here, then reset the system (probably needs some sort of a limiter/backoff system)
+      // error handling should go here,
+      // then reset the system (probably needs some sort of a limiter/backoff system)
       resetSystem();
     }
   }, [error, resetSystem]);
 
-  return initialized ? (
-    loaded ? (
-      <div className={className}>
+  return (
+    initialized &&
+    loaded &&
+    !error && (
+      <motion.div
+        className={className}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaded ? 1 : 0 }}
+      >
         <Avatar />
-      </div>
-    ) : (
-      <div>Loading...</div>
+      </motion.div>
     )
-  ) : null;
+  );
 }
 
 Container.propTypes = {
@@ -232,7 +228,7 @@ Container.defaultProps = {
 };
 
 const Wrapper = styled(motion.div)`
-  margin-right: -60px;
+  margin-right: -72px;
 
   img {
     display: block;
