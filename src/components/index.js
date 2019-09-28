@@ -1,4 +1,4 @@
-export { default as Animated } from './Ava';
+export { default as Avatar } from './Ava';
 export { Ava, Logo, Logotype } from './Branding';
 export { default as Camera } from './Camera';
 export { default as Debug } from './Debug';
