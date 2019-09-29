@@ -19,7 +19,7 @@ function Pool({ className }) {
   return (
     <AnimatePresence exitBeforeEnter>
       {isVisible && (
-        <Wrapper
+        <motion.div
           className={className}
           initial={{ x: -5, opacity: 0 }}
           animate={{ x: 0, opacity: 1, transition: { delay: 1 } }}
@@ -30,7 +30,7 @@ function Pool({ className }) {
               <Item key={event.timestamp} data={event} />
             ))}
           </Items>
-        </Wrapper>
+        </motion.div>
       )}
     </AnimatePresence>
   );
@@ -43,8 +43,6 @@ Pool.propTypes = {
 Pool.defaultProps = {
   className: ''
 };
-
-const Wrapper = styled(motion.div)``;
 
 const Items = styled.ol`
   display: flex;
