@@ -56,8 +56,8 @@ const Main = () => (
       path="/scenes/start"
       render={() => (
         <Interstitial
-          title="Please stand by"
-          subtitle="We'll be getting started soon enough!"
+          title="Starting soon"
+          subtitle="Welcome! Give me a minute to get settled."
         />
       )}
     />

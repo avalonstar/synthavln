@@ -99,9 +99,9 @@ const StyledHeader = styled(Header)`
 
 const Wrapper = styled.div`
   grid-column: 1 / span 3;
-  grid-row: 2 / span 8;
-  margin: 24px;
-  padding: 112px 72px;
+  grid-row: 5 / span 4;
+  margin: 0 24px;
+  padding: 0 42px;
 `;
 
 const Title = styled.div`
