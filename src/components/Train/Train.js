@@ -59,7 +59,7 @@ const Widget = styled.div`
 
   font-family: ${props => props.theme.fonts.freight};
   font-feature-settings: 'lnum';
-  font-size: 18px;
+  font-size: 20px;
   font-variant-numeric: lining-nums;
   font-weight: 600;
 `;

@@ -79,7 +79,7 @@ const Wrapper = styled(motion.li)`
   position: relative;
   align-items: center;
   margin-left: 12px;
-  padding: 1px 10px;
+  padding: 2px 10px 3px;
   height: 26px;
 
   box-shadow: inset 0 0 0 1px ${props => rgba(props.theme.colors.white, 0.5)};
