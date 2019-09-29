@@ -5,12 +5,12 @@ import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 
 import {
-  UI,
   useEventContext,
   useImageryContext,
   useNotificationContext,
   usePoolContext,
-  useTrainContext
+  useTrainContext,
+  useUIContext
 } from 'providers';
 import { Activity, Ava, Camera, Sounds, Splitscreen } from 'scenes/Activity';
 import App from 'scenes/App';
@@ -20,17 +20,19 @@ import { foundation } from 'styles/foundation';
 const history = createBrowserHistory();
 
 const Contexts = () => (
-  <useNotificationContext.Provider>
-    <usePoolContext.Provider>
-      <useEventContext.Provider>
-        <useTrainContext.Provider>
-          <useImageryContext.Provider>
-            <Main />
-          </useImageryContext.Provider>
-        </useTrainContext.Provider>
-      </useEventContext.Provider>
-    </usePoolContext.Provider>
-  </useNotificationContext.Provider>
+  <useUIContext.Provider>
+    <useNotificationContext.Provider>
+      <usePoolContext.Provider>
+        <useEventContext.Provider>
+          <useTrainContext.Provider>
+            <useImageryContext.Provider>
+              <Main />
+            </useImageryContext.Provider>
+          </useTrainContext.Provider>
+        </useEventContext.Provider>
+      </usePoolContext.Provider>
+    </useNotificationContext.Provider>
+  </useUIContext.Provider>
 );
 
 const Main = () => (
@@ -59,9 +61,7 @@ function Root() {
   return (
     <Router history={history}>
       <ThemeProvider theme={foundation}>
-        <UI.Provider>
-          <Contexts />
-        </UI.Provider>
+        <Contexts />
       </ThemeProvider>
     </Router>
   );
