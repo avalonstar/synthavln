@@ -30,7 +30,7 @@ Hero.defaultProps = {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto 1fr;
-  grid-template-rows: 24px auto;
+  grid-template-rows: 24px 40px;
   align-items: center;
 `;
 
