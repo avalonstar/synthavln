@@ -35,7 +35,8 @@ function useEvents() {
       value.docChanges().forEach(change => {
         if (change.type === 'added') {
           dispatchToNotifictions({ type: 'add', event: change.doc.data() });
-          dispatchToPool({ type: 'add', event: change.doc.data() });
+          if (change.doc.data().bucket === 'subscription')
+            dispatchToPool({ type: 'add', event: change.doc.data() });
         }
       });
     }
