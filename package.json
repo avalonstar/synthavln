@@ -28,7 +28,7 @@
     "react-use": "^12.2.2",
     "resource-loader": "^3.0.1",
     "styled-components": "^4.4.0",
-    "twitch": "^3.4.4",
+    "twitch": "^3.5.0",
     "twitch-chat-client": "^3.5.0"
   },
   "scripts": {
