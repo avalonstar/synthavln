@@ -5,12 +5,12 @@ import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 
 import {
-  UI,
   useEventContext,
   useImageryContext,
   useNotificationContext,
   usePoolContext,
-  useTrainContext
+  useTrainContext,
+  useUIContext
 } from 'providers';
 import { Activity, Ava, Camera, Sounds, Splitscreen } from 'scenes/Activity';
 import App from 'scenes/App';
@@ -20,17 +20,19 @@ import { foundation } from 'styles/foundation';
 const history = createBrowserHistory();
 
 const Contexts = () => (
-  <useNotificationContext.Provider>
-    <usePoolContext.Provider>
-      <useEventContext.Provider>
-        <useTrainContext.Provider>
-          <useImageryContext.Provider>
-            <Main />
-          </useImageryContext.Provider>
-        </useTrainContext.Provider>
-      </useEventContext.Provider>
-    </usePoolContext.Provider>
-  </useNotificationContext.Provider>
+  <useUIContext.Provider>
+    <useNotificationContext.Provider>
+      <usePoolContext.Provider>
+        <useEventContext.Provider>
+          <useTrainContext.Provider>
+            <useImageryContext.Provider>
+              <Main />
+            </useImageryContext.Provider>
+          </useTrainContext.Provider>
+        </useEventContext.Provider>
+      </usePoolContext.Provider>
+    </useNotificationContext.Provider>
+  </useUIContext.Provider>
 );
 
 const Main = () => (
@@ -41,26 +43,15 @@ const Main = () => (
     <Route exact path="/scenes/camera" component={Camera} />
     <Route exact path="/scenes/splitscreen" component={Splitscreen} />
 
-    <Route
-      exact
-      path="/scenes/brb"
-      render={() => (
-        <Interstitial
-          title="Be right back"
-          subtitle="Enjoy the intermission."
-        />
-      )}
-    />
-    <Route
-      exact
-      path="/scenes/start"
-      render={() => (
-        <Interstitial
-          title="Starting soon"
-          subtitle="Welcome! Give me a minute to get settled."
-        />
-      )}
-    />
+    <Route exact path="/scenes/brb">
+      <Interstitial title="Be right back" subtitle="Enjoy the intermission." />
+    </Route>
+    <Route exact path="/scenes/start">
+      <Interstitial
+        title="Starting soon"
+        subtitle="Welcome! Give me a minute to get settled."
+      />
+    </Route>
 
     <Route component={App} />
   </Switch>
@@ -70,9 +61,7 @@ function Root() {
   return (
     <Router history={history}>
       <ThemeProvider theme={foundation}>
-        <UI.Provider>
-          <Contexts />
-        </UI.Provider>
+        <Contexts />
       </ThemeProvider>
     </Router>
   );

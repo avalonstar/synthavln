@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import createUseContext from 'constate';
 
-import firestore from 'firestore';
-
 import useNotificationContext from './Notifications';
 import usePoolContext from './Pool';
+
+import firestore from 'firestore';
 
 function useEvents() {
   const [, dispatchToNotifictions] = useNotificationContext();
@@ -45,6 +45,6 @@ function useEvents() {
   return { events };
 }
 
-const useEventContext = createUseContext(useEvents);
+const useEventContext = createUseContext(useEvents, value => [value.events]);
 
 export default useEventContext;

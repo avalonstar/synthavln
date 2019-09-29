@@ -4,5 +4,6 @@ export { default as useImageryContext } from './Imagery';
 export { default as useMessageContext } from './Messages';
 export { default as useNotificationContext } from './Notifications';
 export { default as usePoolContext } from './Pool';
+export { default as useTmiContext } from './TMI';
 export { default as useTrainContext } from './Train';
-export { default as UI } from './UI';
+export { default as useUIContext } from './UI';

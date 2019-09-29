@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import createContainer from 'constate';
-
-import firestore from 'firestore';
+import createUseContext from 'constate';
 
 import { useDocument } from 'react-firebase-hooks/firestore';
+
+import firestore from 'firestore';
 
 function useUI() {
   const [mode, setMode] = useState('variety');
@@ -12,14 +12,12 @@ function useUI() {
   );
 
   useEffect(() => {
-    if (!loading && value) {
-      setMode(value.data().mode);
-    }
+    if (!loading && value) setMode(value.data().mode);
   }, [loading, value]);
 
   return { mode };
 }
 
-const UIContainer = createContainer(useUI);
+const useUIContext = createUseContext(useUI);
 
-export default UIContainer;
+export default useUIContext;

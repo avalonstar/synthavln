@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
+import useAxios from 'axios-hooks';
 import createUseContext from 'constate';
-import axios from 'axios';
 
 function useImagery() {
+  const [{ data, loading, error }] = useAxios(
+    'https://api.twitchemotes.com/api/v4/channels/38981465'
+  );
   const [emotes, setEmotes] = useState([]);
   const [badges, setBadges] = useState([]);
 
   useEffect(() => {
-    const fetchImagery = async () => {
-      const result = await axios(
-        'https://api.twitchemotes.com/api/v4/channels/38981465'
-      );
-      console.log(result.data);
-      setEmotes(result.data.emotes);
-      setBadges(result.data.badges);
-    };
-
-    fetchImagery();
-  }, []);
+    if (!loading && !error) {
+      setEmotes(data.emotes);
+      setBadges(data.badges);
+    }
+  }, [loading, error, data]);
 
   return { emotes, badges };
 }
