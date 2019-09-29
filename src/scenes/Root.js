@@ -41,26 +41,15 @@ const Main = () => (
     <Route exact path="/scenes/camera" component={Camera} />
     <Route exact path="/scenes/splitscreen" component={Splitscreen} />
 
-    <Route
-      exact
-      path="/scenes/brb"
-      render={() => (
-        <Interstitial
-          title="Be right back"
-          subtitle="Enjoy the intermission."
-        />
-      )}
-    />
-    <Route
-      exact
-      path="/scenes/start"
-      render={() => (
-        <Interstitial
-          title="Starting soon"
-          subtitle="Welcome! Give me a minute to get settled."
-        />
-      )}
-    />
+    <Route exact path="/scenes/brb">
+      <Interstitial title="Be right back" subtitle="Enjoy the intermission." />
+    </Route>
+    <Route exact path="/scenes/start">
+      <Interstitial
+        title="Starting soon"
+        subtitle="Welcome! Give me a minute to get settled."
+      />
+    </Route>
 
     <Route component={App} />
   </Switch>
