@@ -16,8 +16,21 @@
     "node": true
   },
   "rules": {
-    "no-shadow": 0,
     "import/no-extraneous-dependencies": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
+    "no-shadow": 0,
     "react/jsx-filename-extension": [
       1,
       {
