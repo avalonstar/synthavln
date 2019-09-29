@@ -6,8 +6,8 @@ const { NODE_ENV } = process.env;
 
 function useTmi() {
   const [client, setClient] = useState(
+    // eslint-disable-next-line new-cap
     new tmi.client({
-      // eslint-disable-line new-cap
       options: { debug: NODE_ENV !== 'production' },
       connection: { reconnect: true, secure: true },
       channels: ['#avalonstar']
