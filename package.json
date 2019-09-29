@@ -29,7 +29,7 @@
     "resource-loader": "^3.0.1",
     "styled-components": "^4.4.0",
     "twitch": "^3.4.4",
-    "twitch-chat-client": "^3.4.5"
+    "twitch-chat-client": "^3.5.0"
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",
