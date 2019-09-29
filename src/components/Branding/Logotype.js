@@ -55,7 +55,7 @@ Logotype.defaultProps = {
 const Wrapper = styled(motion.div)`
   position: relative;
   top: -1px;
-  width: 140px;
+  width: 150px;
 `;
 
 export default Logotype;
