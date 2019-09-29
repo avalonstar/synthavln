@@ -27,7 +27,7 @@
     "react-scripts": "3.1.2",
     "react-use": "^12.2.0",
     "resource-loader": "^3.0.1",
-    "styled-components": "^4.2.0",
+    "styled-components": "^4.4.0",
     "twitch": "^3.4.4",
     "twitch-chat-client": "^3.4.5"
   },
