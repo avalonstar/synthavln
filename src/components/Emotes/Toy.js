@@ -7,6 +7,8 @@ import styled from 'styled-components';
 
 import Scene from './Scene';
 
+import { useTmiContext } from 'providers';
+
 PIXI.utils.skipHello();
 const HEIGHT = 1080;
 
@@ -14,7 +16,9 @@ function Toy({ auto, spam, width }) {
   return (
     <Wrapper>
       <Stage width={width} height={HEIGHT} options={{ transparent: true }}>
-        <Scene width={width} height={HEIGHT} auto={auto} spam={spam} />
+        <useTmiContext.Provider>
+          <Scene width={width} height={HEIGHT} auto={auto} spam={spam} />
+        </useTmiContext.Provider>
       </Stage>
     </Wrapper>
   );

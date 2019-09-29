@@ -7,21 +7,19 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { countBy } from 'lodash';
-
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
-import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
-import { useLoaderSystem } from 'helpers/LoaderSystem';
-import { useImageryContext } from 'providers';
 
 import Pose from './Pose';
 import { baseUrl, url, path } from './constants';
 import poses from './poses';
 
-const { tmi } = window;
-const { NODE_ENV } = process.env;
+import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
+// eslint-disable-next-line import/named
+import { useLoaderSystem } from 'helpers/LoaderSystem';
+import { useImageryContext, useTmiContext } from 'providers';
 
+const { NODE_ENV } = process.env;
 const concurency = 10;
 
 const reducer = (state, action) => {
@@ -54,6 +52,7 @@ const animationReducer = (state, action) => {
 
 function Avatar() {
   const { emotes } = useImageryContext();
+  const { client } = useTmiContext();
   const cooldownTimer = useRef(null);
   const blinkBlockTimer = useRef(null);
   const blinkChecker = useRef(null);
@@ -67,18 +66,6 @@ function Avatar() {
     isAnimating: false,
     isCooldown: false,
     blinkBlocked: false
-  });
-
-  // eslint-disable-next-line new-cap
-  const client = new tmi.client({
-    options: {
-      debug: NODE_ENV !== 'production'
-    },
-    connection: {
-      reconnect: true,
-      secure: true
-    },
-    channels: ['#avalonstar']
   });
 
   const ebs = new EmoteBucketSystem({
@@ -213,7 +200,9 @@ function Container({ className }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: loaded ? 1 : 0 }}
       >
-        <Avatar />
+        <useTmiContext.Provider>
+          <Avatar />
+        </useTmiContext.Provider>
       </motion.div>
     )
   );

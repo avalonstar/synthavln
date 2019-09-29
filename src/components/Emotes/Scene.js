@@ -5,6 +5,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ParticleContainer, useApp, useTick } from '@inlet/react-pixi';
+import { useEffectOnce } from 'react-use';
 import * as PIXI from 'pixi.js';
 import p2 from 'p2';
 import moment from 'moment';
@@ -12,8 +13,9 @@ import moment from 'moment';
 import idMap from './assets/idMap.json';
 import sprites from './hype.json';
 
-const { tmi } = window;
-const { NODE_ENV, PUBLIC_URL } = process.env;
+import { useTmiContext } from 'providers';
+
+const { PUBLIC_URL } = process.env;
 
 // Size constants.
 const SCALE = 0.5;
@@ -29,6 +31,7 @@ const GROUND = 2 ** 2;
 
 function Scene({ width, height, auto, spam }) {
   const pixiApp = useApp();
+  const { client } = useTmiContext();
   const [hypeActive, setHypeActive] = useState(false);
   const [spamActive, setSpamActive] = useState(spam);
 
@@ -38,17 +41,6 @@ function Scene({ width, height, auto, spam }) {
   const textures = useRef([]);
 
   // Construction.
-  // eslint-disable-next-line new-cap
-  const client = new tmi.client({
-    options: {
-      debug: NODE_ENV !== 'production'
-    },
-    connection: {
-      reconnect: true,
-      secure: true
-    },
-    channels: ['#avalonstar']
-  });
   const world = new p2.World({ gravity: [0, -9.82] });
   const { loader } = pixiApp;
 
@@ -320,14 +312,14 @@ function Scene({ width, height, auto, spam }) {
     });
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     const emoteTexture = `${PUBLIC_URL}/sprites/emoteTexture.json`;
     loader.add(emoteTexture).load((_loader, resources) => {
       textures.current = resources[emoteTexture].textures;
       buildPhysics();
       setupTMI();
     });
-  }, [loader, buildPhysics, setupTMI]);
+  });
 
   useEffect(() => {
     if (auto) {
