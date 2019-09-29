@@ -52,7 +52,7 @@ const animationReducer = (state, action) => {
 
 function Avatar() {
   const { emotes } = useImageryContext();
-  const { client } = useTmiContext();
+  const [client] = useTmiContext();
   const cooldownTimer = useRef(null);
   const blinkBlockTimer = useRef(null);
   const blinkChecker = useRef(null);

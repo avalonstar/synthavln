@@ -31,7 +31,7 @@ const GROUND = 2 ** 2;
 
 function Scene({ width, height, auto, spam }) {
   const pixiApp = useApp();
-  const { client } = useTmiContext();
+  const [client] = useTmiContext();
   const [hypeActive, setHypeActive] = useState(false);
   const [spamActive, setSpamActive] = useState(spam);
 
