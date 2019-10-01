@@ -70,7 +70,7 @@ function Avatar() {
 
   const ebs = new EmoteBucketSystem({
     emoteThreshold: NODE_ENV === 'production' ? 30 : 5,
-    systemCooldown: NODE_ENV === 'production' ? 30 * 1000 : 1000,
+    systemCooldown: NODE_ENV === 'production' ? 1000 : 1000,
     trackedEmotes: ['avalonFEELS', 'avalonHEHE'],
     onThresholdReached: emote => {
       console.log('onThresholdReached', emote);
