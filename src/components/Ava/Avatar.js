@@ -162,7 +162,7 @@ function Avatar() {
   return (
     <Wrapper>
       {poseQueue.length === 0 || inCooldown ? (
-        <img src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
+        <Base src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
       ) : (
         <Pose
           name={poseQueue[0]}
@@ -217,11 +217,13 @@ Container.defaultProps = {
 };
 
 const Wrapper = styled(motion.div)`
-  margin-right: -72px;
-
-  img {
-    display: block;
-  }
+  margin-right: -60px;
+  width: 320px;
 `;
+
+const Base = styled.img`
+  display: block;
+  width: 100%;
+`
 
 export default Container;

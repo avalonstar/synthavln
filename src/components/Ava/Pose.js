@@ -15,7 +15,6 @@ function Pose({ name, onPlay, onComplete }) {
       steps={poses[name].steps}
       fps={30}
       autoplay={false}
-      isResponsive={false}
       onInit={spritesheet => spritesheet.play()}
       onPlay={() => onPlay(name)}
       onPause={() => onComplete(name)}
