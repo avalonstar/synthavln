@@ -19,8 +19,8 @@ export default {
     steps: 51
   },
   avalonOWO: {
-    width: 385,
-    height: 527,
+    width: 384,
+    height: 526,
     steps: 38
   }
 };
