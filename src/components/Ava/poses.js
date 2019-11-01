@@ -22,5 +22,10 @@ export default {
     width: 384,
     height: 526,
     steps: 38
+  },
+  avalonPOG: {
+    width: 430,
+    height: 526,
+    steps: 65
   }
 };
