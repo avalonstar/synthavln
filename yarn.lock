@@ -1226,10 +1226,10 @@
   dependencies:
     "@hapi/hoek" "6.x.x"
 
-"@inlet/react-pixi@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-1.1.1.tgz#365a3954b1dcaf55564d292c2768b6aff2abec6e"
-  integrity sha512-BG+m+wM0gqbAqZz34gdrjb1l6G47EcyAehKJOweMhKYemgcZ/mhIbQdJ22VzTzfJRbnmltqvy9PziEqVG0J2QQ==
+"@inlet/react-pixi@^1.1.7":
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-1.1.7.tgz#670c134b56bfaf2054197bdffae67dde35a1de86"
+  integrity sha512-HJkALEn6WwhXUDI6es1mwwH7zxRPhv68QO7sh27AacWsv/CXm5si/kbqdFRElGADLO6I86jqxK1bJnc8FWQnuA==
   dependencies:
     "@testing-library/react" "8.0.5"
     fbjs "^1.0.0"
