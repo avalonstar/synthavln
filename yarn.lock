@@ -6702,10 +6702,10 @@ ipaddr.js@1.9.0, ipaddr.js@^1.9.0:
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.0.tgz#37df74e430a0e47550fe54a2defe30d8acd95f65"
   integrity sha512-M4Sjn6N/+O6/IXSJseKqHoFc+5FdGJ22sXqnjTpdZweHK64MzEPAyQZyEU3R/KRv2GLoa7nNtg/C2Ev6m7z+eA==
 
-ircv3@^0.18.5:
-  version "0.18.5"
-  resolved "https://registry.yarnpkg.com/ircv3/-/ircv3-0.18.5.tgz#29ec96fad4fc405d2c2a9863100f37f007ba9f2b"
-  integrity sha512-GdxGso8f0eU3MCgr+JomR4MBXHVLyR1QYSYvXN8qM/xchy5pjecEWsvvM9Dk3Ks7f3dhfH83isLqaHiLg7T5Mg==
+ircv3@^0.19.3:
+  version "0.19.3"
+  resolved "https://registry.yarnpkg.com/ircv3/-/ircv3-0.19.3.tgz#dab1e19871850786ccea56032132321499601ca8"
+  integrity sha512-Fjhw2W26M/TIjcqwCVRlfQvHKq+/K928/JYXMeSM9cCmbBypxoxJcrag8c7POIe57SAN4hOQ6l+n2uEAAl251g==
   dependencies:
     "@d-fischer/logger" "^0.1.1"
     "@d-fischer/typed-event-emitter" "^2.0.0"
@@ -12789,13 +12789,13 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-twitch-chat-client@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/twitch-chat-client/-/twitch-chat-client-3.5.0.tgz#130fbd2ffcab5d4483b6da648bb5bc7af621ca2d"
-  integrity sha512-MQmALy+WtJMM5W/4JO+dleqpachBc/p1Ky91Jj81+uyBFrM5oRE2sgdCQ48GJhg1GI7c3PD2a8Muq5rjx6zEwQ==
+twitch-chat-client@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/twitch-chat-client/-/twitch-chat-client-3.6.0.tgz#68c2485179e89ec4e670750e0e7cb0b50699723d"
+  integrity sha512-Pqc8kl9Icfxkns9a23+TU3rGmNirsjSQcHv3alahz59V+sgBuSBti5THqCugv47DitKas4PgOo3PsTiNAXs6VA==
   dependencies:
     "@d-fischer/logger" "^0.1.0"
-    ircv3 "^0.18.5"
+    ircv3 "^0.19.3"
     tslib "^1.9.3"
 
 twitch@^3.5.0:
