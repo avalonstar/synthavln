@@ -34,8 +34,8 @@ function Logo({ className }) {
   }, [isTrainActive]);
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <Wrapper className={className}>
+    <Wrapper className={className}>
+      <AnimatePresence exitBeforeEnter>
         <Image
           key={image}
           initial={{ opacity: 0, x: -10 }}
@@ -43,8 +43,8 @@ function Logo({ className }) {
           exit={{ opacity: 0, x: -10 }}
           src={`${baseUrl}${image}.png`}
         />
-      </Wrapper>
-    </AnimatePresence>
+      </AnimatePresence>
+    </Wrapper>
   );
 }
 
