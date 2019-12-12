@@ -18,6 +18,11 @@ export default {
     height: 527,
     steps: 51
   },
+  avalonHUG: {
+    width: 635,
+    height: 599,
+    steps: 105
+  },
   avalonOWO: {
     width: 384,
     height: 526,
