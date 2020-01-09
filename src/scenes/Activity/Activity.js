@@ -37,7 +37,7 @@ const StyledWrapper = styled(Frame.Wrapper)`
   grid-template-columns: auto auto 1fr;
 
   box-shadow: ${props =>
-    `inset 0 160px 100px -100px ${props.theme.colors.muted.dark}`};
+    `inset 0 -160px 100px -100px ${props.theme.colors.muted.dark}`};
   font-family: ${props => props.theme.fonts.freight};
   font-weight: 500;
 `;
@@ -52,13 +52,13 @@ const StyledNotifier = styled(Notifier)`
 
 const StyledHeader = styled(Header)`
   grid-column: 1 / span 3;
-  grid-row: 1 / span 2;
-  align-self: start;
+  grid-row: 25 / span 2;
+  align-self: end;
 `;
 
 const StyledDebug = styled(Debug)`
   position: fixed;
-  bottom: 0;
+  top: 0;
 `;
 
 export default Scene;

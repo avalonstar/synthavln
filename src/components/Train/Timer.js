@@ -42,7 +42,7 @@ const Well = styled.div`
 
 const Indicator = styled.div`
   position: absolute;
-  top: 0;
+  bottom: 0;
   height: 1px;
   will-change: width;
 
