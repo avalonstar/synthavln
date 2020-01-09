@@ -34,13 +34,7 @@ const getType = data => ({
 function Item({ className, notification, soundOnly }) {
   const [, dispatch] = useNotificationContext();
   const [playStatus, setPlayStatus] = useState(false);
-  const [volume, setVolume] = useState(0.2);
-
-  useEffect(() => {
-    if (!soundOnly) {
-      setVolume(0);
-    }
-  }, [soundOnly]);
+  const [volume] = useState(0.2);
 
   useEffect(() => {
     setTimeout(() => setPlayStatus(true), 600);
@@ -63,8 +57,8 @@ function Item({ className, notification, soundOnly }) {
         <>
           <Content
             className={className}
-            initial={{ y: -105, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ x: -105, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
             exit={{ opacity: 0, scale: 1.1 }}
             transition={{
               duration: 1,

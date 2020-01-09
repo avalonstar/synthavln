@@ -44,10 +44,10 @@ const StyledWrapper = styled(Frame.Wrapper)`
 
 const StyledNotifier = styled(Notifier)`
   grid-column: 1 / span 3;
-  grid-row: 1 / span 2;
-  align-self: start;
-  justify-self: center;
-  margin-top: 32px;
+  grid-row: 23 / span 2;
+  align-self: end;
+  justify-self: start;
+  margin-left: 24px;
 `;
 
 const StyledHeader = styled(Header)`
