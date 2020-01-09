@@ -69,14 +69,15 @@ function Avatar() {
   });
 
   const ebs = new EmoteBucketSystem({
-    emoteThreshold: NODE_ENV === 'production' ? 5 : 5,
+    emoteThreshold: NODE_ENV === 'production' ? 5 : 1,
     systemCooldown: NODE_ENV === 'production' ? 1000 : 1000,
     trackedEmotes: [
       'avalonFEELS',
       'avalonHEHE',
       'avalonHUG',
       'avalonOWO',
-      'avalonPOG'
+      'avalonPOG',
+      'avalonRAGE'
     ],
     onThresholdReached: emote => {
       console.log('onThresholdReached', emote);

@@ -32,5 +32,10 @@ export default {
     width: 430,
     height: 526,
     steps: 65
+  },
+  avalonRAGE: {
+    width: 432,
+    height: 526,
+    steps: 93
   }
 };
