@@ -9,11 +9,11 @@ import { Frame } from 'styles';
 
 const Message = ({ title, subtitle }) => (
   <Wrapper>
+    <Subtitle>{subtitle}</Subtitle>
     <Title>
       {title}
       <Dot>.</Dot>
     </Title>
-    <Subtitle>{subtitle}</Subtitle>
   </Wrapper>
 );
 
@@ -99,7 +99,8 @@ const StyledHeader = styled(Header)`
 
 const Wrapper = styled.div`
   grid-column: 1 / span 3;
-  grid-row: 5 / span 4;
+  grid-row: 18 / span 4;
+  align-self: end;
   margin: 0 24px;
   padding: 0 42px;
 `;
