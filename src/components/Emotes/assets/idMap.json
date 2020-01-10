@@ -37,7 +37,6 @@
   "300595802": "avalonE",
   "300608572": "avalonFITE",
   "300611538": "avalonSHUCKS",
-  "300643018": "avalonBLIND",
   "300643041": "avalonBLEH",
   "300646404": "avalonLURK",
   "300685088": "avalonRIP",
@@ -49,5 +48,11 @@
   "300859100": "avalonCOZY",
   "301075547": "avalonDANCE",
   "301075549": "avalonSHADES",
-  "301075550": "avalonSPOOK"
+  "301075550": "avalonSPOOK",
+  "301092872": "avalonDEFEND",
+  "301226523": "avalonARTSY",
+  "301226524": "avalonLAHEE",
+  "301226526": "avalonCHU",
+  "301226566": "avalonBLIND",
+  "301305973": "avalonGASP"
 }
