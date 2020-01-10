@@ -221,11 +221,13 @@ const Actor = styled(motion.div)`
 
 const Modifier = styled(motion.div)`
   color: ${props => props.theme.colors.muted.midgrey};
+  font-family: ${props => props.theme.fonts.adelle};
+  font-style: italic;
   font-feature-settings: 'lnum';
   font-size: 16px;
   font-variant-numeric: lining-nums;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
   white-space: nowrap;
 `;
 

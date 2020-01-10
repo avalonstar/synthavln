@@ -127,7 +127,7 @@ function Scene({ width, height, auto, spam }) {
       const timesIntermediary = Math.round(Math.max(1, value / 100));
       const times = timesIntermediary;
       for (let i = 0; i < times; i += 1) {
-        setTimeout(() => createObject(false), (i + 1) * 250);
+        setTimeout(() => createObject(false, false), (i + 1) * 250);
       }
     },
     [createObject]
