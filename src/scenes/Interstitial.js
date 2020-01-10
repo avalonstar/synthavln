@@ -37,8 +37,6 @@ function Layout({ title, subtitle }) {
   return (
     <StyledWrapper>
       <Toy spam />
-      <StyledHeader />
-      <StyledNotifier />
       <Message title={title} subtitle={subtitle} />
     </StyledWrapper>
   );
@@ -101,23 +99,9 @@ const Background = styled(motion.div)`
   z-index: -1;
 `;
 
-const StyledNotifier = styled(Notifier)`
-  grid-column: 1 / span 3;
-  grid-row: 1 / span 2;
-  align-self: start;
-  justify-self: center;
-  margin-top: 32px;
-`;
-
-const StyledHeader = styled(Header)`
-  grid-column: 1 / span 3;
-  grid-row: 25 / span 2;
-  align-self: end;
-`;
-
 const Wrapper = styled(motion.div)`
   grid-column: 1 / span 3;
-  grid-row: 18 / span 4;
+  grid-row: 17 / span 4;
   align-self: end;
   margin: 0 24px;
   padding: 0 42px;
