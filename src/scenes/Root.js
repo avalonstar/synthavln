@@ -12,14 +12,7 @@ import {
   useTrainContext,
   useUIContext
 } from 'providers';
-import {
-  Activity,
-  Ava,
-  Camera,
-  Notifiers,
-  Sounds,
-  Splitscreen
-} from 'scenes/Activity';
+import { Ava, Camera, Notifiers, Sounds, Splitscreen } from 'scenes/Activity';
 import App from 'scenes/App';
 import Interstitial from 'scenes/Interstitial';
 import { foundation } from 'styles/foundation';
@@ -46,7 +39,6 @@ const Main = () => (
   <Switch>
     <Route exact path="/scenes/ava" component={Ava} />
     <Route exact path="/scenes/activity/sounds" component={Sounds} />
-    <Route exact path="/scenes/activity" component={Activity} />
     <Route exact path="/scenes/camera" component={Camera} />
     <Route exact path="/scenes/notifiers" component={Notifiers} />
     <Route exact path="/scenes/splitscreen" component={Splitscreen} />

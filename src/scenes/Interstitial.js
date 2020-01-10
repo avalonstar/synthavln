@@ -5,7 +5,7 @@ import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-import { Header, Notifier, Toy } from 'components';
+import { Toy } from 'components';
 import { Frame } from 'styles';
 
 function Message({ title, subtitle }) {
