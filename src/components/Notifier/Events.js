@@ -126,7 +126,6 @@ export const TipEvent = ({ from, formattedcount, message }) => (
     <Header>
       <Actor>{from}</Actor>
       <Modifier>{`just tipped ${formattedcount}!`}</Modifier>
-      <Message>{message}</Message>
     </Header>
     <Footer>
       <Tags.Tip />
@@ -178,24 +177,18 @@ TipEvent.propTypes = {
 
 const Header = styled(motion.div)`
   grid-row: 1;
-  margin: 0 24px;
-  padding: 24px 0;
+  padding: 22px 30px 28px;
 
+  background-image: linear-gradient(
+    to bottom,
+    ${props => props.theme.colors.main.dark},
+    ${props => props.theme.colors.muted.dark}
+  );
+  border-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   color: ${props => props.theme.colors.muted.midgrey};
   font-weight: 600;
-  text-transform: uppercase;
-`;
-
-const Message = styled.div`
-  margin-top: 12px;
-  padding: 12px;
-
-  border-radius: 4px;
-  box-shadow: inset 0 0 0 1px ${props => props.theme.colors.muted.midgrey};
-  color: ${props => props.theme.colors.muted.midgrey};
-  font-family: ${props => props.theme.fonts.adelle};
-  font-size: 14px;
-  font-style: italic;
 `;
 
 const Footer = styled.div`
@@ -204,6 +197,7 @@ const Footer = styled.div`
   align-items: center;
   padding: 12px 24px;
 
+  box-shadow: inset 0 1px 0 ${props => props.theme.colors.main.avapurple};
   background-color: ${props => props.theme.colors.main.dark};
   border-radius: 4px;
   border-top-left-radius: 0;
@@ -211,20 +205,26 @@ const Footer = styled.div`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.adelle};
   font-size: 12px;
+  font-weight: 700;
 `;
 
 const Actor = styled(motion.div)`
-  color: ${props => props.theme.colors.main.dark};
-  font-size: 20px;
+  color: ${props => props.theme.colors.white};
+  font-size: 36px;
   font-weight: 800;
+
+  &:after {
+    content: '.';
+    color: ${props => props.theme.colors.main.avagreen};
+  }
 `;
 
 const Modifier = styled(motion.div)`
-  color: ${props => props.theme.colors.muted.midgrey};
+  color: ${props => props.theme.colors.muted.lightbluegrey};
   font-family: ${props => props.theme.fonts.adelle};
   font-style: italic;
   font-feature-settings: 'lnum';
-  font-size: 16px;
+  font-size: 18px;
   font-variant-numeric: lining-nums;
   font-weight: 600;
   text-transform: capitalize;
