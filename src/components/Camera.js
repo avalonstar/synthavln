@@ -5,15 +5,16 @@ import styled from 'styled-components';
 
 import { Chrome } from 'styles';
 
-const Camera = ({ className, title }) => (
+const Camera = ({ className, title, ratio }) => (
   <Chrome className={className} title={title}>
-    <Zone />
+    <Zone ratio={ratio} />
   </Chrome>
 );
 
 Camera.propTypes = {
   className: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  ratio: PropTypes.number.isRequired
 };
 
 Camera.defaultProps = {
@@ -22,7 +23,7 @@ Camera.defaultProps = {
 };
 
 const Zone = styled.div`
-  padding-top: ${(9 / 16) * 100}%;
+  padding-top: ${props => props.ratio * 100}%;
   background: ${props => props.theme.colors.gray[0]};
 `;
 
