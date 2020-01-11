@@ -145,6 +145,22 @@ function Avatar() {
   useEffect(() => {
     if (emoteCodes.length > 0 && !connected) {
       client.on('message', (channel, user, message) => processEmotes(message));
+
+      // Manual calls.
+      client.on('resub', () => {
+        dispatchToQueue({ type: 'add', pose: 'avalonHUG' });
+      });
+      client.on('subgift', () => {
+        dispatchToQueue({ type: 'add', pose: 'avalonOWO' });
+      });
+      client.on('submysterygift', () => {
+        dispatchToQueue({ type: 'add', pose: 'avalonPOG' });
+      });
+      client.on('subscription', () => {
+        dispatchToQueue({ type: 'add', pose: 'avalonHUG' });
+      });
+
+      // Connect.
       client.connect();
       setConnected(true);
     }
