@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import toPath from 'element-to-path';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import isEmpty from 'lodash/isEmpty';
@@ -7,6 +8,7 @@ import { useNotificationContext } from 'providers';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
+import { rgba } from 'polished';
 
 import {
   CheerEvent,
@@ -18,6 +20,8 @@ import {
   ResubEvent,
   TipEvent
 } from './Events';
+import Box from './Events/Box';
+import Wipe from './Wipe';
 import { getSongFile } from './utils';
 
 const getType = data => ({
@@ -31,13 +35,14 @@ const getType = data => ({
   tip: TipEvent({ ...data })
 });
 
-function Item({ className, notification, soundOnly }) {
+function Item({ className, notification }) {
   const [, dispatch] = useNotificationContext();
   const [playStatus, setPlayStatus] = useState(false);
   const [volume] = useState(0.2);
 
   useEffect(() => {
-    setTimeout(() => setPlayStatus(true), 600);
+    const timer = setTimeout(() => { setPlayStatus(true); }, 600);
+    return () => { clearTimeout (timer); }
   }, [notification]);
 
   function handleError(error) {
@@ -46,7 +51,7 @@ function Item({ className, notification, soundOnly }) {
 
   function handleFinishedPlaying() {
     setPlayStatus(false);
-    return setTimeout(() => dispatch({ type: 'delete' }), 500);
+    return setTimeout(() => { dispatch({ type: 'delete' }) }, 500);
   }
 
   const baseURL = 'https://synthform.s3.amazonaws.com/audio/avalonstar/';
@@ -57,20 +62,25 @@ function Item({ className, notification, soundOnly }) {
         <>
           <Content
             className={className}
-            initial={{ x: -105, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
+            initial={{ x: -105, background: 'rgba(13, 10, 18, 0)', opacity: 0 }}
+            animate={{ x: 0, background: 'rgba(13, 10, 18, 1)', opacity: 1 }}
             exit={{ opacity: 0, scale: 1.1 }}
             transition={{
-              duration: 1,
-              ease: [0.23, 1, 0.32, 1],
-              type: 'tween',
-              staggerChildren: 1,
-              delayChildren: 1
+              default: { duration: 1, ease: [0.23, 1, 0.32, 1], type: 'tween' },
+              background: { delay: 4 }
             }}
           >
-            <motion.div key={notification.id}>
-              {!soundOnly && getType(notification)[notification.event]}
-            </motion.div>
+            <Event key={notification.id}>
+              <Box delay={2.5} duration={4} />
+              <Wipe event={notification.event} />
+              <Container
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.3, type: 'tween' }}
+              >
+                {getType(notification)[notification.event]}
+              </Container>
+            </Event>
           </Content>
           <ReactPlayer
             url={`${baseURL}${getSongFile(notification)}.ogg`}
@@ -103,17 +113,34 @@ Item.defaultProps = {
   soundOnly: false
 };
 
+const Event = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
 const Content = styled(motion.div)`
-  display: inline-grid;
-  grid-template-rows: 1fr auto;
-  min-width: calc(${props => props.theme.frame.width} * 0.15);
+  width: calc(${props => props.theme.frame.width} * 0.3);
   z-index: 2000;
   align-items: end;
+  position: relative;
 
-  background: ${props => props.theme.colors.white};
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: ${props => props.theme.shadows[1]};
   font-family: ${props => props.theme.fonts.freight};
+`;
+
+const Container = styled(motion.div)`
+  grid-row: 1;
+  grid-column: 1;
+
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  overflow: hidden;
+
+  border-radius: 4px;
 `;
 
 export default Item;

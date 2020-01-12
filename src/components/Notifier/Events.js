@@ -1,34 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
 import * as Tags from './Events/Tags';
 import * as utils from './utils';
 
 import avalonHAPPY from './assets/avalonHAPPY.png';
-
-const headerVariants = {
-  initial: {
-    opacity: 0,
-    x: 10,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 1,
-      delayChildren: 1
-    }
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      when: 'afterChildren',
-      staggerChildren: 1,
-      delayChildren: 1
-    }
-  }
-};
 
 export const CheerEvent = ({ name, count }) => (
   <>
@@ -79,9 +58,9 @@ export const RaidEvent = ({ name }) => (
   </>
 );
 
-export const ResubEvent = ({ name, months, plan }) => (
+export const ResubEvent = ({ event, name, months, plan }) => (
   <>
-    <Header variants={headerVariants} initial="initial" animate="animate">
+    <Header>
       <Actor>{name}</Actor>
       <Modifier>{`${months} cumulative months!`}</Modifier>
     </Header>
@@ -121,7 +100,7 @@ export const SubGiftEvent = ({ name, gifter, plan }) => (
   </>
 );
 
-export const TipEvent = ({ from, formattedcount, message }) => (
+export const TipEvent = ({ from, formattedcount }) => (
   <>
     <Header>
       <Actor>{from}</Actor>
@@ -131,7 +110,7 @@ export const TipEvent = ({ from, formattedcount, message }) => (
       <Tags.Tip />
     </Footer>
   </>
-);
+);  
 
 CheerEvent.propTypes = {
   count: PropTypes.string.isRequired,
@@ -176,32 +155,27 @@ TipEvent.propTypes = {
 };
 
 const Header = styled(motion.div)`
-  grid-row: 1;
-  padding: 22px 30px 28px;
+  grid-column: 1;
+  padding: 22px 42px 28px 30px;
 
   background-image: linear-gradient(
     to bottom,
     ${props => props.theme.colors.main.dark},
     ${props => props.theme.colors.muted.dark}
   );
-  border-radius: 4px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
   color: ${props => props.theme.colors.muted.midgrey};
   font-weight: 600;
 `;
 
 const Footer = styled.div`
-  grid-row: 2;
+  grid-column: 2;
   display: flex;
-  align-items: center;
-  padding: 12px 24px;
+  flex-direction: column;
+  align-items: start;
+  padding: 20px 24px;
 
-  box-shadow: inset 0 1px 0 ${props => props.theme.colors.main.avapurple};
+  /* box-shadow: inset 2px 0 0 ${props => props.theme.colors.main.avapurple}; */
   background-color: ${props => props.theme.colors.main.dark};
-  border-radius: 4px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.adelle};
   font-size: 12px;
@@ -210,7 +184,7 @@ const Footer = styled.div`
 
 const Actor = styled(motion.div)`
   color: ${props => props.theme.colors.white};
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 800;
 
   &:after {

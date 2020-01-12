@@ -15,21 +15,41 @@ function Debug({ className }) {
     }
   }, []);
 
-  const testEvent = {
-    id:
-      Math.random()
-        .toString(36)
-        .substring(2, 15) +
-      Math.random()
-        .toString(36)
-        .substring(2, 15),
-    bucket: 'subscription',
-    event: 'resub',
-    name: 'Avalonstar',
-    plan: '1000',
-    months: Math.floor(Math.random() * Math.floor(54)),
-    timestamp: Date.now()
-  };
+  const testEvents = [
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'resub',
+      name: 'Avalonstar',
+      plan: '2000',
+      months: Math.floor(Math.random() * Math.floor(54)),
+      timestamp: Date.now()
+    },
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'mysterygift',
+      name: 'Tekitoumei',
+      count: 5,
+      plan: '1000',
+      months: Math.floor(Math.random() * Math.floor(54)),
+      timestamp: Date.now()
+    }
+  ];
+
+  const event = testEvents[Math.floor(Math.random() * testEvents.length)];
 
   return (
     isVisible && (
@@ -37,8 +57,8 @@ function Debug({ className }) {
         <Button
           type="button"
           onClick={() => {
-            dispatchToNotifications({ type: 'add', event: testEvent });
-            dispatchToPool({ type: 'add', event: testEvent });
+            dispatchToNotifications({ type: 'add', event });
+            dispatchToPool({ type: 'add', event });
           }}
         >
           Test Notification
