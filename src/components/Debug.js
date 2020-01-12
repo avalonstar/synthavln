@@ -9,13 +9,37 @@ function Debug({ className }) {
   const [, dispatchToPool] = usePoolContext();
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      setIsVisible(true);
-    }
-  }, []);
-
-  const testEvents = [
+  const events = [
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'subgift',
+      gifter: 'herdyderp',
+      name: 'HypnotikXIV',
+      plan: '3000',
+      months: Math.floor(Math.random() * Math.floor(60)),
+      timestamp: Date.now()
+    },
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'subscription',
+      name: 'erikantha',
+      plan: '1000',
+      timestamp: Date.now()
+    },
     {
       id:
         Math.random()
@@ -28,7 +52,7 @@ function Debug({ className }) {
       event: 'resub',
       name: 'Avalonstar',
       plan: '2000',
-      months: Math.floor(Math.random() * Math.floor(54)),
+      months: Math.floor(Math.random() * Math.floor(60)),
       timestamp: Date.now()
     },
     {
@@ -44,12 +68,16 @@ function Debug({ className }) {
       name: 'Tekitoumei',
       count: 5,
       plan: '1000',
-      months: Math.floor(Math.random() * Math.floor(54)),
       timestamp: Date.now()
     }
   ];
+  const event = events[Math.floor(Math.random() * events.length)];
 
-  const event = testEvents[Math.floor(Math.random() * testEvents.length)];
+  useEffect(() => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      setIsVisible(true);
+    }
+  }, []);
 
   return (
     isVisible && (
