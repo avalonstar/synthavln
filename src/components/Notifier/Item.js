@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import toPath from 'element-to-path';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import isEmpty from 'lodash/isEmpty';
@@ -8,7 +7,6 @@ import { useNotificationContext } from 'providers';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-import { rgba } from 'polished';
 
 import {
   CheerEvent,
@@ -21,7 +19,7 @@ import {
   TipEvent
 } from './Events';
 import Box from './Events/Box';
-import Wipe from './Wipe';
+import Pomp from './Events/Pomp';
 import { getSongFile } from './utils';
 
 const getType = data => ({
@@ -41,8 +39,12 @@ function Item({ className, notification }) {
   const [volume] = useState(0.2);
 
   useEffect(() => {
-    const timer = setTimeout(() => { setPlayStatus(true); }, 600);
-    return () => { clearTimeout (timer); }
+    const timer = setTimeout(() => {
+      setPlayStatus(true);
+    }, 600);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [notification]);
 
   function handleError(error) {
@@ -51,7 +53,9 @@ function Item({ className, notification }) {
 
   function handleFinishedPlaying() {
     setPlayStatus(false);
-    return setTimeout(() => { dispatch({ type: 'delete' }) }, 500);
+    return setTimeout(() => {
+      dispatch({ type: 'delete' });
+    }, 500);
   }
 
   const baseURL = 'https://synthform.s3.amazonaws.com/audio/avalonstar/';
@@ -72,7 +76,7 @@ function Item({ className, notification }) {
           >
             <Event key={notification.id}>
               <Box delay={2.5} duration={4} />
-              <Wipe event={notification.event} />
+              <Pomp event={notification.event} />
               <Container
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

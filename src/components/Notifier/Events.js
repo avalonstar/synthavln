@@ -1,19 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
+
+import { avalonHAPPY } from 'components/Emotes';
 
 import * as Tags from './Events/Tags';
 import * as utils from './utils';
 
-import avalonHAPPY from './assets/avalonHAPPY.png';
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 2.4,
+      when: 'beforeChildren',
+      staggerChildren: 0.1
+    }
+  },
+  hidden: {
+    opacity: 1,
+    transition: {
+      when: 'afterChildren'
+    }
+  }
+};
+
+const item = {
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.1
+    }
+  },
+  hidden: {
+    opacity: 0,
+    x: -12,
+    transition: {
+      when: 'afterChildren'
+    }
+  }
+};
 
 export const CheerEvent = ({ name, count }) => (
   <>
-    <Header>
-      <Actor>{name}</Actor>
-      <Modifier>{`cheered ${count} bits!`}</Modifier>
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{name}</Actor>
+      <Modifier variants={item}>{`Cheered ${count} bits!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Cheer />
@@ -32,11 +67,11 @@ export const FollowEvent = ({ name }) => (
 
 export const MysteryGiftEvent = ({ name, count, plan }) => (
   <>
-    <Header>
-      <Actor>{name}</Actor>
-      <Modifier>{`gifted ${count} ${utils.getTier(
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{name}</Actor>
+      <Modifier variants={item}>{`${count} ${utils.getTier(
         plan
-      )} subscriptions!`}</Modifier>
+      )} gift subscriptions!`}</Modifier>
     </Header>
     <Footer>
       <Tags.MysteryGift />
@@ -48,9 +83,9 @@ export const MysteryGiftEvent = ({ name, count, plan }) => (
 
 export const RaidEvent = ({ name }) => (
   <>
-    <Header>
-      <Actor>{name}</Actor>
-      <Modifier>Thanks for the raid!</Modifier>
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{name}</Actor>
+      <Modifier variants={item}>Thanks for the raid!</Modifier>
     </Header>
     <Footer>
       <Tags.Raid />
@@ -58,11 +93,13 @@ export const RaidEvent = ({ name }) => (
   </>
 );
 
-export const ResubEvent = ({ event, name, months, plan }) => (
+export const ResubEvent = ({ name, months, plan }) => (
   <>
-    <Header>
-      <Actor>{name}</Actor>
-      <Modifier>{`${months} cumulative months!`}</Modifier>
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{name}</Actor>
+      <Modifier
+        variants={item}
+      >{`Thanks for ${months} cumulative months!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Resub />
@@ -74,9 +111,9 @@ export const ResubEvent = ({ event, name, months, plan }) => (
 
 export const SubscriptionEvent = ({ name, plan }) => (
   <>
-    <Header>
-      <Actor>{name}</Actor>
-      <Modifier>has just subscribed!</Modifier>
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{name}</Actor>
+      <Modifier variants={item}>Thanks for the subscription!</Modifier>
     </Header>
     <Footer>
       <Tags.Subscription />
@@ -88,9 +125,9 @@ export const SubscriptionEvent = ({ name, plan }) => (
 
 export const SubGiftEvent = ({ name, gifter, plan }) => (
   <>
-    <Header>
-      <Actor>{name}</Actor>
-      <Modifier>{`was gifted a subscription by ${gifter}!`}</Modifier>
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{name}</Actor>
+      <Modifier variants={item}>{`Enjoy your sub from ${gifter}!`}</Modifier>
     </Header>
     <Footer>
       <Tags.SubGift />
@@ -102,15 +139,15 @@ export const SubGiftEvent = ({ name, gifter, plan }) => (
 
 export const TipEvent = ({ from, formattedcount }) => (
   <>
-    <Header>
-      <Actor>{from}</Actor>
-      <Modifier>{`just tipped ${formattedcount}!`}</Modifier>
+    <Header initial="hidden" animate="visible" variants={list}>
+      <Actor variants={item}>{from}</Actor>
+      <Modifier variants={item}>{`Tipped ${formattedcount}!`}</Modifier>
     </Header>
     <Footer>
       <Tags.Tip />
     </Footer>
   </>
-);  
+);
 
 CheerEvent.propTypes = {
   count: PropTypes.string.isRequired,
@@ -201,7 +238,6 @@ const Modifier = styled(motion.div)`
   font-size: 18px;
   font-variant-numeric: lining-nums;
   font-weight: 600;
-  text-transform: capitalize;
   white-space: nowrap;
 `;
 

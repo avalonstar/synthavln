@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import toPath from 'element-to-path';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-import Box from './Events/Box';
+import {
+  avalonDEFEND,
+  avalonHOLY,
+  avalonHUG,
+  avalonKANPAI,
+  avalonPOG,
+  avalonOWO,
+  avalonSHUCKS
+} from 'components/Emotes';
 
-import avalonDANCE from 'components/Emotes/assets/avalonDANCE.png';
-import avalonDEFEND from 'components/Emotes/assets/avalonDEFEND.png';
-import avalonHUG from 'components/Emotes/assets/avalonHUG.png';
-import avalonKANPAI from 'components/Emotes/assets/avalonKANPAI.png';
-import avalonOWO from 'components/Emotes/assets/avalonOWO.png';
-import avalonPOG from 'components/Emotes/assets/avalonPOG.png';
-import avalonSHUCKS from 'components/Emotes/assets/avalonSHUCKS.png';
+import Box from './Box';
 
 const getHeader = () => ({
   cheer: 'cheer',
@@ -27,8 +27,8 @@ const getHeader = () => ({
 });
 
 const getEmote = () => ({
-  cheer: avalonDANCE,
-  mysterygift: avalonPOG,
+  cheer: avalonPOG,
+  mysterygift: avalonHOLY,
   subscription: avalonHUG,
   subgift: avalonOWO,
   raid: avalonDEFEND,
@@ -36,7 +36,41 @@ const getEmote = () => ({
   tip: avalonSHUCKS
 });
 
-function Wipe({ event }) {
+const list = {
+  visible: {
+    opacity: 0.1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.1
+    }
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren'
+    }
+  }
+};
+
+const item = {
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.1
+    }
+  },
+  hidden: {
+    opacity: 0,
+    x: -64,
+    transition: {
+      when: 'afterChildren'
+    }
+  }
+};
+
+function Pomp({ event }) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -67,11 +101,13 @@ function Wipe({ event }) {
       >
         <img src={getEmote()[event]} alt="" />
       </Emote>
-      <Pattern>
+      <Pattern initial="hidden" animate="visible" variants={list}>
         {[...Array(5)].map((e, x) => (
-          <Text key={x}>
-            {[...Array(8)].map((e, i) => (
-              <div key={i}>{event}</div>
+          <Text key={x} variants={item}>
+            {[...Array(6)].map((e, i) => (
+              <motion.div key={`${x}-${i}`} variants={item}>
+                {event}
+              </motion.div>
             ))}
           </Text>
         ))}
@@ -95,19 +131,6 @@ const Container = styled(motion.div)`
   font-weight: 900;
   font-style: italic;
   text-transform: uppercase;
-`
-
-const SVG = styled(motion.svg)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
-const Path = styled(motion.path)`
-  stroke: ${props => props.theme.colors.main.avapurple};
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  stroke-width: 4;
 `;
 
 const Header = styled(motion.div)`
@@ -127,28 +150,31 @@ const Emote = styled(motion.div)`
   position: absolute;
   left: -256px;
   z-index: 3000;
-`
+`;
 
 const Pattern = styled(motion.div)`
   position: absolute;
   top: -18px;
   left: -25%;
-  width: calc(100% * 2);
+  width: 100vw;
 
   line-height: 28px;
 
-  > div:nth-child(2n) { position: relative; left: 24px; }
-`
+  > div:nth-child(2n) {
+    position: relative;
+    left: 24px;
+  }
+`;
 
 const Text = styled(motion.div)`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.freight};
   font-size: 30px;
-  opacity: 0.075;
 
-  div { display: inline-block; padding: 0 2px; }
-`
+  div {
+    display: inline-block;
+    padding: 0 2px;
+  }
+`;
 
-export default Wipe;
-
-
+export default Pomp;

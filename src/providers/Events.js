@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import createUseContext from 'constate';
 
@@ -45,6 +45,9 @@ function useEvents() {
   return { events };
 }
 
-const useEventContext = createUseContext(useEvents, value => [value.events]);
+const useEventContext = createUseContext(() => {
+  const value = useEvents();
+  return useMemo(() => value, [value]);
+});
 
 export default useEventContext;

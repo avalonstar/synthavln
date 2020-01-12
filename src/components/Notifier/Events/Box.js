@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import toPath from 'element-to-path';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
@@ -17,7 +17,7 @@ function Box({ width, height, fill, delay, duration }) {
       height: height - rx / 2,
       rx
     }
-  }; 
+  };
   const variants = {
     hidden: {
       pathLength: 0,
@@ -52,14 +52,14 @@ Box.propTypes = {
   fill: PropTypes.bool,
   height: PropTypes.number,
   width: PropTypes.number
-}
+};
 
 Box.defaultProps = {
   delay: 0,
   fill: false,
   height: 104,
   width: 576
-}
+};
 
 const SVG = styled(motion.svg)`
   position: absolute;
