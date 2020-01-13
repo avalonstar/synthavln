@@ -13731,10 +13731,10 @@ twitch-chat-client@^3.5.0:
     ircv3 "^0.18.5"
     tslib "^1.9.3"
 
-twitch@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/twitch/-/twitch-3.5.0.tgz#4f19c2c0a7557168cac3497d365167bd70085203"
-  integrity sha512-84XI3RnL9KHyQgtSd/PMlFQHi0jFarKkdRVtzlAOTyOXx00zLmf5hRrqMAyDPv0FoOop9oG3rWjyPegJ5SsHDA==
+twitch@^3.5.6:
+  version "3.5.6"
+  resolved "https://registry.yarnpkg.com/twitch/-/twitch-3.5.6.tgz#2b370717331aa06498186d7c5167fdbd55839c6d"
+  integrity sha512-mcWAaq/5ELz+bEfFJ9u/VBaqMKv1SaMTtqYggLMGGqV/va40T1d/oUjuB4VDXMeYEPsQ6i/elS4CeiuX2p/4ZQ==
   dependencies:
     "@types/qs" "^6.5.1"
     fetch-ponyfill "^6.0.2"
