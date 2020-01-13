@@ -2,7 +2,7 @@ export { default as Avatar } from './Ava';
 export { Ava, Logo, Logotype } from './Branding';
 export { default as Camera } from './Camera';
 export { default as Debug } from './Debug';
-export { default as Toy } from './Emotes';
+export { Toy } from './Emotes';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as Header } from './Header';
 export { Notifier } from './Notifier';

@@ -9,27 +9,75 @@ function Debug({ className }) {
   const [, dispatchToPool] = usePoolContext();
   const [isVisible, setIsVisible] = useState(false);
 
+  const events = [
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'subgift',
+      gifter: 'herdyderp',
+      name: 'HypnotikXIV',
+      plan: '3000',
+      months: Math.floor(Math.random() * Math.floor(60)),
+      timestamp: Date.now()
+    },
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'subscription',
+      name: 'erikantha',
+      plan: '1000',
+      timestamp: Date.now()
+    },
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'resub',
+      name: 'Avalonstar',
+      plan: '2000',
+      months: Math.floor(Math.random() * Math.floor(60)),
+      timestamp: Date.now()
+    },
+    {
+      id:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15),
+      bucket: 'subscription',
+      event: 'mysterygift',
+      name: 'Tekitoumei',
+      count: 5,
+      plan: '1000',
+      timestamp: Date.now()
+    }
+  ];
+  const event = events[Math.floor(Math.random() * events.length)];
+
   useEffect(() => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       setIsVisible(true);
     }
   }, []);
-
-  const testEvent = {
-    id:
-      Math.random()
-        .toString(36)
-        .substring(2, 15) +
-      Math.random()
-        .toString(36)
-        .substring(2, 15),
-    bucket: 'subscription',
-    event: 'resub',
-    name: 'Avalonstar',
-    plan: '1000',
-    months: Math.floor(Math.random() * Math.floor(54)),
-    timestamp: Date.now()
-  };
 
   return (
     isVisible && (
@@ -37,8 +85,8 @@ function Debug({ className }) {
         <Button
           type="button"
           onClick={() => {
-            dispatchToNotifications({ type: 'add', event: testEvent });
-            dispatchToPool({ type: 'add', event: testEvent });
+            dispatchToNotifications({ type: 'add', event });
+            dispatchToPool({ type: 'add', event });
           }}
         >
           Test Notification

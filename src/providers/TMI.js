@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import createUseContext from 'constate';
 
 const { tmi } = window;
@@ -23,6 +23,9 @@ function useTmi() {
   return [client, setClient];
 }
 
-const useTmiContext = createUseContext(useTmi, value => [value.client]);
+const useTmiContext = createUseContext(() => {
+  const value = useTmi();
+  return useMemo(() => value, [value]);
+});
 
 export default useTmiContext;

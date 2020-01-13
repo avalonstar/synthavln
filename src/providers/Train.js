@@ -24,7 +24,7 @@ function useTrain() {
       (!lastSeenNotification.current ||
         last.id !== lastSeenNotification.current)
     ) {
-      const amount = parseInt(last.amount, 10) || 1;
+      const amount = parseInt(last.count, 10) || 1;
       lastSeenNotification.current = last.id;
       setTimer(300);
       setCount(c => c + amount);

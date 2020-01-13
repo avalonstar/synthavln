@@ -25,7 +25,7 @@ export const Cheer = () => (
 
 export const MysteryGift = () => (
   <Tag>
-    <Gift size={svgSize} /> mass subgift
+    <Gift size={svgSize} /> subgift
   </Tag>
 );
 
@@ -49,7 +49,7 @@ export const SPChange = ({ plan, count = '1' }) => (
 
 export const SPRetain = () => (
   <Tag>
-    <SPBadge size={svgSize} /> sp retain
+    <SPBadge size={svgSize} /> sp + 0
   </Tag>
 );
 
@@ -111,6 +111,6 @@ const Tag = styled.div`
   text-transform: uppercase;
 
   svg {
-    padding-right: 4px;
+    padding-right: 6px;
   }
 `;
