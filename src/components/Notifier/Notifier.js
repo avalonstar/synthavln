@@ -5,25 +5,18 @@ import { useNotificationContext } from 'providers';
 
 import Item from './Item';
 
-function Notifier({ className, soundOnly }) {
+function Notifier(props) {
+  const { className } = props;
   const [notifications] = useNotificationContext();
-  return (
-    <Item
-      className={className}
-      notification={notifications[0]}
-      soundOnly={soundOnly}
-    />
-  );
+  return <Item className={className} notification={notifications[0]} />;
 }
 
 Notifier.propTypes = {
-  className: PropTypes.string,
-  soundOnly: PropTypes.bool
+  className: PropTypes.string
 };
 
 Notifier.defaultProps = {
-  className: '',
-  soundOnly: false
+  className: ''
 };
 
 export default Notifier;

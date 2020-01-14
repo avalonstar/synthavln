@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-function Box({ width, height, fill, delay, duration }) {
+function Box(props) {
+  const { controls, width, height, fill, delay, duration } = props;
   const rx = 4;
   const rect = {
     name: 'rect',
@@ -36,7 +37,7 @@ function Box({ width, height, fill, delay, duration }) {
         d={toPath(rect)}
         variants={variants}
         initial="hidden"
-        animate="visible"
+        animate={controls}
         transition={{
           default: { duration, delay, ease: 'easeOut' },
           fill: { duration, ease: [1, 0, 0.8, 1] }

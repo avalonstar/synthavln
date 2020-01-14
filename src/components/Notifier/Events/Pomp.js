@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 
 import {
@@ -17,7 +17,6 @@ import Box from './Box';
 
 const getHeader = () => ({
   cheer: 'cheer',
-  follow: 'follow',
   mysterygift: 'random subgift',
   subscription: 'subscription',
   subgift: 'subgift',
@@ -45,10 +44,7 @@ const list = {
     }
   },
   hidden: {
-    opacity: 0,
-    transition: {
-      when: 'afterChildren'
-    }
+    opacity: 0
   }
 };
 
@@ -63,42 +59,43 @@ const item = {
   },
   hidden: {
     opacity: 0,
-    x: -64,
-    transition: {
-      when: 'afterChildren'
-    }
+    x: -64
   }
 };
 
-function Pomp({ event }) {
-  const [isVisible, setIsVisible] = useState(true);
+function Pomp(props) {
+  const { controls, event } = props;
+
+  // useAnimation().
+  const boxControls = useAnimation();
+  const emoteControls = useAnimation();
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(false), 2500);
-    return () => clearTimeout(timer);
+    const sequence = async () => {
+      boxControls.start('visible');
+      emoteControls.start({
+        x: 716,
+        scale: 1.1,
+        opacity: 1,
+        transition: { duration: 1, type: 'tween', ease: 'circOut' }
+      });
+    };
+
+    sequence();
   }, [event]);
 
   return (
     <Container
-      animate={isVisible ? 'visible' : 'hidden'}
+      animate={controls}
+      initial="visible"
       variants={{
-        hidden: { opacity: 0, scale: 2, transition: { type: 'spring' } },
+        hidden: { opacity: 0, scale: 2 },
         visible: { opacity: 1, scale: 1 }
       }}
     >
-      <Box fill duration={2} />
+      <Box controls={boxControls} fill duration={2} />
       <Header>{getHeader()[event]}</Header>
-      <Emote
-        variants={{
-          hidden: { x: 776, scale: 1.1 },
-          visible: { x: 716, scale: 1.1 }
-        }}
-        transition={{
-          duration: 1,
-          type: 'tween',
-          ease: 'circOut'
-        }}
-      >
+      <Emote animate={emoteControls}>
         <img src={getEmote()[event]} alt="" />
       </Emote>
       <Pattern initial="hidden" animate="visible" variants={list}>
@@ -150,6 +147,7 @@ const Emote = styled(motion.div)`
   position: absolute;
   left: -256px;
   z-index: 3000;
+  opacity: 0;
 `;
 
 const Pattern = styled(motion.div)`

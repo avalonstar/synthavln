@@ -13,35 +13,17 @@ const list = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 2.4,
+      delay: 2,
       when: 'beforeChildren',
-      staggerChildren: 0.1
+      staggerChildren: 0.2
     }
   },
-  hidden: {
-    opacity: 1,
-    transition: {
-      when: 'afterChildren'
-    }
-  }
+  hidden: { opacity: 1 }
 };
 
 const item = {
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.1
-    }
-  },
-  hidden: {
-    opacity: 0,
-    x: -12,
-    transition: {
-      when: 'afterChildren'
-    }
-  }
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: -12 }
 };
 
 export const CheerEvent = ({ name, count }) => (
@@ -54,15 +36,6 @@ export const CheerEvent = ({ name, count }) => (
       <Tags.Cheer />
     </Footer>
   </>
-);
-
-export const FollowEvent = ({ name }) => (
-  <BubbleWrapper>
-    <Avatar src={avalonHAPPY} />
-    <Bubble>
-      Hello there <Actor>{name}</Actor>! Thank you and welcome!
-    </Bubble>
-  </BubbleWrapper>
 );
 
 export const MysteryGiftEvent = ({ name, count, plan }) => (
@@ -154,10 +127,6 @@ CheerEvent.propTypes = {
   name: PropTypes.string.isRequired
 };
 
-FollowEvent.propTypes = {
-  name: PropTypes.string.isRequired
-};
-
 MysteryGiftEvent.propTypes = {
   name: PropTypes.string.isRequired,
   count: PropTypes.string.isRequired,
@@ -211,7 +180,6 @@ const Footer = styled.div`
   align-items: start;
   padding: 20px 24px;
 
-  /* box-shadow: inset 2px 0 0 ${props => props.theme.colors.main.avapurple}; */
   background-color: ${props => props.theme.colors.main.dark};
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.adelle};
@@ -243,50 +211,4 @@ const Modifier = styled(motion.div)`
 
 const Avatar = styled.img`
   transform: rotate(180deg);
-`;
-
-const BubbleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  z-index: 10000;
-`;
-
-const Bubble = styled.div`
-  display: inline-block;
-  position: relative;
-  margin-left: 10px;
-  padding: 18px;
-
-  background-image: linear-gradient(
-    to right,
-    ${props => props.theme.colors.main.dark},
-    ${props => props.theme.colors.muted.dark}
-  );
-  box-shadow: inset 0 2px 0 ${props => props.theme.colors.main.dark};
-  border-radius: 8px;
-  border-bottom-left-radius: 0px;
-  color: ${props => props.theme.colors.muted.lightbluegrey};
-  font-family: ${props => props.theme.fonts.adelle};
-  font-size: 18px;
-  font-weight: 400;
-  transform: rotate(-1deg);
-  transform-origin: bottom left;
-  white-space: nowrap;
-
-  ${Actor} {
-    display: inline;
-    color: ${props => props.theme.colors.main.avapurple};
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    left: -11px;
-    bottom: 0;
-
-    width: 0;
-    height: 0;
-    border-bottom: 12px solid ${props => props.theme.colors.main.dark};
-    border-left: 12px solid transparent;
-  }
 `;
