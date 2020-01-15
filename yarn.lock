@@ -1353,10 +1353,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@inlet/react-pixi@^1.1.9":
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-1.1.11.tgz#2d1e7dc3541a9b8fcd7f528e7b0bf3c1c56d5395"
-  integrity sha512-HsTgZldEC1fw/sQkzBEj4BmexJuzwv+IxYjjR8VPkZBQgosizeOapNh+lRxb/sOmfb4u66Y86m+7lNBCvjTsQw==
+"@inlet/react-pixi@^1.1.12":
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-1.1.12.tgz#52c7345f892a95722e5258db2284381105e6a056"
+  integrity sha512-qq0eBbpfSjyfMD8lAfPmsM9Imikar3jBurMfr2Aiurjft/443exITDKmUjKSanXBMUho++lb9OLtKan5dLkdyg==
   dependencies:
     "@testing-library/react" "8.0.5"
     fbjs "^1.0.0"
