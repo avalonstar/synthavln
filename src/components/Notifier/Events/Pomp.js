@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
+
+import Box from './Box';
 
 import {
   avalonDEFEND,
@@ -12,8 +14,6 @@ import {
   avalonOWO,
   avalonSHUCKS
 } from 'components/Emotes';
-
-import Box from './Box';
 
 const getHeader = () => ({
   cheer: 'cheer',
@@ -82,7 +82,7 @@ function Pomp(props) {
     };
 
     sequence();
-  }, [event]);
+  }, [event, boxControls, emoteControls]);
 
   return (
     <Container

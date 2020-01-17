@@ -49,12 +49,10 @@ function Item(props) {
   const pompControls = useAnimation();
   const containerControls = useAnimation();
 
-  const delay = t => new Promise(resolve => setTimeout(resolve, t));
-
   useEffect(() => {
     const sequence = async () => {
       await wrapperControls.start('animate');
-      return await Promise.all([
+      return Promise.all([
         pompControls.start('hidden'),
         boxControls.start('visible'),
         containerControls.start({
@@ -68,7 +66,13 @@ function Item(props) {
       setPlayStatus(true);
       sequence();
     }
-  }, [notification]);
+  }, [
+    notification,
+    boxControls,
+    containerControls,
+    pompControls,
+    wrapperControls
+  ]);
 
   const handleError = error => {
     console.error('onError', error); // eslint-disable-line

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-import { avalonHAPPY } from 'components/Emotes';
-
 import * as Tags from './Events/Tags';
 import * as utils from './utils';
 
@@ -207,8 +205,4 @@ const Modifier = styled(motion.div)`
   font-variant-numeric: lining-nums;
   font-weight: 600;
   white-space: nowrap;
-`;
-
-const Avatar = styled.img`
-  transform: rotate(180deg);
 `;
