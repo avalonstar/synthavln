@@ -2207,6 +2207,11 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/js-cookie@2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.4.tgz#f79720b4755aa197c2e15e982e2f438f5748e348"
+  integrity sha512-WTfSE1Eauak/Nrg6cA9FgPTFvVawejsai6zXoq0QYTQ3mxONeRtGhKxa7wMlUzWWmzrmTeV+rwLjHgsCntdrsA==
+
 "@types/json-schema@^7.0.3":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
@@ -11076,11 +11081,12 @@ react-scripts@3.3.0:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-use@^13.15.0:
-  version "13.15.0"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.15.0.tgz#dd3e28e63b8c4c3b0e32de63172eea91550891cb"
-  integrity sha512-kxnj6EEnn/gtQbc2in9ov2Qd1ncaT3XaUiXjkD+ZKgOCc3mGYHkKqB7yFBuerCdXasS3Aez0W9PvI5tUUCDXOw==
+react-use@^13.19.0:
+  version "13.19.0"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.19.0.tgz#00c7650012021e75b5cf9ea8c1b1b4e1c22eb076"
+  integrity sha512-By7d8ZhdWo0Ns2BW/Gla5EDrj9rTJ8p/ueJKv7SbqlDQvu9lpwovWGWKjY5Vjz5gAG3tZrSSxd1gK+gw7gZniQ==
   dependencies:
+    "@types/js-cookie" "2.2.4"
     "@xobotyi/scrollbar-width" "1.5.0"
     copy-to-clipboard "^3.2.0"
     fast-shallow-equal "^1.0.0"
