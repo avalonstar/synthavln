@@ -72,6 +72,7 @@ function Avatar() {
     emoteThreshold: NODE_ENV === 'production' ? 5 : 1,
     systemCooldown: NODE_ENV === 'production' ? 1000 : 1000,
     trackedEmotes: [
+      'avalonAYAYA',
       'avalonFEELS',
       'avalonHEHE',
       'avalonHUG',

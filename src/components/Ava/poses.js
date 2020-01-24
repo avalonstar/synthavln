@@ -1,4 +1,9 @@
 export default {
+  avalonAYAYA: {
+    width: 429,
+    height: 526,
+    steps: 30
+  },
   avalonBLINK: {
     width: 385,
     height: 527,
