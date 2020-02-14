@@ -146,7 +146,14 @@ function Avatar() {
     if (emoteCodes.length > 0 && !connected) {
       client.on('message', (channel, user, message) => processEmotes(message));
 
-      // Manual calls.
+      // Text-based manual calls.
+      client.on('message', (channel, user, message) => {
+        const regex = /\b(hi|hello|howdy|greetings|avalonWAVE)\b(.*)? \bava\b/gi;
+        if (regex.test(message))
+          dispatchToQueue({ type: 'add', pose: 'avalonWAVE' });
+      });
+
+      // Subscription-based manual calls.
       client.on('resub', () => {
         dispatchToQueue({ type: 'add', pose: 'avalonHUG' });
       });
