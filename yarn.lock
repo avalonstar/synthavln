@@ -12970,10 +12970,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-twitch-chat-client@^3.5.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/twitch-chat-client/-/twitch-chat-client-3.7.0.tgz#f3862ae9d7e976b94b7c5a57fe23161a3bef8d40"
-  integrity sha512-l0toLPqfguRSadsgtR93dauaSKPKE0sp+4LJkMrxdc9uJ3sBYXE1IppuXnNodwEGiPpgMwQFMZxHXdsTkpV8bw==
+twitch-chat-client@^3.7.3:
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/twitch-chat-client/-/twitch-chat-client-3.7.3.tgz#2cff54aa5c9505d0fa710cefd47bf39af0802535"
+  integrity sha512-wsYQW7Tml0DLX4U6wVs0Genyta3u0v6+GBsDOaPlaUvz13hDTSfNFDjs6nbWO7Qj3gEe2OLWEKSq3gFJXotOGA==
   dependencies:
     "@d-fischer/logger" "^0.1.0"
     ircv3 "^0.19.3"
