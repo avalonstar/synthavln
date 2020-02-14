@@ -19,7 +19,6 @@ import EmoteBucketSystem from 'helpers/EmoteBucketSystem';
 import { useLoaderSystem } from 'helpers/LoaderSystem';
 import { useImageryContext, useTmiContext } from 'providers';
 
-const { NODE_ENV } = process.env;
 const concurency = 10;
 
 const reducer = (state, action) => {
@@ -69,8 +68,8 @@ function Avatar() {
   });
 
   const ebs = new EmoteBucketSystem({
-    emoteThreshold: NODE_ENV === 'production' ? 5 : 1,
-    systemCooldown: NODE_ENV === 'production' ? 1000 : 1000,
+    emoteThreshold: 3,
+    systemCooldown: 1000,
     trackedEmotes: [
       'avalonAYAYA',
       'avalonFEELS',
@@ -78,10 +77,10 @@ function Avatar() {
       'avalonHUG',
       'avalonOWO',
       'avalonPOG',
-      'avalonRAGE'
+      'avalonRAGE',
+      'avalonWAVE'
     ],
     onThresholdReached: emote => {
-      console.log('onThresholdReached', emote);
       dispatchToQueue({ type: 'add', pose: emote });
     }
   });

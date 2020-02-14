@@ -42,5 +42,10 @@ export default {
     width: 432,
     height: 526,
     steps: 93
+  },
+  avalonWAVE: {
+    width: 385,
+    height: 527,
+    steps: 45
   }
 };
