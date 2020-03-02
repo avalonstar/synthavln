@@ -148,7 +148,7 @@ function Avatar() {
 
       // Text-based manual calls.
       client.on('message', (channel, user, message) => {
-        const regex = /\b(hi|hey|hello|hewwo|howdy|greetings|avalonWAVE)\b(.*)? \bava\b/gi;
+        const regex = /\b(hi|hey|hello|hewwo|howdy|greetings|avalonWAVE|bye)\b(.*)? \bava\b/gi;
         if (regex.test(message))
           dispatchToQueue({ type: 'add', pose: 'avalonWAVE' });
       });
