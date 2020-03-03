@@ -13,7 +13,7 @@ function Pose({ name, onPlay, onComplete }) {
       widthFrame={poses[name].width}
       heightFrame={poses[name].height}
       steps={poses[name].steps}
-      fps={30}
+      fps={24}
       autoplay={false}
       isResponsive={false}
       onInit={spritesheet => spritesheet.play()}
