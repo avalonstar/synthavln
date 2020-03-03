@@ -78,6 +78,7 @@ function Avatar() {
       'avalonOWO',
       'avalonPOG',
       'avalonRAGE',
+      'avalonSPOOK',
       'avalonWAVE'
     ],
     onThresholdReached: emote => {

@@ -38,6 +38,11 @@ export default {
     height: 526,
     steps: 65
   },
+  avalonSPOOK: {
+    width: 384,
+    height: 526,
+    steps: 93
+  },
   avalonRAGE: {
     width: 432,
     height: 526,
