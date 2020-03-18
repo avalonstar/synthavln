@@ -9,6 +9,11 @@ export default {
     height: 527,
     steps: 9
   },
+  avalonDANCE: {
+    width: 690,
+    height: 751,
+    steps: 98
+  },
   avalonFEELS: {
     width: 440,
     height: 527,
