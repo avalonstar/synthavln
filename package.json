@@ -26,7 +26,7 @@
     "react-player": "^1.14.2",
     "react-responsive-spritesheet": "^2.3.9",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
     "react-use": "^13.15.0",
     "resource-loader": "^3.0.1",
     "styled-components": "^4.4.0",
