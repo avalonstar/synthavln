@@ -72,6 +72,7 @@ function Avatar() {
     systemCooldown: 1000,
     trackedEmotes: [
       'avalonAYAYA',
+      'avalonBLANK',
       'avalonDANCE',
       'avalonFEELS',
       'avalonHEHE',
