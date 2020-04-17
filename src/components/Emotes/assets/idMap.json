@@ -1,15 +1,12 @@
 {
   "939452": "avalonFIESTA",
   "1425719": "avalonSMUG",
-  "1425720": "avalonBLANK",
   "1425723": "avalonBAKA",
   "1425728": "avalonWHY",
   "1425730": "avalonUH",
   "1425733": "avalonEYES",
   "1425736": "avalonHEHE",
-  "1425740": "avalonHUG",
   "1425749": "avalonHAPPY",
-  "1425750": "avalonWAVE",
   "1425753": "avalonTHINK",
   "1425768": "avalonRAGE",
   "1425776": "avalonBLESS",
@@ -21,7 +18,6 @@
   "1426733": "avalonSMOL",
   "1481552": "avalonSIP",
   "1481558": "avalonBLUSH",
-  "1504000": "avalonGIB",
   "300347574": "avalonOWO",
   "300392080": "avalonOHWOAH",
   "300431722": "avalonHOLY",
@@ -60,5 +56,9 @@
   "301383875": "avalonEUREKA",
   "301419836": "avalonPOWER",
   "301420967": "avalonPOINT",
-  "301553477": "avalonDAISHOURI"
+  "301730535": "avalonGIB",
+  "301730538": "avalonWAVE",
+  "301730540": "avalonHUG",
+  "301747848": "avalonDAISHOURI",
+  "301747852": "avalonBLANK"
 }
