@@ -9,6 +9,11 @@ export default {
     height: 526,
     steps: 55
   },
+  avalonBLESS: {
+    width: 429,
+    height: 526,
+    steps: 47
+  },
   avalonBLINK: {
     width: 385,
     height: 527,

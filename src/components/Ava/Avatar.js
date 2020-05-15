@@ -73,6 +73,7 @@ function Avatar() {
     trackedEmotes: [
       'avalonAYAYA',
       'avalonBLANK',
+      'avalonBLESS',
       'avalonDANCE',
       'avalonFEELS',
       'avalonHEHE',
