@@ -31,7 +31,7 @@
     "resource-loader": "^3.0.1",
     "styled-components": "^4.4.0",
     "twitch": "^3.5.0",
-    "twitch-chat-client": "^3.5.0",
+    "twitch-chat-client": "^3.7.3",
     "use-interval": "^1.2.1"
   },
   "scripts": {
