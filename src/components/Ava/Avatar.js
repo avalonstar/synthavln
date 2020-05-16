@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { countBy } from 'lodash';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import useInterval from 'use-interval';
 
 import Pose from './Pose';
 import { baseUrl, url, path } from './constants';
@@ -57,6 +58,7 @@ function Avatar() {
   const blinkChecker = useRef(null);
   const [connected, setConnected] = useState(false);
   const [emoteCodes, setEmoteCodes] = useState([]);
+  const [idleDelay, setIdleDelay] = useState(0);
   const [poseQueue, dispatchToQueue] = useReducer(reducer, []);
   const [
     { isAnimating, inCooldown, blinkBlocked },
@@ -177,6 +179,14 @@ function Avatar() {
     }
   }, [emoteCodes, connected, client, processEmotes]);
 
+  // Idle poses.
+  useInterval(() => {
+    const [min, max] = [17, 32];
+    const rand = Math.floor(Math.random() * (max - min + 1) + min);
+    setIdleDelay(rand * 60 * 1000);
+    dispatchToQueue({ type: 'add', pose: 'avalonHAIRTWIRL' });
+  }, idleDelay);
+
   useEffect(() => {
     const codes = emotes.map(emote => emote.code);
     setEmoteCodes(codes);
@@ -196,7 +206,7 @@ function Avatar() {
   return (
     <Wrapper>
       {poseQueue.length === 0 || inCooldown ? (
-        <img src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
+        <BaseImage src={`${url}${path}/avalonBASE.png`} alt="avalonBASE" />
       ) : (
         <Pose
           name={poseQueue[0]}
@@ -256,6 +266,11 @@ const Wrapper = styled(motion.div)`
   img {
     display: block;
   }
+`;
+
+const BaseImage = styled.img`
+  position: relative;
+  top: 1px;
 `;
 
 export default Container;

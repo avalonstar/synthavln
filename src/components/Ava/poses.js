@@ -1,4 +1,5 @@
 export default {
+  // Emotes.
   avalonAYAYA: {
     width: 429,
     height: 526,
@@ -13,11 +14,6 @@ export default {
     width: 429,
     height: 526,
     steps: 47
-  },
-  avalonBLINK: {
-    width: 385,
-    height: 527,
-    steps: 9
   },
   avalonDANCE: {
     width: 690,
@@ -66,6 +62,22 @@ export default {
   avalonWAVE: {
     width: 385,
     height: 527,
-    steps: 45
+    steps: 45,
+    style: {
+      position: 'relative',
+      top: '1px'
+    }
+  },
+
+  // Idle poses.
+  avalonBLINK: {
+    width: 385,
+    height: 526,
+    steps: 9
+  },
+  avalonHAIRTWIRL: {
+    width: 429,
+    height: 526,
+    steps: 48
   }
 };
