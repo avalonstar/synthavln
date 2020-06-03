@@ -21,13 +21,11 @@
   "300347574": "avalonOWO",
   "300392080": "avalonOHWOAH",
   "300431722": "avalonHOLY",
-  "300432125": "avalonHOLY2",
   "300555283": "avalonDERP",
   "300570129": "avalonAYAYA",
   "300570578": "avalonPET",
   "300578101": "avalonPOP",
   "300578570": "avalonD",
-  "300595144": "avalonR",
   "300595226": "avalonA",
   "300595449": "avalonG",
   "300595802": "avalonE",
@@ -45,7 +43,6 @@
   "301075547": "avalonDANCE",
   "301075549": "avalonSHADES",
   "301075550": "avalonSPOOK",
-  "301092872": "avalonDEFEND",
   "301226523": "avalonARTSY",
   "301226524": "avalonLAHEE",
   "301226526": "avalonCHU",
@@ -60,5 +57,8 @@
   "301730538": "avalonWAVE",
   "301730540": "avalonHUG",
   "301747848": "avalonDAISHOURI",
-  "301747852": "avalonBLANK"
+  "301747852": "avalonBLANK",
+  "302109575": "avalonGDI",
+  "302340692": "avalonSASS",
+  "302342378": "avalonM"
 }
