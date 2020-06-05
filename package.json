@@ -11,7 +11,7 @@
     "constate": "^1.3.2",
     "date-fns": "2.9.0",
     "element-to-path": "^1.2.0",
-    "firebase": "^7.2.3",
+    "firebase": "^7.15.0",
     "framer-motion": "^1.6.17",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
