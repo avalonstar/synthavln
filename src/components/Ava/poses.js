@@ -5,6 +5,11 @@ export default {
     height: 526,
     steps: 30
   },
+  avalonBAKA: {
+    width: 429,
+    height: 526,
+    steps: 52
+  },
   avalonBLANK: {
     width: 429,
     height: 526,
