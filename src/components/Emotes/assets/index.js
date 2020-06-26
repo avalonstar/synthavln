@@ -1,4 +1,3 @@
-export { default as avalonDEFEND } from 'components/Emotes/assets/avalonDEFEND.png';
 export { default as avalonHAPPY } from 'components/Emotes/assets/avalonHAPPY.png';
 export { default as avalonHOLY } from 'components/Emotes/assets/avalonHOLY.png';
 export { default as avalonHUG } from 'components/Emotes/assets/avalonHUG.png';
