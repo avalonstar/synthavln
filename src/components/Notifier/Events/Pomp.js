@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import Box from './Box';
 
 import {
-  avalonDEFEND,
   avalonHOLY,
   avalonHUG,
   avalonKANPAI,
@@ -30,7 +29,6 @@ const getEmote = () => ({
   mysterygift: avalonHOLY,
   subscription: avalonHUG,
   subgift: avalonOWO,
-  raid: avalonDEFEND,
   resub: avalonKANPAI,
   tip: avalonSHUCKS
 });

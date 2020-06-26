@@ -1,5 +1,4 @@
 export {
-  avalonDEFEND,
   avalonHAPPY,
   avalonHOLY,
   avalonHUG,
