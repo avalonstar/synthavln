@@ -44,6 +44,11 @@ export default {
     height: 599,
     steps: 105
   },
+  avalonKANPAI: {
+    width: 551,
+    height: 527,
+    steps: 98
+  },
   avalonOWO: {
     width: 384,
     height: 526,
@@ -53,6 +58,11 @@ export default {
     width: 430,
     height: 526,
     steps: 65
+  },
+  avalonSMUG: {
+    width: 361,
+    height: 535,
+    steps: 43
   },
   avalonSPOOK: {
     width: 384,

@@ -81,9 +81,11 @@ function Avatar() {
       'avalonFEELS',
       'avalonHEHE',
       'avalonHUG',
+      'avalonKANPAI',
       'avalonOWO',
       'avalonPOG',
       'avalonRAGE',
+      'avalonSMUG',
       'avalonSPOOK',
       'avalonWAVE'
     ],
