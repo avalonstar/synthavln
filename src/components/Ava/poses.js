@@ -45,8 +45,8 @@ export default {
     steps: 105
   },
   avalonKANPAI: {
-    width: 551,
-    height: 527,
+    width: 521,
+    height: 557,
     steps: 98
   },
   avalonOWO: {
