@@ -74,6 +74,16 @@ export default {
     height: 526,
     steps: 93
   },
+  avalonTHINK: {
+    width: 384,
+    height: 526,
+    steps: 62
+  },
+  avalonUH: {
+    width: 481,
+    height: 526,
+    steps: 66
+  },
   avalonWAVE: {
     width: 385,
     height: 527,
