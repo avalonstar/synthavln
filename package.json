@@ -12,7 +12,7 @@
     "date-fns": "2.9.0",
     "element-to-path": "^1.2.0",
     "firebase": "^7.2.3",
-    "framer-motion": "^1.6.17",
+    "framer-motion": "^2.7.7",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
